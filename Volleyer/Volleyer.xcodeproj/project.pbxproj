@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51253E9DEEAB3569A547D2F3 /* Pods_Volleyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Volleyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77A2C1FD5979003FEF520EB2 /* Pods-Volleyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.release.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.release.xcconfig"; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C86E14BD2AB1AF4E00CBA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C86E14BF2AB1AF4E00CBA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51253E9DEEAB3569A547D2F3 /* Pods_Volleyer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79C18332D75E61DF80DFB6C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C705EC19C13A7D0DA66696F5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */,
+				77A2C1FD5979003FEF520EB2 /* Pods-Volleyer.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C86E14A52AB1AF4C00CBA201 = {
 			isa = PBXGroup;
 			children = (
 				C86E14B02AB1AF4C00CBA201 /* Volleyer */,
 				C86E14AF2AB1AF4C00CBA201 /* Products */,
+				C705EC19C13A7D0DA66696F5 /* Pods */,
+				79C18332D75E61DF80DFB6C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C86E14C22AB1AF4E00CBA201 /* Build configuration list for PBXNativeTarget "Volleyer" */;
 			buildPhases = (
+				ABC7D4D0E4BF54FC923A0A0B /* [CP] Check Pods Manifest.lock */,
 				C86E14AA2AB1AF4C00CBA201 /* Sources */,
 				C86E14AB2AB1AF4C00CBA201 /* Frameworks */,
 				C86E14AC2AB1AF4C00CBA201 /* Resources */,
@@ -132,6 +158,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ABC7D4D0E4BF54FC923A0A0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Volleyer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C86E14AA2AB1AF4C00CBA201 /* Sources */ = {
@@ -282,6 +333,7 @@
 		};
 		C86E14C32AB1AF4E00CBA201 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +363,7 @@
 		};
 		C86E14C42AB1AF4E00CBA201 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77A2C1FD5979003FEF520EB2 /* Pods-Volleyer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
