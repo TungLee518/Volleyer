@@ -10,11 +10,13 @@
 		51253E9DEEAB3569A547D2F3 /* Pods_Volleyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
-		C86E14B62AB1AF4C00CBA201 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* ViewController.swift */; };
+		C86E14B62AB1AF4C00CBA201 /* FindPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FindPlayerViewController.swift */; };
 		C86E14B92AB1AF4C00CBA201 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E14B72AB1AF4C00CBA201 /* Main.storyboard */; };
 		C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */; };
 		C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */; };
 		C86E14C62AB2C83700CBA201 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */; };
+		C86E150E2AB31EDE00CBA201 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E150D2AB31EDE00CBA201 /* File.swift */; };
+		C86E15102AB31FF300CBA201 /* PlayInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,12 +25,14 @@
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C86E14B52AB1AF4C00CBA201 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C86E14B52AB1AF4C00CBA201 /* FindPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPlayerViewController.swift; sourceTree = "<group>"; };
 		C86E14B82AB1AF4C00CBA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C86E14BD2AB1AF4E00CBA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C86E14BF2AB1AF4E00CBA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C86E150D2AB31EDE00CBA201 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoTableViewCell.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +88,9 @@
 			children = (
 				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
 				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
-				C86E14B52AB1AF4C00CBA201 /* ViewController.swift */,
+				C86E14B52AB1AF4C00CBA201 /* FindPlayerViewController.swift */,
+				C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */,
+				C86E150D2AB31EDE00CBA201 /* File.swift */,
 				C86E14B72AB1AF4C00CBA201 /* Main.storyboard */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
@@ -210,7 +216,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C86E14B62AB1AF4C00CBA201 /* ViewController.swift in Sources */,
+				C86E14B62AB1AF4C00CBA201 /* FindPlayerViewController.swift in Sources */,
+				C86E150E2AB31EDE00CBA201 /* File.swift in Sources */,
+				C86E15102AB31FF300CBA201 /* PlayInfoTableViewCell.swift in Sources */,
 				C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */,
 				C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */,
 			);
