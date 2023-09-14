@@ -14,6 +14,7 @@
 		C86E14B92AB1AF4C00CBA201 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E14B72AB1AF4C00CBA201 /* Main.storyboard */; };
 		C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */; };
 		C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */; };
+		C86E14C62AB2C83700CBA201 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C86E14BD2AB1AF4E00CBA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C86E14BF2AB1AF4E00CBA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,7 +58,6 @@
 				EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */,
 				77A2C1FD5979003FEF520EB2 /* Pods-Volleyer.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -88,6 +89,7 @@
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
 				C86E14BF2AB1AF4E00CBA201 /* Info.plist */,
+				C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */,
 			);
 			path = Volleyer;
 			sourceTree = "<group>";
@@ -103,6 +105,7 @@
 				C86E14AA2AB1AF4C00CBA201 /* Sources */,
 				C86E14AB2AB1AF4C00CBA201 /* Frameworks */,
 				C86E14AC2AB1AF4C00CBA201 /* Resources */,
+				D7DDCE8F232239B9E66259F9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -151,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C86E14C62AB2C83700CBA201 /* GoogleService-Info.plist in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,
 				C86E14B92AB1AF4C00CBA201 /* Main.storyboard in Resources */,
@@ -180,6 +184,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7DDCE8F232239B9E66259F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Volleyer/Pods-Volleyer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Volleyer/Pods-Volleyer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Volleyer/Pods-Volleyer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
