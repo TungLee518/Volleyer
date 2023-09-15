@@ -23,7 +23,7 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func setNavBar() {
-        navigationItem.title = NavBar.finderPage.rawValue
+        navigationItem.title = NavBarEnum.finderPage.rawValue
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = .systemBlue
@@ -33,6 +33,14 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
          ]
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushToEstablishVC))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+    }
+    
+    @objc func pushToEstablishVC() {
+        let nextVC = EstablishFinderViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     func setTableView() {

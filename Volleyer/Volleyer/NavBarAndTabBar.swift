@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NavBar: String {
+enum NavBarEnum: String {
     case finderPage = "Volleyer"
     case establishFinderPage = "我要揪打球"
     case myPage = "My Page"
@@ -16,7 +16,7 @@ enum NavBar: String {
     case competitionPage = "Competitions"
 }
 
-enum TabBar: String {
+enum TabBarEnum: String {
     case finderPage = "Find Play"
     case myPage = "My Page"
     case communityPage = "Community"

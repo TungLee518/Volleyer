@@ -8,10 +8,16 @@
 import Foundation
 import UIKit
 
+let standardMargin = 16.0
+let standardTextFieldHeight = 25.0
+let standardTextFieldWidth = 250.0
+let standardSmallerTextFieldWidth = 70.0
+let standardButtonHeight = 25.0
+
 class PlayInfoTableViewCell: UITableViewCell {
 
     static let identifier = "PlayInfoTableViewCell"
-    let standardMargin = 16.0
+    
     let photoHeight = 50.0
 
     lazy var photoImageView: UIImageView = {
@@ -23,7 +29,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         return imageView
     }()
 
-    let accountLable: UILabel = {
+    private let accountLable: UILabel = {
         let label = UILabel()
         label.text = "maymmm518"
         label.textColor = UIColor.gray
@@ -32,7 +38,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         return label
     }()
 
-    let tagLable: UILabel = {
+    private let tagLable: UILabel = {
         let label = UILabel()
         let padding = 3
         label.text = String(repeating: " ", count: padding) + "缺3女" + String(repeating: " ", count: padding)
@@ -45,7 +51,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         return label
     }()
 
-    let timeLable: UILabel = {
+    private let timeLable: UILabel = {
         let label = UILabel()
         label.text = "時間：2023/9/20 (三) 18:00-22:00"
         label.textColor = UIColor.gray
@@ -54,7 +60,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         return label
     }()
 
-    let placeLabel: UILabel = {
+    private let placeLabel: UILabel = {
         let label = UILabel()
         label.text = "地點：三米線球館"
         label.textColor = UIColor.black
@@ -65,7 +71,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         return label
     }()
 
-    let typeLable: UILabel = {
+    private let typeLable: UILabel = {
         let label = UILabel()
         label.text = "type: 女網混排"
         label.textColor = UIColor.black
@@ -74,7 +80,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         return label
     }()
 
-    let priceLable: UILabel = {
+    private let priceLable: UILabel = {
         let label = UILabel()
         label.text = "price: 250 元 /人"
         label.textColor = UIColor.black
@@ -83,7 +89,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         return label
     }()
 
-    let levelLable: UILabel = {
+    private let levelLable: UILabel = {
         let label = UILabel()
         label.text = "程度："
         label.textColor = UIColor.black
