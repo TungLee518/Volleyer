@@ -14,7 +14,25 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.view.backgroundColor = UIColor.white
+
+        setNavBar()
         setTableView()
+
+    }
+
+    func setNavBar() {
+        navigationItem.title = NavBar.finderPage.rawValue
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .systemBlue
+        navigationBarAppearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.boldSystemFont(ofSize: 20)
+         ]
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
     func setTableView() {
