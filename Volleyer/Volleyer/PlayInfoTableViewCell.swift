@@ -8,34 +8,34 @@
 import Foundation
 import UIKit
 
-let standardMargin = 16.0
-
 class PlayInfoTableViewCell: UITableViewCell {
-    
-    static let identifier = "PlayInfoTableViewCell"
 
-    let titleLable: UILabel = {
-        let label = UILabel()
-        label.text = "IU「亂穿」竟美出新境界!笑稱自己品味奇怪 網笑:靠顏值撐住女神氣場"
-        label.textColor = UIColor.black
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    static let identifier = "PlayInfoTableViewCell"
+    let standardMargin = 16.0
+    let photoHeight = 50.0
+
+    lazy var photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "placeholder")
+        imageView.layer.cornerRadius = photoHeight / 2
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
-    let authorLable: UILabel = {
+
+    let accountLable: UILabel = {
         let label = UILabel()
-        label.text = "author"
+        label.text = "maymmm518"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
     let tagLable: UILabel = {
         let label = UILabel()
         let padding = 3
-        label.text = String(repeating: " ", count: padding) + "tag" + String(repeating: " ", count: padding)
+        label.text = String(repeating: " ", count: padding) + "缺3女" + String(repeating: " ", count: padding)
         label.textColor = UIColor.systemBlue
         label.backgroundColor = UIColor.lightGray
         label.layer.cornerRadius = 5
@@ -44,58 +44,141 @@ class PlayInfoTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let dateLable: UILabel = {
+
+    let timeLable: UILabel = {
         let label = UILabel()
-        label.text = "2023-09-09 10:19"
+        label.text = "時間：2023/9/20 (三) 18:00-22:00"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let placeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "地點：三米線球館"
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 16)
+//        label.lineBreakMode = .byWordWrapping
+//        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let typeLable: UILabel = {
+        let label = UILabel()
+        label.text = "type: 女網混排"
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let contentLable: UILabel = {
+
+    let priceLable: UILabel = {
         let label = UILabel()
-        label.text = "南韓歌手IU(李知恩)無論在歌唱方面或是近期的戲劇作品都有亮眼的成績，但俗話說人無完美、美玉微瑕，曾再跟工作人員的互動影片中坦言自己品味很奇怪，近日在IG上分享了宛如「媽媽們青春時代的玉女歌手」超復古穿搭造型，卻意外美出新境界。"
+        label.text = "price: 250 元 /人"
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
+    let levelLable: UILabel = {
+        let label = UILabel()
+        label.text = "程度："
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    lazy var levelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("B", for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.orange
+        button.translatesAutoresizingMaskIntoConstraints = false
+        // button.addTarget(self, action: #selector(addData), for: .touchUpInside)
+        button.layer.cornerRadius = standardMargin / 2
+        button.clipsToBounds = true
+        return button
+    }()
+
+    lazy var wantToAddButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("我要加", for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.blue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addData), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        return button
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(titleLable)
-        contentView.addSubview(authorLable)
+        contentView.addSubview(photoImageView)
+        contentView.addSubview(accountLable)
         contentView.addSubview(tagLable)
-        contentView.addSubview(dateLable)
-        contentView.addSubview(contentLable)
+        contentView.addSubview(timeLable)
+        contentView.addSubview(placeLabel)
+        contentView.addSubview(priceLable)
+        contentView.addSubview(typeLable)
+        contentView.addSubview(levelLable)
+        contentView.addSubview(levelButton)
+        contentView.addSubview(wantToAddButton)
         setLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setLayout() {
         NSLayoutConstraint.activate([
-            titleLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
-            titleLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
-            titleLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-            
-            authorLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
-            authorLable.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: standardMargin/2),
-            
-            tagLable.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: standardMargin/2),
+            photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+            photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
+            photoImageView.heightAnchor.constraint(equalToConstant: photoHeight),
+            photoImageView.widthAnchor.constraint(equalToConstant: photoHeight),
+
+            accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
+            accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
+
+            tagLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
             tagLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-            
-            dateLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
-            dateLable.topAnchor.constraint(equalTo: authorLable.bottomAnchor, constant: standardMargin/2),
-            
-            contentLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
-            contentLable.topAnchor.constraint(equalTo: dateLable.bottomAnchor, constant: standardMargin/2),
-            contentLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-            contentLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
+
+            timeLable.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
+            timeLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+            timeLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
+
+            placeLabel.topAnchor.constraint(equalTo: timeLable.bottomAnchor, constant: standardMargin),
+            placeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+            placeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
+
+            priceLable.topAnchor.constraint(equalTo: placeLabel.bottomAnchor, constant: standardMargin),
+            priceLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+
+            typeLable.topAnchor.constraint(equalTo: placeLabel.bottomAnchor, constant: standardMargin),
+            typeLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
+
+            levelLable.topAnchor.constraint(equalTo: priceLable.bottomAnchor, constant: standardMargin),
+            levelLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+
+            levelButton.centerYAnchor.constraint(equalTo: levelLable.centerYAnchor),
+            levelButton.leadingAnchor.constraint(equalTo: levelLable.trailingAnchor),
+            levelButton.heightAnchor.constraint(equalToConstant: standardMargin),
+            levelButton.widthAnchor.constraint(equalToConstant: standardMargin),
+
+            wantToAddButton.topAnchor.constraint(equalTo: typeLable.bottomAnchor, constant: standardMargin),
+            wantToAddButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
+            wantToAddButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
+            wantToAddButton.heightAnchor.constraint(equalToConstant: 30)
         ])
+    }
+
+    @objc func addData() {
     }
 }

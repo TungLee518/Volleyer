@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+// swiftlint:disable force_cast
 #if DEBUG
 
   import Foundation
@@ -138,3 +138,4 @@
   }
 
 #endif // ENABLE_FIREBASE_CORE_INTERNAL_TESTING_UTILS
+// swiftlint:enable force_cast

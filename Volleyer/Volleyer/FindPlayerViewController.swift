@@ -9,17 +9,14 @@ import UIKit
 import FirebaseFirestore
 
 class FindPlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
     var db: Firestore!
-    
     var findPlayerTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-        
     }
-    
+
     func setTableView() {
         findPlayerTableView = UITableView()
         findPlayerTableView.dataSource = self
@@ -27,7 +24,7 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
         findPlayerTableView.register(PlayInfoTableViewCell.self, forCellReuseIdentifier: PlayInfoTableViewCell.identifier)
         findPlayerTableView.separatorStyle = .singleLine
         view.addSubview(findPlayerTableView)
-        
+
         findPlayerTableView.translatesAutoresizingMaskIntoConstraints = false
         findPlayerTableView.rowHeight = UITableView.automaticDimension
         findPlayerTableView.estimatedRowHeight = 50
@@ -38,14 +35,14 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
             findPlayerTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
+
     func addTestDataToFirebase() {
         let settings = FirestoreSettings()
 
         Firestore.firestore().settings = settings
         // [END setup]
         db = Firestore.firestore()
-        
+
         var ref: DocumentReference? = nil
         ref = db.collection("tests").addDocument(data: [
             "first": "May",
@@ -64,13 +61,13 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         7
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // swiftlint:disable force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayInfoTableViewCell.identifier, for: indexPath) as! PlayInfoTableViewCell
-        
-        
+        // swiftlint:enable force_cast
+
         return cell
     }
 
 }
-
