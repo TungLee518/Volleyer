@@ -8,10 +8,27 @@
 import UIKit
 
 class EstablishFinderViewController: UIViewController {
-
-    private let timeLable: UILabel = {
+    let datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+        datePicker.minuteInterval = 5
+        datePicker.sizeToFit()
+        return datePicker
+    }()
+    // ToolBar
+    lazy var toolbar: UIToolbar = {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        return toolbar
+    }()
+    private let startTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "時間"
+        label.text = "開始時間"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +36,7 @@ class EstablishFinderViewController: UIViewController {
         label.sizeToFit()
         return label
     }()
-    private let timeTextField: UITextField = {
+   private lazy var startTimeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
@@ -29,6 +46,8 @@ class EstablishFinderViewController: UIViewController {
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.inputAccessoryView = toolbar
+        textField.inputView = datePicker
         return textField
     }()
     private let placeLable: UILabel = {
@@ -121,8 +140,8 @@ class EstablishFinderViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
-        view.addSubview(timeLable)
-        view.addSubview(timeTextField)
+        view.addSubview(startTimeLabel)
+        view.addSubview(startTimeTextField)
         view.addSubview(placeLable)
         view.addSubview(placeTextField)
         view.addSubview(priceLable)
@@ -134,6 +153,7 @@ class EstablishFinderViewController: UIViewController {
 
         setLayout()
         setUpNavBar()
+        // setDatePicker()
 
     }
 
@@ -143,6 +163,37 @@ class EstablishFinderViewController: UIViewController {
         let backButton = UIBarButtonItem()
         backButton.title = ""
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+
+    func setDatePicker() {
+        // Format Date
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+        datePicker.minuteInterval = 5
+        datePicker.sizeToFit()
+
+        // ToolBar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+
+        startTimeTextField.inputAccessoryView = toolbar
+        startTimeTextField.inputView = datePicker
+    }
+
+    @objc func doneDatePicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        startTimeTextField.text = formatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+    }
+
+    @objc func cancelDatePicker() {
+        self.view.endEditing(true)
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -195,16 +246,16 @@ class EstablishFinderViewController: UIViewController {
 
     func setLayout() {
         NSLayoutConstraint.activate([
-            timeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            timeLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin),
-            timeTextField.leadingAnchor.constraint(equalTo: timeLable.trailingAnchor, constant: standardMargin),
-            timeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            timeTextField.centerYAnchor.constraint(equalTo: timeLable.centerYAnchor),
-            timeTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
-            timeTextField.widthAnchor.constraint(equalToConstant: standardTextFieldWidth),
+            startTimeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            startTimeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin),
+            startTimeTextField.leadingAnchor.constraint(equalTo: startTimeLabel.trailingAnchor, constant: standardMargin),
+            startTimeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            startTimeTextField.centerYAnchor.constraint(equalTo: startTimeLabel.centerYAnchor),
+            startTimeTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
+            startTimeTextField.widthAnchor.constraint(equalToConstant: standardTextFieldWidth),
 
             placeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            placeLable.topAnchor.constraint(equalTo: timeLable.bottomAnchor, constant: standardMargin),
+            placeLable.topAnchor.constraint(equalTo: startTimeLabel.bottomAnchor, constant: standardMargin),
             placeTextField.leadingAnchor.constraint(equalTo: placeLable.trailingAnchor, constant: standardMargin),
             placeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             placeTextField.centerYAnchor.constraint(equalTo: placeLable.centerYAnchor),
