@@ -11,7 +11,7 @@ import UIKit
 class PlayInfoTableViewCell: UITableViewCell {
 
     static let identifier = "PlayInfoTableViewCell"
-    
+
     let photoHeight = 50.0
 
     lazy var photoImageView: UIImageView = {

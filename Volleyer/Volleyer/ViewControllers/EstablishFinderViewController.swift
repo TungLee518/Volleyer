@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class EstablishFinderViewController: UIViewController, PlayerListTableViewDelegate {
     let datePicker: UIDatePicker = {
@@ -41,7 +42,6 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
-
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneStartDatePicker))
@@ -74,7 +74,6 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
-
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEndDatePicker))
@@ -285,7 +284,7 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 20)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = UIColor.blue
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -302,10 +301,35 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private var checkboxes: [UIButton] = []
-    private var selectedStates: [UIButton: Bool] = [:]
 
-    private let playerListView = PlayerListTableView(frame: .zero, style: .plain)
+    private var setCheckboxes: [UIButton] = []
+    private var blocCheckboxes: [UIButton] = []
+    private var digCheckboxes: [UIButton] = []
+    private var spickCheckboxes: [UIButton] = []
+    private var sumCheckboxes: [UIButton] = []
+
+    private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
+
+    private var levelRange = LevelRange(setBall: 4, block: 4, dig: 4, spike: 4, sum: 4)
+    private var lackAmount = LackAmount(male: 0, female: 0, unlimited: 0)
+
+    lazy private var thisPlay: Play = Play(id: "maymmm518", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
+    let players: [Player] = [
+        Player(name: "Player 1", gender: "Male"),
+        Player(name: "Player 2", gender: "Female"),
+        Player(name: "Player 3", gender: "Male"),
+        Player(name: "Player 4", gender: "Female"),
+        Player(name: "Player 5", gender: "Male"),
+        Player(name: "Player 6", gender: "Female"),
+        Player(name: "Player 7", gender: "Male"),
+        Player(name: "Player 8", gender: "Female"),
+        Player(name: "Player 9", gender: "Male"),
+        Player(name: "Player 10", gender: "Female"),
+        Player(name: "Player 11", gender: "Male"),
+        Player(name: "Player 12", gender: "Female")
+    ]
+
+    var dataManager = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -336,17 +360,31 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         setUpNavBar()
         setSABC()
 
-        for i in 0...4 {
-            createQuestion(text: positions[i], i: i)
-        }
+        setCheckboxes = createCheckboxes(text: positions[0], i: 0, action: #selector(setCheckboxTapped))
+        blocCheckboxes = createCheckboxes(text: positions[1], i: 1, action: #selector(blockCheckboxTapped))
+        digCheckboxes = createCheckboxes(text: positions[2], i: 2, action: #selector(digCheckboxTapped))
+        spickCheckboxes = createCheckboxes(text: positions[3], i: 3, action: #selector(spickCheckboxTapped))
+        sumCheckboxes = createCheckboxes(text: positions[4], i: 4, action: #selector(sumCheckboxTapped))
 
         setPlayListTableView()
-        print(checkboxes)
         setLayout()
         typePicker.dataSource = self
         typePicker.delegate = self
+    }
+    
+    func setUpNavBar() {
+        navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationItem.title = NavBarEnum.establishFinderPage.rawValue
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
 
-        // typeTextField.delegate = self
+    func setPlayListTableView() {
+        view.addSubview(playerListTableView)
+        playerListTableView.translatesAutoresizingMaskIntoConstraints = false
+        playerListTableView.playerListDelegate = self
+        playerListTableView.players = players
     }
 
     func setSABC() {
@@ -364,7 +402,7 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         }
     }
 
-    func createQuestion(text: String, i: Int) {
+    func createCheckboxes(text: String, i: Int, action: Selector) -> [UIButton] {
         // Create a label for the question
         let questionLabel = UILabel()
         questionLabel.text = text
@@ -379,89 +417,81 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         // Create checkboxes for each choice
         var choiceButtons: [UIButton] = []
         var previous: Any = questionLabel
-        for _ in 0...4 {
+        for i in 0...4 {
             let checkbox = UIButton(type: .system)
             checkbox.translatesAutoresizingMaskIntoConstraints = false
             checkbox.setImage(UIImage(systemName: "square"), for: .normal)
             checkbox.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
-            checkbox.addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
+            checkbox.addTarget(self, action: action, for: .touchUpInside)
+            checkbox.tag = i
             view.addSubview(checkbox)
-            checkboxes.append(checkbox)
-            selectedStates[checkbox] = false
             checkbox.leadingAnchor.constraint(equalTo: (previous as AnyObject).trailingAnchor, constant: standardMargin).isActive = true
             checkbox.topAnchor.constraint(equalTo: questionLabel.topAnchor).isActive = true
             choiceButtons.append(checkbox)
             previous = checkbox
         }
+        return choiceButtons
     }
-    @objc func checkboxTapped(sender: UIButton) {
-        selectedStates[sender] = !selectedStates[sender]!
-        sender.isSelected = selectedStates[sender]!
-
-        print("Checkbox selected state: \(selectedStates[sender] ?? false)")
+    @objc func setCheckboxTapped(sender: UIButton) {
+        print(sender.tag)
+        thisPlay.levelRange.setBall = sender.tag
+        for checkbox in setCheckboxes {
+            checkbox.isSelected = (checkbox == sender)
+        }
     }
-
-    func setUpNavBar() {
-        navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationItem.title = NavBarEnum.establishFinderPage.rawValue
-        let backButton = UIBarButtonItem()
-        backButton.title = ""
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    @objc func blockCheckboxTapped(sender: UIButton) {
+        print(sender.tag)
+        thisPlay.levelRange.block = sender.tag
+        for checkbox in blocCheckboxes {
+            checkbox.isSelected = (checkbox == sender)
+        }
     }
-
+    @objc func digCheckboxTapped(sender: UIButton) {
+        print(sender.tag)
+        thisPlay.levelRange.dig = sender.tag
+        for checkbox in digCheckboxes {
+            checkbox.isSelected = (checkbox == sender)
+        }
+    }
+    @objc func spickCheckboxTapped(sender: UIButton) {
+        print(sender.tag)
+        thisPlay.levelRange.spike = sender.tag
+        for checkbox in spickCheckboxes {
+            checkbox.isSelected = (checkbox == sender)
+        }
+    }
+    @objc func sumCheckboxTapped(sender: UIButton) {
+        print(sender.tag)
+        thisPlay.levelRange.sum = sender.tag
+        for checkbox in sumCheckboxes {
+            checkbox.isSelected = (checkbox == sender)
+        }
+    }
     @objc func doneStartDatePicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         startTimeTextField.text = formatter.string(from: datePicker.date)
+        thisPlay.startTime = datePicker.date
         self.view.endEditing(true)
     }
-
     @objc func doneEndDatePicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         endTimeTextField.text = formatter.string(from: datePicker.date)
+        thisPlay.endTime = datePicker.date
         self.view.endEditing(true)
     }
-
     @objc func cancelToolbar() {
         self.view.endEditing(true)
     }
-
-    func setPlayListTableView() {
-        view.addSubview(playerListView)
-        playerListView.translatesAutoresizingMaskIntoConstraints = false
-
-        playerListView.playerListDelegate = self
-
-        // Replace this with your actual player data
-        let players: [Player] = [
-            Player(name: "Player 1", gender: "Male"),
-            Player(name: "Player 2", gender: "Female"),
-            Player(name: "Player 3", gender: "Male"),
-            Player(name: "Player 4", gender: "Female"),
-            Player(name: "Player 5", gender: "Male"),
-            Player(name: "Player 6", gender: "Female"),
-            Player(name: "Player 7", gender: "Male"),
-            Player(name: "Player 8", gender: "Female"),
-            Player(name: "Player 9", gender: "Male"),
-            Player(name: "Player 10", gender: "Female"),
-            Player(name: "Player 11", gender: "Male"),
-            Player(name: "Player 12", gender: "Female")
-        ]
-        playerListView.players = players
-    }
-
-    // Implement the edit button action
     @objc func toggleEditingMode() {
-        playerListView.toggleEditing()
-        let buttonText = playerListView.isEditingEnabled ? "Done" : "Edit"
+        playerListTableView.toggleEditing()
+        let buttonText = playerListTableView.isEditingEnabled ? "Done" : "Edit"
         deleteButton.setTitle(buttonText, for: .normal)
     }
-
-    // Add a new player when the "+" button is tapped
     @objc func addPlayer() {
         let newPlayer = Player(name: "New Player", gender: "Unknown") // Customize as needed
-        playerListView.addNewPlayer(newPlayer)
+        playerListTableView.addNewPlayer(newPlayer)
     }
 
     func didTapProfileButton(for player: Player) {
@@ -470,38 +500,22 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         // Navigate to the player's profile view or perform any other action
     }
 
-    @objc func addData() {
-//        if authorTextField.text != "" {
-//            let articles = Firestore.firestore().collection("articles")
-//            let document = articles.document()
-//            let data: [String: Any] = [
-//                "author": [
-//                    "email": "wayne@school.appworks.tw",
-//                    "id": "waynechen323",
-//                    "name": authorTextField.text as Any
-//                ] as [String : Any],
-//                "title": titleTextField.text as Any,
-//                "content": contentTextField.text as Any,
-//                "createdTime": Date().timeIntervalSince1970,
-//                "id": document.documentID,
-//                "category": tagTextField.text as Any
-//            ]
-//            document.setData(data) { err in
-//                if let err = err {
-//                    print("Error adding document: \(err)")
-//                } else {
-//                    print("Document added with ID: \(document.documentID)")
-//                    self.navigationController?.popToRootViewController(animated: true)
-//                }
-//            }
-//            print("add data")
-//        } else {
-//            let controller = UIAlertController(title: "post error", message: "need to input author", preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//            controller.addAction(okAction)
-//            present(controller, animated: true)
-//        }
-//
+    @objc func addData(_ sender: UIButton) {
+        if sender == publishButton {
+            thisPlay.status = 1
+        }
+        if placeTextField.text != "", priceTextField.text != "", typeTextField.text != ""
+            , maleTextField.text != "", femaleTextField.text != "" {
+            thisPlay.place = placeTextField.text!
+            thisPlay.price = Int(priceTextField.text!)!
+            thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
+            thisPlay.lackAmount.male = Int(maleTextField.text!)!
+            thisPlay.lackAmount.female = Int(femaleTextField.text!)!
+            // thisPlay.playerInfo = players
+            print(thisPlay)
+            dataManager.savePlay(thisPlay)
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
 
     func setLayout() {
@@ -566,11 +580,11 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
             levelLabel.topAnchor.constraint(equalTo: lackLabel.bottomAnchor, constant: standardMargin),
 
 //            playerListView.topAnchor.constraint(equalTo: checkboxes[-1].bottomAnchor, constant: standardMargin),
-            playerListView.heightAnchor.constraint(equalToConstant: 200.0),
-            playerListView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            playerListView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            playerListTableView.heightAnchor.constraint(equalToConstant: 200.0),
+            playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
 
-            saveButton.topAnchor.constraint(equalTo: playerListView.bottomAnchor, constant: standardMargin),
+            saveButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             saveButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
@@ -592,21 +606,16 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
 }
 
 // MARK: - UIPickerViewDelegate
-
 extension EstablishFinderViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return playTypes.count
     }
-
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return playTypes[row]
     }
-
     func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         typeTextField.text = playTypes[row]
     }
