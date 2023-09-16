@@ -16,16 +16,6 @@ class EstablishFinderViewController: UIViewController {
         datePicker.sizeToFit()
         return datePicker
     }()
-    // ToolBar
-    lazy var toolbar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        return toolbar
-    }()
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "開始時間"
@@ -36,21 +26,62 @@ class EstablishFinderViewController: UIViewController {
         label.sizeToFit()
         return label
     }()
-   private lazy var startTimeTextField: UITextField = {
+    private lazy var startTimeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
         textField.textColor = UIColor.black
-        textField.placeholder = "time"
+        textField.placeholder = "starttime"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneStartDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+
+        textField.inputAccessoryView = toolbar
+        textField.inputView = datePicker
+
+        return textField
+    }()
+    private let endTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "結束時間"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.sizeToFit()
+        return label
+    }()
+    private lazy var endTimeTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
+        textField.textColor = UIColor.black
+        textField.placeholder = "endtime"
+        textField.textAlignment = .left
+        textField.contentVerticalAlignment = .top
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEndDatePicker))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+
         textField.inputAccessoryView = toolbar
         textField.inputView = datePicker
         return textField
     }()
-    private let placeLable: UILabel = {
+    private let placeLabel: UILabel = {
         let label = UILabel()
         label.text = "地點"
         label.textColor = UIColor.gray
@@ -70,7 +101,7 @@ class EstablishFinderViewController: UIViewController {
         textField.autocapitalizationType = .none
         return textField
     }()
-    private let priceLable: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
         label.text = "價錢"
         label.textColor = UIColor.gray
@@ -102,7 +133,7 @@ class EstablishFinderViewController: UIViewController {
         textField.autocapitalizationType = .none
         return textField
     }()
-    private let typeLable: UILabel = {
+    private let typeLabel: UILabel = {
         let label = UILabel()
         label.text = "場種"
         label.textColor = UIColor.gray
@@ -122,7 +153,54 @@ class EstablishFinderViewController: UIViewController {
         textField.autocapitalizationType = .none
         return textField
     }()
-    
+    private let lackLabel: UILabel = {
+        let label = UILabel()
+        label.text = "缺"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let maleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "男"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let maleTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
+        textField.textColor = UIColor.black
+        textField.placeholder = "male"
+        textField.textAlignment = .left
+        textField.contentVerticalAlignment = .top
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        return textField
+    }()
+    private let femaleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "女"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let femaleTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
+        textField.textColor = UIColor.black
+        textField.placeholder = "female"
+        textField.textAlignment = .left
+        textField.contentVerticalAlignment = .top
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        return textField
+    }()
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save", for: .normal)
@@ -135,6 +213,16 @@ class EstablishFinderViewController: UIViewController {
         button.clipsToBounds = true
         return button
     }()
+    private let levelLabel: UILabel = {
+        let label = UILabel()
+        label.text = "程度"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private var checkboxes: [UIButton] = []
+    private var selectedStates: [UIButton: Bool] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,19 +230,82 @@ class EstablishFinderViewController: UIViewController {
         view.backgroundColor = UIColor.white
         view.addSubview(startTimeLabel)
         view.addSubview(startTimeTextField)
-        view.addSubview(placeLable)
+        view.addSubview(endTimeLabel)
+        view.addSubview(endTimeTextField)
+        view.addSubview(placeLabel)
         view.addSubview(placeTextField)
-        view.addSubview(priceLable)
+        view.addSubview(priceLabel)
         view.addSubview(priceTextField)
         view.addSubview(unitTextField)
-        view.addSubview(typeLable)
+        view.addSubview(typeLabel)
         view.addSubview(typeTextField)
         view.addSubview(saveButton)
+        view.addSubview(levelLabel)
+        view.addSubview(lackLabel)
+        view.addSubview(maleLabel)
+        view.addSubview(maleTextField)
+        view.addSubview(femaleLabel)
+        view.addSubview(femaleTextField)
 
         setLayout()
         setUpNavBar()
-        // setDatePicker()
+        setSABC()
 
+        for i in 0...4 {
+            createQuestion(text: positions[i], i: i)
+        }
+    }
+
+    func setSABC() {
+        var previous: Any = levelLabel
+        for i in 0...4 {
+            let label = UILabel()
+            label.text = levels[i]
+            label.textColor = UIColor.gray
+            label.font = UIFont.systemFont(ofSize: 16)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(label)
+            label.leadingAnchor.constraint(equalTo: (previous as AnyObject).trailingAnchor, constant: standardMargin+20).isActive = true
+            label.centerYAnchor.constraint(equalTo: levelLabel.centerYAnchor).isActive = true
+            previous = label
+        }
+    }
+
+    func createQuestion(text: String, i: Int) {
+        // Create a label for the question
+        let questionLabel = UILabel()
+        questionLabel.text = text
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(questionLabel)
+        // Create constraints for the question label
+        NSLayoutConstraint.activate([
+            questionLabel.leadingAnchor.constraint(equalTo: levelLabel.trailingAnchor, constant: standardMargin),
+            questionLabel.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: (standardMargin + 10) * Double(i))
+        ])
+
+        // Create checkboxes for each choice
+        var choiceButtons: [UIButton] = []
+        var previous: Any = questionLabel
+        for _ in 0...4 {
+            let checkbox = UIButton(type: .system)
+            checkbox.translatesAutoresizingMaskIntoConstraints = false
+            checkbox.setImage(UIImage(systemName: "square"), for: .normal)
+            checkbox.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
+            checkbox.addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
+            view.addSubview(checkbox)
+            checkboxes.append(checkbox)
+            selectedStates[checkbox] = false
+            checkbox.leadingAnchor.constraint(equalTo: (previous as AnyObject).trailingAnchor, constant: standardMargin).isActive = true
+            checkbox.topAnchor.constraint(equalTo: questionLabel.topAnchor).isActive = true
+            choiceButtons.append(checkbox)
+            previous = checkbox
+        }
+    }
+    @objc func checkboxTapped(sender: UIButton) {
+        selectedStates[sender] = !selectedStates[sender]!
+        sender.isSelected = selectedStates[sender]!
+
+        print("Checkbox selected state: \(selectedStates[sender] ?? false)")
     }
 
     func setUpNavBar() {
@@ -165,49 +316,22 @@ class EstablishFinderViewController: UIViewController {
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
-    func setDatePicker() {
-        // Format Date
-        datePicker.datePickerMode = .dateAndTime
-        datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
-        datePicker.minuteInterval = 5
-        datePicker.sizeToFit()
-
-        // ToolBar
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
-
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-
-        startTimeTextField.inputAccessoryView = toolbar
-        startTimeTextField.inputView = datePicker
-    }
-
-    @objc func doneDatePicker() {
+    @objc func doneStartDatePicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         startTimeTextField.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
 
-    @objc func cancelDatePicker() {
+    @objc func doneEndDatePicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        endTimeTextField.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
 
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "input content"
-            textView.textColor = UIColor.lightGray
-        }
+    @objc func cancelToolbar() {
+        self.view.endEditing(true)
     }
 
     @objc func addData() {
@@ -254,67 +378,61 @@ class EstablishFinderViewController: UIViewController {
             startTimeTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             startTimeTextField.widthAnchor.constraint(equalToConstant: standardTextFieldWidth),
 
-            placeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            placeLable.topAnchor.constraint(equalTo: startTimeLabel.bottomAnchor, constant: standardMargin),
-            placeTextField.leadingAnchor.constraint(equalTo: placeLable.trailingAnchor, constant: standardMargin),
+            endTimeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            endTimeLabel.topAnchor.constraint(equalTo: startTimeLabel.bottomAnchor, constant: standardMargin),
+            endTimeTextField.leadingAnchor.constraint(equalTo: endTimeLabel.trailingAnchor, constant: standardMargin),
+            endTimeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            endTimeTextField.centerYAnchor.constraint(equalTo: endTimeLabel.centerYAnchor),
+            endTimeTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
+            endTimeTextField.widthAnchor.constraint(equalToConstant: standardTextFieldWidth),
+
+            placeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            placeLabel.topAnchor.constraint(equalTo: endTimeLabel.bottomAnchor, constant: standardMargin),
+            placeTextField.leadingAnchor.constraint(equalTo: placeLabel.trailingAnchor, constant: standardMargin),
             placeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            placeTextField.centerYAnchor.constraint(equalTo: placeLable.centerYAnchor),
+            placeTextField.centerYAnchor.constraint(equalTo: placeLabel.centerYAnchor),
             placeTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             placeTextField.widthAnchor.constraint(equalToConstant: standardTextFieldWidth),
 
-            priceLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            priceLable.topAnchor.constraint(equalTo: placeLable.bottomAnchor, constant: standardMargin),
+            priceLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            priceLabel.topAnchor.constraint(equalTo: placeLabel.bottomAnchor, constant: standardMargin),
             priceTextField.leadingAnchor.constraint(equalTo: placeTextField.leadingAnchor),
-            priceTextField.centerYAnchor.constraint(equalTo: priceLable.centerYAnchor),
+            priceTextField.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
             priceTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             unitTextField.leadingAnchor.constraint(equalTo: priceTextField.trailingAnchor, constant: standardMargin),
-            unitTextField.centerYAnchor.constraint(equalTo: priceLable.centerYAnchor),
+            unitTextField.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
             unitTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             unitTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             unitTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
 
-            typeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            typeLable.topAnchor.constraint(equalTo: priceLable.bottomAnchor, constant: standardMargin),
-            typeTextField.leadingAnchor.constraint(equalTo: typeLable.trailingAnchor, constant: standardMargin),
+            typeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            typeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: standardMargin),
+            typeTextField.leadingAnchor.constraint(equalTo: typeLabel.trailingAnchor, constant: standardMargin),
             typeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            typeTextField.centerYAnchor.constraint(equalTo: typeLable.centerYAnchor),
+            typeTextField.centerYAnchor.constraint(equalTo: typeLabel.centerYAnchor),
             typeTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             typeTextField.widthAnchor.constraint(equalToConstant: standardTextFieldWidth),
+
+            lackLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            lackLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: standardMargin),
+            maleLabel.leadingAnchor.constraint(equalTo: typeTextField.leadingAnchor, constant: standardMargin),
+            maleLabel.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
+            maleTextField.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
+            maleTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
+            maleTextField.trailingAnchor.constraint(equalTo: typeTextField.leadingAnchor, constant: standardTextFieldWidth / 2),
+            femaleLabel.leadingAnchor.constraint(equalTo: typeTextField.leadingAnchor, constant: standardTextFieldWidth / 2 + standardMargin),
+            femaleLabel.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
+            femaleTextField.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
+            femaleTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
+            femaleTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+
+            levelLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            levelLabel.topAnchor.constraint(equalTo: lackLabel.bottomAnchor, constant: standardMargin),
 
             saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             saveButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             saveButton.widthAnchor.constraint(equalToConstant: 100)
         ])
-    }
-}
-
-class CheckBox: UIButton {
-    // Images
-    // let checkedImage = UIImage(named: "ic_check_box")! as UIImage
-    // let uncheckedImage = UIImage(named: "ic_check_box_outline_blank")! as UIImage
-    
-    // Bool property
-    var isChecked: Bool = false {
-        didSet {
-            if isChecked == true {
-                self.backgroundColor = UIColor.black
-                //self.setImage(checkedImage, for: UIControl.State.normal)
-            } else {
-                self.backgroundColor = UIColor.white
-                //self.setImage(uncheckedImage, for: UIControl.State.normal)
-            }
-        }
-    }
-        
-    override func awakeFromNib() {
-        self.addTarget(self, action:#selector(buttonClicked(sender:)), for: UIControl.Event.touchUpInside)
-        self.isChecked = false
-    }
-        
-    @objc func buttonClicked(sender: UIButton) {
-        if sender == self {
-            isChecked = !isChecked
-        }
     }
 }

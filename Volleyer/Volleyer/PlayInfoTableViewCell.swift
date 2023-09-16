@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-let standardMargin = 16.0
-let standardTextFieldHeight = 25.0
-let standardTextFieldWidth = 250.0
-let standardSmallerTextFieldWidth = 70.0
-let standardButtonHeight = 25.0
-
 class PlayInfoTableViewCell: UITableViewCell {
 
     static let identifier = "PlayInfoTableViewCell"
