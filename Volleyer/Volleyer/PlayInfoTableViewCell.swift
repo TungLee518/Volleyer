@@ -12,8 +12,6 @@ class PlayInfoTableViewCell: UITableViewCell {
 
     static let identifier = "PlayInfoTableViewCell"
 
-    let photoHeight = 50.0
-
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder")
@@ -137,7 +135,7 @@ class PlayInfoTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setLayout() {
+    private func setLayout() {
         NSLayoutConstraint.activate([
             photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
             photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),

@@ -92,7 +92,6 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
         // swiftlint:disable force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayInfoTableViewCell.identifier, for: indexPath) as! PlayInfoTableViewCell
         // swiftlint:enable force_cast
-
         return cell
     }
 

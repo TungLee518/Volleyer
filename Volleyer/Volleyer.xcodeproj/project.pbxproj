@@ -14,7 +14,6 @@
 		C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */; };
 		C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */; };
 		C86E14C62AB2C83700CBA201 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */; };
-		C86E150E2AB31EDE00CBA201 /* PlayInfoViewClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E150D2AB31EDE00CBA201 /* PlayInfoViewClass.swift */; };
 		C86E15102AB31FF300CBA201 /* PlayInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */; };
 		C86E15132AB42A6A00CBA201 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C86E15122AB42A6A00CBA201 /* .swiftlint.yml */; };
 		C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */; };
@@ -31,6 +30,10 @@
 		C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E152B2AB5897500CBA201 /* Seletions.swift */; };
 		C86E152E2AB598CD00CBA201 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E152D2AB598CD00CBA201 /* Play.swift */; };
 		C86E15312AB5D69A00CBA201 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15302AB5D69A00CBA201 /* DataManager.swift */; };
+		C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */; };
+		C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */; };
+		C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */; };
+		C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +47,6 @@
 		C86E14BD2AB1AF4E00CBA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C86E14BF2AB1AF4E00CBA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C86E150D2AB31EDE00CBA201 /* PlayInfoViewClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoViewClass.swift; sourceTree = "<group>"; };
 		C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoTableViewCell.swift; sourceTree = "<group>"; };
 		C86E15122AB42A6A00CBA201 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarAndTabBar.swift; sourceTree = "<group>"; };
@@ -61,6 +63,10 @@
 		C86E152B2AB5897500CBA201 /* Seletions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seletions.swift; sourceTree = "<group>"; };
 		C86E152D2AB598CD00CBA201 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		C86E15302AB5D69A00CBA201 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFindersViewController.swift; sourceTree = "<group>"; };
+		C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaysViewController.swift; sourceTree = "<group>"; };
+		C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoView.swift; sourceTree = "<group>"; };
+		C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayTableViewCell.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,9 +126,10 @@
 				C86E15222AB4A30300CBA201 /* Model */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
 				C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */,
-				C86E150D2AB31EDE00CBA201 /* PlayInfoViewClass.swift */,
+				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
+				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
@@ -151,6 +158,8 @@
 				C86E14B52AB1AF4C00CBA201 /* FindPlayerViewController.swift */,
 				C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */,
 				C86E15162AB438BF00CBA201 /* MyPageViewController.swift */,
+				C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */,
+				C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */,
 				C86E15182AB438EE00CBA201 /* CompetitionsPageViewController.swift */,
 				C86E151A2AB4390600CBA201 /* PlayOneViewController.swift */,
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
@@ -293,18 +302,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
+				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FindPlayerViewController.swift in Sources */,
 				C86E15192AB438EE00CBA201 /* CompetitionsPageViewController.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
+				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,
+				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C86E151B2AB4390600CBA201 /* PlayOneViewController.swift in Sources */,
+				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyPageViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
 				C86E15242AB4A33600CBA201 /* StandardAmounts.swift in Sources */,
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,
-				C86E150E2AB31EDE00CBA201 /* PlayInfoViewClass.swift in Sources */,
 				C86E15102AB31FF300CBA201 /* PlayInfoTableViewCell.swift in Sources */,
 				C86E15312AB5D69A00CBA201 /* DataManager.swift in Sources */,
 				C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */,

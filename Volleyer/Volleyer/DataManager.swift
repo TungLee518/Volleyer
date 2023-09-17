@@ -42,7 +42,6 @@ class DataManager {
                 print("Error adding document: \(err)")
             } else {
                 print("Document added with ID: \(document.documentID)")
-                // self.navigationController?.popToRootViewController(animated: true)
             }
         }
         print("add data")
