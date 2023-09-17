@@ -12,13 +12,18 @@ class PlayTableViewCell: UITableViewCell {
 
     static let identifier = "PlayTableViewCell"
 
-    private let playView = PlayInfoView()
+    private var playView = PlayInfoView()
+
+    var thisPlay: Play? {
+        didSet {
+            sendData(thisPlay!)
+        }
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(playView)
         setLayout()
-        playView.setUI()
     }
 
     required init?(coder: NSCoder) {
@@ -33,6 +38,11 @@ class PlayTableViewCell: UITableViewCell {
             playView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             playView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+
+    func sendData(_ data: Play) {
+        playView.play = thisPlay
+        playView.setUI()
     }
 
     @objc func addData() {

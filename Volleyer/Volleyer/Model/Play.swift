@@ -33,3 +33,33 @@ struct LackAmount {
     var female: Int
     var unlimited: Int
 }
+
+enum PlayTitle: String {
+    case id = "id"
+    case createTime = "create_time"
+    case startTime = "start_time"
+    case endTime = "end_time"
+    case place = "place"
+    case price = "price"
+    case type = "type"
+    case levelRange = "level_range"
+    case lackAmount = "lack_amount"
+    case playerInfo = "palyer_info"
+    case status = "status"
+    case levelFilter = "level_filter"
+    case followerListId = "follower_list_id"
+}
+
+enum LevelTitle: String {
+    case set = "set"
+    case block = "block"
+    case dig = "dig"
+    case spike = "spike"
+    case sum = "sum"
+}
+
+enum LackGender: String {
+    case male = "male"
+    case female = "female"
+    case unlimited = "unlimited"
+}

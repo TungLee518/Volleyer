@@ -7,13 +7,20 @@
 
 import UIKit
 
-class MyFindersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class MyFindersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     private var myFindersTableView: UITableView!
+    
+    let dataManager = DataManager()
+    private var myFinders = [Play]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
+        
+        dataManager.getPlay()
+        dataManager.delegate = self
+        
         setTableView()
     }
 
@@ -45,7 +52,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        myFinders.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,6 +60,16 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayTableViewCell.identifier, for: indexPath) as! PlayTableViewCell
         // swiftlint:enable force_cast
 
+        let thisPlay = myFinders[indexPath.row]
+        cell.thisPlay = thisPlay
+        print("play info VC", thisPlay)
         return cell
+    }
+}
+
+extension MyFindersViewController: PlayDataManagerDelegate {
+    func manager(_ manager: DataManager, didGet plays: [Play]) {
+        myFinders = plays
+        myFindersTableView.reloadData()
     }
 }

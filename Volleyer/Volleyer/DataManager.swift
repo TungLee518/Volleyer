@@ -7,10 +7,20 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseCore
 
+protocol PlayDataManagerDelegate {
+    func manager(_ manager: DataManager, didGet plays: [Play])
+}
+
+// swiftlint:disable force_cast
 class DataManager {
+    
+    var delegate: PlayDataManagerDelegate?
+
+    let plays = Firestore.firestore().collection("plays")
+
     func savePlay(_ play: Play) {
-        let plays = Firestore.firestore().collection("plays")
         let document = plays.document()
         let data: [String: Any] = [
             "id": play.id,
@@ -46,4 +56,49 @@ class DataManager {
         }
         print("add data")
     }
+
+    func getPlay() {
+        plays.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var playsArray: [Play] = []
+                for document in querySnapshot!.documents {
+                    let levelDict = document.data()[PlayTitle.levelRange.rawValue] as! [String: Int]
+                    let levelRange = LevelRange(
+                        setBall: levelDict[LevelTitle.set.rawValue]!,
+                        block: levelDict[LevelTitle.block.rawValue]!,
+                        dig: levelDict[LevelTitle.dig.rawValue]!,
+                        spike: levelDict[LevelTitle.spike.rawValue]!,
+                        sum: levelDict[LevelTitle.sum.rawValue]!
+                    )
+                    let lackDict = document.data()[PlayTitle.lackAmount.rawValue] as! [String: Int]
+                    let lackAmount = LackAmount(
+                        male: lackDict[LackGender.male.rawValue]!,
+                        female: lackDict[LackGender.female.rawValue]!,
+                        unlimited: lackDict[LackGender.unlimited.rawValue]!
+                    )
+                    let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
+                    let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
+                    let aPlay = Play(
+                        id: document.data()[PlayTitle.id.rawValue] as! String,
+                        startTime: startTime.dateValue(),
+                        endTime: endTime.dateValue(),
+                        place: document.data()[PlayTitle.place.rawValue] as! String,
+                        price: document.data()[PlayTitle.price.rawValue] as! Int,
+                        type: document.data()[PlayTitle.type.rawValue] as! Int,
+                        levelRange: levelRange,
+                        lackAmount: lackAmount,
+                        playerInfo: [],
+                        status: document.data()[PlayTitle.status.rawValue] as! Int
+                    )
+                    playsArray.append(aPlay)
+                }
+                // playsArray.sort { $0.time > $1.time }
+                print(playsArray)
+                self.delegate?.manager(self, didGet: playsArray)
+            }
+        }
+    }
 }
+// swiftlint:enable force_cast
