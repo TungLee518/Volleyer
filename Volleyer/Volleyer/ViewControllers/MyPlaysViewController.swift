@@ -60,7 +60,6 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
 
         let thisPlay = myPlays[indexPath.row]
         cell.thisPlay = thisPlay
-        print("play info VC", thisPlay)
         return cell
     }
 }

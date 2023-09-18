@@ -10,7 +10,7 @@
 		51253E9DEEAB3569A547D2F3 /* Pods_Volleyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
-		C86E14B62AB1AF4C00CBA201 /* FindPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FindPlayerViewController.swift */; };
+		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
 		C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */; };
 		C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */; };
 		C86E14C62AB2C83700CBA201 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */; };
@@ -44,7 +44,7 @@
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C86E14B52AB1AF4C00CBA201 /* FindPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPlayerViewController.swift; sourceTree = "<group>"; };
+		C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderViewController.swift; sourceTree = "<group>"; };
 		C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C86E14BD2AB1AF4E00CBA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C86E14BF2AB1AF4E00CBA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,11 +129,8 @@
 				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
 				C86E15222AB4A30300CBA201 /* Model */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
-				C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */,
-				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
-				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
+				C86E153E2AB819D900CBA201 /* TableViewCells */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
-				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
@@ -161,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				C86E151E2AB43B8600CBA201 /* TabBarViewController.swift */,
-				C86E14B52AB1AF4C00CBA201 /* FindPlayerViewController.swift */,
+				C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */,
 				C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */,
 				C86E15162AB438BF00CBA201 /* MyPageViewController.swift */,
 				C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */,
@@ -171,6 +168,17 @@
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C86E153E2AB819D900CBA201 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
+				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
+				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
+				C86E150F2AB31FF300CBA201 /* PlayInfoTableViewCell.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,7 +317,7 @@
 			files = (
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
-				C86E14B62AB1AF4C00CBA201 /* FindPlayerViewController.swift in Sources */,
+				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
 				C86E15192AB438EE00CBA201 /* CompetitionsPageViewController.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,

@@ -60,7 +60,6 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
         let thisPlay = myFinders[indexPath.row]
         cell.thisPlay = thisPlay
-        print("play info VC", thisPlay)
         return cell
     }
 }

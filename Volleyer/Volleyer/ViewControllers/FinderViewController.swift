@@ -8,21 +8,23 @@
 import UIKit
 import FirebaseFirestore
 
-class FindPlayerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FinderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var db: Firestore!
     var findPlayerTableView: UITableView!
 
+    private let dataManager = DataManager()
+    var publicPlays = [Play]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = UIColor.white
-
         setNavBar()
+        dataManager.delegate = self
         setTableView()
-
+        dataManager.getPlay()
     }
 
     func setNavBar() {
+        self.view.backgroundColor = UIColor.white
         navigationItem.title = NavBarEnum.finderPage.rawValue
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
@@ -33,11 +35,10 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
          ]
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushToEstablishVC))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.white
     }
-    
+
     @objc func pushToEstablishVC() {
         let nextVC = EstablishFinderViewController()
         navigationController?.pushViewController(nextVC, animated: true)
@@ -62,37 +63,24 @@ class FindPlayerViewController: UIViewController, UITableViewDataSource, UITable
         ])
     }
 
-    func addTestDataToFirebase() {
-        let settings = FirestoreSettings()
-
-        Firestore.firestore().settings = settings
-        // [END setup]
-        db = Firestore.firestore()
-
-        var ref: DocumentReference? = nil
-        ref = db.collection("tests").addDocument(data: [
-            "first": "May",
-            "middle": "",
-            "last": "Lee",
-            "born": 1999
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        7
+        publicPlays.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable force_cast
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayInfoTableViewCell.identifier, for: indexPath) as! PlayInfoTableViewCell
         // swiftlint:enable force_cast
+        let thisPlay = publicPlays[indexPath.row]
+        cell.thisPlay = thisPlay
         return cell
     }
+}
 
+// not determine public or not yet
+extension FinderViewController: PlayDataManagerDelegate {
+    func manager(_ manager: DataManager, didGet plays: [Play]) {
+        publicPlays = plays
+        findPlayerTableView.reloadData()
+    }
 }

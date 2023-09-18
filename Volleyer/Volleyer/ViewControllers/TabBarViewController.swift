@@ -12,7 +12,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let findPlayerVC = FindPlayerViewController()
+        let findPlayerVC = FinderViewController()
         let findPlayerNC = UINavigationController(rootViewController: findPlayerVC)
         // findPlayerNC.tabBarItem.image = UIImage(named: "placeholder")
         findPlayerNC.tabBarItem.title = TabBarEnum.finderPage.rawValue

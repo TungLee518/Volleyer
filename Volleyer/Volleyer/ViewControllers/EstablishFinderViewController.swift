@@ -512,7 +512,6 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
             thisPlay.lackAmount.male = Int(maleTextField.text!)!
             thisPlay.lackAmount.female = Int(femaleTextField.text!)!
             // thisPlay.playerInfo = players
-            print(thisPlay)
             dataManager.savePlay(thisPlay)
             navigationController?.popToRootViewController(animated: true)
         }
