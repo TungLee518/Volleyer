@@ -10,17 +10,15 @@ import UIKit
 class MyFindersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     private var myFindersTableView: UITableView!
-    
-    let dataManager = DataManager()
-    private var myFinders = [Play]()
+
+    private let dataManager = DataManager()
+    var myFinders = [Play]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
-        
         dataManager.getPlay()
         dataManager.delegate = self
-        
         setTableView()
     }
 
@@ -69,7 +67,11 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
 extension MyFindersViewController: PlayDataManagerDelegate {
     func manager(_ manager: DataManager, didGet plays: [Play]) {
-        myFinders = plays
+        for i in plays {
+            if i.id == UserDefaults.standard.string(forKey: "UserID") {
+                myFinders.append(i)
+            }
+        }
         myFindersTableView.reloadData()
     }
 }

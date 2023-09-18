@@ -13,12 +13,17 @@ protocol PlayDataManagerDelegate {
     func manager(_ manager: DataManager, didGet plays: [Play])
 }
 
+protocol CompetitionDataManagerDelegate {
+    func manager(_ manager: DataManager, didGet competitions: [Competition])
+}
+
 // swiftlint:disable force_cast
 class DataManager {
-    
     var delegate: PlayDataManagerDelegate?
+    var competitionDelegate: CompetitionDataManagerDelegate?
 
     let plays = Firestore.firestore().collection("plays")
+    let competitions = Firestore.firestore().collection("competitions")
 
     func savePlay(_ play: Play) {
         let document = plays.document()
@@ -97,6 +102,28 @@ class DataManager {
                 // playsArray.sort { $0.time > $1.time }
                 print(playsArray)
                 self.delegate?.manager(self, didGet: playsArray)
+            }
+        }
+    }
+    
+    func getCompetion() {
+        competitions.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var competitionsArray: [Competition] = []
+                for document in querySnapshot!.documents {
+                    let aCompetition = Competition(
+                        title: document.data()[CompetitionTitle.title.rawValue] as! String,
+                        date: document.data()[CompetitionTitle.date.rawValue] as! String,
+                        county: document.data()[CompetitionTitle.county.rawValue] as! String,
+                        url: document.data()[CompetitionTitle.url.rawValue] as! String
+                    )
+                    competitionsArray.append(aCompetition)
+                }
+                competitionsArray.sort { $0.date > $1.date }
+                print(competitionsArray)
+                self.competitionDelegate?.manager(self, didGet: competitionsArray)
             }
         }
     }

@@ -20,7 +20,7 @@ class PlayInfoView: UIView {
             let lackLable: UILabel = {
                 let label = UILabel()
                 let padding = 3
-                label.text = String(repeating: " ", count: padding) + "缺3女" + String(repeating: " ", count: padding)
+                label.text = String(repeating: " ", count: padding) + "缺\(play.lackAmount.female)女\(play.lackAmount.male)男" + String(repeating: " ", count: padding)
                 label.textColor = UIColor.systemBlue
                 label.backgroundColor = UIColor.lightGray
                 label.layer.cornerRadius = 5
@@ -79,7 +79,7 @@ class PlayInfoView: UIView {
             }()
             lazy var levelButton: UIButton = {
                 let button = UIButton()
-                button.setTitle("B", for: .normal)
+                button.setTitle(levels[play.levelRange.sum], for: .normal)
                 button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
                 button.titleLabel?.textAlignment = .center
                 button.backgroundColor = UIColor.orange

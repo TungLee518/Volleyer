@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         let db = Firestore.firestore()
+        
+        UserDefaults.standard.set("maymmm518", forKey: "UserID")
+        
         return true
     }
 
