@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompetitionsPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class CompetitionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
 
     private var competitionsTableView: UITableView!
 
@@ -74,7 +74,7 @@ class CompetitionsPageViewController: UIViewController, UITableViewDataSource, U
     }
 }
 
-extension CompetitionsPageViewController: CompetitionDataManagerDelegate {
+extension CompetitionsViewController: CompetitionDataManagerDelegate {
     func manager(_ manager: DataManager, didGet competitions: [Competition]) {
         allCompetitions = competitions
         competitionsTableView.reloadData()

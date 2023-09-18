@@ -371,7 +371,7 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         typePicker.dataSource = self
         typePicker.delegate = self
     }
-    
+
     func setUpNavBar() {
         navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationItem.title = NavBarEnum.establishFinderPage.rawValue
@@ -383,6 +383,7 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
     func setPlayListTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
+        playerListTableView.playerListDelegate = self
         playerListTableView.playerListDelegate = self
         playerListTableView.players = players
     }

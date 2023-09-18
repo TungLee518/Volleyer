@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 class FinderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var db: Firestore!
-    var findPlayerTableView: UITableView!
+    var finderTableView: UITableView!
 
     private let dataManager = DataManager()
     var publicPlays = [Play]()
@@ -45,21 +45,22 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func setTableView() {
-        findPlayerTableView = UITableView()
-        findPlayerTableView.dataSource = self
-        findPlayerTableView.delegate = self
-        findPlayerTableView.register(PlayInfoTableViewCell.self, forCellReuseIdentifier: PlayInfoTableViewCell.identifier)
-        findPlayerTableView.separatorStyle = .singleLine
-        view.addSubview(findPlayerTableView)
+        finderTableView = UITableView()
+        finderTableView.dataSource = self
+        finderTableView.delegate = self
+        finderTableView.register(FinderTableViewCell.self, forCellReuseIdentifier: FinderTableViewCell.identifier)
+        finderTableView.separatorStyle = .singleLine
+        finderTableView.allowsSelection = false
+        view.addSubview(finderTableView)
 
-        findPlayerTableView.translatesAutoresizingMaskIntoConstraints = false
-        findPlayerTableView.rowHeight = UITableView.automaticDimension
-        findPlayerTableView.estimatedRowHeight = 50
+        finderTableView.translatesAutoresizingMaskIntoConstraints = false
+        finderTableView.rowHeight = UITableView.automaticDimension
+        finderTableView.estimatedRowHeight = 50
         NSLayoutConstraint.activate([
-            findPlayerTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            findPlayerTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            findPlayerTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            findPlayerTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            finderTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            finderTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            finderTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            finderTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
@@ -69,10 +70,11 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable force_cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: PlayInfoTableViewCell.identifier, for: indexPath) as! PlayInfoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FinderTableViewCell.identifier, for: indexPath) as! FinderTableViewCell
         // swiftlint:enable force_cast
         let thisPlay = publicPlays[indexPath.row]
         cell.thisPlay = thisPlay
+        cell.parent = self
         return cell
     }
 }
@@ -81,6 +83,6 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 extension FinderViewController: PlayDataManagerDelegate {
     func manager(_ manager: DataManager, didGet plays: [Play]) {
         publicPlays = plays
-        findPlayerTableView.reloadData()
+        finderTableView.reloadData()
     }
 }
