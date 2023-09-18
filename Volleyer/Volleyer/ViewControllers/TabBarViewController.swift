@@ -12,12 +12,12 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let findPlayerVC = FindPlayerViewController()
+        let findPlayerVC = FinderViewController()
         let findPlayerNC = UINavigationController(rootViewController: findPlayerVC)
         // findPlayerNC.tabBarItem.image = UIImage(named: "placeholder")
         findPlayerNC.tabBarItem.title = TabBarEnum.finderPage.rawValue
 
-        let myPageVC = MyPageViewController()
+        let myPageVC = MyViewController()
         let myPageNC = UINavigationController(rootViewController: myPageVC)
         // myPageNC.tabBarItem.image = UIImage(named: "placeholder")
         myPageNC.tabBarItem.title = TabBarEnum.myPage.rawValue
@@ -27,7 +27,7 @@ class TabBarViewController: UITabBarController {
         // communityNC.tabBarItem.image = UIImage(named: "placeholder")
         communityNC.tabBarItem.title = TabBarEnum.communityPage.rawValue
 
-        let competitionVC = CompetitionsPageViewController()
+        let competitionVC = CompetitionsViewController()
         let competitionNC = UINavigationController(rootViewController: competitionVC)
         // competitionNC.tabBarItem.image = UIImage(named: "placeholder")
         competitionNC.tabBarItem.title = TabBarEnum.competitionPage.rawValue

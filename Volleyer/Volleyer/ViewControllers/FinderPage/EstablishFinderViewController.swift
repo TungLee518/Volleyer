@@ -371,18 +371,20 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         typePicker.dataSource = self
         typePicker.delegate = self
     }
-    
+
     func setUpNavBar() {
         navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationItem.title = NavBarEnum.establishFinderPage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
+        backButton.tintColor = UIColor.black
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
     func setPlayListTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
+        playerListTableView.playerListDelegate = self
         playerListTableView.playerListDelegate = self
         playerListTableView.players = players
     }
@@ -512,7 +514,6 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
             thisPlay.lackAmount.male = Int(maleTextField.text!)!
             thisPlay.lackAmount.female = Int(femaleTextField.text!)!
             // thisPlay.playerInfo = players
-            print(thisPlay)
             dataManager.savePlay(thisPlay)
             navigationController?.popToRootViewController(animated: true)
         }

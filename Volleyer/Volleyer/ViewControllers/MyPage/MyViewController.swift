@@ -7,8 +7,8 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
-    
+class MyViewController: UIViewController {
+
     private lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder")

@@ -100,12 +100,11 @@ class DataManager {
                     playsArray.append(aPlay)
                 }
                 // playsArray.sort { $0.time > $1.time }
-                print(playsArray)
                 self.delegate?.manager(self, didGet: playsArray)
             }
         }
     }
-    
+
     func getCompetion() {
         competitions.getDocuments() { (querySnapshot, err) in
             if let err = err {
