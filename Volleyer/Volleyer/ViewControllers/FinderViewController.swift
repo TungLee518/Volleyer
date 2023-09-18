@@ -26,17 +26,17 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     func setNavBar() {
         self.view.backgroundColor = UIColor.white
         navigationItem.title = NavBarEnum.finderPage.rawValue
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.backgroundColor = .systemBlue
-        navigationBarAppearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white,
-            .font: UIFont.boldSystemFont(ofSize: 20)
-         ]
-        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+//        let navigationBarAppearance = UINavigationBarAppearance()
+//        navigationBarAppearance.configureWithOpaqueBackground()
+//        navigationBarAppearance.backgroundColor = .systemBlue
+//        navigationBarAppearance.titleTextAttributes = [
+//            .foregroundColor: UIColor.white,
+//            .font: UIFont.boldSystemFont(ofSize: 20)
+//         ]
+//        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushToEstablishVC))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
 
     @objc func pushToEstablishVC() {

@@ -1,5 +1,5 @@
 //
-//  AddPlayViewController.swift
+//  MyFinderInfoViewController.swift
 //  Volleyer
 //
 //  Created by 李童 on 2023/9/18.
@@ -7,18 +7,29 @@
 
 import UIKit
 
-class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
-
+class MyFinderInfoViewController: UIViewController, PlayerListTableViewDelegate {
     private var playView = PlayInfoView()
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
-    lazy var sendRequestButton: UIButton = {
+    lazy var randomTeamButton: UIButton = {
         let button = UIButton()
-        button.setTitle("send request", for: .normal)
+        button.setTitle("幫我分隊", for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = UIColor.gray
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
+        button.addTarget(self, action: #selector(randomTeamPage), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        return button
+    }()
+    lazy var changeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("我要更改", for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.gray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pushToEstablishVC), for: .touchUpInside)
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
         return button
@@ -38,7 +49,7 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(playView)
-        view.addSubview(sendRequestButton)
+        view.addSubview(randomTeamButton)
         setPlayersTableView()
         setLayout()
         setNavBar()
@@ -46,7 +57,7 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.addOnePage.rawValue
+        self.title = NavBarEnum.myFinderInfo.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = UIColor.black
@@ -55,6 +66,7 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
 
     private func setPlayersTableView() {
         view.addSubview(playerListTableView)
+        view.addSubview(changeButton)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         playerListTableView.playerListDelegate = self
         playerListTableView.players = addPlayers
@@ -72,10 +84,15 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
             playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             playerListTableView.heightAnchor.constraint(equalToConstant: 200),
 
-            sendRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            sendRequestButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
-            sendRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
+            changeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            changeButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
+            changeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -standardMargin/2),
+            changeButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+
+            randomTeamButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: standardMargin/2),
+            randomTeamButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
+            randomTeamButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            randomTeamButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
     }
 
@@ -90,8 +107,12 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
         // Navigate to the player's profile view or perform any other action
     }
 
-    @objc func sendRequest() {
-        print("request sent")
-        navigationController?.popToRootViewController(animated: true)
+    @objc func pushToEstablishVC() {
+        let nextVC = EstablishFinderViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+
+    @objc func randomTeamPage() {
+        print("go to random team page")
     }
 }

@@ -27,6 +27,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         self.title = NavBarEnum.myFinders.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
+        backButton.tintColor = UIColor.black
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
@@ -61,6 +62,12 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         let thisPlay = myFinders[indexPath.row]
         cell.thisPlay = thisPlay
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = MyFinderInfoViewController()
+        nextVC.thisPlay = myFinders[indexPath.row]
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

@@ -27,6 +27,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         self.title = NavBarEnum.myPlays.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
+        backButton.tintColor = UIColor.black
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
@@ -62,6 +63,12 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.thisPlay = thisPlay
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = MyPlayInfoViewController()
+        nextVC.thisPlay = myPlays[indexPath.row]
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 
 extension MyPlaysViewController: PlayDataManagerDelegate {
@@ -70,4 +77,3 @@ extension MyPlaysViewController: PlayDataManagerDelegate {
         myPlaysTableView.reloadData()
     }
 }
-

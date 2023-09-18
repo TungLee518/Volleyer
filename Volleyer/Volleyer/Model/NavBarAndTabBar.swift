@@ -14,6 +14,8 @@ enum NavBarEnum: String {
     case myPage = "My Page"
     case myFinders = "我的揪場"
     case myPlays = "我要打的場"
+    case myFinderInfo = "我的揪場資訊"
+    case myPlayInfo = "我要打的場資訊"
     case communityPage = "Community"
     case playOnePage = "Play One"
     case competitionPage = "Competitions"

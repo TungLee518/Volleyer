@@ -377,6 +377,7 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
         self.navigationItem.title = NavBarEnum.establishFinderPage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
+        backButton.tintColor = UIColor.black
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 

@@ -1,5 +1,5 @@
 //
-//  AddPlayViewController.swift
+//  MyPlayInfoViewController.swift
 //  Volleyer
 //
 //  Created by 李童 on 2023/9/18.
@@ -7,18 +7,17 @@
 
 import UIKit
 
-class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
-
+class MyPlayInfoViewController: UIViewController, PlayerListTableViewDelegate {
     private var playView = PlayInfoView()
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
-    lazy var sendRequestButton: UIButton = {
+    lazy var changeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("send request", for: .normal)
+        button.setTitle("我要更改", for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = UIColor.gray
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
+        button.addTarget(self, action: #selector(pushToAddPlayVC), for: .touchUpInside)
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
         return button
@@ -38,7 +37,7 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(playView)
-        view.addSubview(sendRequestButton)
+        view.addSubview(changeButton)
         setPlayersTableView()
         setLayout()
         setNavBar()
@@ -46,7 +45,7 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.addOnePage.rawValue
+        self.title = NavBarEnum.myPlayInfo.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = UIColor.black
@@ -72,10 +71,10 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
             playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             playerListTableView.heightAnchor.constraint(equalToConstant: 200),
 
-            sendRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            sendRequestButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
-            sendRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
+            changeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            changeButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
+            changeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            changeButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
     }
 
@@ -90,8 +89,9 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
         // Navigate to the player's profile view or perform any other action
     }
 
-    @objc func sendRequest() {
-        print("request sent")
-        navigationController?.popToRootViewController(animated: true)
+    @objc func pushToAddPlayVC() {
+        let nextVC = AddPlayViewController()
+        nextVC.thisPlay = thisPlay
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
