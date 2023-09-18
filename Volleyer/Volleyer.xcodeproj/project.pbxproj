@@ -10,6 +10,7 @@
 		51253E9DEEAB3569A547D2F3 /* Pods_Volleyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */; };
 		C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */; };
 		C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */; };
+		C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
@@ -46,6 +47,7 @@
 		77A2C1FD5979003FEF520EB2 /* Pods-Volleyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.release.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.release.xcconfig"; sourceTree = "<group>"; };
 		C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayInfoViewController.swift; sourceTree = "<group>"; };
 		C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFinderInfoViewController.swift; sourceTree = "<group>"; };
+		C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTeamViewController.swift; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,29 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C80051202AB8443B00FEA7FD /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				C86E15162AB438BF00CBA201 /* MyViewController.swift */,
+				C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */,
+				C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */,
+				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
+				C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */,
+				C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		C80051212AB8445D00FEA7FD /* FinderPage */ = {
+			isa = PBXGroup;
+			children = (
+				C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */,
+				C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */,
+				C86E15412AB8249400CBA201 /* AddPlayViewController.swift */,
+			);
+			path = FinderPage;
+			sourceTree = "<group>";
+		};
 		C86E14A52AB1AF4C00CBA201 = {
 			isa = PBXGroup;
 			children = (
@@ -164,14 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				C86E151E2AB43B8600CBA201 /* TabBarViewController.swift */,
-				C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */,
-				C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */,
-				C86E15412AB8249400CBA201 /* AddPlayViewController.swift */,
-				C86E15162AB438BF00CBA201 /* MyViewController.swift */,
-				C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */,
-				C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */,
-				C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */,
-				C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */,
+				C80051202AB8443B00FEA7FD /* MyPage */,
+				C80051212AB8445D00FEA7FD /* FinderPage */,
 				C86E15182AB438EE00CBA201 /* CompetitionsViewController.swift */,
 				C86E151A2AB4390600CBA201 /* PlayOneViewController.swift */,
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
@@ -332,6 +351,7 @@
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
+				C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */,
 				C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */,
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
 				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,

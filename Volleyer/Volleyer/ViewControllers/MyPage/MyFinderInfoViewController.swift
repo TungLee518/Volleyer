@@ -114,5 +114,7 @@ class MyFinderInfoViewController: UIViewController, PlayerListTableViewDelegate 
 
     @objc func randomTeamPage() {
         print("go to random team page")
+        let nextVC = RandomTeamViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
