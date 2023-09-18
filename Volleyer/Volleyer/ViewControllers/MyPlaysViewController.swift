@@ -11,9 +11,14 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
 
     private var myPlaysTableView: UITableView!
 
+    private let dataManager = DataManager()
+    var myPlays = [Play]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
+        dataManager.getPlay()
+        dataManager.delegate = self
         setTableView()
     }
 
@@ -45,7 +50,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        myPlays.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,6 +58,17 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: PlayTableViewCell.identifier, for: indexPath) as! PlayTableViewCell
         // swiftlint:enable force_cast
 
+        let thisPlay = myPlays[indexPath.row]
+        cell.thisPlay = thisPlay
+        print("play info VC", thisPlay)
         return cell
     }
 }
+
+extension MyPlaysViewController: PlayDataManagerDelegate {
+    func manager(_ manager: DataManager, didGet plays: [Play]) {
+        myPlays = plays
+        myPlaysTableView.reloadData()
+    }
+}
+
