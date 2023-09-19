@@ -11,6 +11,10 @@
 		C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */; };
 		C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */; };
 		C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */; };
+		C80051252AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051242AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift */; };
+		C80051272AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051262AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift */; };
+		C80051292AB8942D00FEA7FD /* PlayOneCourtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */; };
+		C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
@@ -48,6 +52,10 @@
 		C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayInfoViewController.swift; sourceTree = "<group>"; };
 		C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFinderInfoViewController.swift; sourceTree = "<group>"; };
 		C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTeamViewController.swift; sourceTree = "<group>"; };
+		C80051242AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneCourtTableViewCell.swift; sourceTree = "<group>"; };
+		C80051262AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneFinderTableViewCell.swift; sourceTree = "<group>"; };
+		C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneCourtViewController.swift; sourceTree = "<group>"; };
+		C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +201,8 @@
 				C80051212AB8445D00FEA7FD /* FinderPage */,
 				C86E15182AB438EE00CBA201 /* CompetitionsViewController.swift */,
 				C86E151A2AB4390600CBA201 /* PlayOneViewController.swift */,
+				C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */,
+				C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */,
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
 			);
 			path = ViewControllers;
@@ -202,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
+				C80051242AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift */,
+				C80051262AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
 				C86E150F2AB31FF300CBA201 /* FinderTableViewCell.swift */,
@@ -345,8 +357,10 @@
 			files = (
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
+				C80051272AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
 				C86E15192AB438EE00CBA201 /* CompetitionsViewController.swift in Sources */,
+				C80051252AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
@@ -363,12 +377,14 @@
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
 				C86E15242AB4A33600CBA201 /* StandardAmounts.swift in Sources */,
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,
+				C80051292AB8942D00FEA7FD /* PlayOneCourtViewController.swift in Sources */,
 				C86E15102AB31FF300CBA201 /* FinderTableViewCell.swift in Sources */,
 				C86E15312AB5D69A00CBA201 /* DataManager.swift in Sources */,
 				C86E15422AB8249400CBA201 /* AddPlayViewController.swift in Sources */,
 				C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */,
 				C86E15282AB5584B00CBA201 /* PlayerListTableView.swift in Sources */,
 				C86E151D2AB4392700CBA201 /* CommunityViewController.swift in Sources */,
+				C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */,
 				C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */,
 				C86E153B2AB7FE6900CBA201 /* Competition.swift in Sources */,
 			);

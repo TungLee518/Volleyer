@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompetitionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class CompetitionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     private var competitionsTableView: UITableView!
 

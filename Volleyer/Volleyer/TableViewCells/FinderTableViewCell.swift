@@ -44,7 +44,7 @@ class FinderTableViewCell: UITableViewCell {
         button.setTitle("我要加", for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
+        button.backgroundColor = UIColor.lightGray
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addPlay), for: .touchUpInside)
         button.layer.cornerRadius = 5
@@ -83,7 +83,8 @@ class FinderTableViewCell: UITableViewCell {
             wantToAddButton.topAnchor.constraint(equalTo: playView.bottomAnchor),
             wantToAddButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
             wantToAddButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
-            wantToAddButton.heightAnchor.constraint(equalToConstant: 30)
+            wantToAddButton.heightAnchor.constraint(equalToConstant: 30),
+            wantToAddButton.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
 

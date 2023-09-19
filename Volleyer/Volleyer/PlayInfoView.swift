@@ -21,7 +21,7 @@ class PlayInfoView: UIView {
                 let label = UILabel()
                 let padding = 3
                 label.text = String(repeating: " ", count: padding) + "缺\(play.lackAmount.female)女\(play.lackAmount.male)男" + String(repeating: " ", count: padding)
-                label.textColor = UIColor.systemBlue
+                label.textColor = UIColor.black
                 label.backgroundColor = UIColor.lightGray
                 label.layer.cornerRadius = 5
                 label.clipsToBounds = true
@@ -47,7 +47,7 @@ class PlayInfoView: UIView {
             }()
             let placeLabel: UILabel = {
                 let label = UILabel()
-                label.text = play.place
+                label.text = "place: \(play.place)"
                 label.textColor = UIColor.black
                 label.font = UIFont.systemFont(ofSize: 16)
                 label.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +85,7 @@ class PlayInfoView: UIView {
                 button.backgroundColor = UIColor.orange
                 button.translatesAutoresizingMaskIntoConstraints = false
                 // button.addTarget(self, action: #selector(showLevelDetail), for: .touchUpInside)
-                button.layer.cornerRadius = standardMargin / 2
+                button.layer.cornerRadius = standardMargin
                 button.clipsToBounds = true
                 return button
             }()
@@ -124,8 +124,8 @@ class PlayInfoView: UIView {
 
                 levelButton.centerYAnchor.constraint(equalTo: levelLable.centerYAnchor),
                 levelButton.leadingAnchor.constraint(equalTo: levelLable.trailingAnchor),
-                levelButton.heightAnchor.constraint(equalToConstant: standardMargin),
-                levelButton.widthAnchor.constraint(equalToConstant: standardMargin),
+                levelButton.heightAnchor.constraint(equalToConstant: standardMargin*2),
+                levelButton.widthAnchor.constraint(equalToConstant: standardMargin*2),
 
                 priceLable.centerYAnchor.constraint(equalTo: levelLable.centerYAnchor),
                 priceLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin)
