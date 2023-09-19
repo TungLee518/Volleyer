@@ -313,7 +313,7 @@ class EstablishFinderViewController: UIViewController {
     private var levelRange = LevelRange(setBall: 4, block: 4, dig: 4, spike: 4, sum: 4)
     private var lackAmount = LackAmount(male: 0, female: 0, unlimited: 0)
 
-    lazy private var thisPlay: Play = Play(id: "maymmm518", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
+    lazy private var thisPlay: Play = Play(id: "", finderId: "maymmm518", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
     
     var players: [Player] = []
 
@@ -492,6 +492,8 @@ class EstablishFinderViewController: UIViewController {
         }
         if placeTextField.text != "", priceTextField.text != "", typeTextField.text != ""
             , maleTextField.text != "", femaleTextField.text != "" {
+            let anID = UUID()
+            thisPlay.id = anID.uuidString
             thisPlay.place = placeTextField.text!
             thisPlay.price = Int(priceTextField.text!)!
             thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!

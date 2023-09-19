@@ -25,7 +25,7 @@ class MyPlayInfoViewController: UIViewController {
 
     var thisPlay: Play? {
         didSet {
-            sendData(thisPlay!)
+            sendDataToPlayView(thisPlay!)
         }
     }
 
@@ -56,6 +56,7 @@ class MyPlayInfoViewController: UIViewController {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         playerListTableView.players = addPlayers
+        playerListTableView.canEdit = false
     }
 
     private func setLayout() {
@@ -77,7 +78,7 @@ class MyPlayInfoViewController: UIViewController {
         ])
     }
 
-    func sendData(_ data: Play) {
+    func sendDataToPlayView(_ data: Play) {
         playView.play = thisPlay
         playView.setUI()
     }

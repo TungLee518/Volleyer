@@ -11,84 +11,92 @@ import UIKit
 class PlayInfoView: UIView {
 
     var play: Play?
+    
+    let lackLable: UILabel = {
+        let label = UILabel()
+        let padding = 3
+//        label.text = String(repeating: " ", count: padding) + "缺\(play.lackAmount.female)女\(play.lackAmount.male)男" + String(repeating: " ", count: padding)
+        label.textColor = UIColor.black
+        label.backgroundColor = UIColor.lightGray
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let startTimeLable: UILabel = {
+        let label = UILabel()
+//        label.text = "\(dateFormatter.string(from: play.startTime)) ~ \(dateFormatter.string(from: play.endTime))"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let endTimeLable: UILabel = {
+        let label = UILabel()
+//        label.text = "\(dateFormatter.string(from: play.endTime))"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let placeLabel: UILabel = {
+        let label = UILabel()
+//        label.text = "place: \(play.place)"
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let typeLable: UILabel = {
+        let label = UILabel()
+//        label.text = playTypes[play.type]
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let priceLable: UILabel = {
+        let label = UILabel()
+//        label.text = "\(play.price) 元 /人"
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let levelLable: UILabel = {
+        let label = UILabel()
+        label.text = "程度："
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var levelButton: UIButton = {
+        let button = UIButton()
+//        button.setTitle(levels[play.levelRange.sum], for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.orange
+        button.translatesAutoresizingMaskIntoConstraints = false
+        // button.addTarget(self, action: #selector(showLevelDetail), for: .touchUpInside)
+        button.layer.cornerRadius = standardMargin
+        button.clipsToBounds = true
+        return button
+    }()
 
     func setUI() {
         if let play = play {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy/MM/dd EE HH:mm"
 
-            let lackLable: UILabel = {
-                let label = UILabel()
-                let padding = 3
-                label.text = String(repeating: " ", count: padding) + "缺\(play.lackAmount.female)女\(play.lackAmount.male)男" + String(repeating: " ", count: padding)
-                label.textColor = UIColor.black
-                label.backgroundColor = UIColor.lightGray
-                label.layer.cornerRadius = 5
-                label.clipsToBounds = true
-                label.font = UIFont.boldSystemFont(ofSize: 16)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            let startTimeLable: UILabel = {
-                let label = UILabel()
-                label.text = "\(dateFormatter.string(from: play.startTime)) ~ \(dateFormatter.string(from: play.endTime))"
-                label.textColor = UIColor.gray
-                label.font = UIFont.systemFont(ofSize: 16)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            let endTimeLable: UILabel = {
-                let label = UILabel()
-                label.text = "\(dateFormatter.string(from: play.endTime))"
-                label.textColor = UIColor.gray
-                label.font = UIFont.systemFont(ofSize: 16)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            let placeLabel: UILabel = {
-                let label = UILabel()
-                label.text = "place: \(play.place)"
-                label.textColor = UIColor.black
-                label.font = UIFont.systemFont(ofSize: 16)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            let typeLable: UILabel = {
-                let label = UILabel()
-                label.text = playTypes[play.type]
-                label.textColor = UIColor.black
-                label.font = UIFont.systemFont(ofSize: 16)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            let priceLable: UILabel = {
-                let label = UILabel()
-                label.text = "\(play.price) 元 /人"
-                label.textColor = UIColor.black
-                label.font = UIFont.systemFont(ofSize: 16)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            let levelLable: UILabel = {
-                let label = UILabel()
-                label.text = "程度："
-                label.textColor = UIColor.black
-                label.font = UIFont.systemFont(ofSize: 16)
-                label.translatesAutoresizingMaskIntoConstraints = false
-                return label
-            }()
-            lazy var levelButton: UIButton = {
-                let button = UIButton()
-                button.setTitle(levels[play.levelRange.sum], for: .normal)
-                button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
-                button.titleLabel?.textAlignment = .center
-                button.backgroundColor = UIColor.orange
-                button.translatesAutoresizingMaskIntoConstraints = false
-                // button.addTarget(self, action: #selector(showLevelDetail), for: .touchUpInside)
-                button.layer.cornerRadius = standardMargin
-                button.clipsToBounds = true
-                return button
-            }()
+            lackLable.text = "   缺\(play.lackAmount.female)女\(play.lackAmount.male)男   "
+            startTimeLable.text = "\(dateFormatter.string(from: play.startTime)) ~ \(dateFormatter.string(from: play.endTime))"
+            placeLabel.text = "place: \(play.place)"
+            typeLable.text = playTypes[play.type]
+            priceLable.text = "\(play.price) 元 /人"
+            levelButton.setTitle(levels[play.levelRange.sum], for: .normal)
+            
             addSubview(lackLable)
             addSubview(startTimeLable)
             // addSubview(endTimeLable)

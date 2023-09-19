@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelegate, EditPlayersDelegate {
-    
+
     var players: [Player] = []
-    var isEditingEnabled = false // Flag to track editing mode
+    var canEdit = true
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -40,9 +40,8 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
         cell.playerDelegate = self
         // swiftlint:enable force_cast
         let player = players[indexPath.row]
-        
         // 第一個永遠是自己
-        if indexPath.row == 0 {
+        if indexPath.row == 0 || canEdit == false {
             cell.showOnly(with: player)
         } 
         return cell

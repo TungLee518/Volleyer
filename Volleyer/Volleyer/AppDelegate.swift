@@ -17,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let db = Firestore.firestore()
         
-        UserDefaults.standard.set("maymmm518", forKey: "UserID")
+        UserDefaults.standard.set("maymmm518", forKey: User.id.rawValue)
+        UserDefaults.standard.set("May", forKey: User.name.rawValue)
+        UserDefaults.standard.set("Female", forKey: User.gender.rawValue)
         
         return true
     }

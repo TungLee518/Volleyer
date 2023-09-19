@@ -35,7 +35,8 @@ class FinderTableViewCell: UITableViewCell {
     private var playView = PlayInfoView()
     var thisPlay: Play? {
         didSet {
-            sendData(thisPlay!)
+            sendDataToPlayView(thisPlay!)
+            accountLable.text = thisPlay?.finderId
         }
     }
 
@@ -88,7 +89,7 @@ class FinderTableViewCell: UITableViewCell {
         ])
     }
 
-    func sendData(_ data: Play) {
+    func sendDataToPlayView(_ data: Play) {
         playView.play = thisPlay
         playView.setUI()
     }

@@ -9,6 +9,7 @@ import Foundation
 
 struct Play {
     var id: String
+    var finderId: String
     var startTime, endTime: Date
     var place: String
     var price, type: Int
@@ -36,6 +37,7 @@ struct LackAmount {
 
 enum PlayTitle: String {
     case id = "id"
+    case finderId = "finder_id"
     case createTime = "create_time"
     case startTime = "start_time"
     case endTime = "end_time"

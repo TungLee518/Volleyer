@@ -15,6 +15,7 @@
 		C80051272AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051262AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift */; };
 		C80051292AB8942D00FEA7FD /* PlayOneCourtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */; };
 		C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */; };
+		C800512F2AB9890700FEA7FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512E2AB9890700FEA7FD /* User.swift */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
@@ -56,6 +57,7 @@
 		C80051262AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneFinderTableViewCell.swift; sourceTree = "<group>"; };
 		C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneCourtViewController.swift; sourceTree = "<group>"; };
 		C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		C800512E2AB9890700FEA7FD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				C86E152B2AB5897500CBA201 /* Seletions.swift */,
 				C86E152D2AB598CD00CBA201 /* Play.swift */,
 				C86E153A2AB7FE6900CBA201 /* Competition.swift */,
+				C800512E2AB9890700FEA7FD /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */,
 				C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */,
 				C86E153B2AB7FE6900CBA201 /* Competition.swift in Sources */,
+				C800512F2AB9890700FEA7FD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ class PlayTableViewCell: UITableViewCell {
 
     var thisPlay: Play? {
         didSet {
-            sendData(thisPlay!)
+            sendDataToPlayView(thisPlay!)
         }
     }
 
@@ -40,7 +40,7 @@ class PlayTableViewCell: UITableViewCell {
         ])
     }
 
-    func sendData(_ data: Play) {
+    func sendDataToPlayView(_ data: Play) {
         playView.play = thisPlay
         playView.setUI()
     }

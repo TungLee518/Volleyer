@@ -64,7 +64,7 @@ class RandomTeamViewController: UIViewController {
         setNavBar()
         setLayout()
     }
-    
+
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
         self.title = NavBarEnum.randomTeam.rawValue
@@ -78,6 +78,7 @@ class RandomTeamViewController: UIViewController {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         playerListTableView.players = players
+        playerListTableView.canEdit = false
     }
 
     private func setLayout() {
@@ -91,7 +92,7 @@ class RandomTeamViewController: UIViewController {
             generateRandomTeamButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             generateRandomTeamButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             generateRandomTeamButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            
+
             doneRandonTeamLable.topAnchor.constraint(equalTo: generateRandomTeamButton.bottomAnchor, constant: standardMargin),
             doneRandonTeamLable.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
@@ -106,31 +107,16 @@ class RandomTeamViewController: UIViewController {
         var groups: [[Player]] = [[], [], []]
 
         var totalNumber = 0
-        var maleNumber = 0
-        var femaleNumber = 0
-
-        var nthBoyTeam = maleNumber % 3
-        var nthGirlTeam = femaleNumber % 3
         var nthTotal = totalNumber % 3
 
         for player in shuffledPlayers {
-//            if player.gender == "Male" {
-//                nthBoyTeam = maleNumber % 3
-//                maleNumber += 1
-//                groups[nthBoyTeam].append(player)
-//            } else {
-//                nthGirlTeam = femaleNumber % 3
-//                femaleNumber += 1
-//                print(player)
-//                groups[nthGirlTeam].insert(player, at: 0)
-//            }
             groups[nthTotal].append(player)
             totalNumber += 1
             nthTotal = totalNumber % 3
         }
 
         var groupNames: [String] = []
-        
+
         for group in groups {
             var groupName = ""
             for player in group {
@@ -138,7 +124,7 @@ class RandomTeamViewController: UIViewController {
             }
             groupNames.append(groupName)
         }
-        
+
         doneRandonTeamLable.text = "A: \(groupNames[0])\n B: \(groupNames[1])\n C: \(groupNames[2])"
         doneRandonTeamLable.isHidden = false
     }

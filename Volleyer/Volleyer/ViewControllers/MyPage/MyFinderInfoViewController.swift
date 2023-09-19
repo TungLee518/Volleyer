@@ -37,11 +37,15 @@ class MyFinderInfoViewController: UIViewController {
 
     var thisPlay: Play? {
         didSet {
-            sendData(thisPlay!)
+            sendDataToPlayView(thisPlay!)
         }
     }
 
     private var addPlayers: [Player] = [
+        Player(name: "May Lee", gender: "Female"),
+        Player(name: "Mandy", gender: "Female"),
+        Player(name: "May Lee", gender: "Female"),
+        Player(name: "Mandy", gender: "Female"),
         Player(name: "May Lee", gender: "Female"),
         Player(name: "Mandy", gender: "Female")
     ]
@@ -69,6 +73,7 @@ class MyFinderInfoViewController: UIViewController {
         view.addSubview(changeButton)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         playerListTableView.players = addPlayers
+        playerListTableView.canEdit = false
     }
 
     private func setLayout() {
@@ -95,7 +100,7 @@ class MyFinderInfoViewController: UIViewController {
         ])
     }
 
-    func sendData(_ data: Play) {
+    func sendDataToPlayView(_ data: Play) {
         playView.play = thisPlay
         playView.setUI()
     }

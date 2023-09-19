@@ -50,11 +50,13 @@ class AddPlayViewController: UIViewController {
 
     var thisPlay: Play? {
         didSet {
-            sendData(thisPlay!)
+            sendDataToPlayView(thisPlay!)
         }
     }
 
     private var addPlayers: [Player] = []
+    
+    var dataManager = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,7 +108,7 @@ class AddPlayViewController: UIViewController {
         ])
     }
 
-    func sendData(_ data: Play) {
+    func sendDataToPlayView(_ data: Play) {
         playView.play = thisPlay
         playView.setUI()
     }
@@ -114,7 +116,7 @@ class AddPlayViewController: UIViewController {
     @objc func sendRequest() {
         addPlayers = playerListTableView.players
         print(addPlayers)
-//        dataManager.savePlay(thisPlay)
+        dataManager.saveRequest(thisPlay!, playerList: addPlayers)
         print("request sent")
         navigationController?.popToRootViewController(animated: true)
     }
