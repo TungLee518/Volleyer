@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 
-class EstablishFinderViewController: UIViewController, PlayerListTableViewDelegate {
+class EstablishFinderViewController: UIViewController {
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .dateAndTime
@@ -314,20 +314,8 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
     private var lackAmount = LackAmount(male: 0, female: 0, unlimited: 0)
 
     lazy private var thisPlay: Play = Play(id: "maymmm518", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
-    let players: [Player] = [
-        Player(name: "Player 1", gender: "Male"),
-        Player(name: "Player 2", gender: "Female"),
-        Player(name: "Player 3", gender: "Male"),
-        Player(name: "Player 4", gender: "Female"),
-        Player(name: "Player 5", gender: "Male"),
-        Player(name: "Player 6", gender: "Female"),
-        Player(name: "Player 7", gender: "Male"),
-        Player(name: "Player 8", gender: "Female"),
-        Player(name: "Player 9", gender: "Male"),
-        Player(name: "Player 10", gender: "Female"),
-        Player(name: "Player 11", gender: "Male"),
-        Player(name: "Player 12", gender: "Female")
-    ]
+    
+    var players: [Player] = []
 
     var dataManager = DataManager()
 
@@ -383,10 +371,9 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
 
     func setPlayListTableView() {
         view.addSubview(playerListTableView)
+        // 第一個永遠是自己
+        playerListTableView.players.append(Player(name: "May", gender: "Female"))
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.playerListDelegate = self
-        playerListTableView.playerListDelegate = self
-        playerListTableView.players = players
     }
 
     func setSABC() {
@@ -486,23 +473,20 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
     @objc func cancelToolbar() {
         self.view.endEditing(true)
     }
+
     @objc func toggleEditingMode() {
         playerListTableView.toggleEditing()
-        let buttonText = playerListTableView.isEditingEnabled ? "Done" : "Edit"
+        let buttonText = playerListTableView.isEditing ? "Done" : "Delete"
         deleteButton.setTitle(buttonText, for: .normal)
     }
     @objc func addPlayer() {
-        let newPlayer = Player(name: "New Player", gender: "Unknown") // Customize as needed
+        let newPlayer = Player(name: "", gender: "") // Customize as needed
         playerListTableView.addNewPlayer(newPlayer)
     }
 
-    func didTapProfileButton(for player: Player) {
-        // Handle profile button tap for the selected player
-        print("Tapped on profile button for \(player.name)")
-        // Navigate to the player's profile view or perform any other action
-    }
-
     @objc func addData(_ sender: UIButton) {
+        players = playerListTableView.players
+        print(players)
         if sender == publishButton {
             thisPlay.status = 1
         }
@@ -513,7 +497,7 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
             thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
             thisPlay.lackAmount.male = Int(maleTextField.text!)!
             thisPlay.lackAmount.female = Int(femaleTextField.text!)!
-            // thisPlay.playerInfo = players
+            thisPlay.playerInfo = players
             dataManager.savePlay(thisPlay)
             navigationController?.popToRootViewController(animated: true)
         }
@@ -583,7 +567,7 @@ class EstablishFinderViewController: UIViewController, PlayerListTableViewDelega
 //            playerListView.topAnchor.constraint(equalTo: checkboxes[-1].bottomAnchor, constant: standardMargin),
             playerListTableView.heightAnchor.constraint(equalToConstant: 200.0),
             playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
 
             saveButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),

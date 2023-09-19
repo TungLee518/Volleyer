@@ -170,6 +170,7 @@
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
 				C86E153E2AB819D900CBA201 /* TableViewCells */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
+				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
@@ -214,7 +215,6 @@
 				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
 				C80051242AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift */,
 				C80051262AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift */,
-				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
 				C86E150F2AB31FF300CBA201 /* FinderTableViewCell.swift */,
 			);

@@ -12,4 +12,5 @@ let standardTextFieldHeight = 25.0
 let standardTextFieldWidth = 250.0
 let standardSmallerTextFieldWidth = 70.0
 let standardButtonHeight = 25.0
+let standardButtonWidth = 120.0
 let photoHeight = 50.0

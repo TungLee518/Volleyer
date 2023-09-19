@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyPlayInfoViewController: UIViewController, PlayerListTableViewDelegate {
+class MyPlayInfoViewController: UIViewController {
     private var playView = PlayInfoView()
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var changeButton: UIButton = {
@@ -55,7 +55,6 @@ class MyPlayInfoViewController: UIViewController, PlayerListTableViewDelegate {
     private func setPlayersTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.playerListDelegate = self
         playerListTableView.players = addPlayers
     }
 

@@ -8,12 +8,8 @@
 import Foundation
 import UIKit
 
-protocol PlayerListTableViewDelegate: AnyObject {
-    func didTapProfileButton(for player: Player)
-}
-
-class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
-    weak var playerListDelegate: PlayerListTableViewDelegate?
+class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelegate, EditPlayersDelegate {
+    
     var players: [Player] = []
     var isEditingEnabled = false // Flag to track editing mode
 
@@ -40,16 +36,16 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable force_cast
         let cell = dequeueReusableCell(withIdentifier: "PlayerTableViewCell", for: indexPath) as! PlayerTableViewCell
+        cell.selectionStyle = .none
+        cell.playerDelegate = self
         // swiftlint:enable force_cast
         let player = players[indexPath.row]
-        cell.configure(with: player)
+        
+        // 第一個永遠是自己
+        if indexPath.row == 0 {
+            cell.showOnly(with: player)
+        } 
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let player = players[indexPath.row]
-        playerListDelegate?.didTapProfileButton(for: player)
-        deselectRow(at: indexPath, animated: true)
     }
 
     // Toggle the editing mode of the table view
@@ -72,5 +68,12 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
     func addNewPlayer(_ player: Player) {
         players.append(player)
         insertRows(at: [IndexPath(row: players.count - 1, section: 0)], with: .automatic)
+    }
+    
+    func addPlayer(from cell: PlayerTableViewCell, add player: Player) {
+        guard let indexPath = indexPath(for: cell) else {
+            return
+        }
+        players[indexPath.row] = player
     }
 }

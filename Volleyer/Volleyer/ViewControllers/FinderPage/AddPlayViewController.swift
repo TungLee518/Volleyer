@@ -7,10 +7,34 @@
 
 import UIKit
 
-class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
+class AddPlayViewController: UIViewController {
 
     private var playView = PlayInfoView()
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
+    lazy var addPlayerButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("add player", for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.gray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addPlayer), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        return button
+    }()
+    lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete", for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.blue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        return button
+    }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
         button.setTitle("send request", for: .normal)
@@ -30,14 +54,12 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
         }
     }
 
-    private var addPlayers: [Player] = [
-        Player(name: "May Lee", gender: "Female"),
-        Player(name: "Mandy", gender: "Female")
-    ]
+    private var addPlayers: [Player] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(playView)
+        view.addSubview(addPlayerButton)
         view.addSubview(sendRequestButton)
         setPlayersTableView()
         setLayout()
@@ -56,8 +78,8 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
     private func setPlayersTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.playerListDelegate = self
-        playerListTableView.players = addPlayers
+        // 第一個永遠是自己
+        playerListTableView.players.append(Player(name: "May", gender: "Female"))
     }
 
     private func setLayout() {
@@ -72,10 +94,15 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
             playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             playerListTableView.heightAnchor.constraint(equalToConstant: 200),
 
-            sendRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            addPlayerButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            addPlayerButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
+            addPlayerButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            addPlayerButton.widthAnchor.constraint(equalToConstant: standardButtonWidth),
+
             sendRequestButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             sendRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
+            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            sendRequestButton.widthAnchor.constraint(equalToConstant: standardButtonWidth)
         ])
     }
 
@@ -84,14 +111,21 @@ class AddPlayViewController: UIViewController, PlayerListTableViewDelegate {
         playView.setUI()
     }
 
-    func didTapProfileButton(for player: Player) {
-        // Handle profile button tap for the selected player
-        print("Tapped on profile button for \(player.name)")
-        // Navigate to the player's profile view or perform any other action
-    }
-
     @objc func sendRequest() {
+        addPlayers = playerListTableView.players
+        print(addPlayers)
+//        dataManager.savePlay(thisPlay)
         print("request sent")
         navigationController?.popToRootViewController(animated: true)
+    }
+
+    @objc func toggleEditingMode() {
+        playerListTableView.toggleEditing()
+        let buttonText = playerListTableView.isEditing ? "Done" : "Delete"
+        deleteButton.setTitle(buttonText, for: .normal)
+    }
+    @objc func addPlayer() {
+        let newPlayer = Player(name: "", gender: "") // Customize as needed
+        playerListTableView.addNewPlayer(newPlayer)
     }
 }

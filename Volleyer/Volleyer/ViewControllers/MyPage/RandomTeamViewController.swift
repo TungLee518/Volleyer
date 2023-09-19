@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RandomTeamViewController: UIViewController, PlayerListTableViewDelegate {
+class RandomTeamViewController: UIViewController {
 
     private var players: [Player] = [
         Player(name: "May", gender: "Female"),
@@ -77,7 +77,6 @@ class RandomTeamViewController: UIViewController, PlayerListTableViewDelegate {
     private func setPlayersTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.playerListDelegate = self
         playerListTableView.players = players
     }
 

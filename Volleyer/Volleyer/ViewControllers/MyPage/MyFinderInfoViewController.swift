@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyFinderInfoViewController: UIViewController, PlayerListTableViewDelegate {
+class MyFinderInfoViewController: UIViewController {
     private var playView = PlayInfoView()
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var randomTeamButton: UIButton = {
@@ -68,7 +68,6 @@ class MyFinderInfoViewController: UIViewController, PlayerListTableViewDelegate 
         view.addSubview(playerListTableView)
         view.addSubview(changeButton)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.playerListDelegate = self
         playerListTableView.players = addPlayers
     }
 
