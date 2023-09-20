@@ -21,7 +21,6 @@
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
 		C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */; };
 		C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */; };
-		C86E14C62AB2C83700CBA201 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */; };
 		C86E15102AB31FF300CBA201 /* FinderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E150F2AB31FF300CBA201 /* FinderTableViewCell.swift */; };
 		C86E15132AB42A6A00CBA201 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C86E15122AB42A6A00CBA201 /* .swiftlint.yml */; };
 		C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */; };
@@ -45,6 +44,7 @@
 		C86E153B2AB7FE6900CBA201 /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E153A2AB7FE6900CBA201 /* Competition.swift */; };
 		C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */; };
 		C86E15422AB8249400CBA201 /* AddPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15412AB8249400CBA201 /* AddPlayViewController.swift */; };
+		C89960FB2ABAE8C300C5D35D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C89960FA2ABAE8C300C5D35D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,6 @@
 		C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C86E14BD2AB1AF4E00CBA201 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C86E14BF2AB1AF4E00CBA201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C86E150F2AB31FF300CBA201 /* FinderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderTableViewCell.swift; sourceTree = "<group>"; };
 		C86E15122AB42A6A00CBA201 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarAndTabBar.swift; sourceTree = "<group>"; };
@@ -89,6 +88,7 @@
 		C86E153A2AB7FE6900CBA201 /* Competition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableViewCell.swift; sourceTree = "<group>"; };
 		C86E15412AB8249400CBA201 /* AddPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayViewController.swift; sourceTree = "<group>"; };
+		C89960FA2ABAE8C300C5D35D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,7 +178,7 @@
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
 				C86E14BF2AB1AF4E00CBA201 /* Info.plist */,
-				C86E14C52AB2C83700CBA201 /* GoogleService-Info.plist */,
+				C89960FA2ABAE8C300C5D35D /* GoogleService-Info.plist */,
 			);
 			path = Volleyer;
 			sourceTree = "<group>";
@@ -286,7 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C86E15132AB42A6A00CBA201 /* .swiftlint.yml in Resources */,
-				C86E14C62AB2C83700CBA201 /* GoogleService-Info.plist in Resources */,
+				C89960FB2ABAE8C300C5D35D /* GoogleService-Info.plist in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,
 			);
@@ -542,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.Volleyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -571,7 +571,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.Volleyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
