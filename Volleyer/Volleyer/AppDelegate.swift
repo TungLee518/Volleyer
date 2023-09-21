@@ -14,13 +14,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
         FirebaseApp.configure()
         let db = Firestore.firestore()
+
+        var thisUser = UserData(id: "", email: "", gender: 99, name: "")
+
+        db.collection("users").whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    // swiftlint:disable force_cast
+                    for document in querySnapshot!.documents {
+                        thisUser = UserData(id: document.data()["id"] as! String,
+                                            email: document.data()["email"] as! String,
+                                            gender: document.data()["gender"] as! Int,
+                                            name: document.data()["name"] as! String)
+                        print("\(document.documentID) => \(document.data())")
+                        print(thisUser)
+                        // all strings
+                        UserDefaults.standard.set(thisUser.id, forKey: User.id.rawValue)
+                        UserDefaults.standard.set(thisUser.name, forKey: User.name.rawValue)
+                        UserDefaults.standard.set(genderList[thisUser.gender], forKey: User.gender.rawValue)
+                        DataManager.sharedDataMenager.listenPlayRequests()
+//                        if launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] != nil {
+//                            DataManager.sharedDataMenager.listenPlayRequests()
+//                        }
+                    }
+                    // swiftlint:enable force_cast
+                }
+        }
+
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .carPlay, .sound]) { (granted, error) in
+            if granted {
+                print("允許開啟")
+            } else {
+                print("拒絕接受開啟")
+            }
+        }
         
-        UserDefaults.standard.set("maymmm518", forKey: User.id.rawValue)
-        UserDefaults.standard.set("May", forKey: User.name.rawValue)
-        UserDefaults.standard.set("Female", forKey: User.gender.rawValue)
         
+        
+        
+
         return true
     }
 
@@ -41,3 +77,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
+    }
+}
