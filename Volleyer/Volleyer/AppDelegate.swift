@@ -7,12 +7,12 @@
 
 import UIKit
 import FirebaseCore
-
+import FirebaseMessaging
 import FirebaseFirestore
 import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func registerForPushNotifications() {
+        Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             print("Permission granted: \(granted)")
             guard granted else { return }
@@ -69,6 +70,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token: \(String(describing: fcmToken))")
+        messaging.token { token, error in
+            guard let token = token else {
+                print("messaging error", error as Any)
+                return
+            }
+            print("firebase messaging Token: \(token)")
+        }
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+            NotificationCenter.default.post(
+                name: Notification.Name("FCMToken"),
+                object: nil,
+                userInfo: dataDict
+            )
+    }
 
     
     func application(_ application: UIApplication,
@@ -77,6 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
+        // Messaging.messaging().apnsToken = deviceToken
     }
 
 
