@@ -74,6 +74,9 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
             cell.showOnly(status: requestStatus[1])
         } else if thisRequest.status == 0 { // pending
             print(thisRequest)
+            cell.acceptRequestButton.isHidden = false
+            cell.denyRequestButton.isHidden = false
+            cell.statusLable.isHidden = true
         } else { // deny
             cell.showOnly(status: requestStatus[2])
         }
