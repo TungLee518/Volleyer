@@ -18,7 +18,8 @@ protocol CompetitionDataManagerDelegate {
 }
 
 protocol RequestsDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet playRequests: [PlayRequest])
+    func manager(_ manager: DataManager, iReceive playRequests: [PlayRequest])
+    func manager(_ manager: DataManager, iSent playRequests: [PlayRequest])
 }
 
 // swiftlint:disable force_cast
@@ -33,6 +34,8 @@ class DataManager {
     let plays = Firestore.firestore().collection("plays")
     let competitions = Firestore.firestore().collection("competitions")
     let addPlayRQs = Firestore.firestore().collection("add_play_requests")
+    
+    var updateRequestsSentTableView: ((PlayRequest) -> Void)?
 
     func savePlay(_ play: Play) {
         let document = plays.document()
@@ -42,7 +45,6 @@ class DataManager {
             playerDictList.append(playerDict)
         }
         let data: [String: Any] = [
-            "id": play.id,
             "finder_id": play.finderId,
             "create_time": Date(),
             "start_time": play.startTime,
@@ -101,7 +103,7 @@ class DataManager {
                     let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
                     let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
                     let aPlay = Play(
-                        id: document.data()[PlayTitle.id.rawValue] as! String,
+                        id: document.documentID,
                         finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
                         startTime: startTime.dateValue(),
                         endTime: endTime.dateValue(),
@@ -146,7 +148,7 @@ class DataManager {
                         let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
                         let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
                         let aPlay = Play(
-                            id: document.data()[PlayTitle.id.rawValue] as! String,
+                            id: document.documentID,
                             finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
                             startTime: startTime.dateValue(),
                             endTime: endTime.dateValue(),
@@ -161,7 +163,7 @@ class DataManager {
                         playsArray.append(aPlay)
                     }
                 }
-                // playsArray.sort { $0.time > $1.time }
+                playsArray.sort { $0.startTime < $1.startTime }
                 self.delegate?.manager(self, didGet: playsArray)
             }
         }
@@ -197,11 +199,12 @@ class DataManager {
             playerDictList.append(playerDict)
         }
         let data: [String: Any] = [
-            "request_sender_id": UserDefaults.standard.string(forKey: User.id.rawValue) as Any,
-            "request_reveiver_id": play.finderId,
-            "requests_Id_Status": [play.id: 0],
-            "request_player_list": playerDictList,
-            "create_time": Date()
+            PlayRequestTitle.requestSenderId.rawValue: UserDefaults.standard.string(forKey: User.id.rawValue) as Any,
+            PlayRequestTitle.requestReceiverId.rawValue: play.finderId,
+            PlayRequestTitle.playId.rawValue: play.id,
+            PlayRequestTitle.status.rawValue: 0,
+            PlayRequestTitle.requestPlayerList.rawValue: playerDictList,
+            PlayRequestTitle.createTime.rawValue: Date()
         ]
         document.setData(data) { err in
             if let err = err {
@@ -214,41 +217,51 @@ class DataManager {
     }
 
     func getPlayRequests() {
-        addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).getDocuments() { (querySnapshot, err) in
+        addPlayRQs.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                var playRequestssArray: [PlayRequest] = []
+                var playRequestsReceiveArray: [PlayRequest] = []
+                var playRequestsSentArray: [PlayRequest] = []
                 for document in querySnapshot!.documents {
                     let requestPlayerList = document.data()[PlayRequestTitle.requestPlayerList.rawValue] as! [[String: String]]
                     var requestPlayerArray = [Player]()
                     for player in requestPlayerList {
                         requestPlayerArray.append(Player(name: player["Name"]!, gender: player["Gender"]!))
                     }
+                    let createdTime = document.data()[PlayRequestTitle.createTime.rawValue] as! Timestamp
                     let aPlayRequest = PlayRequest(
                         requestPlayerList: requestPlayerArray,
                         requestReceverId: document.data()[PlayRequestTitle.requestReceiverId.rawValue] as! String,
                         requestSenderId: document.data()[PlayRequestTitle.requestSenderId.rawValue] as! String,
-                        requestIdStatus: document.data()[PlayRequestTitle.requestIdStatus.rawValue] as! [String: Int],
-                        createTime: document.data()[PlayRequestTitle.createTime.rawValue] as! Date
+                        playId: document.data()[PlayRequestTitle.playId.rawValue] as! String,
+                        status: document.data()[PlayRequestTitle.status.rawValue] as! Int,
+                        createTime: createdTime.dateValue(),
+                        id: document.documentID
                     )
-                    playRequestssArray.append(aPlayRequest)
+                    if aPlayRequest.requestReceverId == UserDefaults.standard.string(forKey: User.id.rawValue) {
+                        playRequestsReceiveArray.append(aPlayRequest)
+                    } else if aPlayRequest.requestSenderId == UserDefaults.standard.string(forKey: User.id.rawValue) {
+                        playRequestsSentArray.append(aPlayRequest)
+                    }
                 }
-                print(playRequestssArray)
-                self.playRequestDelegate?.manager(self, didGet: playRequestssArray)
+                playRequestsReceiveArray.sort { $0.createTime < $1.createTime }
+                playRequestsSentArray.sort { $0.createTime < $1.createTime }
+                self.playRequestDelegate?.manager(self, iReceive: playRequestsReceiveArray)
+                self.playRequestDelegate?.manager(self, iSent: playRequestsSentArray)
             }
         }
     }
 
     func listenPlayRequests() {
-        addPlayRQs.whereField("request_reveiver_id", isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
+        addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
             snapshot.documentChanges.forEach { diff in
                 if (diff.type == .added) {
-                    print("New city: \(diff.document.data())")
+                    print("New request: \(diff.document.data())")
                     let launchTime = UserDefaults.standard.value(forKey: launchAppDate) as! Date
                     let firebaseTime = diff.document.data()["create_time"] as! Timestamp
                     if Int32(launchTime.timeIntervalSince1970) < firebaseTime.seconds {
@@ -256,11 +269,56 @@ class DataManager {
                     }
                 }
                 if (diff.type == .modified) {
-                    print("Modified city: \(diff.document.data())")
+                    print("Modified request: \(diff.document.data())")
                 }
                 if (diff.type == .removed) {
-                    print("Removed city: \(diff.document.data())")
+                    print("Removed request: \(diff.document.data())")
                 }
+            }
+        }
+        addPlayRQs.whereField(PlayRequestTitle.requestSenderId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
+            guard let snapshot = querySnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
+            }
+            snapshot.documentChanges.forEach { diff in
+                if (diff.type == .added) {
+                    print("New request: \(diff.document.data())")
+                }
+                if (diff.type == .modified) {
+                    print("Modified request: \(diff.document.data())")
+                    let requestPlayerList = diff.document.data()[PlayRequestTitle.requestPlayerList.rawValue] as! [[String: String]]
+                    var requestPlayerArray = [Player]()
+                    for player in requestPlayerList {
+                        requestPlayerArray.append(Player(name: player["Name"]!, gender: player["Gender"]!))
+                    }
+                    let createdTime = diff.document.data()[PlayRequestTitle.createTime.rawValue] as! Timestamp
+                    let aPlayRequest = PlayRequest(
+                        requestPlayerList: requestPlayerArray,
+                        requestReceverId: diff.document.data()[PlayRequestTitle.requestReceiverId.rawValue] as! String,
+                        requestSenderId: diff.document.data()[PlayRequestTitle.requestSenderId.rawValue] as! String,
+                        playId: diff.document.data()[PlayRequestTitle.playId.rawValue] as! String,
+                        status: diff.document.data()[PlayRequestTitle.status.rawValue] as! Int,
+                        createTime: createdTime.dateValue(),
+                        id: diff.document.documentID
+                    )
+                    self.updateRequestsSentTableView?(aPlayRequest)
+                }
+                if (diff.type == .removed) {
+                    print("Removed request: \(diff.document.data())")
+                }
+            }
+        }
+    }
+    
+    func updateRequest(_ request: PlayRequest, status: Int) {
+        addPlayRQs.document(request.id).updateData([
+            PlayRequestTitle.status.rawValue: status
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Request Document successfully updated")
             }
         }
     }

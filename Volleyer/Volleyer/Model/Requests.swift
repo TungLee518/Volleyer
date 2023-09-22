@@ -11,8 +11,11 @@ struct PlayRequest {
     var requestPlayerList: [Player]
     var requestReceverId: String
     var requestSenderId: String
-    var requestIdStatus: [String: Int]
+//     var requestIdStatus: [String: Int]
+    var playId: String
+    var status: Int = 0
     var createTime: Date
+    var id: String = ""
 }
 
 enum PlayRequestTitle: String {
@@ -20,8 +23,10 @@ enum PlayRequestTitle: String {
     // TODO 拼錯了
     case requestReceiverId = "request_reveiver_id"
     case requestSenderId = "request_sender_id"
-    case requestIdStatus = "requests_Id_Status"
+//    case requestIdStatus = "requests_Id_Status"
+    case playId = "play_id"
+    case status = "status"
     case createTime = "create_time"
 }
 
-let requestStatus = ["pending", "accept", "deny"]
+let requestStatus = ["Pending", "Accepted", "Denied"]

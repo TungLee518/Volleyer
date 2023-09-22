@@ -492,8 +492,6 @@ class EstablishFinderViewController: UIViewController {
         }
         if placeTextField.text != "", priceTextField.text != "", typeTextField.text != ""
             , maleTextField.text != "", femaleTextField.text != "" {
-            let anID = UUID()
-            thisPlay.id = anID.uuidString
             thisPlay.place = placeTextField.text!
             thisPlay.price = Int(priceTextField.text!)!
             thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Play {
-    var id: String
+    var id: String = ""
     var finderId: String
     var startTime, endTime: Date
     var place: String

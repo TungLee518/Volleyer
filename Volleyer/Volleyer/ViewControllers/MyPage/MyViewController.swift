@@ -45,14 +45,24 @@ class MyViewController: UIViewController {
         button.addTarget(self, action: #selector(pushToMyPlays), for: .touchUpInside)
         return button
     }()
-    lazy var requestsButton: UIButton = {
+    lazy var requestsReceiveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Requests", for: .normal)
+        button.setTitle("Requests I Received", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pushToRequests), for: .touchUpInside)
+        button.addTarget(self, action: #selector(pushToRequestsReceive), for: .touchUpInside)
+        return button
+    }()
+    lazy var requestsSendButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Requests I Sent", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pushToRequestsSend), for: .touchUpInside)
         return button
     }()
 
@@ -66,7 +76,8 @@ class MyViewController: UIViewController {
         view.addSubview(accountLable)
         view.addSubview(myFinderButton)
         view.addSubview(myPlayButton)
-        view.addSubview(requestsButton)
+        view.addSubview(requestsReceiveButton)
+        view.addSubview(requestsSendButton)
 
         setLayout()
     }
@@ -86,9 +97,12 @@ class MyViewController: UIViewController {
 
             myPlayButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             myPlayButton.topAnchor.constraint(equalTo: myFinderButton.bottomAnchor, constant: standardMargin),
-            
-            requestsButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            requestsButton.topAnchor.constraint(equalTo: myPlayButton.bottomAnchor, constant: standardMargin)
+
+            requestsReceiveButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            requestsReceiveButton.topAnchor.constraint(equalTo: myPlayButton.bottomAnchor, constant: standardMargin),
+
+            requestsSendButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            requestsSendButton.topAnchor.constraint(equalTo: requestsReceiveButton.bottomAnchor, constant: standardMargin)
         ])
     }
     
@@ -102,8 +116,13 @@ class MyViewController: UIViewController {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc func pushToRequests() {
-        let nextVC = RequestsViewController()
+    @objc func pushToRequestsReceive() {
+        let nextVC = RequestsReceivedViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+
+    @objc func pushToRequestsSend() {
+        let nextVC = RequestSentViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

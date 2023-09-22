@@ -1,13 +1,13 @@
 //
-//  RequestsViewController.swift
+//  RequestSentViewController.swift
 //  Volleyer
 //
-//  Created by 李童 on 2023/9/21.
+//  Created by 李童 on 2023/9/22.
 //
 
 import UIKit
 
-class RequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RequestSentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var requestsTableView: UITableView!
 
     private let dataManager = DataManager()
@@ -19,11 +19,21 @@ class RequestsViewController: UIViewController, UITableViewDataSource, UITableVi
         dataManager.getPlayRequests()
         dataManager.playRequestDelegate = self
         setTableView()
+        DataManager.sharedDataMenager.updateRequestsSentTableView = { [weak self] modifiedRequest in
+            guard let self = self else { return }
+            for i in 0..<myRequests.count {
+                if myRequests[i].id == modifiedRequest.id {
+                    myRequests[i] = modifiedRequest
+                    let indexPathToReload = IndexPath(row: i, section: 0)
+                    requestsTableView.reloadRows(at: [indexPathToReload], with: .automatic)
+                }
+            }
+        }
     }
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.myRequests.rawValue
+        self.title = NavBarEnum.myRequestsSent.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = UIColor.black
@@ -51,7 +61,6 @@ class RequestsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myRequests.count
-        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,14 +69,24 @@ class RequestsViewController: UIViewController, UITableViewDataSource, UITableVi
         // swiftlint:enable force_cast
 
         let thisRequest = myRequests[indexPath.row]
-        cell.titleLable.text = "\(thisRequest.requestSenderId) send a play request to you"
-        
+        cell.titleLable.text = "I sent \(thisRequest.requestSenderId) a play request"
+
         let players = thisRequest.requestPlayerList
         var playerListText = "名單："
         for player in players {
             playerListText += "\(player.name) "
         }
         cell.playersLable.text = playerListText
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd HH:mm"
+        cell.dateLable.text = "Sent at \(dateFormatter.string(from: thisRequest.createTime))"
+        if thisRequest.status == 99 { // accept
+            cell.showOnly(status: requestStatus[1])
+        } else if thisRequest.status == 0 { // pending
+            cell.showOnly(status: requestStatus[0])
+        } else { // deny
+            cell.showOnly(status: requestStatus[2])
+        }
         
         return cell
     }
@@ -79,10 +98,12 @@ class RequestsViewController: UIViewController, UITableViewDataSource, UITableVi
 //    }
 }
 
-extension RequestsViewController: RequestsDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet playRequests: [PlayRequest]) {
+extension RequestSentViewController: RequestsDataManagerDelegate {
+    func manager(_ manager: DataManager, iReceive playRequests: [PlayRequest]) {
+
+    }
+    func manager(_ manager: DataManager, iSent playRequests: [PlayRequest]) {
         myRequests = playRequests
         requestsTableView.reloadData()
     }
 }
-
