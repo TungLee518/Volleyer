@@ -42,7 +42,6 @@ class DataManager {
             playerDictList.append(playerDict)
         }
         let data: [String: Any] = [
-            "id": play.id,
             "finder_id": play.finderId,
             "create_time": Date(),
             "start_time": play.startTime,
@@ -101,7 +100,7 @@ class DataManager {
                     let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
                     let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
                     let aPlay = Play(
-                        id: document.data()[PlayTitle.id.rawValue] as! String,
+                        id: document.documentID,
                         finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
                         startTime: startTime.dateValue(),
                         endTime: endTime.dateValue(),
@@ -146,7 +145,7 @@ class DataManager {
                         let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
                         let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
                         let aPlay = Play(
-                            id: document.data()[PlayTitle.id.rawValue] as! String,
+                            id: document.documentID,
                             finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
                             startTime: startTime.dateValue(),
                             endTime: endTime.dateValue(),
@@ -161,7 +160,7 @@ class DataManager {
                         playsArray.append(aPlay)
                     }
                 }
-                // playsArray.sort { $0.time > $1.time }
+                playsArray.sort { $0.startTime < $1.startTime }
                 self.delegate?.manager(self, didGet: playsArray)
             }
         }
@@ -197,11 +196,12 @@ class DataManager {
             playerDictList.append(playerDict)
         }
         let data: [String: Any] = [
-            "request_sender_id": UserDefaults.standard.string(forKey: User.id.rawValue) as Any,
-            "request_reveiver_id": play.finderId,
-            "requests_Id_Status": [play.id: 0],
-            "request_player_list": playerDictList,
-            "create_time": Date()
+            PlayRequestTitle.requestSenderId.rawValue: UserDefaults.standard.string(forKey: User.id.rawValue) as Any,
+            PlayRequestTitle.requestReceiverId.rawValue: play.finderId,
+            PlayRequestTitle.playId.rawValue: play.id,
+            PlayRequestTitle.status.rawValue: 0,
+            PlayRequestTitle.requestPlayerList.rawValue: playerDictList,
+            PlayRequestTitle.createTime.rawValue: Date()
         ]
         document.setData(data) { err in
             if let err = err {
@@ -225,12 +225,14 @@ class DataManager {
                     for player in requestPlayerList {
                         requestPlayerArray.append(Player(name: player["Name"]!, gender: player["Gender"]!))
                     }
+                    let createdTime = document.data()[PlayRequestTitle.createTime.rawValue] as! Timestamp
                     let aPlayRequest = PlayRequest(
                         requestPlayerList: requestPlayerArray,
                         requestReceverId: document.data()[PlayRequestTitle.requestReceiverId.rawValue] as! String,
                         requestSenderId: document.data()[PlayRequestTitle.requestSenderId.rawValue] as! String,
-                        requestIdStatus: document.data()[PlayRequestTitle.requestIdStatus.rawValue] as! [String: Int],
-                        createTime: document.data()[PlayRequestTitle.createTime.rawValue] as! Date
+                        playId: document.data()[PlayRequestTitle.playId.rawValue] as! String,
+                        createTime: createdTime.dateValue(),
+                        id: document.documentID
                     )
                     playRequestssArray.append(aPlayRequest)
                 }
@@ -261,6 +263,18 @@ class DataManager {
                 if (diff.type == .removed) {
                     print("Removed city: \(diff.document.data())")
                 }
+            }
+        }
+    }
+    
+    func updateRequest(_ request: PlayRequest, status: Int) {
+        addPlayRQs.document(request.id).updateData([
+            PlayRequestTitle.status.rawValue: status
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Request Document successfully updated")
             }
         }
     }

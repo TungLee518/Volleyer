@@ -21,7 +21,7 @@ class RequestsTableViewCell: UITableViewCell {
     }()
     var dateLable: UILabel = {
         let label = UILabel()
-        label.text = "No date"
+        label.text = "Sent date"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,12 +35,50 @@ class RequestsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    lazy var acceptRequestButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(" Accept  ", for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.gray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(acceptRequest), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        return button
+    }()
+    lazy var denyRequestButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(" Deny  ", for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.gray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(denyRequest), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        return button
+    }()
+    var statusLable: UILabel = {
+        let label = UILabel()
+        label.text = "Status"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+
+    var updateStatus: ((Int) -> Void)?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLable)
         contentView.addSubview(dateLable)
-        contentView.addSubview(playersLable)
+//        contentView.addSubview(playersLable)
+        contentView.addSubview(acceptRequestButton)
+        contentView.addSubview(denyRequestButton)
+        contentView.addSubview(statusLable)
         setLayout()
     }
 
@@ -53,15 +91,38 @@ class RequestsTableViewCell: UITableViewCell {
             titleLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
             titleLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
 
-            playersLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
-            playersLable.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: standardMargin),
+            dateLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+            dateLable.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: standardMargin),
 
-            dateLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-            dateLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
-            dateLable.centerYAnchor.constraint(equalTo: playersLable.centerYAnchor)
+            acceptRequestButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
+            acceptRequestButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
+            acceptRequestButton.centerYAnchor.constraint(equalTo: dateLable.centerYAnchor),
+
+            denyRequestButton.trailingAnchor.constraint(equalTo: acceptRequestButton.leadingAnchor, constant: -standardMargin),
+            denyRequestButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
+            denyRequestButton.centerYAnchor.constraint(equalTo: dateLable.centerYAnchor),
+
+            statusLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
+            statusLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
+            statusLable.centerYAnchor.constraint(equalTo: dateLable.centerYAnchor),
         ])
     }
 
-    @objc func addData() {
+    @objc func acceptRequest() {
+        showOnly(status: "Accepted")
+        updateStatus?(99)
+        
+    }
+
+    @objc func denyRequest() {
+        showOnly(status: "Denied")
+        updateStatus?(1)
+    }
+    
+    func showOnly(status: String) {
+        acceptRequestButton.isHidden = true
+        denyRequestButton.isHidden = true
+        statusLable.isHidden = false
+        statusLable.text = "Request \(status)"
     }
 }

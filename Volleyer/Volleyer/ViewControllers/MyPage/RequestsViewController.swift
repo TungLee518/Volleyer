@@ -51,7 +51,6 @@ class RequestsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myRequests.count
-        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,14 +60,20 @@ class RequestsViewController: UIViewController, UITableViewDataSource, UITableVi
 
         let thisRequest = myRequests[indexPath.row]
         cell.titleLable.text = "\(thisRequest.requestSenderId) send a play request to you"
-        
+
         let players = thisRequest.requestPlayerList
         var playerListText = "名單："
         for player in players {
             playerListText += "\(player.name) "
         }
         cell.playersLable.text = playerListText
-        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd HH:mm"
+        cell.dateLable.text = "Sent at \(dateFormatter.string(from: thisRequest.createTime))"
+        cell.updateStatus = { [weak self] status in
+            guard let self = self else { return }
+            dataManager.updateRequest(thisRequest, status: status)
+        }
         return cell
     }
 
