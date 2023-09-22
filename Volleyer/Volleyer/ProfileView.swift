@@ -10,134 +10,149 @@ import UIKit
 
 class ProfileView: UIView {
 
-    var play: Play?
+    var thisUser: UserData? 
     
-    let lackLable: UILabel = {
-        let label = UILabel()
-        let padding = 3
-//        label.text = String(repeating: " ", count: padding) + "缺\(play.lackAmount.female)女\(play.lackAmount.male)男" + String(repeating: " ", count: padding)
-        label.textColor = UIColor.black
-        label.backgroundColor = UIColor.lightGray
-        label.layer.cornerRadius = 5
-        label.clipsToBounds = true
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "placeholder")
+        imageView.layer.cornerRadius = photoHeight / 2
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
-    let startTimeLable: UILabel = {
+    private let accountLable: UILabel = {
         let label = UILabel()
-//        label.text = "\(dateFormatter.string(from: play.startTime)) ~ \(dateFormatter.string(from: play.endTime))"
+        label.text = "id"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let endTimeLable: UILabel = {
+    private let nameLable: UILabel = {
         let label = UILabel()
-//        label.text = "\(dateFormatter.string(from: play.endTime))"
+        label.text = "name"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let placeLabel: UILabel = {
+    private let genderLable: UILabel = {
         let label = UILabel()
-//        label.text = "place: \(play.place)"
+        label.text = "gender"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let levelLable: UILabel = {
+        let label = UILabel()
+        label.text = "Level"
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let typeLable: UILabel = {
+    private let setLable: UILabel = {
         let label = UILabel()
-//        label.text = playTypes[play.type]
-        label.textColor = UIColor.black
+        label.text = "set: X"
+        label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let priceLable: UILabel = {
+    private let spikeLable: UILabel = {
         let label = UILabel()
-//        label.text = "\(play.price) 元 /人"
-        label.textColor = UIColor.black
+        label.text = "spike: X"
+        label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    let levelLable: UILabel = {
+    private let digLable: UILabel = {
         let label = UILabel()
-        label.text = "程度："
-        label.textColor = UIColor.black
+        label.text = "dig: X"
+        label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    lazy var levelButton: UIButton = {
-        let button = UIButton()
-//        button.setTitle(levels[play.levelRange.sum], for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.orange
-        button.translatesAutoresizingMaskIntoConstraints = false
-        // button.addTarget(self, action: #selector(showLevelDetail), for: .touchUpInside)
-        button.layer.cornerRadius = standardMargin
-        button.clipsToBounds = true
-        return button
+    private let blockLable: UILabel = {
+        let label = UILabel()
+        label.text = "block: X"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
-
-    func setUI() {
-        if let play = play {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy/MM/dd EE HH:mm"
-
-            lackLable.text = "   缺\(play.lackAmount.female)女\(play.lackAmount.male)男   "
-            startTimeLable.text = "\(dateFormatter.string(from: play.startTime)) ~ \(dateFormatter.string(from: play.endTime))"
-            placeLabel.text = "place: \(play.place)"
-            typeLable.text = playTypes[play.type]
-            priceLable.text = "\(play.price) 元 /人"
-            levelButton.setTitle(levels[play.levelRange.sum], for: .normal)
+    private let sumLable: UILabel = {
+        let label = UILabel()
+        label.text = "sum: X"
+        label.textColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    func setContent() {
+        if let thisUser = thisUser {
+            accountLable.text = thisUser.id
+            nameLable.text = thisUser.name
+            genderLable.text = genderList[thisUser.gender]
+            setLable.text = "Set: \(levelList[thisUser.level.setBall])"
+            spikeLable.text = "Spike: \(levelList[thisUser.level.spike])"
+            digLable.text = "Dig: \(levelList[thisUser.level.dig])"
+            blockLable.text = "Block: \(levelList[thisUser.level.block])"
+            sumLable.text = "Sum: \(levelList[thisUser.level.sum])"
             
-            addSubview(lackLable)
-            addSubview(startTimeLable)
-            // addSubview(endTimeLable)
-            addSubview(placeLabel)
-            addSubview(priceLable)
-            addSubview(typeLable)
+            addSubview(photoImageView)
+            addSubview(accountLable)
+            addSubview(nameLable)
+            addSubview(genderLable)
             addSubview(levelLable)
-            addSubview(levelButton)
+            addSubview(setLable)
+            addSubview(spikeLable)
+            addSubview(digLable)
+            addSubview(blockLable)
+            addSubview(sumLable)
 
-            NSLayoutConstraint.activate([
-                self.heightAnchor.constraint(equalToConstant: 130),
-
-                startTimeLable.topAnchor.constraint(equalTo: topAnchor, constant: standardMargin),
-                startTimeLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
-                // startTimeLable.trailingAnchor.constraint(equalTo: centerXAnchor),
-
-                // endTimeLable.topAnchor.constraint(equalTo: topAnchor, constant: standardMargin),
-                // endTimeLable.leadingAnchor.constraint(equalTo: centerXAnchor),
-                // endTimeLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin),
-
-                placeLabel.topAnchor.constraint(equalTo: startTimeLable.bottomAnchor, constant: standardMargin/2),
-                placeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
-                placeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin),
-
-                typeLable.topAnchor.constraint(equalTo: placeLabel.bottomAnchor, constant: standardMargin/2),
-                typeLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
-
-                lackLable.centerYAnchor.constraint(equalTo: typeLable.centerYAnchor),
-                lackLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin),
-
-                levelLable.topAnchor.constraint(equalTo: typeLable.bottomAnchor, constant: standardMargin/2),
-                levelLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
-
-                levelButton.centerYAnchor.constraint(equalTo: levelLable.centerYAnchor),
-                levelButton.leadingAnchor.constraint(equalTo: levelLable.trailingAnchor),
-                levelButton.heightAnchor.constraint(equalToConstant: standardMargin*2),
-                levelButton.widthAnchor.constraint(equalToConstant: standardMargin*2),
-
-                priceLable.centerYAnchor.constraint(equalTo: levelLable.centerYAnchor),
-                priceLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin)
-            ])
+            setLayout()
         }
+    }
+    
+    private func setLayout() {
+        NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: 250),
+            photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
+            photoImageView.topAnchor.constraint(equalTo: topAnchor, constant: standardMargin),
+            photoImageView.heightAnchor.constraint(equalToConstant: photoHeight),
+            photoImageView.widthAnchor.constraint(equalToConstant: photoHeight),
+
+            accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
+            accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
+
+            nameLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
+            nameLable.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
+
+            genderLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
+            genderLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: standardMargin),
+
+            levelLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
+            levelLable.topAnchor.constraint(equalTo: genderLable.bottomAnchor, constant: standardMargin),
+
+            setLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
+            setLable.topAnchor.constraint(equalTo: levelLable.bottomAnchor, constant: standardMargin),
+
+            spikeLable.leadingAnchor.constraint(equalTo: setLable.trailingAnchor, constant: standardMargin),
+            spikeLable.topAnchor.constraint(equalTo: levelLable.bottomAnchor, constant: standardMargin),
+
+            digLable.leadingAnchor.constraint(equalTo: spikeLable.trailingAnchor, constant: standardMargin),
+            digLable.topAnchor.constraint(equalTo: levelLable.bottomAnchor, constant: standardMargin),
+
+            blockLable.leadingAnchor.constraint(equalTo: digLable.trailingAnchor, constant: standardMargin),
+            blockLable.topAnchor.constraint(equalTo: levelLable.bottomAnchor, constant: standardMargin),
+
+            sumLable.leadingAnchor.constraint(equalTo: blockLable.trailingAnchor, constant: standardMargin),
+            sumLable.topAnchor.constraint(equalTo: levelLable.bottomAnchor, constant: standardMargin)
+        ])
     }
 }

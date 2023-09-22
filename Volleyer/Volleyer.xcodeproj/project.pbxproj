@@ -52,6 +52,7 @@
 		C89961072ABD687300C5D35D /* RequestSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961062ABD687300C5D35D /* RequestSentViewController.swift */; };
 		C89961092ABD933700C5D35D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961082ABD933700C5D35D /* ProfileView.swift */; };
 		C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899610A2ABD963D00C5D35D /* ProfileViewController.swift */; };
+		C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899610C2ABDD3E300C5D35D /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		C89961062ABD687300C5D35D /* RequestSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSentViewController.swift; sourceTree = "<group>"; };
 		C89961082ABD933700C5D35D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C899610A2ABD963D00C5D35D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C899610C2ABDD3E300C5D35D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +232,7 @@
 				C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */,
 				C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */,
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
+				C899610C2ABDD3E300C5D35D /* InfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
 				C89961012ABBF11500C5D35D /* RequestsTableViewCell.swift in Sources */,
 				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,
+				C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C86E151B2AB4390600CBA201 /* PlayOneViewController.swift in Sources */,

@@ -380,7 +380,7 @@ class EstablishFinderViewController: UIViewController {
         var previous: Any = levelLabel
         for i in 0...4 {
             let label = UILabel()
-            label.text = levels[i]
+            label.text = levelList[i]
             label.textColor = UIColor.gray
             label.font = UIFont.systemFont(ofSize: 16)
             label.translatesAutoresizingMaskIntoConstraints = false

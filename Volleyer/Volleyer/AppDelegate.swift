@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         FirebaseApp.configure()
         let db = Firestore.firestore()
 
-        var thisUser = UserData(id: "", email: "", gender: 99, name: "")
+        var thisUser = UserData(id: "", email: "", gender: 99, name: "", level: LevelRange(setBall: -1, block: -1, dig: -1, spike: -1, sum: -1))
 
         db.collection("users").whereField("id", isEqualTo: "maymmm518").getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -28,16 +28,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                 } else {
                     // swiftlint:disable force_cast
                     for document in querySnapshot!.documents {
+                        let documentLevel = document.data()["self_level"] as! [String: Int]
                         thisUser = UserData(id: document.data()["id"] as! String,
                                             email: document.data()["email"] as! String,
                                             gender: document.data()["gender"] as! Int,
-                                            name: document.data()["name"] as! String)
+                                            name: document.data()["name"] as! String,
+                                            level: LevelRange(setBall: documentLevel["set"]!,
+                                                              block: documentLevel["block"]!,
+                                                              dig: documentLevel["dig"]!,
+                                                              spike: documentLevel["spike"]!,
+                                                              sum: documentLevel["sum"]!
+                                                             )
+                        )
                         print("\(document.documentID) => \(document.data())")
                         print(thisUser)
                         // all strings
                         UserDefaults.standard.set(thisUser.id, forKey: User.id.rawValue)
                         UserDefaults.standard.set(thisUser.name, forKey: User.name.rawValue)
-                        UserDefaults.standard.set(genderList[thisUser.gender], forKey: User.gender.rawValue)
+                        UserDefaults.standard.set(thisUser.email, forKey: User.email.rawValue)
+                        UserDefaults.standard.set(thisUser.gender, forKey: User.gender.rawValue)
+                        UserDefaults.standard.set(thisUser.level.setBall, forKey: Level.setBall.rawValue)
+                        UserDefaults.standard.set(thisUser.level.block, forKey: Level.block.rawValue)
+                        UserDefaults.standard.set(thisUser.level.dig, forKey: Level.dig.rawValue)
+                        UserDefaults.standard.set(thisUser.level.spike, forKey: Level.spike.rawValue)
+                        UserDefaults.standard.set(thisUser.level.sum, forKey: Level.sum.rawValue)
                     }
                     // swiftlint:enable force_cast
                 }

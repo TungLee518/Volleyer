@@ -8,8 +8,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
-    var thisUser: User?
+
+    var thisUser: UserData?
 
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -45,15 +45,15 @@ class ProfileViewController: UIViewController {
     }()
     private let levelLable: UILabel = {
         let label = UILabel()
-        label.text = "level"
-        label.textColor = UIColor.gray
+        label.text = "Level"
+        label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private let setLable: UILabel = {
         let label = UILabel()
-        label.text = "set: S"
+        label.text = "set: X"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
     }()
     private let spikeLable: UILabel = {
         let label = UILabel()
-        label.text = "spike: S"
+        label.text = "spike: X"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +69,7 @@ class ProfileViewController: UIViewController {
     }()
     private let digLable: UILabel = {
         let label = UILabel()
-        label.text = "dig: S"
+        label.text = "dig: X"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +77,7 @@ class ProfileViewController: UIViewController {
     }()
     private let blockLable: UILabel = {
         let label = UILabel()
-        label.text = "block: S"
+        label.text = "block: X"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +85,7 @@ class ProfileViewController: UIViewController {
     }()
     private let sumLable: UILabel = {
         let label = UILabel()
-        label.text = "sum: S"
+        label.text = "sum: X"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -106,10 +106,20 @@ class ProfileViewController: UIViewController {
         view.addSubview(sumLable)
         setNavBar()
         setLayout()
+        setContent()
     }
 
     func setContent() {
-//        accountLable.text = 
+        if let thisUser = thisUser {
+            accountLable.text = thisUser.id
+            nameLable.text = thisUser.name
+            genderLable.text = genderList[thisUser.gender]
+            setLable.text = "Set: \(levelList[thisUser.level.setBall])"
+            spikeLable.text = "Spike: \(levelList[thisUser.level.spike])"
+            digLable.text = "Dig: \(levelList[thisUser.level.dig])"
+            blockLable.text = "Block: \(levelList[thisUser.level.block])"
+            sumLable.text = "Sum: \(levelList[thisUser.level.sum])"
+        }
     }
 
     private func setNavBar() {
