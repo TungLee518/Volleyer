@@ -12,3 +12,13 @@ enum User: String {
     case name = "UserName"
     case gender = "UserGender"
 }
+
+struct UserData {
+    var id: String
+    var email: String
+    var gender: Int
+    var name: String
+}
+
+let genderList = ["Male", "Female"]
+let launchAppDate = "launchAppDate"

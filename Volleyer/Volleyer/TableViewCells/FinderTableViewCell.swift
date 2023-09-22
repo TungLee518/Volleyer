@@ -37,6 +37,11 @@ class FinderTableViewCell: UITableViewCell {
         didSet {
             sendDataToPlayView(thisPlay!)
             accountLable.text = thisPlay?.finderId
+            if thisPlay?.finderId == UserDefaults.standard.string(forKey: User.id.rawValue) {
+                wantToAddButton.isHidden = true
+            } else {
+                wantToAddButton.isHidden = false
+            }
         }
     }
 

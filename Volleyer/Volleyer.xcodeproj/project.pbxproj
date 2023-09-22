@@ -45,6 +45,10 @@
 		C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */; };
 		C86E15422AB8249400CBA201 /* AddPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15412AB8249400CBA201 /* AddPlayViewController.swift */; };
 		C89960FB2ABAE8C300C5D35D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C89960FA2ABAE8C300C5D35D /* GoogleService-Info.plist */; };
+		C89960FD2ABBE0D200C5D35D /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89960FC2ABBE0D200C5D35D /* RequestsViewController.swift */; };
+		C89960FF2ABBEE9600C5D35D /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89960FE2ABBEE9600C5D35D /* Requests.swift */; };
+		C89961012ABBF11500C5D35D /* RequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */; };
+		C89961032ABC183200C5D35D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961022ABC183200C5D35D /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +93,11 @@
 		C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionTableViewCell.swift; sourceTree = "<group>"; };
 		C86E15412AB8249400CBA201 /* AddPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayViewController.swift; sourceTree = "<group>"; };
 		C89960FA2ABAE8C300C5D35D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C89960FC2ABBE0D200C5D35D /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
+		C89960FE2ABBEE9600C5D35D /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsTableViewCell.swift; sourceTree = "<group>"; };
+		C89961022ABC183200C5D35D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		C89961042ABC237C00C5D35D /* Volleyer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Volleyer.entitlements; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +139,7 @@
 				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
 				C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */,
 				C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */,
+				C89960FC2ABBE0D200C5D35D /* RequestsViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -166,6 +176,7 @@
 		C86E14B02AB1AF4C00CBA201 /* Volleyer */ = {
 			isa = PBXGroup;
 			children = (
+				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
 				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
 				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
 				C86E15222AB4A30300CBA201 /* Model */,
@@ -175,6 +186,7 @@
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
+				C89961022ABC183200C5D35D /* Notifications.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
 				C86E14BF2AB1AF4E00CBA201 /* Info.plist */,
@@ -193,6 +205,7 @@
 				C86E152D2AB598CD00CBA201 /* Play.swift */,
 				C86E153A2AB7FE6900CBA201 /* Competition.swift */,
 				C800512E2AB9890700FEA7FD /* User.swift */,
+				C89960FE2ABBEE9600C5D35D /* Requests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,6 +233,7 @@
 				C80051262AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift */,
 				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
 				C86E150F2AB31FF300CBA201 /* FinderTableViewCell.swift */,
+				C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -363,6 +377,7 @@
 				C80051272AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
 				C86E15192AB438EE00CBA201 /* CompetitionsViewController.swift in Sources */,
+				C89961032ABC183200C5D35D /* Notifications.swift in Sources */,
 				C80051252AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
@@ -371,6 +386,7 @@
 				C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */,
 				C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */,
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
+				C89961012ABBF11500C5D35D /* RequestsTableViewCell.swift in Sources */,
 				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
@@ -378,6 +394,7 @@
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
+				C89960FD2ABBE0D200C5D35D /* RequestsViewController.swift in Sources */,
 				C86E15242AB4A33600CBA201 /* StandardAmounts.swift in Sources */,
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,
 				C80051292AB8942D00FEA7FD /* PlayOneCourtViewController.swift in Sources */,
@@ -390,6 +407,7 @@
 				C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */,
 				C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */,
 				C86E153B2AB7FE6900CBA201 /* Competition.swift in Sources */,
+				C89960FF2ABBEE9600C5D35D /* Requests.swift in Sources */,
 				C800512F2AB9890700FEA7FD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,11 +546,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Volleyer/Volleyer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a picture for this app!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -557,11 +577,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Volleyer/Volleyer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a picture for this app!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

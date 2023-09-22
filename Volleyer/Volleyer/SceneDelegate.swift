@@ -24,6 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = TabBarViewController()
         window?.makeKeyAndVisible()
+        
+        UserDefaults.standard.set(Date(), forKey: launchAppDate)
+        DataManager.sharedDataMenager.listenPlayRequests()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

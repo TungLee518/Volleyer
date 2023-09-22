@@ -81,7 +81,10 @@ class AddPlayViewController: UIViewController {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         // 第一個永遠是自己
-        playerListTableView.players.append(Player(name: "May", gender: "Female"))
+        playerListTableView.players.append(
+            Player(name: UserDefaults.standard.string(forKey: User.name.rawValue)!,
+                   gender: UserDefaults.standard.string(forKey: User.gender.rawValue)!)
+        )
     }
 
     private func setLayout() {

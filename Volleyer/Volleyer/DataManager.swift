@@ -17,10 +17,18 @@ protocol CompetitionDataManagerDelegate {
     func manager(_ manager: DataManager, didGet competitions: [Competition])
 }
 
+protocol RequestsDataManagerDelegate {
+    func manager(_ manager: DataManager, didGet playRequests: [PlayRequest])
+}
+
 // swiftlint:disable force_cast
 class DataManager {
+
+    static let sharedDataMenager = DataManager()
+
     var delegate: PlayDataManagerDelegate?
     var competitionDelegate: CompetitionDataManagerDelegate?
+    var playRequestDelegate: RequestsDataManagerDelegate?
 
     let plays = Firestore.firestore().collection("plays")
     let competitions = Firestore.firestore().collection("competitions")
@@ -192,7 +200,8 @@ class DataManager {
             "request_sender_id": UserDefaults.standard.string(forKey: User.id.rawValue) as Any,
             "request_reveiver_id": play.finderId,
             "requests_Id_Status": [play.id: 0],
-            "request_player_list": playerDictList
+            "request_player_list": playerDictList,
+            "create_time": Date()
         ]
         document.setData(data) { err in
             if let err = err {
@@ -202,6 +211,58 @@ class DataManager {
             }
         }
         print("add data")
+    }
+
+    func getPlayRequests() {
+        addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var playRequestssArray: [PlayRequest] = []
+                for document in querySnapshot!.documents {
+                    let requestPlayerList = document.data()[PlayRequestTitle.requestPlayerList.rawValue] as! [[String: String]]
+                    var requestPlayerArray = [Player]()
+                    for player in requestPlayerList {
+                        requestPlayerArray.append(Player(name: player["Name"]!, gender: player["Gender"]!))
+                    }
+                    let aPlayRequest = PlayRequest(
+                        requestPlayerList: requestPlayerArray,
+                        requestReceverId: document.data()[PlayRequestTitle.requestReceiverId.rawValue] as! String,
+                        requestSenderId: document.data()[PlayRequestTitle.requestSenderId.rawValue] as! String,
+                        requestIdStatus: document.data()[PlayRequestTitle.requestIdStatus.rawValue] as! [String: Int],
+                        createTime: document.data()[PlayRequestTitle.createTime.rawValue] as! Date
+                    )
+                    playRequestssArray.append(aPlayRequest)
+                }
+                print(playRequestssArray)
+                self.playRequestDelegate?.manager(self, didGet: playRequestssArray)
+            }
+        }
+    }
+
+    func listenPlayRequests() {
+        addPlayRQs.whereField("request_reveiver_id", isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
+            guard let snapshot = querySnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
+            }
+            snapshot.documentChanges.forEach { diff in
+                if (diff.type == .added) {
+                    print("New city: \(diff.document.data())")
+                    let launchTime = UserDefaults.standard.value(forKey: launchAppDate) as! Date
+                    let firebaseTime = diff.document.data()["create_time"] as! Timestamp
+                    if Int32(launchTime.timeIntervalSince1970) < firebaseTime.seconds {
+                        NotificationManager.notifyDelegate.successNotificationContent(id: diff.document.data()["request_sender_id"] as! String)
+                    }
+                }
+                if (diff.type == .modified) {
+                    print("Modified city: \(diff.document.data())")
+                }
+                if (diff.type == .removed) {
+                    print("Removed city: \(diff.document.data())")
+                }
+            }
+        }
     }
 }
 // swiftlint:enable force_cast

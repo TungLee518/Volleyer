@@ -45,6 +45,16 @@ class MyViewController: UIViewController {
         button.addTarget(self, action: #selector(pushToMyPlays), for: .touchUpInside)
         return button
     }()
+    lazy var requestsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Requests", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pushToRequests), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +66,7 @@ class MyViewController: UIViewController {
         view.addSubview(accountLable)
         view.addSubview(myFinderButton)
         view.addSubview(myPlayButton)
+        view.addSubview(requestsButton)
 
         setLayout()
     }
@@ -74,7 +85,10 @@ class MyViewController: UIViewController {
             myFinderButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
 
             myPlayButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            myPlayButton.topAnchor.constraint(equalTo: myFinderButton.bottomAnchor, constant: standardMargin)
+            myPlayButton.topAnchor.constraint(equalTo: myFinderButton.bottomAnchor, constant: standardMargin),
+            
+            requestsButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            requestsButton.topAnchor.constraint(equalTo: myPlayButton.bottomAnchor, constant: standardMargin)
         ])
     }
     
@@ -85,6 +99,11 @@ class MyViewController: UIViewController {
     
     @objc func pushToMyPlays() {
         let nextVC = MyPlaysViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func pushToRequests() {
+        let nextVC = RequestsViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
