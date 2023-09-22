@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
         var thisUser = UserData(id: "", email: "", gender: 99, name: "")
 
-        db.collection("users").whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+        db.collection("users").whereField("id", isEqualTo: "maymmm518").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -38,17 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                         UserDefaults.standard.set(thisUser.id, forKey: User.id.rawValue)
                         UserDefaults.standard.set(thisUser.name, forKey: User.name.rawValue)
                         UserDefaults.standard.set(genderList[thisUser.gender], forKey: User.gender.rawValue)
-                        DataManager.sharedDataMenager.listenPlayRequests()
-//                        if launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] != nil {
-//                            DataManager.sharedDataMenager.listenPlayRequests()
-//                        }
                     }
                     // swiftlint:enable force_cast
                 }
         }
 
         registerForPushNotifications()
-        
+        UNUserNotificationCenter.current().delegate = self
+
         return true
     }
 
@@ -128,6 +125,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert])
+        completionHandler([.alert, .badge, .sound])
     }
 }

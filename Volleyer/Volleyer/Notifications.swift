@@ -8,60 +8,38 @@
 import Foundation
 import UserNotifications
 
-//class NotificationManager: UNUserNotificationCenterDelegate {
-//    func isEqual(_ object: Any?) -> Bool {
-//        <#code#>
-//    }
-//
-//    var hash: Int
-//
-//    var superclass: AnyClass?
-//
-//    func `self`() -> Self {
-//        <#code#>
-//    }
-//
-//    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-//        <#code#>
-//    }
-//
-//    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-//        <#code#>
-//    }
-//
-//    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-//        <#code#>
-//    }
-//
-//    func isProxy() -> Bool {
-//        <#code#>
-//    }
-//
-//    func isKind(of aClass: AnyClass) -> Bool {
-//        <#code#>
-//    }
-//
-//    func isMember(of aClass: AnyClass) -> Bool {
-//        <#code#>
-//    }
-//
-//    func conforms(to aProtocol: Protocol) -> Bool {
-//        <#code#>
-//    }
-//
-//    func responds(to aSelector: Selector!) -> Bool {
-//        <#code#>
-//    }
-//
-//    var description: String
-//
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//        completionHandler()
-//    }
-//
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                willPresent notification: UNNotification,
-//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        completionHandler([.alert, .badge, .sound])
-//    }
-//}
+class NotificationManager {
+    
+    static let notifyDelegate = NotificationManager()
+    
+    func successNotificationContent(id: String) {
+        let content = UNMutableNotificationContent()
+        content.title = "有新的邀請"
+        content.subtitle = "加場邀請"
+        content.body = "\(id) 寄送加場邀請給你"
+//        content.badge = 1
+        content.sound = UNNotificationSound.defaultCritical
+        // Add an attachment to the notification content
+        if let url = Bundle.main.url(forResource: "dune",
+                                        withExtension: "png") {
+            if let attachment = try? UNNotificationAttachment(identifier: "dune",
+                                                                url: url,
+                                                                options: nil) {
+                content.attachments = [attachment]
+            }
+        }
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.2, repeats: false)
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if error != nil {
+                print("success Error")
+            } else {
+                print("success Success")
+            }
+        }
+        print("success notify")
+    }
+}

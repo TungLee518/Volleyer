@@ -12,6 +12,7 @@ struct PlayRequest {
     var requestReceverId: String
     var requestSenderId: String
     var requestIdStatus: [String: Int]
+    var createTime: Date
 }
 
 enum PlayRequestTitle: String {
@@ -20,6 +21,7 @@ enum PlayRequestTitle: String {
     case requestReceiverId = "request_reveiver_id"
     case requestSenderId = "request_sender_id"
     case requestIdStatus = "requests_Id_Status"
+    case createTime = "create_time"
 }
 
 let requestStatus = ["pending", "accept", "deny"]

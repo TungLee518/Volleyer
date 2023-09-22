@@ -23,7 +23,7 @@ protocol RequestsDataManagerDelegate {
 
 // swiftlint:disable force_cast
 class DataManager {
-    
+
     static let sharedDataMenager = DataManager()
 
     var delegate: PlayDataManagerDelegate?
@@ -198,10 +198,10 @@ class DataManager {
         }
         let data: [String: Any] = [
             "request_sender_id": UserDefaults.standard.string(forKey: User.id.rawValue) as Any,
-            // TODO 拼錯了
             "request_reveiver_id": play.finderId,
             "requests_Id_Status": [play.id: 0],
-            "request_player_list": playerDictList
+            "request_player_list": playerDictList,
+            "create_time": Date()
         ]
         document.setData(data) { err in
             if let err = err {
@@ -229,7 +229,8 @@ class DataManager {
                         requestPlayerList: requestPlayerArray,
                         requestReceverId: document.data()[PlayRequestTitle.requestReceiverId.rawValue] as! String,
                         requestSenderId: document.data()[PlayRequestTitle.requestSenderId.rawValue] as! String,
-                        requestIdStatus: document.data()[PlayRequestTitle.requestIdStatus.rawValue] as! [String: Int]
+                        requestIdStatus: document.data()[PlayRequestTitle.requestIdStatus.rawValue] as! [String: Int],
+                        createTime: document.data()[PlayRequestTitle.createTime.rawValue] as! Date
                     )
                     playRequestssArray.append(aPlayRequest)
                 }
@@ -248,6 +249,11 @@ class DataManager {
             snapshot.documentChanges.forEach { diff in
                 if (diff.type == .added) {
                     print("New city: \(diff.document.data())")
+                    let launchTime = UserDefaults.standard.value(forKey: launchAppDate) as! Date
+                    let firebaseTime = diff.document.data()["create_time"] as! Timestamp
+                    if Int32(launchTime.timeIntervalSince1970) < firebaseTime.seconds {
+                        NotificationManager.notifyDelegate.successNotificationContent(id: diff.document.data()["request_sender_id"] as! String)
+                    }
                 }
                 if (diff.type == .modified) {
                     print("Modified city: \(diff.document.data())")

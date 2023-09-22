@@ -21,3 +21,4 @@ struct UserData {
 }
 
 let genderList = ["Male", "Female"]
+let launchAppDate = "launchAppDate"
