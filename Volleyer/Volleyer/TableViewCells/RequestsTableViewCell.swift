@@ -104,21 +104,20 @@ class RequestsTableViewCell: UITableViewCell {
 
             statusLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
             statusLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
-            statusLable.centerYAnchor.constraint(equalTo: dateLable.centerYAnchor),
+            statusLable.centerYAnchor.constraint(equalTo: dateLable.centerYAnchor)
         ])
     }
 
     @objc func acceptRequest() {
         showOnly(status: "Accepted")
         updateStatus?(99)
-        
     }
 
     @objc func denyRequest() {
         showOnly(status: "Denied")
         updateStatus?(1)
     }
-    
+
     func showOnly(status: String) {
         acceptRequestButton.isHidden = true
         denyRequestButton.isHidden = true

@@ -29,4 +29,4 @@ enum PlayRequestTitle: String {
     case createTime = "create_time"
 }
 
-let requestStatus = ["Pending", "Accept", "Deny"]
+let requestStatus = ["Pending", "Accepted", "Denied"]
