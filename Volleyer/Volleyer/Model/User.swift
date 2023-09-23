@@ -8,10 +8,10 @@
 import Foundation
 
 enum User: String {
-    case id = "UserID"
-    case name = "UserName"
-    case gender = "UserGender"
-    case level = "UserLevel"
+    case id = "id"
+    case name = "name"
+    case gender = "gender"
+    case level = "self_level"
     case email = "email"
 }
 

@@ -18,7 +18,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         setNavBar()
         dataManager.getPlay()
-        dataManager.delegate = self
+        dataManager.playDataDelegate = self
         setTableView()
     }
 

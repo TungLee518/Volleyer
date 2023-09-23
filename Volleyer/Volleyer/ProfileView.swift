@@ -11,7 +11,7 @@ import UIKit
 class ProfileView: UIView {
 
     var thisUser: UserData? 
-    
+
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder")
@@ -92,7 +92,7 @@ class ProfileView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     func setContent() {
         if let thisUser = thisUser {
             accountLable.text = thisUser.id
@@ -103,7 +103,7 @@ class ProfileView: UIView {
             digLable.text = "Dig: \(levelList[thisUser.level.dig])"
             blockLable.text = "Block: \(levelList[thisUser.level.block])"
             sumLable.text = "Sum: \(levelList[thisUser.level.sum])"
-            
+
             addSubview(photoImageView)
             addSubview(accountLable)
             addSubview(nameLable)
@@ -118,7 +118,7 @@ class ProfileView: UIView {
             setLayout()
         }
     }
-    
+
     private func setLayout() {
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: 250),

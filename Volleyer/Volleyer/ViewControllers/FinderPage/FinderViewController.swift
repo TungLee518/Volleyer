@@ -18,7 +18,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
-        dataManager.delegate = self
+        dataManager.playDataDelegate = self
         setTableView()
         
     }

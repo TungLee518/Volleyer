@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             self.getNotificationSettings()
         }
     }
-        
+
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             print("Notification settings: \(settings)")
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             }
         }
     }
-    
+
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(String(describing: fcmToken))")
         messaging.token { token, error in
@@ -99,20 +99,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             )
     }
 
-    
-    func application(_ application: UIApplication,
-                didRegisterForRemoteNotificationsWithDeviceToken
-                    deviceToken: Data) {
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken
+                     deviceToken: Data) {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
         // Messaging.messaging().apnsToken = deviceToken
     }
 
-
-    func application(_ application: UIApplication,
-                didFailToRegisterForRemoteNotificationsWithError
-                    error: Error) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
+                     error: Error) {
         print("Failed to register: \(error)")
     }
 

@@ -90,8 +90,8 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = InfoViewController()
         // firebase get data by play id and request_sender_id
-        nextVC.thisPlay = Play(finderId: "hello", startTime: Date(), endTime: Date(), place: "a place", price: 100, type: 2, levelRange: LevelRange(setBall: 1, block: 2, dig: 3, spike: 4, sum: 0), lackAmount: LackAmount(male: 4, female: 6, unlimited: 0), playerInfo: [], status: 0)
-        nextVC.thisUser = UserData(id: "maymmm518", email: "maymmm58", gender: 1, name: "MAY", level: LevelRange(setBall: 0, block: 0, dig: 0, spike: 0, sum: 0))
+        nextVC.thisPlayId = myRequests[indexPath.row].playId
+        nextVC.thisUserId = myRequests[indexPath.row].requestSenderId
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
@@ -102,7 +102,5 @@ extension RequestsReceivedViewController: RequestsDataManagerDelegate {
         requestsTableView.reloadData()
     }
     func manager(_ manager: DataManager, iSent playRequests: [PlayRequest]) {
-        
     }
 }
-

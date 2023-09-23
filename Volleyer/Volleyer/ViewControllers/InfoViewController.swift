@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUserDataManagerDelegate {
 
     private var playView = PlayInfoView()
     private var profileView = ProfileView()
@@ -22,11 +22,18 @@ class InfoViewController: UIViewController {
             sendDataToProfileView(thisUser!)
         }
     }
+    var thisPlayId: String?
+    var thisUserId: String?
+    let dataManager = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(playView)
         view.addSubview(profileView)
+        dataManager.getPlayById(id: thisPlayId ?? "")
+        dataManager.getUserById(id: thisUserId ?? "")
+        dataManager.thisPlayDelegate = self
+        dataManager.thisUserDelegate = self
         setLayout()
         setNavBar()
     }
@@ -61,5 +68,13 @@ class InfoViewController: UIViewController {
     func sendDataToProfileView(_ data: UserData) {
         profileView.thisUser = thisUser
         profileView.setContent()
+    }
+
+    func manager(_ manager: DataManager, thisPlay play: Play) {
+        thisPlay = play
+    }
+
+    func manager(_ manager: DataManager, thisUser user: UserData) {
+        thisUser = user
     }
 }
