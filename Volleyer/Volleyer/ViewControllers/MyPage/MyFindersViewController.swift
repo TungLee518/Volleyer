@@ -17,7 +17,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
-        dataManager.getPlay()
+        dataManager.getThisUserPlays()
         dataManager.playDataDelegate = self
         setTableView()
     }

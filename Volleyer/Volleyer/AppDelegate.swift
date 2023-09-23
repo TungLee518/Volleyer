@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                     // swiftlint:disable force_cast
                     for document in querySnapshot!.documents {
                         let documentLevel = document.data()["self_level"] as! [String: Int]
-                        thisUser = UserData(id: document.data()["id"] as! String,
+                        thisUser = UserData(firebaseId: document.documentID,
+                                            id: document.data()["id"] as! String,
                                             email: document.data()["email"] as! String,
                                             gender: document.data()["gender"] as! Int,
                                             name: document.data()["name"] as! String,
@@ -43,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                         print("\(document.documentID) => \(document.data())")
                         print(thisUser)
                         // all strings
+                        UserDefaults.standard.set(thisUser.firebaseId, forKey: User.firebaseId.rawValue)
                         UserDefaults.standard.set(thisUser.id, forKey: User.id.rawValue)
                         UserDefaults.standard.set(thisUser.name, forKey: User.name.rawValue)
                         UserDefaults.standard.set(thisUser.email, forKey: User.email.rawValue)

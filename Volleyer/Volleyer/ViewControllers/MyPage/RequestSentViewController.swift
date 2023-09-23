@@ -69,7 +69,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         // swiftlint:enable force_cast
 
         let thisRequest = myRequests[indexPath.row]
-        cell.titleLable.text = "I sent \(thisRequest.requestSenderId) a play request"
+        cell.titleLable.text = "I sent \(thisRequest.requestReceverId) a play request"
 
         let players = thisRequest.requestPlayerList
         var playerListText = "名單："

@@ -95,48 +95,71 @@ class DataManager {
     }
 
     // TODO: need to get plays that this user is going to
-    func getPlay() {
-        plays.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
+    func getThisUserPlays() {
+        users.document(UserDefaults.standard.string(forKey: User.firebaseId.rawValue) ?? "").getDocument {(document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                let myPlayList = document.data()?[User.myPlayList.rawValue] as! [String]
                 var playsArray: [Play] = []
-                for document in querySnapshot!.documents {
-                    let levelDict = document.data()[PlayTitle.levelRange.rawValue] as! [String: Int]
-                    let levelRange = LevelRange(
-                        setBall: levelDict[LevelTitle.set.rawValue]!,
-                        block: levelDict[LevelTitle.block.rawValue]!,
-                        dig: levelDict[LevelTitle.dig.rawValue]!,
-                        spike: levelDict[LevelTitle.spike.rawValue]!,
-                        sum: levelDict[LevelTitle.sum.rawValue]!
-                    )
-                    let lackDict = document.data()[PlayTitle.lackAmount.rawValue] as! [String: Int]
-                    let lackAmount = LackAmount(
-                        male: lackDict[LackGender.male.rawValue]!,
-                        female: lackDict[LackGender.female.rawValue]!,
-                        unlimited: lackDict[LackGender.unlimited.rawValue]!
-                    )
-                    let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
-                    let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
-                    let aPlay = Play(
-                        id: document.documentID,
-                        finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
-                        startTime: startTime.dateValue(),
-                        endTime: endTime.dateValue(),
-                        place: document.data()[PlayTitle.place.rawValue] as! String,
-                        price: document.data()[PlayTitle.price.rawValue] as! Int,
-                        type: document.data()[PlayTitle.type.rawValue] as! Int,
-                        levelRange: levelRange,
-                        lackAmount: lackAmount,
-                        playerInfo: [],
-                        status: document.data()[PlayTitle.status.rawValue] as! Int
-                    )
-                    playsArray.append(aPlay)
+                for playId in myPlayList {
+                    self.plays.document(playId).getDocument {(document, error) in
+                        if let playDocument = document, playDocument.exists {
+                            let dataDescription = playDocument.data().map(String.init(describing:)) ?? "nil"
+                            playsArray.append(self.decodePlayDS(playDocument))
+                            if playsArray.count == myPlayList.count {
+                                self.playDataDelegate?.manager(self, didGet: playsArray)
+                            }
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
                 }
-                // playsArray.sort { $0.time > $1.time }
-                self.playDataDelegate?.manager(self, didGet: playsArray)
+            } else {
+                print("Document does not exist")
             }
         }
+        
+//        plays.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                var playsArray: [Play] = []
+//                for document in querySnapshot!.documents {
+//                    let levelDict = document.data()[PlayTitle.levelRange.rawValue] as! [String: Int]
+//                    let levelRange = LevelRange(
+//                        setBall: levelDict[LevelTitle.set.rawValue]!,
+//                        block: levelDict[LevelTitle.block.rawValue]!,
+//                        dig: levelDict[LevelTitle.dig.rawValue]!,
+//                        spike: levelDict[LevelTitle.spike.rawValue]!,
+//                        sum: levelDict[LevelTitle.sum.rawValue]!
+//                    )
+//                    let lackDict = document.data()[PlayTitle.lackAmount.rawValue] as! [String: Int]
+//                    let lackAmount = LackAmount(
+//                        male: lackDict[LackGender.male.rawValue]!,
+//                        female: lackDict[LackGender.female.rawValue]!,
+//                        unlimited: lackDict[LackGender.unlimited.rawValue]!
+//                    )
+//                    let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
+//                    let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
+//                    let aPlay = Play(
+//                        id: document.documentID,
+//                        finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
+//                        startTime: startTime.dateValue(),
+//                        endTime: endTime.dateValue(),
+//                        place: document.data()[PlayTitle.place.rawValue] as! String,
+//                        price: document.data()[PlayTitle.price.rawValue] as! Int,
+//                        type: document.data()[PlayTitle.type.rawValue] as! Int,
+//                        levelRange: levelRange,
+//                        lackAmount: lackAmount,
+//                        playerInfo: [],
+//                        status: document.data()[PlayTitle.status.rawValue] as! Int
+//                    )
+//                    playsArray.append(aPlay)
+//                }
+//                // playsArray.sort { $0.time > $1.time }
+//                self.playDataDelegate?.manager(self, didGet: playsArray)
+//            }
+//        }
     }
 
     func getPublishPlay() {
@@ -171,6 +194,16 @@ class DataManager {
     }
 
     func getUserById(id: String) {
+//        users.document(id).getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                print("Document data: \(dataDescription)")
+//                let thisUser = self.decodeUser(document)
+//                self.thisUserDelegate?.manager(self, thisUser: thisUser)
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
         users.whereField(User.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -377,6 +410,38 @@ extension DataManager {
         )
         return aPlay
     }
+    func decodePlayDS(_ document: DocumentSnapshot) -> Play {
+        let levelDict = document.data()?[PlayTitle.levelRange.rawValue] as! [String: Int]
+        let levelRange = LevelRange(
+            setBall: levelDict[LevelTitle.set.rawValue]!,
+            block: levelDict[LevelTitle.block.rawValue]!,
+            dig: levelDict[LevelTitle.dig.rawValue]!,
+            spike: levelDict[LevelTitle.spike.rawValue]!,
+            sum: levelDict[LevelTitle.sum.rawValue]!
+        )
+        let lackDict = document.data()?[PlayTitle.lackAmount.rawValue] as! [String: Int]
+        let lackAmount = LackAmount(
+            male: lackDict[LackGender.male.rawValue]!,
+            female: lackDict[LackGender.female.rawValue]!,
+            unlimited: lackDict[LackGender.unlimited.rawValue]!
+        )
+        let startTime = document.data()?[PlayTitle.startTime.rawValue] as! Timestamp
+        let endTime = document.data()?[PlayTitle.endTime.rawValue] as! Timestamp
+        let aPlay = Play(
+            id: document.documentID,
+            finderId: document.data()?[PlayTitle.finderId.rawValue] as! String,
+            startTime: startTime.dateValue(),
+            endTime: endTime.dateValue(),
+            place: document.data()?[PlayTitle.place.rawValue] as! String,
+            price: document.data()?[PlayTitle.price.rawValue] as! Int,
+            type: document.data()?[PlayTitle.type.rawValue] as! Int,
+            levelRange: levelRange,
+            lackAmount: lackAmount,
+            playerInfo: [],
+            status: document.data()?[PlayTitle.status.rawValue] as! Int
+        )
+        return aPlay
+    }
 
     func decodeUser(_ document: QueryDocumentSnapshot) -> UserData {
         let levelDict = document.data()[User.level.rawValue] as! [String: Int]
@@ -397,6 +462,24 @@ extension DataManager {
     }
 
     func appendPlayIdToUserPlayList(_ documentId: String) {
+//        self.users.document(UserDefaults.standard.string(forKey: User.firebaseId.rawValue) ?? "").getDocument { (document, error) in
+//            if let userDocument = document, userDocument.exists {
+//                var myPlayList = userDocument.data()?[User.myPlayList.rawValue] as! [String]
+//                print("\(userDocument.documentID) => \(userDocument.data())")
+//                myPlayList.append(documentId)
+//                self.users.document(userDocument.data()?[User.firebaseId.rawValue] as! String).updateData([
+//                    User.myPlayList.rawValue: myPlayList
+//                ]) { err in
+//                    if let err = err {
+//                        print("Error updating document: \(err)")
+//                    } else {
+//                        print("Document successfully updated")
+//                    }
+//                }
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
         self.users.whereField(User.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
