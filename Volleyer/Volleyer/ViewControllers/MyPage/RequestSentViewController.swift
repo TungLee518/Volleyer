@@ -91,11 +91,13 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let nextVC = MyFinderInfoViewController()
-//        nextVC.thisPlay = myRequests[indexPath.row]
-//        navigationController?.pushViewController(nextVC, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = InfoViewController()
+        // firebase get data by play id and request_sender_id
+        nextVC.thisPlayId = myRequests[indexPath.row].playId
+        nextVC.thisUserId = myRequests[indexPath.row].requestReceverId
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 
 extension RequestSentViewController: RequestsDataManagerDelegate {
