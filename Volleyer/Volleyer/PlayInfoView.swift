@@ -95,7 +95,7 @@ class PlayInfoView: UIView {
             placeLabel.text = "place: \(play.place)"
             typeLable.text = playTypes[play.type]
             priceLable.text = "\(play.price) 元 /人"
-            levelButton.setTitle(levels[play.levelRange.sum], for: .normal)
+            levelButton.setTitle(levelList[play.levelRange.sum], for: .normal)
             
             addSubview(lackLable)
             addSubview(startTimeLable)

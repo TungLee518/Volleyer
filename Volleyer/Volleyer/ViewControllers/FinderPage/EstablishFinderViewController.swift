@@ -313,8 +313,8 @@ class EstablishFinderViewController: UIViewController {
     private var levelRange = LevelRange(setBall: 4, block: 4, dig: 4, spike: 4, sum: 4)
     private var lackAmount = LackAmount(male: 0, female: 0, unlimited: 0)
 
-    lazy private var thisPlay: Play = Play(id: "", finderId: "maymmm518", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
-    
+    lazy private var thisPlay: Play = Play(id: "", finderId: UserDefaults.standard.string(forKey: User.id.rawValue) ?? "Wrong User Id", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
+
     var players: [Player] = []
 
     var dataManager = DataManager()
@@ -380,7 +380,7 @@ class EstablishFinderViewController: UIViewController {
         var previous: Any = levelLabel
         for i in 0...4 {
             let label = UILabel()
-            label.text = levels[i]
+            label.text = levelList[i]
             label.textColor = UIColor.gray
             label.font = UIFont.systemFont(ofSize: 16)
             label.translatesAutoresizingMaskIntoConstraints = false

@@ -25,6 +25,16 @@ class MyViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    lazy var myProfileButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("My Profile", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pushToMyProfile), for: .touchUpInside)
+        return button
+    }()
     lazy var myFinderButton: UIButton = {
         let button = UIButton()
         button.setTitle("我的揪場", for: .normal)
@@ -74,6 +84,7 @@ class MyViewController: UIViewController {
 
         view.addSubview(photoImageView)
         view.addSubview(accountLable)
+        view.addSubview(myProfileButton)
         view.addSubview(myFinderButton)
         view.addSubview(myPlayButton)
         view.addSubview(requestsReceiveButton)
@@ -92,8 +103,11 @@ class MyViewController: UIViewController {
             accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
             accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
 
+            myProfileButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            myProfileButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
+
             myFinderButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            myFinderButton.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
+            myFinderButton.topAnchor.constraint(equalTo: myProfileButton.bottomAnchor, constant: standardMargin),
 
             myPlayButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             myPlayButton.topAnchor.constraint(equalTo: myFinderButton.bottomAnchor, constant: standardMargin),
@@ -105,12 +119,28 @@ class MyViewController: UIViewController {
             requestsSendButton.topAnchor.constraint(equalTo: requestsReceiveButton.bottomAnchor, constant: standardMargin)
         ])
     }
-    
+
+    @objc func pushToMyProfile() {
+        let nextVC = ProfileViewController()
+        nextVC.thisUser = UserData(
+            id: UserDefaults.standard.string(forKey: User.id.rawValue) ?? "No id found",
+            email: UserDefaults.standard.string(forKey: User.email.rawValue) ?? "No email found",
+            gender: UserDefaults.standard.integer(forKey: User.gender.rawValue),
+            name: UserDefaults.standard.string(forKey: User.name.rawValue) ?? "No name found",
+            level: LevelRange(setBall: UserDefaults.standard.integer(forKey: Level.setBall.rawValue),
+                              block: UserDefaults.standard.integer(forKey: Level.block.rawValue),
+                              dig: UserDefaults.standard.integer(forKey: Level.dig.rawValue),
+                              spike: UserDefaults.standard.integer(forKey: Level.spike.rawValue),
+                              sum: UserDefaults.standard.integer(forKey: Level.sum.rawValue))
+        )
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+
     @objc func pushToMyFinders() {
         let nextVC = MyFindersViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
+
     @objc func pushToMyPlays() {
         let nextVC = MyPlaysViewController()
         navigationController?.pushViewController(nextVC, animated: true)

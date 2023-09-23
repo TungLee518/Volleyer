@@ -50,6 +50,9 @@
 		C89961012ABBF11500C5D35D /* RequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */; };
 		C89961032ABC183200C5D35D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961022ABC183200C5D35D /* Notifications.swift */; };
 		C89961072ABD687300C5D35D /* RequestSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961062ABD687300C5D35D /* RequestSentViewController.swift */; };
+		C89961092ABD933700C5D35D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961082ABD933700C5D35D /* ProfileView.swift */; };
+		C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899610A2ABD963D00C5D35D /* ProfileViewController.swift */; };
+		C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899610C2ABDD3E300C5D35D /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +103,9 @@
 		C89961022ABC183200C5D35D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		C89961042ABC237C00C5D35D /* Volleyer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Volleyer.entitlements; sourceTree = "<group>"; };
 		C89961062ABD687300C5D35D /* RequestSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSentViewController.swift; sourceTree = "<group>"; };
+		C89961082ABD933700C5D35D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C899610A2ABD963D00C5D35D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C899610C2ABDD3E300C5D35D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				C86E15162AB438BF00CBA201 /* MyViewController.swift */,
+				C899610A2ABD963D00C5D35D /* ProfileViewController.swift */,
 				C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */,
 				C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */,
 				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
@@ -188,6 +195,7 @@
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
+				C89961082ABD933700C5D35D /* ProfileView.swift */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
@@ -224,6 +232,7 @@
 				C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */,
 				C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */,
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
+				C899610C2ABDD3E300C5D35D /* InfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -376,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
+				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
 				C80051272AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
@@ -392,10 +402,12 @@
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
 				C89961012ABBF11500C5D35D /* RequestsTableViewCell.swift in Sources */,
 				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,
+				C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C86E151B2AB4390600CBA201 /* PlayOneViewController.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
+				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
 				C89960FD2ABBE0D200C5D35D /* RequestsReceivedViewController.swift in Sources */,

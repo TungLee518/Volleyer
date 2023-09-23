@@ -87,11 +87,13 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
         return cell
     }
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let nextVC = MyFinderInfoViewController()
-//        nextVC.thisPlay = myRequests[indexPath.row]
-//        navigationController?.pushViewController(nextVC, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = InfoViewController()
+        // firebase get data by play id and request_sender_id
+        nextVC.thisPlayId = myRequests[indexPath.row].playId
+        nextVC.thisUserId = myRequests[indexPath.row].requestSenderId
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 
 extension RequestsReceivedViewController: RequestsDataManagerDelegate {
@@ -100,7 +102,5 @@ extension RequestsReceivedViewController: RequestsDataManagerDelegate {
         requestsTableView.reloadData()
     }
     func manager(_ manager: DataManager, iSent playRequests: [PlayRequest]) {
-        
     }
 }
-

@@ -12,6 +12,7 @@ enum NavBarEnum: String {
     case establishFinderPage = "我要揪打球"
     case addOnePage = "我要加"
     case myPage = "My Page"
+    case myProfile = "My Profile"
     case myFinders = "我的揪場"
     case myPlays = "我要打的場"
     case myRequests = "我收到的 requests"
@@ -22,6 +23,7 @@ enum NavBarEnum: String {
     case communityPage = "Community"
     case playOnePage = "Play One"
     case competitionPage = "Competitions"
+    case info = "詳細資訊"
 }
 
 enum TabBarEnum: String {

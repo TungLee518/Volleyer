@@ -10,7 +10,7 @@ import UIKit
 class RequestsTableViewCell: UITableViewCell {
 
     static let identifier = "RequestsTableViewCell"
-    
+
     var titleLable: UILabel = {
         let label = UILabel()
         label.text = "No title"

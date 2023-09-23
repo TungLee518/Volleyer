@@ -69,7 +69,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         // swiftlint:enable force_cast
 
         let thisRequest = myRequests[indexPath.row]
-        cell.titleLable.text = "I sent \(thisRequest.requestSenderId) a play request"
+        cell.titleLable.text = "I sent \(thisRequest.requestReceverId) a play request"
 
         let players = thisRequest.requestPlayerList
         var playerListText = "名單："
@@ -91,11 +91,13 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let nextVC = MyFinderInfoViewController()
-//        nextVC.thisPlay = myRequests[indexPath.row]
-//        navigationController?.pushViewController(nextVC, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = InfoViewController()
+        // firebase get data by play id and request_sender_id
+        nextVC.thisPlayId = myRequests[indexPath.row].playId
+        nextVC.thisUserId = myRequests[indexPath.row].requestReceverId
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 
 extension RequestSentViewController: RequestsDataManagerDelegate {
