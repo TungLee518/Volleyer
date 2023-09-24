@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Play One View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="PlayOneViewController" id="Y6W-OH-hqX" customClass="PlayOneViewController" customModule="Volleyer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hB2-73-Owx">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayOneTableViewCell" id="ecJ-1j-cdp" customClass="PlayOneTableViewCell" customModule="Volleyer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ecJ-1j-cdp" id="gvv-oJ-ISw">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zaP-OO-GVe">
+                                                    <rect key="frame" x="20" y="11" width="353" height="178"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5uA-C2-FGD">
+                                                        <size key="itemSize" width="140" height="170"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayOneCollectionViewCell" id="gVf-Ef-kB5" customClass="PlayOneCollectionViewCell" customModule="Volleyer" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="4" width="140" height="170"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CQq-Bk-VV3">
+                                                                <rect key="frame" x="0.0" y="0.0" width="140" height="170"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Jtv-E0-mDl">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="100" id="Tov-la-tZs"/>
+                                                                            <constraint firstAttribute="width" constant="100" id="W5s-p4-AF4"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2W-Qm-EnQ">
+                                                                        <rect key="frame" x="39" y="116" width="62" height="38"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="Jtv-E0-mDl" secondAttribute="trailing" id="NuG-4X-RIv"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="h2W-Qm-EnQ" secondAttribute="bottom" constant="16" id="f5q-2U-hXj"/>
+                                                                    <constraint firstItem="h2W-Qm-EnQ" firstAttribute="top" secondItem="Jtv-E0-mDl" secondAttribute="bottom" constant="16" id="jdn-wH-JkM"/>
+                                                                    <constraint firstItem="Jtv-E0-mDl" firstAttribute="top" secondItem="CQq-Bk-VV3" secondAttribute="top" id="qFw-Xd-63j"/>
+                                                                    <constraint firstItem="h2W-Qm-EnQ" firstAttribute="centerX" secondItem="CQq-Bk-VV3" secondAttribute="centerX" id="qUe-gE-6jo"/>
+                                                                    <constraint firstItem="Jtv-E0-mDl" firstAttribute="leading" secondItem="CQq-Bk-VV3" secondAttribute="leading" id="uZE-Vq-UxT"/>
+                                                                </constraints>
+                                                            </collectionViewCellContentView>
+                                                            <size key="customSize" width="140" height="170"/>
+                                                            <connections>
+                                                                <outlet property="accountImageView" destination="Jtv-E0-mDl" id="n3q-R8-NU6"/>
+                                                                <outlet property="accountLabel" destination="h2W-Qm-EnQ" id="IIb-IJ-SZy"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="zaP-OO-GVe" secondAttribute="bottom" id="0xF-QX-ikp"/>
+                                                <constraint firstItem="zaP-OO-GVe" firstAttribute="top" secondItem="gvv-oJ-ISw" secondAttribute="topMargin" id="6mB-a9-LGm"/>
+                                                <constraint firstItem="zaP-OO-GVe" firstAttribute="leading" secondItem="gvv-oJ-ISw" secondAttribute="leadingMargin" id="JWt-1r-1Vk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="zaP-OO-GVe" secondAttribute="trailing" id="nVw-t3-eLk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="playOneCollectionView" destination="zaP-OO-GVe" id="XSV-J1-HAh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="Rbt-l1-SJh"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="7kT-Fl-RIb"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hB2-73-Owx" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="XOH-Zf-J8L"/>
+                            <constraint firstItem="hB2-73-Owx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dan-Cv-14X"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="hB2-73-Owx" secondAttribute="bottom" id="eCO-KB-xQe"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hB2-73-Owx" secondAttribute="trailing" id="uuj-Bd-qSH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="playOneTableView" destination="hB2-73-Owx" id="aH4-nA-Pj6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139.69465648854961" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="placeholder" width="820" height="678"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

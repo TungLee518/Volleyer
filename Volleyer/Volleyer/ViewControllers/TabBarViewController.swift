@@ -32,7 +32,8 @@ class TabBarViewController: UITabBarController {
         // competitionNC.tabBarItem.image = UIImage(named: "placeholder")
         competitionNC.tabBarItem.title = TabBarEnum.competitionPage.rawValue
 
-        let playOneVC = PlayOneViewController()
+        let storyboard = UIStoryboard(name: "PlayOne", bundle: nil)
+        let playOneVC = storyboard.instantiateViewController(withIdentifier: "PlayOneViewController")
         let playOneNC = UINavigationController(rootViewController: playOneVC)
         // playOneNC.tabBarItem.image = UIImage(named: "placeholder")
         playOneNC.tabBarItem.title = TabBarEnum.playOnePage.rawValue

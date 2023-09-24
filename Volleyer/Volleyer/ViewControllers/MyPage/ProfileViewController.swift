@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var thisUser: UserData?
+    var thisUser: User?
 
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()

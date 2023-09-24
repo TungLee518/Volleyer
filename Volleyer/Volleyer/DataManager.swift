@@ -18,7 +18,7 @@ protocol ThisPlayDataManagerDelegate {
 }
 
 protocol ThisUserDataManagerDelegate {
-    func manager(_ manager: DataManager, thisUser user: UserData)
+    func manager(_ manager: DataManager, thisUser user: User)
 }
 
 protocol CompetitionDataManagerDelegate {
@@ -96,10 +96,10 @@ class DataManager {
 
     // TODO: need to get plays that this user is going to
     func getThisUserPlays() {
-        users.document(UserDefaults.standard.string(forKey: User.firebaseId.rawValue) ?? "").getDocument {(document, error) in
+        users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "").getDocument {(document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                let myPlayList = document.data()?[User.myPlayList.rawValue] as! [String]
+                let myPlayList = document.data()?[UserTitle.myPlayList.rawValue] as! [String]
                 var playsArray: [Play] = []
                 for playId in myPlayList {
                     self.plays.document(playId).getDocument {(document, error) in
@@ -204,7 +204,7 @@ class DataManager {
 //                print("Document does not exist")
 //            }
 //        }
-        users.whereField(User.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
+        users.whereField(UserTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -247,7 +247,7 @@ class DataManager {
             playerDictList.append(playerDict)
         }
         let data: [String: Any] = [
-            PlayRequestTitle.requestSenderId.rawValue: UserDefaults.standard.string(forKey: User.id.rawValue) as Any,
+            PlayRequestTitle.requestSenderId.rawValue: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any,
             PlayRequestTitle.requestReceiverId.rawValue: play.finderId,
             PlayRequestTitle.playId.rawValue: play.id,
             PlayRequestTitle.status.rawValue: 0,
@@ -287,9 +287,9 @@ class DataManager {
                         createTime: createdTime.dateValue(),
                         id: document.documentID
                     )
-                    if aPlayRequest.requestReceverId == UserDefaults.standard.string(forKey: User.id.rawValue) {
+                    if aPlayRequest.requestReceverId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                         playRequestsReceiveArray.append(aPlayRequest)
-                    } else if aPlayRequest.requestSenderId == UserDefaults.standard.string(forKey: User.id.rawValue) {
+                    } else if aPlayRequest.requestSenderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                         playRequestsSentArray.append(aPlayRequest)
                     }
                 }
@@ -302,7 +302,7 @@ class DataManager {
     }
 
     func listenPlayRequests() {
-        addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
+        addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
@@ -324,7 +324,7 @@ class DataManager {
                 }
             }
         }
-        addPlayRQs.whereField(PlayRequestTitle.requestSenderId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
+        addPlayRQs.whereField(PlayRequestTitle.requestSenderId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
@@ -443,8 +443,8 @@ extension DataManager {
         return aPlay
     }
 
-    func decodeUser(_ document: QueryDocumentSnapshot) -> UserData {
-        let levelDict = document.data()[User.level.rawValue] as! [String: Int]
+    func decodeUser(_ document: QueryDocumentSnapshot) -> User {
+        let levelDict = document.data()[UserTitle.level.rawValue] as! [String: Int]
         let levelRange = LevelRange(
             setBall: levelDict[LevelTitle.set.rawValue]!,
             block: levelDict[LevelTitle.block.rawValue]!,
@@ -452,11 +452,11 @@ extension DataManager {
             spike: levelDict[LevelTitle.spike.rawValue]!,
             sum: levelDict[LevelTitle.sum.rawValue]!
         )
-        let aUser = UserData(
-            id: document.data()[User.id.rawValue] as! String,
-            email: document.data()[User.email.rawValue] as! String,
-            gender: document.data()[User.gender.rawValue] as! Int,
-            name: document.data()[User.name.rawValue] as! String,
+        let aUser = User(
+            id: document.data()[UserTitle.id.rawValue] as! String,
+            email: document.data()[UserTitle.email.rawValue] as! String,
+            gender: document.data()[UserTitle.gender.rawValue] as! Int,
+            name: document.data()[UserTitle.name.rawValue] as! String,
             level: levelRange)
         return aUser
     }
@@ -480,17 +480,17 @@ extension DataManager {
 //                print("Document does not exist")
 //            }
 //        }
-        self.users.whereField(User.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: User.id.rawValue) as Any)
+        self.users.whereField(UserTitle.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for userDocument in querySnapshot!.documents {
-                        var myPlayList = userDocument.data()[User.myPlayList.rawValue] as! [String]
+                        var myPlayList = userDocument.data()[UserTitle.myPlayList.rawValue] as! [String]
                         print("\(userDocument.documentID) => \(userDocument.data())")
                         myPlayList.append(documentId)
-                        self.users.document(userDocument.data()[User.firebaseId.rawValue] as! String).updateData([
-                            User.myPlayList.rawValue: myPlayList
+                        self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as! String).updateData([
+                            UserTitle.myPlayList.rawValue: myPlayList
                         ]) { err in
                             if let err = err {
                                 print("Error updating document: \(err)")

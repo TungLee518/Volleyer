@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         FirebaseApp.configure()
         let db = Firestore.firestore()
 
-        var thisUser = UserData(id: "", email: "", gender: 99, name: "", level: LevelRange(setBall: -1, block: -1, dig: -1, spike: -1, sum: -1))
+        var thisUser = User(id: "", email: "", gender: 99, name: "", level: LevelRange(setBall: -1, block: -1, dig: -1, spike: -1, sum: -1))
 
         db.collection("users").whereField("id", isEqualTo: "maymmm518").getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                     // swiftlint:disable force_cast
                     for document in querySnapshot!.documents {
                         let documentLevel = document.data()["self_level"] as! [String: Int]
-                        thisUser = UserData(firebaseId: document.documentID,
+                        thisUser = User(firebaseId: document.documentID,
                                             id: document.data()["id"] as! String,
                                             email: document.data()["email"] as! String,
                                             gender: document.data()["gender"] as! Int,
@@ -44,11 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                         print("\(document.documentID) => \(document.data())")
                         print(thisUser)
                         // all strings
-                        UserDefaults.standard.set(thisUser.firebaseId, forKey: User.firebaseId.rawValue)
-                        UserDefaults.standard.set(thisUser.id, forKey: User.id.rawValue)
-                        UserDefaults.standard.set(thisUser.name, forKey: User.name.rawValue)
-                        UserDefaults.standard.set(thisUser.email, forKey: User.email.rawValue)
-                        UserDefaults.standard.set(thisUser.gender, forKey: User.gender.rawValue)
+                        UserDefaults.standard.set(thisUser.firebaseId, forKey: UserTitle.firebaseId.rawValue)
+                        UserDefaults.standard.set(thisUser.id, forKey: UserTitle.id.rawValue)
+                        UserDefaults.standard.set(thisUser.name, forKey: UserTitle.name.rawValue)
+                        UserDefaults.standard.set(thisUser.email, forKey: UserTitle.email.rawValue)
+                        UserDefaults.standard.set(thisUser.gender, forKey: UserTitle.gender.rawValue)
                         UserDefaults.standard.set(thisUser.level.setBall, forKey: Level.setBall.rawValue)
                         UserDefaults.standard.set(thisUser.level.block, forKey: Level.block.rawValue)
                         UserDefaults.standard.set(thisUser.level.dig, forKey: Level.dig.rawValue)
