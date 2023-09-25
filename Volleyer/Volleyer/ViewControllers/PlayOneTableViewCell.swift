@@ -9,12 +9,13 @@ import UIKit
 
 class PlayOneTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var playOneCollectionView: UICollectionView!
-    
+
     var playOneFinderData: [User] = []
     var playOneData: [PlayOne] = []
-    
+
+    var tapAFinder: ((IndexPath) -> Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         playOneCollectionView.dataSource = self
@@ -34,7 +35,7 @@ extension PlayOneTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
 //        playOneFinderData.count
         playOneData[playOneCollectionView.tag].finders.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // swiftlint:disable force_cast
         let cell = playOneCollectionView.dequeueReusableCell(withReuseIdentifier: "PlayOneCollectionViewCell", for: indexPath) as! PlayOneCollectionViewCell
@@ -42,5 +43,9 @@ extension PlayOneTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         // swiftlint:enable force_cast
         cell.accountLabel.text = playOneData[playOneCollectionView.tag].finders[indexPath.row].id
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        tapAFinder?(indexPath)
     }
 }

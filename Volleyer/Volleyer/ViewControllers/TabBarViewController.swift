@@ -38,8 +38,8 @@ class TabBarViewController: UITabBarController {
         // playOneNC.tabBarItem.image = UIImage(named: "placeholder")
         playOneNC.tabBarItem.title = TabBarEnum.playOnePage.rawValue
 
-        viewControllers = [communityNC, findPlayerNC, myPageNC, competitionNC, playOneNC]
+        viewControllers = [findPlayerNC, myPageNC, competitionNC, playOneNC]
 
-        self.selectedIndex = 1
+        self.selectedIndex = 0
     }
 }

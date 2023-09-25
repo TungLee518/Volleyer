@@ -58,6 +58,8 @@
 		C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */; };
 		C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */; };
 		C89961172AC043D200C5D35D /* PlayOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961162AC043D200C5D35D /* PlayOne.swift */; };
+		C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */; };
+		C899611B2AC16CE800C5D35D /* PlayOnePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +118,8 @@
 		C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneTableViewCell.swift; sourceTree = "<group>"; };
 		C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneCollectionViewCell.swift; sourceTree = "<group>"; };
 		C89961162AC043D200C5D35D /* PlayOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOne.swift; sourceTree = "<group>"; };
+		C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneFinderViewController.swift; sourceTree = "<group>"; };
+		C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOnePlayerView.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +210,7 @@
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C89961082ABD933700C5D35D /* ProfileView.swift */,
+				C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
@@ -245,6 +250,7 @@
 				C89961102AC03C0700C5D35D /* PlayOneViewController.swift */,
 				C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */,
 				C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */,
+				C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */,
 				C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */,
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
 				C899610C2ABDD3E300C5D35D /* InfoViewController.swift */,
@@ -411,6 +417,7 @@
 				C89961032ABC183200C5D35D /* Notifications.swift in Sources */,
 				C80051252AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
+				C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
@@ -430,6 +437,7 @@
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
+				C899611B2AC16CE800C5D35D /* PlayOnePlayerView.swift in Sources */,
 				C89960FD2ABBE0D200C5D35D /* RequestsReceivedViewController.swift in Sources */,
 				C86E15242AB4A33600CBA201 /* StandardAmounts.swift in Sources */,
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,

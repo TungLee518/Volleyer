@@ -37,6 +37,15 @@ class PlayOneViewController: UIViewController {
         let backButton = UIBarButtonItem()
         backButton.title = ""
     }
+
+    func pushToPlayOneFinderVC(whichCourt: Int, whichFinder: Int) {
+        let storyboard = UIStoryboard(name: "PlayOne", bundle: nil)
+        if let nextVC = storyboard.instantiateViewController(withIdentifier: "PlayOneFinderViewController") as? PlayOneFinderViewController {
+            nextVC.court = "\(playOneData[whichCourt].court) play\(whichFinder+1)"
+            nextVC.finderInfo = playOneData[whichCourt].finders[whichFinder]
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
 }
 
 extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
@@ -60,6 +69,10 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         // swiftlint:enable force_cast
         cell.playOneFinderData = playOneData[indexPath.section].finders
         cell.playOneData = playOneData
+        cell.tapAFinder = { [weak self] indexPathInCV in
+            guard let self = self else { return }
+            pushToPlayOneFinderVC(whichCourt: indexPath.section, whichFinder: indexPathInCV.row)
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
