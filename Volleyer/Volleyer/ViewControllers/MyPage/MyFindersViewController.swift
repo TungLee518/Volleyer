@@ -74,7 +74,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 extension MyFindersViewController: PlayDataManagerDelegate {
     func manager(_ manager: DataManager, didGet plays: [Play]) {
         for i in plays {
-            if i.finderId == UserDefaults.standard.string(forKey: User.id.rawValue) {
+            if i.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 myFinders.append(i)
             }
         }

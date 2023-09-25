@@ -17,7 +17,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
             sendDataToPlayView(thisPlay!)
         }
     }
-    var thisUser: UserData? {
+    var thisUser: User? {
         didSet {
             sendDataToProfileView(thisUser!)
         }
@@ -65,7 +65,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         playView.setUI()
     }
 
-    func sendDataToProfileView(_ data: UserData) {
+    func sendDataToProfileView(_ data: User) {
         profileView.thisUser = thisUser
         profileView.setContent()
     }
@@ -74,7 +74,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         thisPlay = play
     }
 
-    func manager(_ manager: DataManager, thisUser user: UserData) {
+    func manager(_ manager: DataManager, thisUser user: User) {
         thisUser = user
     }
 }

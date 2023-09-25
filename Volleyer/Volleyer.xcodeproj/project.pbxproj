@@ -26,7 +26,7 @@
 		C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */; };
 		C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15162AB438BF00CBA201 /* MyViewController.swift */; };
 		C86E15192AB438EE00CBA201 /* CompetitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15182AB438EE00CBA201 /* CompetitionsViewController.swift */; };
-		C86E151B2AB4390600CBA201 /* PlayOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E151A2AB4390600CBA201 /* PlayOneViewController.swift */; };
+		C86E151B2AB4390600CBA201 /* PlayOneViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E151A2AB4390600CBA201 /* PlayOneViewController2.swift */; };
 		C86E151D2AB4392700CBA201 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E151C2AB4392700CBA201 /* CommunityViewController.swift */; };
 		C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E151E2AB43B8600CBA201 /* TabBarViewController.swift */; };
 		C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */; };
@@ -53,6 +53,13 @@
 		C89961092ABD933700C5D35D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961082ABD933700C5D35D /* ProfileView.swift */; };
 		C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899610A2ABD963D00C5D35D /* ProfileViewController.swift */; };
 		C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899610C2ABDD3E300C5D35D /* InfoViewController.swift */; };
+		C899610F2AC038C600C5D35D /* PlayOne.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C899610E2AC038C600C5D35D /* PlayOne.storyboard */; };
+		C89961112AC03C0700C5D35D /* PlayOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961102AC03C0700C5D35D /* PlayOneViewController.swift */; };
+		C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */; };
+		C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */; };
+		C89961172AC043D200C5D35D /* PlayOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961162AC043D200C5D35D /* PlayOne.swift */; };
+		C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */; };
+		C899611B2AC16CE800C5D35D /* PlayOnePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,7 +85,7 @@
 		C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarAndTabBar.swift; sourceTree = "<group>"; };
 		C86E15162AB438BF00CBA201 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		C86E15182AB438EE00CBA201 /* CompetitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewController.swift; sourceTree = "<group>"; };
-		C86E151A2AB4390600CBA201 /* PlayOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneViewController.swift; sourceTree = "<group>"; };
+		C86E151A2AB4390600CBA201 /* PlayOneViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneViewController2.swift; sourceTree = "<group>"; };
 		C86E151C2AB4392700CBA201 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		C86E151E2AB43B8600CBA201 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstablishFinderViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +113,13 @@
 		C89961082ABD933700C5D35D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C899610A2ABD963D00C5D35D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C899610C2ABDD3E300C5D35D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		C899610E2AC038C600C5D35D /* PlayOne.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayOne.storyboard; sourceTree = "<group>"; };
+		C89961102AC03C0700C5D35D /* PlayOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneViewController.swift; sourceTree = "<group>"; };
+		C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneTableViewCell.swift; sourceTree = "<group>"; };
+		C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneCollectionViewCell.swift; sourceTree = "<group>"; };
+		C89961162AC043D200C5D35D /* PlayOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOne.swift; sourceTree = "<group>"; };
+		C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneFinderViewController.swift; sourceTree = "<group>"; };
+		C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOnePlayerView.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +210,7 @@
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C89961082ABD933700C5D35D /* ProfileView.swift */,
+				C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
@@ -217,6 +232,7 @@
 				C86E153A2AB7FE6900CBA201 /* Competition.swift */,
 				C800512E2AB9890700FEA7FD /* User.swift */,
 				C89960FE2ABBEE9600C5D35D /* Requests.swift */,
+				C89961162AC043D200C5D35D /* PlayOne.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,8 +244,13 @@
 				C80051202AB8443B00FEA7FD /* MyPage */,
 				C80051212AB8445D00FEA7FD /* FinderPage */,
 				C86E15182AB438EE00CBA201 /* CompetitionsViewController.swift */,
-				C86E151A2AB4390600CBA201 /* PlayOneViewController.swift */,
+				C86E151A2AB4390600CBA201 /* PlayOneViewController2.swift */,
+				C899610E2AC038C600C5D35D /* PlayOne.storyboard */,
 				C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */,
+				C89961102AC03C0700C5D35D /* PlayOneViewController.swift */,
+				C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */,
+				C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */,
+				C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */,
 				C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */,
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
 				C899610C2ABDD3E300C5D35D /* InfoViewController.swift */,
@@ -313,6 +334,7 @@
 			files = (
 				C86E15132AB42A6A00CBA201 /* .swiftlint.yml in Resources */,
 				C89960FB2ABAE8C300C5D35D /* GoogleService-Info.plist in Resources */,
+				C899610F2AC038C600C5D35D /* PlayOne.storyboard in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,
 			);
@@ -387,6 +409,7 @@
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
+				C89961112AC03C0700C5D35D /* PlayOneViewController.swift in Sources */,
 				C80051272AB8920200FEA7FD /* PlayOneFinderTableViewCell.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
 				C89961072ABD687300C5D35D /* RequestSentViewController.swift in Sources */,
@@ -394,6 +417,7 @@
 				C89961032ABC183200C5D35D /* Notifications.swift in Sources */,
 				C80051252AB891D600FEA7FD /* PlayOneCourtTableViewCell.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
+				C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
@@ -403,13 +427,17 @@
 				C89961012ABBF11500C5D35D /* RequestsTableViewCell.swift in Sources */,
 				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,
 				C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */,
+				C89961172AC043D200C5D35D /* PlayOne.swift in Sources */,
+				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
+				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
-				C86E151B2AB4390600CBA201 /* PlayOneViewController.swift in Sources */,
+				C86E151B2AB4390600CBA201 /* PlayOneViewController2.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
+				C899611B2AC16CE800C5D35D /* PlayOnePlayerView.swift in Sources */,
 				C89960FD2ABBE0D200C5D35D /* RequestsReceivedViewController.swift in Sources */,
 				C86E15242AB4A33600CBA201 /* StandardAmounts.swift in Sources */,
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,

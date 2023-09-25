@@ -122,11 +122,11 @@ class MyViewController: UIViewController {
 
     @objc func pushToMyProfile() {
         let nextVC = ProfileViewController()
-        nextVC.thisUser = UserData(
-            id: UserDefaults.standard.string(forKey: User.id.rawValue) ?? "No id found",
-            email: UserDefaults.standard.string(forKey: User.email.rawValue) ?? "No email found",
-            gender: UserDefaults.standard.integer(forKey: User.gender.rawValue),
-            name: UserDefaults.standard.string(forKey: User.name.rawValue) ?? "No name found",
+        nextVC.thisUser = User(
+            id: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No id found",
+            email: UserDefaults.standard.string(forKey: UserTitle.email.rawValue) ?? "No email found",
+            gender: UserDefaults.standard.integer(forKey: UserTitle.gender.rawValue),
+            name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue) ?? "No name found",
             level: LevelRange(setBall: UserDefaults.standard.integer(forKey: Level.setBall.rawValue),
                               block: UserDefaults.standard.integer(forKey: Level.block.rawValue),
                               dig: UserDefaults.standard.integer(forKey: Level.dig.rawValue),

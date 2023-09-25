@@ -82,8 +82,8 @@ class AddPlayViewController: UIViewController {
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         // 第一個永遠是自己
         playerListTableView.players.append(
-            Player(name: UserDefaults.standard.string(forKey: User.name.rawValue)!,
-                   gender: UserDefaults.standard.string(forKey: User.gender.rawValue)!)
+            Player(name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue)!,
+                   gender: UserDefaults.standard.string(forKey: UserTitle.gender.rawValue)!)
         )
     }
 
