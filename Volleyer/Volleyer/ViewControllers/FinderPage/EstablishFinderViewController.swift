@@ -25,8 +25,8 @@ class EstablishFinderViewController: UIViewController {
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "開始時間"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.sizeToFit()
@@ -35,8 +35,8 @@ class EstablishFinderViewController: UIViewController {
     private lazy var startTimeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "starttime"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -57,8 +57,8 @@ class EstablishFinderViewController: UIViewController {
     private let endTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "結束時間"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.sizeToFit()
@@ -67,8 +67,8 @@ class EstablishFinderViewController: UIViewController {
     private lazy var endTimeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "endtime"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -88,16 +88,16 @@ class EstablishFinderViewController: UIViewController {
     private let placeLabel: UILabel = {
         let label = UILabel()
         label.text = "地點"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private lazy var placeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "place"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -114,16 +114,16 @@ class EstablishFinderViewController: UIViewController {
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.text = "價錢"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private lazy var priceTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "price"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -141,8 +141,8 @@ class EstablishFinderViewController: UIViewController {
     private lazy var unitTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "unit"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -159,16 +159,16 @@ class EstablishFinderViewController: UIViewController {
     private let typeLabel: UILabel = {
         let label = UILabel()
         label.text = "場種"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private lazy var typeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "X 網 X 排"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -186,24 +186,24 @@ class EstablishFinderViewController: UIViewController {
     private let lackLabel: UILabel = {
         let label = UILabel()
         label.text = "缺"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private let maleLabel: UILabel = {
         let label = UILabel()
         label.text = "男"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private lazy var maleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "male"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -221,16 +221,16 @@ class EstablishFinderViewController: UIViewController {
     private let femaleLabel: UILabel = {
         let label = UILabel()
         label.text = "女"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray2
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     private lazy var femaleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont(name: "PingFang TC", size: CGFloat(16))
-        textField.textColor = UIColor.black
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
         textField.placeholder = "female"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
@@ -272,32 +272,36 @@ class EstablishFinderViewController: UIViewController {
     lazy var publishButton: UIButton = {
         let button = UIButton()
         button.setTitle("Publish", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
+        button.backgroundColor = .purple1
+        button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 16
         button.clipsToBounds = true
         return button
     }()
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
         button.clipsToBounds = true
         return button
     }()
     private let levelLabel: UILabel = {
         let label = UILabel()
         label.text = "程度"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -313,9 +317,10 @@ class EstablishFinderViewController: UIViewController {
     private var levelRange = LevelRange(setBall: 4, block: 4, dig: 4, spike: 4, sum: 4)
     private var lackAmount = LackAmount(male: 0, female: 0, unlimited: 0)
 
-    lazy private var thisPlay: Play = Play(id: "", finderId: "maymmm518", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
-    
+    lazy private var thisPlay: Play = Play(id: "", finderId: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "Wrong User Id", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
+
     var players: [Player] = []
+    var SABCLabels: [UILabel] = []
 
     var dataManager = DataManager()
 
@@ -342,8 +347,8 @@ class EstablishFinderViewController: UIViewController {
         view.addSubview(femaleTextField)
         view.addSubview(saveButton)
         view.addSubview(publishButton)
-        view.addSubview(deleteButton)
-        view.addSubview(addButton)
+//        view.addSubview(deleteButton)
+//        view.addSubview(addButton)
 
         setUpNavBar()
         setSABC()
@@ -354,7 +359,7 @@ class EstablishFinderViewController: UIViewController {
         spickCheckboxes = createCheckboxes(text: positions[3], i: 3, action: #selector(spickCheckboxTapped))
         sumCheckboxes = createCheckboxes(text: positions[4], i: 4, action: #selector(sumCheckboxTapped))
 
-        setPlayListTableView()
+//        setPlayListTableView()
         setLayout()
         typePicker.dataSource = self
         typePicker.delegate = self
@@ -380,13 +385,18 @@ class EstablishFinderViewController: UIViewController {
         var previous: Any = levelLabel
         for i in 0...4 {
             let label = UILabel()
-            label.text = levels[i]
+            label.text = levelList[i]
             label.textColor = UIColor.gray
             label.font = UIFont.systemFont(ofSize: 16)
             label.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(label)
-            label.leadingAnchor.constraint(equalTo: (previous as AnyObject).trailingAnchor, constant: standardMargin+20).isActive = true
+            if i == 0 {
+                label.leadingAnchor.constraint(equalTo: typeTextField.leadingAnchor).isActive = true
+            } else {
+                label.leadingAnchor.constraint(equalTo: (previous as AnyObject).trailingAnchor, constant: standardMargin+20).isActive = true
+            }
             label.centerYAnchor.constraint(equalTo: levelLabel.centerYAnchor).isActive = true
+            SABCLabels.append(label)
             previous = label
         }
     }
@@ -395,26 +405,29 @@ class EstablishFinderViewController: UIViewController {
         // Create a label for the question
         let questionLabel = UILabel()
         questionLabel.text = text
+        questionLabel.font = .regularNunito(size: 16)
+        questionLabel.textColor = .gray3
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(questionLabel)
         // Create constraints for the question label
         NSLayoutConstraint.activate([
             questionLabel.leadingAnchor.constraint(equalTo: levelLabel.trailingAnchor, constant: standardMargin),
-            questionLabel.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: (standardMargin + 10) * Double(i))
+            questionLabel.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: (standardMargin + 10) * (Double(i)+0.2))
         ])
 
         // Create checkboxes for each choice
         var choiceButtons: [UIButton] = []
         var previous: Any = questionLabel
         for i in 0...4 {
-            let checkbox = UIButton(type: .system)
+            let checkbox = UIButton(type: .custom)
             checkbox.translatesAutoresizingMaskIntoConstraints = false
             checkbox.setImage(UIImage(systemName: "square"), for: .normal)
             checkbox.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
+            checkbox.tintColor = .purple2
             checkbox.addTarget(self, action: action, for: .touchUpInside)
             checkbox.tag = i
             view.addSubview(checkbox)
-            checkbox.leadingAnchor.constraint(equalTo: (previous as AnyObject).trailingAnchor, constant: standardMargin).isActive = true
+            checkbox.centerXAnchor.constraint(equalTo: SABCLabels[i].centerXAnchor).isActive = true
             checkbox.topAnchor.constraint(equalTo: questionLabel.topAnchor).isActive = true
             choiceButtons.append(checkbox)
             previous = checkbox
@@ -492,8 +505,6 @@ class EstablishFinderViewController: UIViewController {
         }
         if placeTextField.text != "", priceTextField.text != "", typeTextField.text != ""
             , maleTextField.text != "", femaleTextField.text != "" {
-            let anID = UUID()
-            thisPlay.id = anID.uuidString
             thisPlay.place = placeTextField.text!
             thisPlay.price = Int(priceTextField.text!)!
             thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
@@ -556,38 +567,42 @@ class EstablishFinderViewController: UIViewController {
             maleLabel.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
             maleTextField.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
             maleTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
+            maleTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             maleTextField.trailingAnchor.constraint(equalTo: typeTextField.leadingAnchor, constant: standardTextFieldWidth / 2),
             femaleLabel.leadingAnchor.constraint(equalTo: typeTextField.leadingAnchor, constant: standardTextFieldWidth / 2 + standardMargin),
             femaleLabel.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
             femaleTextField.centerYAnchor.constraint(equalTo: lackLabel.centerYAnchor),
             femaleTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
+            femaleTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             femaleTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
 
             levelLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             levelLabel.topAnchor.constraint(equalTo: lackLabel.bottomAnchor, constant: standardMargin),
 
 //            playerListView.topAnchor.constraint(equalTo: checkboxes[-1].bottomAnchor, constant: standardMargin),
-            playerListTableView.heightAnchor.constraint(equalToConstant: 200.0),
-            playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            playerListTableView.heightAnchor.constraint(equalToConstant: 200.0),
+//            playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+//            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
 
-            saveButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
-            saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
-            saveButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            saveButton.widthAnchor.constraint(equalToConstant: 70),
-            publishButton.trailingAnchor.constraint(equalTo: saveButton.leadingAnchor, constant: -standardMargin),
-            publishButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
+//            saveButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
+            publishButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            publishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             publishButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            publishButton.widthAnchor.constraint(equalToConstant: 70),
-            deleteButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin),
-            deleteButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
-            deleteButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            deleteButton.widthAnchor.constraint(equalToConstant: 70),
-            addButton.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -standardMargin),
-            addButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
-            addButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            addButton.widthAnchor.constraint(equalToConstant: 70)
+            publishButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: standardMargin/2),
+
+            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: standardMargin),
+            saveButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin/2),
+            saveButton.centerYAnchor.constraint(equalTo: publishButton.centerYAnchor),
+            saveButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
+
+//            deleteButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin),
+//            deleteButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
+//            deleteButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+//            deleteButton.widthAnchor.constraint(equalToConstant: 70),
+//            addButton.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -standardMargin),
+//            addButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
+//            addButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+//            addButton.widthAnchor.constraint(equalToConstant: 70)
         ])
     }
 }

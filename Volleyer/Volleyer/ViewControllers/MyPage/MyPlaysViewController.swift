@@ -17,8 +17,8 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
-        dataManager.getPlay()
-        dataManager.delegate = self
+        dataManager.getThisUserPlays()
+        dataManager.playDataDelegate = self
         setTableView()
     }
 

@@ -9,36 +9,86 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
+    private let tabs: [Tab] = [.finder, .profile, .competition, .playOne]
+
+    private var trolleyTabBarItem: UITabBarItem?
+
+    private var orderObserver: NSKeyValueObservation?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let findPlayerVC = FinderViewController()
-        let findPlayerNC = UINavigationController(rootViewController: findPlayerVC)
-        // findPlayerNC.tabBarItem.image = UIImage(named: "placeholder")
-        findPlayerNC.tabBarItem.title = TabBarEnum.finderPage.rawValue
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+        self.tabBar.tintColor = .purple4
+        viewControllers = tabs.map { $0.makeViewController() }
+    }
+}
 
-        let myPageVC = MyViewController()
-        let myPageNC = UINavigationController(rootViewController: myPageVC)
-        // myPageNC.tabBarItem.image = UIImage(named: "placeholder")
-        myPageNC.tabBarItem.title = TabBarEnum.myPage.rawValue
+// MARK: - Tabs
+extension TabBarViewController {
+    private enum Tab {
+        case finder
+        case profile
+        case competition
+        case playOne
 
-        let communityVC = CommunityViewController()
-        let communityNC = UINavigationController(rootViewController: communityVC)
-        // communityNC.tabBarItem.image = UIImage(named: "placeholder")
-        communityNC.tabBarItem.title = TabBarEnum.communityPage.rawValue
+        func makeViewController() -> UIViewController {
+            let controller: UINavigationController
+            switch self {
+            case .finder: controller = UINavigationController(rootViewController: FinderViewController())
+            case .profile: controller = UINavigationController(rootViewController: MyViewController())
+            case .competition: controller = UINavigationController(rootViewController: CompetitionsViewController())
+            case .playOne: controller = UINavigationController(rootViewController: UIStoryboard(name: "PlayOne", bundle: nil).instantiateViewController(withIdentifier: "PlayOneViewController"))
+            }
+            controller.tabBarItem = makeTabBarItem()
+            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
+            return controller
+        }
 
-        let competitionVC = CompetitionsViewController()
-        let competitionNC = UINavigationController(rootViewController: competitionVC)
-        // competitionNC.tabBarItem.image = UIImage(named: "placeholder")
-        competitionNC.tabBarItem.title = TabBarEnum.competitionPage.rawValue
+        private func makeTabBarItem() -> UITabBarItem {
+            return UITabBarItem(title: title, image: image, selectedImage: selectedImage)
+        }
 
-        let playOneVC = PlayOneViewController()
-        let playOneNC = UINavigationController(rootViewController: playOneVC)
-        // playOneNC.tabBarItem.image = UIImage(named: "placeholder")
-        playOneNC.tabBarItem.title = TabBarEnum.playOnePage.rawValue
+        private var title: String {
+            switch self {
+            case .finder:
+                return TabBarEnum.finderPage.rawValue
+            case .profile:
+                return TabBarEnum.myPage.rawValue
+            case .competition:
+                return TabBarEnum.competitionPage.rawValue
+            case .playOne:
+                return TabBarEnum.playOnePage.rawValue
+            }
+        }
 
-        viewControllers = [communityNC, findPlayerNC, myPageNC, competitionNC, playOneNC]
+        private var image: UIImage? {
+            switch self {
+            case .finder:
+                return .asset(.ball)
+            case .profile:
+                return .asset(.profile)
+            case .competition:
+                return .asset(.score)
+            case .playOne:
+                return .asset(.spike)
+            }
+        }
 
-        self.selectedIndex = 1
+        private var selectedImage: UIImage? {
+            switch self {
+            case .finder:
+                return .asset(.ball_selected)
+            case .profile:
+                return .asset(.profile_selected)
+            case .competition:
+                return .asset(.score_selected)
+            case .playOne:
+                return .asset(.spike_selected)
+            }
+        }
     }
 }

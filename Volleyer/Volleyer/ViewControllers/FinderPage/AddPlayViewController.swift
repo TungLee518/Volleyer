@@ -14,37 +14,41 @@ class AddPlayViewController: UIViewController {
     lazy var addPlayerButton: UIButton = {
         let button = UIButton()
         button.setTitle("add player", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(addPlayer), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
         return button
     }()
     lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle("Delete", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
         button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
         return button
     }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
         button.setTitle("send request", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .semiboldNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = .purple1
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 16
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
         return button
     }()
 
@@ -81,7 +85,10 @@ class AddPlayViewController: UIViewController {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         // 第一個永遠是自己
-        playerListTableView.players.append(Player(name: "May", gender: "Female"))
+        playerListTableView.players.append(
+            Player(name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue)!,
+                   gender: UserDefaults.standard.string(forKey: UserTitle.gender.rawValue)!)
+        )
     }
 
     private func setLayout() {
@@ -99,12 +106,12 @@ class AddPlayViewController: UIViewController {
             addPlayerButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             addPlayerButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             addPlayerButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            addPlayerButton.widthAnchor.constraint(equalToConstant: standardButtonWidth),
+            addPlayerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -standardMargin/2),
 
+            sendRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: standardMargin/2),
             sendRequestButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             sendRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            sendRequestButton.widthAnchor.constraint(equalToConstant: standardButtonWidth)
+            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
     }
 

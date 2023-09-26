@@ -11,64 +11,64 @@ import UIKit
 class PlayInfoView: UIView {
 
     var play: Play?
-    
+
     let lackLable: UILabel = {
         let label = UILabel()
         let padding = 3
 //        label.text = String(repeating: " ", count: padding) + "缺\(play.lackAmount.female)女\(play.lackAmount.male)男" + String(repeating: " ", count: padding)
-        label.textColor = UIColor.black
-        label.backgroundColor = UIColor.lightGray
+        label.textColor = .purple1
+        label.backgroundColor = .purple6
         label.layer.cornerRadius = 5
         label.clipsToBounds = true
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let startTimeLable: UILabel = {
         let label = UILabel()
 //        label.text = "\(dateFormatter.string(from: play.startTime)) ~ \(dateFormatter.string(from: play.endTime))"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let endTimeLable: UILabel = {
         let label = UILabel()
 //        label.text = "\(dateFormatter.string(from: play.endTime))"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray2
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let placeLabel: UILabel = {
         let label = UILabel()
 //        label.text = "place: \(play.place)"
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray2
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let typeLable: UILabel = {
         let label = UILabel()
 //        label.text = playTypes[play.type]
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray2
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let priceLable: UILabel = {
         let label = UILabel()
 //        label.text = "\(play.price) 元 /人"
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray1
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let levelLable: UILabel = {
         let label = UILabel()
         label.text = "程度："
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray2
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -78,9 +78,10 @@ class PlayInfoView: UIView {
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = UIColor.orange
+        button.setTitleColor(.gray6, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         // button.addTarget(self, action: #selector(showLevelDetail), for: .touchUpInside)
-        button.layer.cornerRadius = standardMargin
+        button.layer.cornerRadius = standardMargin*1.7/2
         button.clipsToBounds = true
         return button
     }()
@@ -92,11 +93,27 @@ class PlayInfoView: UIView {
 
             lackLable.text = "   缺\(play.lackAmount.female)女\(play.lackAmount.male)男   "
             startTimeLable.text = "\(dateFormatter.string(from: play.startTime)) ~ \(dateFormatter.string(from: play.endTime))"
-            placeLabel.text = "place: \(play.place)"
+            placeLabel.text = "地點: \(play.place)"
             typeLable.text = playTypes[play.type]
             priceLable.text = "\(play.price) 元 /人"
-            levelButton.setTitle(levels[play.levelRange.sum], for: .normal)
-            
+            levelButton.setTitle(levelList[play.levelRange.sum], for: .normal)
+            if play.levelRange.sum == 0 {
+                levelButton.backgroundColor = .purple1
+                levelButton.setTitleColor(.gray6, for: .normal)
+            } else if play.levelRange.sum == 1 {
+                levelButton.backgroundColor = .purple3
+                levelButton.setTitleColor(.gray6, for: .normal)
+            } else if play.levelRange.sum == 2 {
+                levelButton.backgroundColor = .purple4
+                levelButton.setTitleColor(.white, for: .normal)
+            } else if play.levelRange.sum == 3 {
+                levelButton.backgroundColor = .purple5
+                levelButton.setTitleColor(.white, for: .normal)
+            } else if play.levelRange.sum == 4 {
+                levelButton.backgroundColor = .purple7
+                levelButton.setTitleColor(.gray2, for: .normal)
+            }
+
             addSubview(lackLable)
             addSubview(startTimeLable)
             // addSubview(endTimeLable)
@@ -132,8 +149,8 @@ class PlayInfoView: UIView {
 
                 levelButton.centerYAnchor.constraint(equalTo: levelLable.centerYAnchor),
                 levelButton.leadingAnchor.constraint(equalTo: levelLable.trailingAnchor),
-                levelButton.heightAnchor.constraint(equalToConstant: standardMargin*2),
-                levelButton.widthAnchor.constraint(equalToConstant: standardMargin*2),
+                levelButton.heightAnchor.constraint(equalToConstant: standardMargin*1.7),
+                levelButton.widthAnchor.constraint(equalToConstant: standardMargin*1.7),
 
                 priceLable.centerYAnchor.constraint(equalTo: levelLable.centerYAnchor),
                 priceLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin)

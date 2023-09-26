@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import WebKit
+import SafariServices
 
 class CompetitionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -24,7 +26,7 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.competitionPage.rawValue
+        navigationItem.title = NavBarEnum.competitionPage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -70,7 +72,9 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
         guard let url = URL(string: allCompetitions[indexPath.row].url) else {
           return
         }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let nextVC = SFSafariViewController(url: url)
+        present(nextVC, animated: true)
+//        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 

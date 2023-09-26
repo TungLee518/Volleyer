@@ -17,8 +17,8 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
-        dataManager.getPlay()
-        dataManager.delegate = self
+        dataManager.getThisUserPlays()
+        dataManager.playDataDelegate = self
         setTableView()
     }
 
@@ -74,7 +74,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 extension MyFindersViewController: PlayDataManagerDelegate {
     func manager(_ manager: DataManager, didGet plays: [Play]) {
         for i in plays {
-            if i.finderId == UserDefaults.standard.string(forKey: "UserID") {
+            if i.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 myFinders.append(i)
             }
         }
