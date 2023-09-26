@@ -15,24 +15,24 @@ class CompetitionTableViewCell: UITableViewCell {
     var titleLable: UILabel = {
         let label = UILabel()
         label.text = "No title"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray2
+        label.font = .semiboldNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     var dateLable: UILabel = {
         let label = UILabel()
         label.text = "No date"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray3
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     var countyLable: UILabel = {
         let label = UILabel()
         label.text = "No county"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray3
+        label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

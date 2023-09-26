@@ -20,7 +20,6 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         setNavBar()
         dataManager.playDataDelegate = self
         setTableView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

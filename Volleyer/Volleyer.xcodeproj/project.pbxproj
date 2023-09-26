@@ -60,6 +60,11 @@
 		C89961172AC043D200C5D35D /* PlayOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961162AC043D200C5D35D /* PlayOne.swift */; };
 		C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */; };
 		C899611B2AC16CE800C5D35D /* PlayOnePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */; };
+		C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611D2AC2680300C5D35D /* UIImage+Extension.swift */; };
+		C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */; };
+		C89961242AC2C32D00C5D35D /* Nunito-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C89961232AC2C31F00C5D35D /* Nunito-Italic-VariableFont_wght.ttf */; };
+		C89961252AC2C33100C5D35D /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C89961222AC2C31F00C5D35D /* Nunito-VariableFont_wght.ttf */; };
+		C89961272AC2C49600C5D35D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961262AC2C49600C5D35D /* UIFont+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +125,11 @@
 		C89961162AC043D200C5D35D /* PlayOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOne.swift; sourceTree = "<group>"; };
 		C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneFinderViewController.swift; sourceTree = "<group>"; };
 		C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOnePlayerView.swift; sourceTree = "<group>"; };
+		C899611D2AC2680300C5D35D /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		C89961222AC2C31F00C5D35D /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		C89961232AC2C31F00C5D35D /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		C89961262AC2C49600C5D35D /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,9 +210,11 @@
 		C86E14B02AB1AF4C00CBA201 /* Volleyer */ = {
 			isa = PBXGroup;
 			children = (
+				C89961212AC2C31200C5D35D /* Fonts */,
 				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
 				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
 				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
+				C899611C2AC267D700C5D35D /* Extension+ */,
 				C86E15222AB4A30300CBA201 /* Model */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
 				C86E153E2AB819D900CBA201 /* TableViewCells */,
@@ -244,8 +256,8 @@
 				C80051202AB8443B00FEA7FD /* MyPage */,
 				C80051212AB8445D00FEA7FD /* FinderPage */,
 				C86E15182AB438EE00CBA201 /* CompetitionsViewController.swift */,
-				C86E151A2AB4390600CBA201 /* PlayOneViewController2.swift */,
 				C899610E2AC038C600C5D35D /* PlayOne.storyboard */,
+				C86E151A2AB4390600CBA201 /* PlayOneViewController2.swift */,
 				C80051282AB8942D00FEA7FD /* PlayOneCourtViewController.swift */,
 				C89961102AC03C0700C5D35D /* PlayOneViewController.swift */,
 				C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */,
@@ -269,6 +281,25 @@
 				C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		C899611C2AC267D700C5D35D /* Extension+ */ = {
+			isa = PBXGroup;
+			children = (
+				C899611D2AC2680300C5D35D /* UIImage+Extension.swift */,
+				C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */,
+				C89961262AC2C49600C5D35D /* UIFont+Extension.swift */,
+			);
+			path = "Extension+";
+			sourceTree = "<group>";
+		};
+		C89961212AC2C31200C5D35D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C89961232AC2C31F00C5D35D /* Nunito-Italic-VariableFont_wght.ttf */,
+				C89961222AC2C31F00C5D35D /* Nunito-VariableFont_wght.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,9 +364,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C86E15132AB42A6A00CBA201 /* .swiftlint.yml in Resources */,
+				C89961252AC2C33100C5D35D /* Nunito-VariableFont_wght.ttf in Resources */,
 				C89960FB2ABAE8C300C5D35D /* GoogleService-Info.plist in Resources */,
 				C899610F2AC038C600C5D35D /* PlayOne.storyboard in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
+				C89961242AC2C32D00C5D35D /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */,
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
@@ -423,6 +457,7 @@
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
 				C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */,
 				C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */,
+				C89961272AC2C49600C5D35D /* UIFont+Extension.swift in Sources */,
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
 				C89961012ABBF11500C5D35D /* RequestsTableViewCell.swift in Sources */,
 				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,
@@ -433,6 +468,7 @@
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C86E151B2AB4390600CBA201 /* PlayOneViewController2.swift in Sources */,
+				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,

@@ -26,8 +26,8 @@ class FinderTableViewCell: UITableViewCell {
     private let accountLable: UILabel = {
         let label = UILabel()
         label.text = "maymmm518"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .gray1
+        label.font = .semiboldNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -37,6 +37,7 @@ class FinderTableViewCell: UITableViewCell {
         didSet {
             sendDataToPlayView(thisPlay!)
             accountLable.text = thisPlay?.finderId
+            photoImageView.image = UIImage(named: thisPlay?.finderId ?? "placeholder")
             if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 wantToAddButton.isHidden = true
             } else {
@@ -48,12 +49,12 @@ class FinderTableViewCell: UITableViewCell {
     lazy var wantToAddButton: UIButton = {
         let button = UIButton()
         button.setTitle("我要加", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .semiboldNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.lightGray
+        button.backgroundColor = .purple1
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addPlay), for: .touchUpInside)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 16
         button.clipsToBounds = true
         return button
     }()
@@ -86,11 +87,11 @@ class FinderTableViewCell: UITableViewCell {
             playView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             playView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
-            wantToAddButton.topAnchor.constraint(equalTo: playView.bottomAnchor),
+            wantToAddButton.topAnchor.constraint(equalTo: playView.bottomAnchor, constant: standardMargin),
             wantToAddButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
             wantToAddButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
-            wantToAddButton.heightAnchor.constraint(equalToConstant: 30),
-            wantToAddButton.widthAnchor.constraint(equalToConstant: 100)
+            wantToAddButton.heightAnchor.constraint(equalToConstant: 40),
+            wantToAddButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin)
         ])
     }
 

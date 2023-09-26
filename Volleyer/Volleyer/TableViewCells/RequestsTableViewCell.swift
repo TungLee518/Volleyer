@@ -38,25 +38,29 @@ class RequestsTableViewCell: UITableViewCell {
     lazy var acceptRequestButton: UIButton = {
         let button = UIButton()
         button.setTitle(" Accept  ", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = .purple6
+        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 8
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.purple1.cgColor
         button.addTarget(self, action: #selector(acceptRequest), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
         return button
     }()
     lazy var denyRequestButton: UIButton = {
         let button = UIButton()
         button.setTitle(" Deny  ", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = .gray6
+        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 8
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.purple1.cgColor
         button.addTarget(self, action: #selector(denyRequest), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
         return button
     }()
     var statusLable: UILabel = {
@@ -97,10 +101,12 @@ class RequestsTableViewCell: UITableViewCell {
             acceptRequestButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
             acceptRequestButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
             acceptRequestButton.centerYAnchor.constraint(equalTo: dateLable.centerYAnchor),
+            acceptRequestButton.widthAnchor.constraint(equalToConstant: standardButtonWidth*2/3),
 
-            denyRequestButton.trailingAnchor.constraint(equalTo: acceptRequestButton.leadingAnchor, constant: -standardMargin),
+            denyRequestButton.trailingAnchor.constraint(equalTo: acceptRequestButton.leadingAnchor, constant: -standardMargin/2),
             denyRequestButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
             denyRequestButton.centerYAnchor.constraint(equalTo: dateLable.centerYAnchor),
+            denyRequestButton.widthAnchor.constraint(equalToConstant: standardButtonWidth*2/3),
 
             statusLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
             statusLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
