@@ -37,6 +37,7 @@ class FinderTableViewCell: UITableViewCell {
         didSet {
             sendDataToPlayView(thisPlay!)
             accountLable.text = thisPlay?.finderId
+            photoImageView.image = UIImage(named: thisPlay?.finderId ?? "placeholder")
             if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 wantToAddButton.isHidden = true
             } else {

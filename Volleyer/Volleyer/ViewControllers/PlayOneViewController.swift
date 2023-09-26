@@ -21,6 +21,15 @@ class PlayOneViewController: UIViewController {
             User(id: "iamSteven", email: "steven@gmail.com", gender: 0, name: "Steven")
         ]),
         PlayOne(court: "場三", finders: [
+            User(id: "iamShuyu", email: "shuyu@gmail.com", gender: 0, name: "Shuyu")
+        ]),
+        PlayOne(court: "場四", finders: [
+            User(id: "iamAngus", email: "angus@gmail.com", gender: 0, name: "Angus")
+        ]),
+        PlayOne(court: "場五", finders: [
+            User(id: "iamAngus", email: "angus@gmail.com", gender: 0, name: "Angus")
+        ]),
+        PlayOne(court: "場六", finders: [
             User(id: "iamAngus", email: "angus@gmail.com", gender: 0, name: "Angus")
         ])
     ]
@@ -55,9 +64,9 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         playOneData.count
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        playOneData[section].court
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        playOneData[section].court
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -76,6 +85,37 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = .green
+//        view.tintColor = .purple2
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.heightAnchor.constraint(equalToConstant: standardButtonHeight).isActive = true
+//        guard let header = view as? UITableViewHeaderFooterView else { return }
+//        header.textLabel?.textColor = .gray7
+//        header.textLabel?.font = .semiboldNunito(size: 20)
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UITableViewHeaderFooterView()
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.backgroundView = {
+            let view = UIView()
+            view.backgroundColor = .purple7
+            return view
+        }()
+
+        let headerLabel = UILabel()
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerLabel.text = playOneData[section].court
+        headerLabel.font = .boldSystemFont(ofSize: 20)
+        headerLabel.textColor = .purple2
+        headerView.contentView.addSubview(headerLabel)
+
+        NSLayoutConstraint.activate([
+            headerLabel.leadingAnchor.constraint(equalTo: headerView.contentView.leadingAnchor, constant: 16),
+            headerLabel.trailingAnchor.constraint(equalTo: headerView.contentView.trailingAnchor, constant: -16),
+            headerLabel.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
+            headerLabel.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12)
+        ])
+
+        return headerView
     }
 }

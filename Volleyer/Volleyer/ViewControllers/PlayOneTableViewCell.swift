@@ -42,6 +42,8 @@ extension PlayOneTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
 //        cell.accountImageView.image = UIImage(named: "placeholder")
         // swiftlint:enable force_cast
         cell.accountLabel.text = playOneData[playOneCollectionView.tag].finders[indexPath.row].id
+        cell.accountImageView.image = UIImage(named: playOneFinderData[indexPath.row].id ?? "placeholder")
+        cell.thisFinder = playOneFinderData[indexPath.row]
         return cell
     }
 

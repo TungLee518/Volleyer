@@ -28,6 +28,8 @@ class PlayOneFinderViewController: UIViewController {
 
         titleLabel.text = court
         finderAccountLabel.text = finderInfo?.id
+        finderImageView.image = UIImage(named: finderInfo?.id ?? "placeholder")
+        finderImageView.layer.cornerRadius = 35
     }
 
     @IBAction func takePlayer1Photo(_ sender: Any) {
