@@ -26,6 +26,7 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
+        navigationItem.title = NavBarEnum.competitionPage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton

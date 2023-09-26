@@ -18,46 +18,9 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBar.tintColor = UIColor.purple
+        self.tabBar.tintColor = .purple4
         viewControllers = tabs.map { $0.makeViewController() }
-
-        delegate = self
     }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        let findPlayerVC = FinderViewController()
-//        let findPlayerNC = UINavigationController(rootViewController: findPlayerVC)
-//        findPlayerNC.tabBarItem.title = TabBarEnum.finderPage.rawValue
-//        findPlayerNC.tabBarItem.image = UIImage(named: TabBarImageEnum.plus.rawValue)
-//        findPlayerNC.tabBarItem.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
-//
-//        let myPageVC = MyViewController()
-//        let myPageNC = UINavigationController(rootViewController: myPageVC)
-//        // myPageNC.tabBarItem.image = UIImage(named: "placeholder")
-//        myPageNC.tabBarItem.title = TabBarEnum.myPage.rawValue
-//
-//        let communityVC = CommunityViewController()
-//        let communityNC = UINavigationController(rootViewController: communityVC)
-//        // communityNC.tabBarItem.image = UIImage(named: "placeholder")
-//        communityNC.tabBarItem.title = TabBarEnum.communityPage.rawValue
-//
-//        let competitionVC = CompetitionsViewController()
-//        let competitionNC = UINavigationController(rootViewController: competitionVC)
-//        // competitionNC.tabBarItem.image = UIImage(named: "placeholder")
-//        competitionNC.tabBarItem.title = TabBarEnum.competitionPage.rawValue
-//
-//        let storyboard = UIStoryboard(name: "PlayOne", bundle: nil)
-//        let playOneVC = storyboard.instantiateViewController(withIdentifier: "PlayOneViewController")
-//        let playOneNC = UINavigationController(rootViewController: playOneVC)
-//        // playOneNC.tabBarItem.image = UIImage(named: "placeholder")
-//        playOneNC.tabBarItem.title = TabBarEnum.playOnePage.rawValue
-//
-//        viewControllers = [findPlayerNC, myPageNC, competitionNC, playOneNC]
-//
-//        self.selectedIndex = 0
-//    }
 }
 
 // MARK: - Tabs
@@ -77,12 +40,25 @@ extension TabBarViewController {
             case .playOne: controller = UINavigationController(rootViewController: UIStoryboard(name: "PlayOne", bundle: nil).instantiateViewController(withIdentifier: "PlayOneViewController"))
             }
             controller.tabBarItem = makeTabBarItem()
-            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 15.0, left: 0.0, bottom: -15.0, right: 0.0)
+            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
             return controller
         }
 
         private func makeTabBarItem() -> UITabBarItem {
-            return UITabBarItem(title: nil, image: image, selectedImage: selectedImage)
+            return UITabBarItem(title: title, image: image, selectedImage: selectedImage)
+        }
+
+        private var title: String {
+            switch self {
+            case .finder:
+                return TabBarEnum.finderPage.rawValue
+            case .profile:
+                return TabBarEnum.myPage.rawValue
+            case .competition:
+                return TabBarEnum.competitionPage.rawValue
+            case .playOne:
+                return TabBarEnum.playOnePage.rawValue
+            }
         }
 
         private var image: UIImage? {
@@ -110,22 +86,5 @@ extension TabBarViewController {
                 return .asset(.spike_selected)
             }
         }
-    }
-}
-
-// MARK: - UITabBarControllerDelegate
-extension TabBarViewController: UITabBarControllerDelegate {
-    func tabBarController(
-        _ tabBarController: UITabBarController,
-        shouldSelect viewController: UIViewController
-    ) -> Bool {
-        guard
-            let navVC = viewController as? UINavigationController,
-            navVC.viewControllers.first is FinderViewController
-//                || navVC.viewControllers.first is AuctionViewController
-        else {
-            return true
-        }
-        return true
     }
 }

@@ -50,7 +50,7 @@ class FinderTableViewCell: UITableViewCell {
         button.setTitle("我要加", for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.lightGray
+        button.backgroundColor = .purple1
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addPlay), for: .touchUpInside)
         button.layer.cornerRadius = 5

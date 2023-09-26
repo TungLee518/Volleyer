@@ -61,6 +61,7 @@
 		C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */; };
 		C899611B2AC16CE800C5D35D /* PlayOnePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */; };
 		C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611D2AC2680300C5D35D /* UIImage+Extension.swift */; };
+		C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +123,7 @@
 		C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneFinderViewController.swift; sourceTree = "<group>"; };
 		C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOnePlayerView.swift; sourceTree = "<group>"; };
 		C899611D2AC2680300C5D35D /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -278,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				C899611D2AC2680300C5D35D /* UIImage+Extension.swift */,
+				C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */,
 			);
 			path = "Extension+";
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */,
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,

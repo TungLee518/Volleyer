@@ -90,6 +90,7 @@ class MyViewController: UIViewController {
         view.addSubview(requestsSendButton)
 
         setLayout()
+        navigationItem.title = NavBarEnum.myPage.rawValue
     }
 
     private func setLayout() {
