@@ -34,4 +34,15 @@ enum TabBarEnum: String {
     case competitionPage = "Competitions"
 }
 
+enum TabBarImageEnum: String {
+    case plus
+    case profile
+    case medal
+    case players
+
+    private var description: String {
+           return self.rawValue
+       }
+}
+
 let placeholderPic = "placeholder"

@@ -33,7 +33,6 @@ class PlayOneViewController: UIViewController {
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.playOnePage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
     }

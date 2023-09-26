@@ -60,6 +60,7 @@
 		C89961172AC043D200C5D35D /* PlayOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961162AC043D200C5D35D /* PlayOne.swift */; };
 		C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */; };
 		C899611B2AC16CE800C5D35D /* PlayOnePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */; };
+		C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899611D2AC2680300C5D35D /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		C89961162AC043D200C5D35D /* PlayOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOne.swift; sourceTree = "<group>"; };
 		C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneFinderViewController.swift; sourceTree = "<group>"; };
 		C899611A2AC16CE800C5D35D /* PlayOnePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOnePlayerView.swift; sourceTree = "<group>"; };
+		C899611D2AC2680300C5D35D /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +205,7 @@
 				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
 				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
 				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
+				C899611C2AC267D700C5D35D /* Extension+ */,
 				C86E15222AB4A30300CBA201 /* Model */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
 				C86E153E2AB819D900CBA201 /* TableViewCells */,
@@ -269,6 +272,14 @@
 				C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		C899611C2AC267D700C5D35D /* Extension+ */ = {
+			isa = PBXGroup;
+			children = (
+				C899611D2AC2680300C5D35D /* UIImage+Extension.swift */,
+			);
+			path = "Extension+";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,6 +444,7 @@
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C86E151B2AB4390600CBA201 /* PlayOneViewController2.swift in Sources */,
+				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,

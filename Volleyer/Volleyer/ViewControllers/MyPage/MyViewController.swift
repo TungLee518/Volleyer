@@ -80,7 +80,6 @@ class MyViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.myPage.rawValue
 
         view.addSubview(photoImageView)
         view.addSubview(accountLable)
