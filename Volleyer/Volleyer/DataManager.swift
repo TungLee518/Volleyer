@@ -30,6 +30,10 @@ protocol RequestsDataManagerDelegate {
     func manager(_ manager: DataManager, iSent playRequests: [PlayRequest])
 }
 
+protocol PlayOneDataManagerDelegate {
+    func manager(_ manager: DataManager, didget playOne: [PlayOne])
+}
+
 // swiftlint:disable force_cast
 class DataManager {
 
@@ -40,15 +44,18 @@ class DataManager {
     var thisUserDelegate: ThisUserDataManagerDelegate?
     var competitionDelegate: CompetitionDataManagerDelegate?
     var playRequestDelegate: RequestsDataManagerDelegate?
+    var playOneDataDelegate: PlayOneDataManagerDelegate?
 
     let users = Firestore.firestore().collection("users")
     let plays = Firestore.firestore().collection("plays")
     let competitions = Firestore.firestore().collection("competitions")
     let addPlayRQs = Firestore.firestore().collection("add_play_requests")
+    let playOneCourts = Firestore.firestore().collection("play_one_courts")
 
     var updateRequestsSentTableView: ((PlayRequest) -> Void)?
     let dispatchSemaphore = DispatchSemaphore(value: 1)
 
+    // MARK: save play
     func savePlay(_ play: Play) {
         let document = plays.document()
         var playerDictList: [[String: String]] = []
@@ -94,7 +101,7 @@ class DataManager {
         print("add data")
     }
 
-    // TODO: need to get plays that this user is going to
+    // MARK: get this user's play
     func getThisUserPlays() {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "").getDocument {(document, error) in
             if let document = document, document.exists {
@@ -118,50 +125,9 @@ class DataManager {
                 print("Document does not exist")
             }
         }
-        
-//        plays.getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                var playsArray: [Play] = []
-//                for document in querySnapshot!.documents {
-//                    let levelDict = document.data()[PlayTitle.levelRange.rawValue] as! [String: Int]
-//                    let levelRange = LevelRange(
-//                        setBall: levelDict[LevelTitle.set.rawValue]!,
-//                        block: levelDict[LevelTitle.block.rawValue]!,
-//                        dig: levelDict[LevelTitle.dig.rawValue]!,
-//                        spike: levelDict[LevelTitle.spike.rawValue]!,
-//                        sum: levelDict[LevelTitle.sum.rawValue]!
-//                    )
-//                    let lackDict = document.data()[PlayTitle.lackAmount.rawValue] as! [String: Int]
-//                    let lackAmount = LackAmount(
-//                        male: lackDict[LackGender.male.rawValue]!,
-//                        female: lackDict[LackGender.female.rawValue]!,
-//                        unlimited: lackDict[LackGender.unlimited.rawValue]!
-//                    )
-//                    let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
-//                    let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
-//                    let aPlay = Play(
-//                        id: document.documentID,
-//                        finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
-//                        startTime: startTime.dateValue(),
-//                        endTime: endTime.dateValue(),
-//                        place: document.data()[PlayTitle.place.rawValue] as! String,
-//                        price: document.data()[PlayTitle.price.rawValue] as! Int,
-//                        type: document.data()[PlayTitle.type.rawValue] as! Int,
-//                        levelRange: levelRange,
-//                        lackAmount: lackAmount,
-//                        playerInfo: [],
-//                        status: document.data()[PlayTitle.status.rawValue] as! Int
-//                    )
-//                    playsArray.append(aPlay)
-//                }
-//                // playsArray.sort { $0.time > $1.time }
-//                self.playDataDelegate?.manager(self, didGet: playsArray)
-//            }
-//        }
     }
 
+    // MARK: get publish play
     func getPublishPlay() {
         plays.getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -179,6 +145,7 @@ class DataManager {
         }
     }
 
+    // MARK: get play by id
     func getPlayById(id: String) {
         plays.whereField(PlayTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -193,17 +160,8 @@ class DataManager {
         }
     }
 
+    // MARK: get user by id
     func getUserById(id: String) {
-//        users.document(id).getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                print("Document data: \(dataDescription)")
-//                let thisUser = self.decodeUser(document)
-//                self.thisUserDelegate?.manager(self, thisUser: thisUser)
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
         users.whereField(UserTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -217,6 +175,7 @@ class DataManager {
         }
     }
 
+    // MARK: get competitions
     func getCompetion() {
         competitions.getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -239,6 +198,7 @@ class DataManager {
         }
     }
 
+    // MARK: save request
     func saveRequest(_ play: Play, playerList: [Player]) {
         let document = addPlayRQs.document()
         var playerDictList: [[String: String]] = []
@@ -264,6 +224,7 @@ class DataManager {
         print("add data")
     }
 
+    // MARK: get play requests
     func getPlayRequests() {
         addPlayRQs.getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -301,6 +262,7 @@ class DataManager {
         }
     }
 
+    // MARK: listen play requests
     func listenPlayRequests() {
         addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -362,7 +324,8 @@ class DataManager {
             }
         }
     }
-    
+
+    // MARK: update request
     func updateRequest(_ request: PlayRequest, status: Int) {
         addPlayRQs.document(request.id).updateData([
             PlayRequestTitle.status.rawValue: status
@@ -372,6 +335,39 @@ class DataManager {
             } else {
                 print("Request Document successfully updated")
             }
+        }
+    }
+
+    func getPlayOneCourts() {
+        playOneCourts.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    var playOneDataArray: [PlayOne] = []
+                    for document in querySnapshot!.documents {
+                        let userIds: [String] = document.data()["finder_ids"] as! [String]
+                        var finders: [User] = []
+                        for userId in userIds {
+                            self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId).getDocuments() { (userQuerySnapshot, err) in
+                                    if let err = err {
+                                        print("Error getting documents: \(err)")
+                                    } else {
+                                        for userDocument in userQuerySnapshot!.documents {
+                                            let thisUser = self.decodeUser(userDocument)
+                                            finders.append(thisUser)
+                                            print("===\(finders)")
+                                            if finders.count == userIds.count {
+                                                playOneDataArray.append(PlayOne(court: document.documentID, finders: finders))
+                                                if querySnapshot!.documents.count == playOneDataArray.count {
+                                                    self.playOneDataDelegate?.manager(self, didget: playOneDataArray)
+                                                }
+                                            }
+                                        }
+                                    }
+                            }
+                        }
+                    }
+                }
         }
     }
 }
@@ -462,24 +458,6 @@ extension DataManager {
     }
 
     func appendPlayIdToUserPlayList(_ documentId: String) {
-//        self.users.document(UserDefaults.standard.string(forKey: User.firebaseId.rawValue) ?? "").getDocument { (document, error) in
-//            if let userDocument = document, userDocument.exists {
-//                var myPlayList = userDocument.data()?[User.myPlayList.rawValue] as! [String]
-//                print("\(userDocument.documentID) => \(userDocument.data())")
-//                myPlayList.append(documentId)
-//                self.users.document(userDocument.data()?[User.firebaseId.rawValue] as! String).updateData([
-//                    User.myPlayList.rawValue: myPlayList
-//                ]) { err in
-//                    if let err = err {
-//                        print("Error updating document: \(err)")
-//                    } else {
-//                        print("Document successfully updated")
-//                    }
-//                }
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
         self.users.whereField(UserTitle.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {

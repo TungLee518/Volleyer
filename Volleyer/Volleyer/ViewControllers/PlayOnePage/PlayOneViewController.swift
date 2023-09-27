@@ -7,37 +7,20 @@
 
 import UIKit
 
-class PlayOneViewController: UIViewController {
+class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
 
     @IBOutlet weak var playOneTableView: UITableView!
 
-    let playOneData: [PlayOne] = [
-        PlayOne(court: "場一", finders: [
-            User(id: "maymmm518", email: "maymmm518@gmail.com", gender: 1, name: "May"),
-            User(id: "iamMandy", email: "mandy@gmail.com", gender: 0, name: "Mandy"),
-            User(id: "iamIris", email: "iris@gmail.com", gender: 1, name: "Iris"),
-            User(id: "iamRuby", email: "ruby@gmail.com", gender: 1, name: "Ruby"),
-            User(id: "iamAaron", email: "aaron@gmail.com", gender: 0, name: "Aaron"),
-            User(id: "iamSteven", email: "steven@gmail.com", gender: 0, name: "Steven")
-        ]),
-        PlayOne(court: "場三", finders: [
-            User(id: "iamShuyu", email: "shuyu@gmail.com", gender: 0, name: "Shuyu")
-        ]),
-        PlayOne(court: "場四", finders: [
-            User(id: "iamAngus", email: "angus@gmail.com", gender: 0, name: "Angus")
-        ]),
-        PlayOne(court: "場五", finders: [
-            User(id: "iamAngus", email: "angus@gmail.com", gender: 0, name: "Angus")
-        ]),
-        PlayOne(court: "場六", finders: [
-            User(id: "iamAngus", email: "angus@gmail.com", gender: 0, name: "Angus")
-        ])
-    ]
+    var playOneData: [PlayOne] = []
+
+    let playOneDataManager = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setNavBar()
+        playOneDataManager.getPlayOneCourts()
+        playOneDataManager.playOneDataDelegate = self
     }
 
     private func setNavBar() {
@@ -64,9 +47,6 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         playOneData.count
     }
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        playOneData[section].court
-//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -132,5 +112,11 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         ])
 
         return headerView
+    }
+
+    func manager(_ manager: DataManager, didget playOne: [PlayOne]) {
+        playOneData = playOne
+        print(playOne)
+        playOneTableView.reloadData()
     }
 }
