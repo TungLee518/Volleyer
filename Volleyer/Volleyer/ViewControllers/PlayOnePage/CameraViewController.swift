@@ -14,6 +14,8 @@ class CameraViewController: UIViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .secondarySystemBackground
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "placeholder")
         return imageView
     }()
 
@@ -22,10 +24,11 @@ class CameraViewController: UIViewController {
         button.setTitle("take photo", for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.lightGray
+        button.backgroundColor = .purple1
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.gray7, for: .normal)
         button.addTarget(self, action: #selector(didTapOnTakePhotoButton), for: .touchUpInside)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 16
         button.clipsToBounds = true
         return button
     }()
@@ -51,9 +54,9 @@ class CameraViewController: UIViewController {
             photoPreviewImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             photoPreviewImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             photoPreviewImageView.bottomAnchor.constraint(equalTo: takePhotoButton.topAnchor, constant: -standardMargin),
-            takePhotoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            takePhotoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            takePhotoButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            takePhotoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            takePhotoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+            takePhotoButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             takePhotoButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
     }
@@ -78,6 +81,15 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
         guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
+        guard let imageData = image.pngData() else {
+            return
+        }
         photoPreviewImageView.image = image
+        takePhotoButton.setTitle("完成拍照", for: .normal)
+        takePhotoButton.removeTarget(nil, action: nil, for: .allEvents)
+        takePhotoButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
+    }
+    @objc func dismissSelf() {
+        self.dismiss(animated: true)
     }
 }

@@ -21,6 +21,7 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
         setNavBar()
         playOneDataManager.getPlayOneCourts()
         playOneDataManager.playOneDataDelegate = self
+        self.hidesBottomBarWhenPushed = false
     }
 
     private func setNavBar() {
@@ -35,7 +36,7 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "PlayOneFinderViewController") as? PlayOneFinderViewController {
             nextVC.court = "\(playOneData[whichCourt].court) play\(whichFinder+1)"
             nextVC.finderInfo = playOneData[whichCourt].finders[whichFinder]
-            navigationController?.pushViewController(nextVC, animated: true)
+            navigationController?.present(nextVC, animated: true)
         }
     }
 }

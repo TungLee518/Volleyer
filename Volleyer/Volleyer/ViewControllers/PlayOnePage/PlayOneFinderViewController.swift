@@ -30,10 +30,21 @@ class PlayOneFinderViewController: UIViewController {
         finderAccountLabel.text = finderInfo?.id
         finderImageView.image = UIImage(named: finderInfo?.id ?? "placeholder")
         finderImageView.layer.cornerRadius = 35
+        changeButtonUI(takePlayer1PhotoButton)
     }
 
     @IBAction func takePlayer1Photo(_ sender: Any) {
         let nextVC = CameraViewController()
-        navigationController?.pushViewController(nextVC, animated: true)
+//        nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true)
+    }
+
+    func changeButtonUI(_ button: UIButton) {
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .purple6
+        button.setTitleColor(.purple1, for: .normal)
+        button.layer.cornerRadius = 16
+        button.clipsToBounds = true
     }
 }
