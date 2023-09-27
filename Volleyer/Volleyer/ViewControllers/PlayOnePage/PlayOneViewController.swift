@@ -111,9 +111,24 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
 
         NSLayoutConstraint.activate([
             headerLabel.leadingAnchor.constraint(equalTo: headerView.contentView.leadingAnchor, constant: 16),
-            headerLabel.trailingAnchor.constraint(equalTo: headerView.contentView.trailingAnchor, constant: -16),
             headerLabel.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
             headerLabel.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12)
+        ])
+
+        let lineUpButton = UIButton()
+        lineUpButton.setTitle("+", for: .normal)
+        lineUpButton.titleLabel?.font =  .regularNunito(size: 30)
+        lineUpButton.titleLabel?.textAlignment = .center
+        lineUpButton.backgroundColor = .purple7
+        lineUpButton.setTitleColor(.purple1, for: .normal)
+        lineUpButton.translatesAutoresizingMaskIntoConstraints = false
+        headerView.contentView.addSubview(lineUpButton)
+
+        NSLayoutConstraint.activate([
+            lineUpButton.trailingAnchor.constraint(equalTo: headerView.contentView.trailingAnchor, constant: -16),
+            lineUpButton.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
+            lineUpButton.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12),
+            lineUpButton.heightAnchor.constraint(equalToConstant: standardButtonHeight/2)
         ])
 
         return headerView
