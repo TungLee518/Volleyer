@@ -35,6 +35,8 @@ class PlayOneFinderViewController: UIViewController {
 
     @IBAction func takePlayer1Photo(_ sender: Any) {
         let nextVC = CameraViewController()
+        nextVC.playerN = "player1"
+        nextVC.finderInfo = finderInfo
 //        nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true)
     }

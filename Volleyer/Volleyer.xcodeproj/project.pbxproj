@@ -60,6 +60,7 @@
 		C89961242AC2C32D00C5D35D /* Nunito-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C89961232AC2C31F00C5D35D /* Nunito-Italic-VariableFont_wght.ttf */; };
 		C89961252AC2C33100C5D35D /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C89961222AC2C31F00C5D35D /* Nunito-VariableFont_wght.ttf */; };
 		C89961272AC2C49600C5D35D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961262AC2C49600C5D35D /* UIFont+Extension.swift */; };
+		C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		C89961222AC2C31F00C5D35D /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		C89961232AC2C31F00C5D35D /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		C89961262AC2C49600C5D35D /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneDataManager.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,6 +214,7 @@
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
 				C89961292AC4286400C5D35D /* CommonViews */,
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
+				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
@@ -462,6 +465,7 @@
 				C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */,
 				C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */,
 				C89961172AC043D200C5D35D /* PlayOne.swift in Sources */,
+				C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,

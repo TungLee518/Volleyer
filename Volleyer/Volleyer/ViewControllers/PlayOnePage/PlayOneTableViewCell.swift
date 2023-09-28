@@ -12,7 +12,11 @@ class PlayOneTableViewCell: UITableViewCell {
     @IBOutlet weak var playOneCollectionView: UICollectionView!
 
     var playOneFinderData: [User] = []
-    var playOneData: [PlayOne] = []
+    var playOneData: [PlayOne] = [] {
+        didSet {
+            playOneCollectionView.reloadData()
+        }
+    }
 
     var tapAFinder: ((IndexPath) -> Void)?
 

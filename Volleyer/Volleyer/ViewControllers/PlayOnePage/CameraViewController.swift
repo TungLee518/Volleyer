@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import FirebaseStorage
 
 class CameraViewController: UIViewController {
 
@@ -17,6 +18,25 @@ class CameraViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(named: "placeholder")
         return imageView
+    }()
+
+    private lazy var nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = .regularNunito(size: 16)
+        textField.textColor = .gray2
+        textField.placeholder = "name"
+        textField.textAlignment = .left
+        textField.contentVerticalAlignment = .top
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([spaceButton, doneButton], animated: false)
+        textField.inputAccessoryView = toolbar
+        return textField
     }()
 
     lazy var takePhotoButton: UIButton = {
@@ -33,9 +53,17 @@ class CameraViewController: UIViewController {
         return button
     }()
 
+    private let storage = Storage.storage().reference()
+
+    var finderInfo: User?
+    var playerN: String?
+    var imageTook: Data?
+    let dataManager = PlayOneDataManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(photoPreviewImageView)
+        view.addSubview(nameTextField)
         view.addSubview(takePhotoButton)
         setLayout()
         setNavBar()
@@ -51,9 +79,14 @@ class CameraViewController: UIViewController {
     private func setLayout() {
         NSLayoutConstraint.activate([
             photoPreviewImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            photoPreviewImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            photoPreviewImageView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: standardMargin),
             photoPreviewImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             photoPreviewImageView.bottomAnchor.constraint(equalTo: takePhotoButton.topAnchor, constant: -standardMargin),
+            nameTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            nameTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            nameTextField.bottomAnchor.constraint(equalTo: photoPreviewImageView.topAnchor, constant: -standardMargin),
+            nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin*10),
+            nameTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             takePhotoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             takePhotoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             takePhotoButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
@@ -84,6 +117,11 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
         guard let imageData = image.pngData() else {
             return
         }
+        imageTook = imageData
+//        if let finderInfo = finderInfo, let playerN = playerN, nameTextField.text != "" {
+//            dataManager.savePlayOneImage(finder: finderInfo, playerN: playerN, imageData: imageData, playerName: nameTextField.text!)
+//        }
+
         photoPreviewImageView.image = image
         takePhotoButton.setTitle("完成拍照", for: .normal)
         takePhotoButton.removeTarget(nil, action: nil, for: .allEvents)
@@ -91,5 +129,11 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
     }
     @objc func dismissSelf() {
         self.dismiss(animated: true)
+        if let finderInfo = finderInfo, let playerN = playerN, let imageTook = imageTook, nameTextField.text != "" {
+            dataManager.savePlayOneImage(finder: finderInfo, playerN: playerN, imageData: imageTook, playerName: nameTextField.text!)
+        }
+    }
+    @objc func cancelToolbar() {
+        self.view.endEditing(true)
     }
 }

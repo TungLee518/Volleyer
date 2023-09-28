@@ -13,15 +13,23 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
 
     var playOneData: [PlayOne] = []
 
-    let playOneDataManager = DataManager()
+    let playOneDataManager = PlayOneDataManager()
+
+    var canAddPlay = true
+    var courtIAdded: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setNavBar()
-        playOneDataManager.getPlayOneCourts()
+        // playOneDataManager.getPlayOneCourts()
+        playOneDataManager.listenPlayOne()
         playOneDataManager.playOneDataDelegate = self
-        self.hidesBottomBarWhenPushed = false
+        playOneDataManager.updatePlayOneTableView = { [weak self] isUpdate in
+            guard let self = self else { return }
+            playOneData = []
+            playOneDataManager.getPlayOneCourts()
+        }
     }
 
     private func setNavBar() {
@@ -103,6 +111,8 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         lineUpButton.backgroundColor = .purple7
         lineUpButton.setTitleColor(.purple1, for: .normal)
         lineUpButton.translatesAutoresizingMaskIntoConstraints = false
+        lineUpButton.addTarget(self, action: #selector(lineUp), for: .touchUpInside)
+        lineUpButton.tag = section
         headerView.contentView.addSubview(lineUpButton)
 
         NSLayoutConstraint.activate([
@@ -112,12 +122,49 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
             lineUpButton.heightAnchor.constraint(equalToConstant: standardButtonHeight/2)
         ])
 
+        if canAddPlay {
+            lineUpButton.isHidden = false
+        } else {
+            lineUpButton.isHidden = true
+        }
+
         return headerView
     }
 
-    func manager(_ manager: DataManager, didget playOne: [PlayOne]) {
+    func manager(_ manager: PlayOneDataManager, didget playOne: [PlayOne]) {
         playOneData = playOne
-        print(playOne)
+        playOneData.sort { $0.order < $1.order }
+        for playOne in playOneData {
+            for finder in playOne.finders {
+                print("ppppp\(finder.id)")
+                if UserDefaults.standard.string(forKey: UserTitle.id.rawValue) == finder.id {
+                    canAddPlay = false
+                    courtIAdded = playOne.court
+                    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消 play", style: .plain, target: self, action: #selector(cancelPlay))
+                    print(canAddPlay)
+                }
+            }
+        }
+        print("========\(playOneData)")
         playOneTableView.reloadData()
+    }
+
+    @objc func lineUp(_ sender: UIButton) {
+        if canAddPlay {
+            playOneDataManager.createPlayOneFinder(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No Name")
+            playOneDataManager.addFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No Name", court: playOneData[sender.tag].court)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消 play", style: .plain, target: self, action: #selector(cancelPlay))
+        } else {
+            // 跳個通知
+            print("已經加過了")
+        }
+    }
+
+    @objc func cancelPlay() {
+        navigationItem.setRightBarButton(nil, animated: false)
+        canAddPlay = true
+        playOneDataManager.deleteFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id", court: courtIAdded!)
+        playOneDataManager.deletaPlayOnefinder(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id")
+        courtIAdded = nil
     }
 }
