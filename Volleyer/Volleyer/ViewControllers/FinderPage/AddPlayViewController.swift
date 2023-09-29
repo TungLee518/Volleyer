@@ -77,7 +77,7 @@ class AddPlayViewController: UIViewController {
         self.title = NavBarEnum.addOnePage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 

@@ -36,7 +36,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         self.title = NavBarEnum.myRequestsSent.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 

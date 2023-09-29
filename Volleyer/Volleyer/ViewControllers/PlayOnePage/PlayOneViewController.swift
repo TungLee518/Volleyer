@@ -141,6 +141,7 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
                     canAddPlay = false
                     courtIAdded = playOne.court
                     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消 play", style: .plain, target: self, action: #selector(cancelPlay))
+                    navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.purple2], for: .normal)
                     print(canAddPlay)
                 }
             }

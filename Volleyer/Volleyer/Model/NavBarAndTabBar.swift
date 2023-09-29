@@ -23,7 +23,7 @@ enum NavBarEnum: String {
     case communityPage = "Community"
     case playOnePage = "Play One"
     case competitionPage = "Competitions"
-    case info = "詳細資訊"
+    case info = "輸入名字與相片"
 }
 
 enum TabBarEnum: String {

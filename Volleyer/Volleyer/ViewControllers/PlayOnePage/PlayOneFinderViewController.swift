@@ -45,7 +45,6 @@ class PlayOneFinderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         titleLabel.text = court
         finderAccountLabel.text = finderInfo?.id
         finderImageView.image = UIImage(named: finderInfo?.id ?? "placeholder")
@@ -56,6 +55,7 @@ class PlayOneFinderViewController: UIViewController {
         changeButtonUI(takePlayer4PhotoButton)
         changeButtonUI(takePlayer5PhotoButton)
         dataManager.playOneFinderDataDelegate = self
+        setNavBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +96,15 @@ class PlayOneFinderViewController: UIViewController {
         nextVC.playerN = "player5"
         nextVC.finderInfo = finderInfo
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+
+    private func setNavBar() {
+        self.view.backgroundColor = UIColor.white
+        navigationItem.title = ""
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = .purple2
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
     func changeButtonUI(_ button: UIButton) {

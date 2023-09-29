@@ -41,7 +41,7 @@ class CameraViewController: UIViewController {
 
     lazy var takePhotoButton: UIButton = {
         let button = UIButton()
-        button.setTitle("take photo", for: .normal)
+        button.setTitle("拍照", for: .normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple1
@@ -71,8 +71,10 @@ class CameraViewController: UIViewController {
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
+        self.title = NavBarEnum.info.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
@@ -85,10 +87,10 @@ class CameraViewController: UIViewController {
             nameTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             nameTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             nameTextField.bottomAnchor.constraint(equalTo: photoPreviewImageView.topAnchor, constant: -standardMargin),
-            nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin*10),
+            nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin*5),
             nameTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
             takePhotoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            takePhotoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+            takePhotoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin*3),
             takePhotoButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             takePhotoButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])

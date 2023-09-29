@@ -27,7 +27,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         self.title = NavBarEnum.myFinders.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
