@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PlayOneFinderViewController: UIViewController {
 
@@ -50,8 +51,11 @@ class PlayOneFinderViewController: UIViewController {
         finderImageView.image = UIImage(named: finderInfo?.id ?? "placeholder")
         finderImageView.layer.cornerRadius = 35
         changeButtonUI(takePlayer1PhotoButton)
+        changeButtonUI(takePlayer2PhotoButton)
+        changeButtonUI(takePlayer3PhotoButton)
+        changeButtonUI(takePlayer4PhotoButton)
+        changeButtonUI(takePlayer5PhotoButton)
         dataManager.playOneFinderDataDelegate = self
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,7 +112,7 @@ extension PlayOneFinderViewController: PlayOneFinderDataManagerDelegate {
     func manager(_ manager: PlayOneDataManager, didget playerN: [PlayerN]) {
         fivePlayersData = playerN
         print("----", fivePlayersData)
-//        let fiveImageView = [player1ImageView, player2ImageView, player3ImageView, player4ImageView, player5ImageView]
+        let fiveImageView = [player1ImageView, player2ImageView, player3ImageView, player4ImageView, player5ImageView]
         let fiveNameLabel = [player1NameLabel, player2NameLabel, player3NameLabel, player4NameLabel, player5NameLabel]
         var imageUrls: [URL?] = []
         for i in 0..<5 {
@@ -120,23 +124,26 @@ extension PlayOneFinderViewController: PlayOneFinderDataManagerDelegate {
             if let playerImageUrl = URL(string: fivePlayersData[i].image) {
                 print("第\(i)個有照片:", playerImageUrl)
                 imageUrls.append(playerImageUrl)
+                fiveImageView[i]?.kf.setImage(with: playerImageUrl)
             } else {
                 imageUrls.append(nil)
             }
         }
+        
+        
 
-        if let imageUrl = imageUrls[1] {
-            let request = URLRequest(url: imageUrl)
-            let task = URLSession.shared.dataTask(with: request) { [weak self] (imageData, _, err) in
-                guard let imageData = imageData, err == nil else {
-                    print("image error: ", err)
-                    return
-                }
-                DispatchQueue.main.async {
-                    self?.player2ImageView.image = UIImage(data: imageData)
-                }
-            }
-            task.resume()
-        }
+//        if let imageUrl = imageUrls[1] {
+//            let request = URLRequest(url: imageUrl)
+//            let task = URLSession.shared.dataTask(with: request) { [weak self] (imageData, _, err) in
+//                guard let imageData = imageData, err == nil else {
+//                    print("image error: ", err)
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    self?.player2ImageView.image = UIImage(data: imageData)
+//                }
+//            }
+//            task.resume()
+//        }
     }
 }
