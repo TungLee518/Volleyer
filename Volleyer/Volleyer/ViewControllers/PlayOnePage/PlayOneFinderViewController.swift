@@ -112,7 +112,11 @@ extension PlayOneFinderViewController: PlayOneFinderDataManagerDelegate {
         let fiveNameLabel = [player1NameLabel, player2NameLabel, player3NameLabel, player4NameLabel, player5NameLabel]
         var imageUrls: [URL?] = []
         for i in 0..<5 {
-            fiveNameLabel[i]?.text = fivePlayersData[i].name
+            if fivePlayersData[i].name == "" {
+                fiveNameLabel[i]?.text = "目前沒人"
+            } else {
+                fiveNameLabel[i]?.text = fivePlayersData[i].name
+            }
             if let playerImageUrl = URL(string: fivePlayersData[i].image) {
                 print("第\(i)個有照片:", playerImageUrl)
                 imageUrls.append(playerImageUrl)
