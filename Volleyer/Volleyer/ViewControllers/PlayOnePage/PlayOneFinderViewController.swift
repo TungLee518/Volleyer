@@ -24,13 +24,13 @@ class PlayOneFinderViewController: UIViewController {
     @IBOutlet weak var player3ImageView: UIImageView!
     @IBOutlet weak var player4ImageView: UIImageView!
     @IBOutlet weak var player5ImageView: UIImageView!
-    
+
     @IBOutlet weak var player1NameLabel: UILabel!
     @IBOutlet weak var player2NameLabel: UILabel!
     @IBOutlet weak var player3NameLabel: UILabel!
     @IBOutlet weak var player4NameLabel: UILabel!
     @IBOutlet weak var player5NameLabel: UILabel!
-    
+
     var finderInfo: User?
     var court = "場X play x"
 
@@ -51,6 +51,11 @@ class PlayOneFinderViewController: UIViewController {
         finderImageView.layer.cornerRadius = 35
         changeButtonUI(takePlayer1PhotoButton)
         dataManager.playOneFinderDataDelegate = self
+        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         dataManager.getPlayOneFinderData(finder: finderInfo?.id ?? "")
     }
 
@@ -58,35 +63,35 @@ class PlayOneFinderViewController: UIViewController {
         let nextVC = CameraViewController()
         nextVC.playerN = "player1"
         nextVC.finderInfo = finderInfo
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @IBAction func inputPlayer2Info(_ sender: Any) {
         let nextVC = CameraViewController()
         nextVC.playerN = "player2"
         nextVC.finderInfo = finderInfo
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @IBAction func inputPlayer3Info(_ sender: Any) {
         let nextVC = CameraViewController()
         nextVC.playerN = "player3"
         nextVC.finderInfo = finderInfo
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @IBAction func inputPlayer4Info(_ sender: Any) {
         let nextVC = CameraViewController()
         nextVC.playerN = "player4"
         nextVC.finderInfo = finderInfo
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @IBAction func inputPlayer5Info(_ sender: Any) {
         let nextVC = CameraViewController()
         nextVC.playerN = "player5"
         nextVC.finderInfo = finderInfo
-        present(nextVC, animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     func changeButtonUI(_ button: UIButton) {
@@ -102,16 +107,32 @@ class PlayOneFinderViewController: UIViewController {
 extension PlayOneFinderViewController: PlayOneFinderDataManagerDelegate {
     func manager(_ manager: PlayOneDataManager, didget playerN: [PlayerN]) {
         fivePlayersData = playerN
-        guard let player3ImageUrl = URL(string: fivePlayersData[3].image) else {
-            return
+        print("----", fivePlayersData)
+//        let fiveImageView = [player1ImageView, player2ImageView, player3ImageView, player4ImageView, player5ImageView]
+        let fiveNameLabel = [player1NameLabel, player2NameLabel, player3NameLabel, player4NameLabel, player5NameLabel]
+        var imageUrls: [URL?] = []
+        for i in 0..<5 {
+            fiveNameLabel[i]?.text = fivePlayersData[i].name
+            if let playerImageUrl = URL(string: fivePlayersData[i].image) {
+                print("第\(i)個有照片:", playerImageUrl)
+                imageUrls.append(playerImageUrl)
+            } else {
+                imageUrls.append(nil)
+            }
         }
-        URLSession.shared.dataTask(with: player3ImageUrl) { imageData, _, err in
-            guard let image3Data = imageData, err == nil else {
-                return
+
+        if let imageUrl = imageUrls[1] {
+            let request = URLRequest(url: imageUrl)
+            let task = URLSession.shared.dataTask(with: request) { [weak self] (imageData, _, err) in
+                guard let imageData = imageData, err == nil else {
+                    print("image error: ", err)
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.player2ImageView.image = UIImage(data: imageData)
+                }
             }
-            DispatchQueue.main.async {
-                self.player3ImageView.image = UIImage(data: image3Data)
-            }
+            task.resume()
         }
     }
 }

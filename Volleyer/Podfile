@@ -19,5 +19,7 @@ target 'Volleyer' do
   pod 'FirebaseFirestore'
   pod 'FirebaseMessaging'
   pod 'FirebaseStorage'
+  pod 'Kingfisher', '~> 7.0'
+  pod 'MJRefresh'
 
 end

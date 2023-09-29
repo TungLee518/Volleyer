@@ -128,7 +128,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
         takePhotoButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
     }
     @objc func dismissSelf() {
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
         if let finderInfo = finderInfo, let playerN = playerN, let imageTook = imageTook, nameTextField.text != "" {
             dataManager.savePlayOneImage(finder: finderInfo, playerN: playerN, imageData: imageTook, playerName: nameTextField.text!)
         }
