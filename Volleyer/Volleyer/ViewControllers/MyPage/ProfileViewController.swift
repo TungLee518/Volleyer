@@ -127,7 +127,7 @@ class ProfileViewController: UIViewController {
         self.title = NavBarEnum.myProfile.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 

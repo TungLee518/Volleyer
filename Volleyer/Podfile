@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Volleyer' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -18,5 +19,8 @@ target 'Volleyer' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'FirebaseMessaging'
+  pod 'FirebaseStorage'
+  pod 'MJRefresh'
+  pod 'Kingfisher', '~> 7.0'
 
 end

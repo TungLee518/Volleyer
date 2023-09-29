@@ -370,7 +370,7 @@ class EstablishFinderViewController: UIViewController {
         self.navigationItem.title = NavBarEnum.establishFinderPage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
