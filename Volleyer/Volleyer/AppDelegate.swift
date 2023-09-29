@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
         var thisUser = User(id: "", email: "", gender: 99, name: "", level: LevelRange(setBall: -1, block: -1, dig: -1, spike: -1, sum: -1))
 
-        db.collection("users").whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+        db.collection("users").whereField("id", isEqualTo: "maymmm518").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {

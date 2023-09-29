@@ -14,10 +14,15 @@ protocol PlayOneDataManagerDelegate {
     func manager(_ manager: PlayOneDataManager, didget playOne: [PlayOne])
 }
 
+protocol PlayOneFinderDataManagerDelegate {
+    func manager(_ manager: PlayOneDataManager, didget playerN: [PlayerN])
+}
+
 // swiftlint:disable force_cast
 class PlayOneDataManager {
 
     var playOneDataDelegate: PlayOneDataManagerDelegate?
+    var playOneFinderDataDelegate: PlayOneFinderDataManagerDelegate?
 
     let users = Firestore.firestore().collection("users")
     let playOneCourts = Firestore.firestore().collection("play_one_courts")
@@ -193,6 +198,22 @@ class PlayOneDataManager {
             }
             print("Current data: \(document)")
             self.updatePlayOneTableView?(true)
+        }
+    }
+
+    func getPlayOneFinderData(finder: String) {
+        playOneFinders.document(finder).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let playersTitle = ["player1", "player2", "player3", "player4", "player5"]
+                var fivePlayersData: [PlayerN] = []
+                for playern in playersTitle {
+                    let player = document.data()?[playern] as! [String: String]
+                    fivePlayersData.append(PlayerN(name: player["name"] ?? "", image: player["image"] ?? ""))
+                }
+                self.playOneFinderDataDelegate?.manager(self, didget: fivePlayersData)
+            } else {
+                print("Document does not exist")
+            }
         }
     }
 }
