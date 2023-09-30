@@ -159,7 +159,8 @@ class MyViewController: UIViewController {
                               block: UserDefaults.standard.integer(forKey: Level.block.rawValue),
                               dig: UserDefaults.standard.integer(forKey: Level.dig.rawValue),
                               spike: UserDefaults.standard.integer(forKey: Level.spike.rawValue),
-                              sum: UserDefaults.standard.integer(forKey: Level.sum.rawValue))
+                              sum: UserDefaults.standard.integer(forKey: Level.sum.rawValue)),
+            image: UserDefaults.standard.string(forKey: UserTitle.image.rawValue) ?? "https://firebasestorage.googleapis.com/v0/b/volleyer-a15b6.appspot.com/o/defaults%2Fplaceholder.png?alt=media&token=d686707b-7b55-4291-8d67-c809c14f9528&_gl=1*gmtbad*_ga*MTE1Njk3OTU3Ny4xNjkxNjU1MTk0*_ga_CW55HF8NVT*MTY5NjA2MDc1Ni45Mi4xLjE2OTYwNjEwMTguNTQuMC4w"
         )
         navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -173,7 +174,7 @@ class MyViewController: UIViewController {
         let nextVC = MyPlaysViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
+
     @objc func pushToRequestsReceive() {
         let nextVC = RequestsReceivedViewController()
         navigationController?.pushViewController(nextVC, animated: true)

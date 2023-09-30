@@ -45,4 +45,9 @@ enum TabBarImageEnum: String {
        }
 }
 
+enum RightBarTiems: String {
+    case cancelPlay = "取消 play"
+    case editContent = "編輯"
+}
+
 let placeholderPic = "placeholder"

@@ -138,9 +138,6 @@ extension PlayOneFinderViewController: PlayOneFinderDataManagerDelegate {
                 imageUrls.append(nil)
             }
         }
-        
-        
-
 //        if let imageUrl = imageUrls[1] {
 //            let request = URLRequest(url: imageUrl)
 //            let task = URLSession.shared.dataTask(with: request) { [weak self] (imageData, _, err) in

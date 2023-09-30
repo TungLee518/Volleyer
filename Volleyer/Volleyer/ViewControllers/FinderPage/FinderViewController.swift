@@ -21,7 +21,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         dataManager.playDataDelegate = self
         setTableView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         dataManager.getPublishPlay()
     }

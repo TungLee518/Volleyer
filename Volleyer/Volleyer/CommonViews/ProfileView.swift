@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class ProfileView: UIView {
 
@@ -14,7 +15,7 @@ class ProfileView: UIView {
 
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: thisUser?.id ?? "placeholder")
+        imageView.image = UIImage(named: "placeholder")
         imageView.layer.cornerRadius = photoHeight / 2
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -95,6 +96,7 @@ class ProfileView: UIView {
 
     func setContent() {
         if let thisUser = thisUser {
+            photoImageView.kf.setImage(with: URL(string: thisUser.image))
             accountLable.text = thisUser.id
             nameLable.text = thisUser.name
             genderLable.text = genderList[thisUser.gender]

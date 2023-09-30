@@ -140,7 +140,7 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
                 if UserDefaults.standard.string(forKey: UserTitle.id.rawValue) == finder.id {
                     canAddPlay = false
                     courtIAdded = playOne.court
-                    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消 play", style: .plain, target: self, action: #selector(cancelPlay))
+                    navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.cancelPlay.rawValue, style: .plain, target: self, action: #selector(cancelPlay))
                     navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.purple2], for: .normal)
                     print(canAddPlay)
                 }
@@ -154,7 +154,7 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         if canAddPlay {
             playOneDataManager.createPlayOneFinder(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No Name")
             playOneDataManager.addFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No Name", court: playOneData[sender.tag].court)
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消 play", style: .plain, target: self, action: #selector(cancelPlay))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.cancelPlay.rawValue, style: .plain, target: self, action: #selector(cancelPlay))
         } else {
             // 跳個通知
             print("已經加過了")

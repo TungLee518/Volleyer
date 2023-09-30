@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     var thisUser: User?
+
+    let dataManager = MyDataManager()
 
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -188,17 +191,22 @@ class ProfileViewController: UIViewController {
         setContent()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        setContent()
+        print("view will appear")
+    }
+
     func setContent() {
-        if let thisUser = thisUser {
-            accountLable.text = thisUser.id
-            nameLable.text = thisUser.name
-            genderLable.text = genderList[thisUser.gender]
-            setLevelLable.text = "  \(levelList[thisUser.level.setBall])  "
-            spikeLevelLable.text = "  \(levelList[thisUser.level.spike])  "
-            digLevelLable.text = "  \(levelList[thisUser.level.dig])  "
-            blockLevelLable.text = "  \(levelList[thisUser.level.block])  "
-            sumLevelLable.text = "  \(levelList[thisUser.level.sum])  "
-        }
+        photoImageView.kf.setImage(with: URL(string: UserDefaults.standard.string(forKey: UserTitle.image.rawValue) ?? placeholderImage))
+        accountLable.text = UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No id found"
+        nameLable.text = UserDefaults.standard.string(forKey: UserTitle.name.rawValue)
+        genderLable.text = genderList[UserDefaults.standard.integer(forKey: UserTitle.gender.rawValue)]
+        setLevelLable.text = "  \(levelList[UserDefaults.standard.integer(forKey: Level.setBall.rawValue)])  "
+        spikeLevelLable.text = "  \(levelList[UserDefaults.standard.integer(forKey: Level.spike.rawValue)])  "
+        digLevelLable.text = "  \(levelList[UserDefaults.standard.integer(forKey: Level.dig.rawValue)])  "
+        blockLevelLable.text = "  \(levelList[UserDefaults.standard.integer(forKey: Level.block.rawValue)])  "
+        sumLevelLable.text = "  \(levelList[UserDefaults.standard.integer(forKey: Level.sum.rawValue)])  "
     }
 
     private func setNavBar() {
@@ -208,6 +216,9 @@ class ProfileViewController: UIViewController {
         backButton.title = ""
         backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.editContent.rawValue, style: .plain, target: self, action: #selector(pushToEditProfile))
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.purple2], for: .normal)
+
     }
 
     private func setLayout() {
@@ -254,5 +265,29 @@ class ProfileViewController: UIViewController {
             sumLevelLable.centerXAnchor.constraint(equalTo: sumLable.centerXAnchor),
             sumLevelLable.topAnchor.constraint(equalTo: sumLable.bottomAnchor, constant: standardMargin)
         ])
+    }
+
+    @objc func pushToEditProfile() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true)
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        guard let imageData = image.pngData() else {
+            return
+        }
+        photoImageView.image = UIImage(data: imageData)
+        dataManager.saveProfileImage(imageData: imageData)
     }
 }
