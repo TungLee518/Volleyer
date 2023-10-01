@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import JGProgressHUD
 
 class EstablishFinderViewController: UIViewController {
     let formatter = DateFormatter()

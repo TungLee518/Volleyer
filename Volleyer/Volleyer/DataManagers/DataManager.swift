@@ -145,6 +145,7 @@ class DataManager {
             }
         }
         deletePlayIdToUserPlayList(play.id)
+        LKProgressHUD.showSuccess(text: "成功刪除貼文")
     }
 
     // MARK: get this user's play

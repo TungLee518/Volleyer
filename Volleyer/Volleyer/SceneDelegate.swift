@@ -9,6 +9,9 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    // swiftlint:disable force_cast
+    static let shared = SceneDelegate()
+    // swiftlint:enable force_cast
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -24,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = TabBarViewController()
         window?.makeKeyAndVisible()
-        
+
         UserDefaults.standard.set(Date(), forKey: launchAppDate)
         DataManager.sharedDataMenager.listenPlayRequests()
     }

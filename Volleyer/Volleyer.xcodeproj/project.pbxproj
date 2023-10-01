@@ -62,6 +62,8 @@
 		C89961272AC2C49600C5D35D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961262AC2C49600C5D35D /* UIFont+Extension.swift */; };
 		C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */; };
 		C899612E2AC80B3C00C5D35D /* MyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899612D2AC80B3C00C5D35D /* MyDataManager.swift */; };
+		C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */; };
+		C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +126,8 @@
 		C89961262AC2C49600C5D35D /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneDataManager.swift; sourceTree = "<group>"; };
 		C899612D2AC80B3C00C5D35D /* MyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataManager.swift; sourceTree = "<group>"; };
+		C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,7 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				C89961212AC2C31200C5D35D /* Fonts */,
-				C899611C2AC267D700C5D35D /* Extension+ */,
+				C899611C2AC267D700C5D35D /* Extensions */,
 				C89961322AC94CE700C5D35D /* DataManagers */,
 				C86E15222AB4A30300CBA201 /* Models */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
@@ -255,14 +259,16 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		C899611C2AC267D700C5D35D /* Extension+ */ = {
+		C899611C2AC267D700C5D35D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				C899611D2AC2680300C5D35D /* UIImage+Extension.swift */,
 				C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */,
 				C89961262AC2C49600C5D35D /* UIFont+Extension.swift */,
+				C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */,
+				C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */,
 			);
-			path = "Extension+";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C89961212AC2C31200C5D35D /* Fonts */ = {
@@ -479,10 +485,12 @@
 				C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
+				C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
+				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
@@ -568,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -622,7 +630,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
