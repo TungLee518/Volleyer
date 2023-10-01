@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class RequestsReceivedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var requestsTableView: UITableView!
@@ -47,6 +48,13 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
             requestsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             requestsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                dataManager.getPlayRequests()
+                self.requestsTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.requestsTableView)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
