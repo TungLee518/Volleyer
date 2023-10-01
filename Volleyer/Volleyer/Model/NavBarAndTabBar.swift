@@ -34,6 +34,14 @@ enum TabBarEnum: String {
     case competitionPage = "Competitions"
 }
 
+enum MyPageEnum: String {
+    case myProfile = "我的個人資料"
+    case myFinders = "我的揪場"
+    case myPlays = "我的打場"
+    case requestIReceive = "我收到的邀請"
+    case requestISent = "我送出的邀請"
+}
+
 enum TabBarImageEnum: String {
     case plus
     case profile
@@ -43,6 +51,11 @@ enum TabBarImageEnum: String {
     private var description: String {
            return self.rawValue
        }
+}
+
+enum RightBarTiems: String {
+    case cancelPlay = "取消 play"
+    case editContent = "編輯"
 }
 
 let placeholderPic = "placeholder"

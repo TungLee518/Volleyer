@@ -13,7 +13,7 @@ class AddPlayViewController: UIViewController {
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var addPlayerButton: UIButton = {
         let button = UIButton()
-        button.setTitle("add player", for: .normal)
+        button.setTitle(AddPlayPageEnum.addPlayer.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
@@ -41,7 +41,7 @@ class AddPlayViewController: UIViewController {
     }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
-        button.setTitle("send request", for: .normal)
+        button.setTitle(AddPlayPageEnum.sendRequest.rawValue, for: .normal)
         button.titleLabel?.font =  .semiboldNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple1

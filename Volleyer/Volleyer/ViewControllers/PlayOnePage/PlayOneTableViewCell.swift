@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PlayOneTableViewCell: UITableViewCell {
 
@@ -43,10 +44,9 @@ extension PlayOneTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // swiftlint:disable force_cast
         let cell = playOneCollectionView.dequeueReusableCell(withReuseIdentifier: "PlayOneCollectionViewCell", for: indexPath) as! PlayOneCollectionViewCell
-//        cell.accountImageView.image = UIImage(named: "placeholder")
         // swiftlint:enable force_cast
         cell.accountLabel.text = playOneData[playOneCollectionView.tag].finders[indexPath.row].id
-        cell.accountImageView.image = UIImage(named: playOneFinderData[indexPath.row].id)
+        cell.accountImageView.kf.setImage(with: URL(string: playOneFinderData[indexPath.row].image))
         cell.thisFinder = playOneFinderData[indexPath.row]
         return cell
     }

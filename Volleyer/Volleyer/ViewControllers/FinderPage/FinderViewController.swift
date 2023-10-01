@@ -21,7 +21,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         dataManager.playDataDelegate = self
         setTableView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         dataManager.getPublishPlay()
     }
@@ -44,6 +44,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     @objc func pushToEstablishVC() {
         let nextVC = EstablishFinderViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
 

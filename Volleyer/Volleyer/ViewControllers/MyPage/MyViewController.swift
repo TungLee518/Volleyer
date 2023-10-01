@@ -27,7 +27,7 @@ class MyViewController: UIViewController {
     }()
     lazy var myProfileButton: UIButton = {
         let button = UIButton()
-        button.setTitle("My Profile", for: .normal)
+        button.setTitle(MyPageEnum.myProfile.rawValue, for: .normal)
         button.titleLabel?.font =  .semiboldNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple1
@@ -39,7 +39,7 @@ class MyViewController: UIViewController {
     }()
     lazy var myFinderButton: UIButton = {
         let button = UIButton()
-        button.setTitle("我的揪場", for: .normal)
+        button.setTitle(MyPageEnum.myFinders.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple6
@@ -53,7 +53,7 @@ class MyViewController: UIViewController {
     }()
     lazy var myPlayButton: UIButton = {
         let button = UIButton()
-        button.setTitle("我要打的場", for: .normal)
+        button.setTitle(MyPageEnum.myPlays.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple6
@@ -67,7 +67,7 @@ class MyViewController: UIViewController {
     }()
     lazy var requestsReceiveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Requests I Received", for: .normal)
+        button.setTitle(MyPageEnum.requestIReceive.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
@@ -81,7 +81,7 @@ class MyViewController: UIViewController {
     }()
     lazy var requestsSendButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Requests I Sent", for: .normal)
+        button.setTitle(MyPageEnum.requestISent.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
@@ -159,7 +159,8 @@ class MyViewController: UIViewController {
                               block: UserDefaults.standard.integer(forKey: Level.block.rawValue),
                               dig: UserDefaults.standard.integer(forKey: Level.dig.rawValue),
                               spike: UserDefaults.standard.integer(forKey: Level.spike.rawValue),
-                              sum: UserDefaults.standard.integer(forKey: Level.sum.rawValue))
+                              sum: UserDefaults.standard.integer(forKey: Level.sum.rawValue)),
+            image: UserDefaults.standard.string(forKey: UserTitle.image.rawValue) ?? "https://firebasestorage.googleapis.com/v0/b/volleyer-a15b6.appspot.com/o/defaults%2Fplaceholder.png?alt=media&token=d686707b-7b55-4291-8d67-c809c14f9528&_gl=1*gmtbad*_ga*MTE1Njk3OTU3Ny4xNjkxNjU1MTk0*_ga_CW55HF8NVT*MTY5NjA2MDc1Ni45Mi4xLjE2OTYwNjEwMTguNTQuMC4w"
         )
         navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -173,7 +174,7 @@ class MyViewController: UIViewController {
         let nextVC = MyPlaysViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
+
     @objc func pushToRequestsReceive() {
         let nextVC = RequestsReceivedViewController()
         navigationController?.pushViewController(nextVC, animated: true)

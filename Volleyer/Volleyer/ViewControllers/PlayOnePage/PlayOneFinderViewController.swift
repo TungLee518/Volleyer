@@ -46,9 +46,11 @@ class PlayOneFinderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = court
-        finderAccountLabel.text = finderInfo?.id
-        finderImageView.image = UIImage(named: finderInfo?.id ?? "placeholder")
-        finderImageView.layer.cornerRadius = 35
+        if let finderInfo = finderInfo {
+            finderAccountLabel.text = finderInfo.id
+            finderImageView.kf.setImage(with: URL(string: finderInfo.image))
+            finderImageView.layer.cornerRadius = 35
+        }
         changeButtonUI(takePlayer1PhotoButton)
         changeButtonUI(takePlayer2PhotoButton)
         changeButtonUI(takePlayer3PhotoButton)
@@ -138,21 +140,5 @@ extension PlayOneFinderViewController: PlayOneFinderDataManagerDelegate {
                 imageUrls.append(nil)
             }
         }
-        
-        
-
-//        if let imageUrl = imageUrls[1] {
-//            let request = URLRequest(url: imageUrl)
-//            let task = URLSession.shared.dataTask(with: request) { [weak self] (imageData, _, err) in
-//                guard let imageData = imageData, err == nil else {
-//                    print("image error: ", err)
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    self?.player2ImageView.image = UIImage(data: imageData)
-//                }
-//            }
-//            task.resume()
-//        }
     }
 }
