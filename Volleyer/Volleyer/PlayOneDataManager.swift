@@ -55,7 +55,7 @@ class PlayOneDataManager {
                                         } else {
                                             for userDocument in userQuerySnapshot!.documents {
                                                 let thisUser = self.decodeUser(userDocument)
-                                                finders.append(thisUser)
+                                                finders.insert(thisUser, at: 0)
                                                 print("===\(finders)")
                                                 if finders.count == userIds.count {
                                                     playOneDataArray.append(PlayOne(court: document.documentID, finders: finders, order: order))
@@ -298,7 +298,9 @@ extension PlayOneDataManager {
             email: document.data()[UserTitle.email.rawValue] as! String,
             gender: document.data()[UserTitle.gender.rawValue] as! Int,
             name: document.data()[UserTitle.name.rawValue] as! String,
-            level: levelRange)
+            level: levelRange,
+            image: document.data()[UserTitle.image.rawValue] as! String
+        )
         return aUser
     }
 

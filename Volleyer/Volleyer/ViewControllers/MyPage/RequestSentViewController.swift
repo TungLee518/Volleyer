@@ -69,7 +69,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         // swiftlint:enable force_cast
 
         let thisRequest = myRequests[indexPath.row]
-        cell.titleLable.text = "I sent \(thisRequest.requestReceverId) a play request"
+        cell.titleLable.text = RequestEnum.requestSentTo.rawValue + " " + thisRequest.requestReceverId
 
         let players = thisRequest.requestPlayerList
         var playerListText = "名單："
@@ -79,7 +79,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         cell.playersLable.text = playerListText
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YY/MM/dd HH:mm"
-        cell.dateLable.text = "Sent at \(dateFormatter.string(from: thisRequest.createTime))"
+        cell.dateLable.text = RequestEnum.sentAt.rawValue + " " + dateFormatter.string(from: thisRequest.createTime)
         if thisRequest.status == 99 { // accept
             cell.showOnly(status: requestStatus[1])
         } else if thisRequest.status == 0 { // pending

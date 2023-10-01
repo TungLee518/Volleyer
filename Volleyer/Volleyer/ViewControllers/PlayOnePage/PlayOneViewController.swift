@@ -44,6 +44,7 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "PlayOneFinderViewController") as? PlayOneFinderViewController {
             nextVC.court = "\(playOneData[whichCourt].court) play\(whichFinder+1)"
             nextVC.finderInfo = playOneData[whichCourt].finders[whichFinder]
+            nextVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(nextVC, animated: true)
         }
     }

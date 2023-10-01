@@ -271,7 +271,7 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var publishButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Publish", for: .normal)
+        button.setTitle(EstablishPageEnum.publish.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple1
@@ -284,7 +284,7 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save", for: .normal)
+        button.setTitle(EstablishPageEnum.save.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
@@ -299,7 +299,7 @@ class EstablishFinderViewController: UIViewController {
     }()
     private let levelLabel: UILabel = {
         let label = UILabel()
-        label.text = "程度"
+        label.text = EstablishPageEnum.level.rawValue
         label.textColor = UIColor.gray2
         label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false

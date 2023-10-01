@@ -23,7 +23,7 @@ class RequestsTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "Sent date"
         label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -37,7 +37,7 @@ class RequestsTableViewCell: UITableViewCell {
     }()
     lazy var acceptRequestButton: UIButton = {
         let button = UIButton()
-        button.setTitle(" Accept  ", for: .normal)
+        button.setTitle(" \(RequestEnum.accept.rawValue)  ", for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple6
@@ -51,7 +51,7 @@ class RequestsTableViewCell: UITableViewCell {
     }()
     lazy var denyRequestButton: UIButton = {
         let button = UIButton()
-        button.setTitle(" Deny  ", for: .normal)
+        button.setTitle(" \(RequestEnum.deny.rawValue)  ", for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .gray6
@@ -115,12 +115,12 @@ class RequestsTableViewCell: UITableViewCell {
     }
 
     @objc func acceptRequest() {
-        showOnly(status: "Accepted")
+        showOnly(status: RequestEnum.accepted.rawValue)
         updateStatus?(99)
     }
 
     @objc func denyRequest() {
-        showOnly(status: "Denied")
+        showOnly(status: RequestEnum.denied.rawValue)
         updateStatus?(1)
     }
 
@@ -128,6 +128,6 @@ class RequestsTableViewCell: UITableViewCell {
         acceptRequestButton.isHidden = true
         denyRequestButton.isHidden = true
         statusLable.isHidden = false
-        statusLable.text = "Request \(status)"
+        statusLable.text = "\(RequestEnum.invite.rawValue)\(status)"
     }
 }

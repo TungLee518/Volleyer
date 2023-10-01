@@ -35,6 +35,18 @@ struct LackAmount {
     var unlimited: Int
 }
 
+enum EstablishPageEnum: String {
+    case publish = "發文"
+    case save = "儲存"
+    case level = "程度"
+}
+
+enum AddPlayPageEnum: String {
+    case sendRequest = "我要加"
+    case addPlayer = "新增隊友"
+    case level = "程度"
+}
+
 enum PlayTitle: String {
     case id = "id"
     case finderId = "finder_id"
@@ -65,3 +77,5 @@ enum LackGender: String {
     case female = "female"
     case unlimited = "unlimited"
 }
+
+

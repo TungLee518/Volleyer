@@ -337,6 +337,24 @@ class DataManager {
             }
         }
     }
+
+    func getImageFromUserId(id: String, completion: @escaping (String?, Error?) -> Void) {
+        users.whereField(UserTitle.id.rawValue, isEqualTo: id)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                    completion(nil, err) // Pass error to the completion handler
+                } else {
+                    for userDocument in querySnapshot!.documents {
+                        let imageUrl = userDocument.data()[UserTitle.image.rawValue] as! String
+                        completion(imageUrl, nil) // Pass the imageUrl to the completion handler
+                        return
+                    }
+                    // If no documents match the query, you can handle that case too
+                    completion(nil, nil) // Pass nil for imageUrl and error to indicate no matching document
+                }
+            }
+    }
 }
 
 // function used only in DataManager

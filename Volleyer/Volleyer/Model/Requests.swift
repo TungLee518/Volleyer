@@ -29,4 +29,15 @@ enum PlayRequestTitle: String {
     case createTime = "create_time"
 }
 
-let requestStatus = ["Pending", "Accepted", "Denied"]
+enum RequestEnum: String {
+    case sentARequestToYou = "寄給你打場邀請"
+    case requestSentTo = "已寄送邀請給"
+    case sentAt = "寄送時間"
+    case invite = "邀請"
+    case accept = "接受"
+    case deny = "拒絕"
+    case accepted = "已接受"
+    case denied = "已拒絕"
+}
+
+let requestStatus = ["等待中", "已接受", "已拒絕"]

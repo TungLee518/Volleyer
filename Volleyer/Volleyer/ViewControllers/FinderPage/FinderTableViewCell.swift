@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class FinderTableViewCell: UITableViewCell {
 
@@ -37,8 +38,20 @@ class FinderTableViewCell: UITableViewCell {
         didSet {
             sendDataToPlayView(thisPlay!)
             accountLable.text = thisPlay?.finderId
-            // =====
-            photoImageView.image = UIImage(named: thisPlay?.finderId ?? "placeholder")
+            DataManager.sharedDataMenager.getImageFromUserId(id: thisPlay!.finderId) { imageUrl, err in
+                if let error = err {
+                    // Handle the error
+                    print("Error: \(error)")
+                } else if let imageUrl = imageUrl {
+                    // Use the imageUrl
+                    print("Image URL: \(imageUrl)")
+                    self.photoImageView.kf.setImage(with: URL(string: imageUrl))
+                } else {
+                    // Handle the case where no matching document was found
+                    print("No matching document found")
+                }
+            }
+//            photoImageView.image = UIImage(named: )
             if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 wantToAddButton.isHidden = true
             } else {
