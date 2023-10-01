@@ -116,7 +116,6 @@ class PlayOneDataManager {
         }
     }
 
-    // 還沒油照片時
     func savePlayOneImage(finder: User, playerN: String, imageData: Data, playerName: String) {
         let savePath = "playOneImages/\(finder.id) \(playerN).png"
         storage.child(savePath).putData(imageData) { _, error in

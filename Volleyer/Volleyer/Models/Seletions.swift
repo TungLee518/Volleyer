@@ -14,7 +14,7 @@ enum PlayType: String, Codable {
     case girlsAll
     case boys
     case boysAll
-    
+
     func title() -> String {
         switch self {
         case .girls: return "女網女排"

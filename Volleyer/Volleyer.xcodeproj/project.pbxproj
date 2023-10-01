@@ -208,17 +208,15 @@
 			isa = PBXGroup;
 			children = (
 				C89961212AC2C31200C5D35D /* Fonts */,
-				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
-				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
-				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
 				C899611C2AC267D700C5D35D /* Extension+ */,
-				C86E15222AB4A30300CBA201 /* Model */,
+				C89961322AC94CE700C5D35D /* DataManagers */,
+				C86E15222AB4A30300CBA201 /* Models */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
 				C89961292AC4286400C5D35D /* CommonViews */,
-				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
-				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
-				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
+				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
+				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
+				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
 				C86E14BF2AB1AF4E00CBA201 /* Info.plist */,
@@ -227,7 +225,7 @@
 			path = Volleyer;
 			sourceTree = "<group>";
 		};
-		C86E15222AB4A30300CBA201 /* Model */ = {
+		C86E15222AB4A30300CBA201 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */,
@@ -240,7 +238,7 @@
 				C89960FE2ABBEE9600C5D35D /* Requests.swift */,
 				C89961162AC043D200C5D35D /* PlayOne.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C86E152F2AB5AD9D00CBA201 /* ViewControllers */ = {
@@ -307,6 +305,16 @@
 				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
 			);
 			path = CompetitionPage;
+			sourceTree = "<group>";
+		};
+		C89961322AC94CE700C5D35D /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
+				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
+				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
+			);
+			path = DataManagers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -100,6 +100,53 @@ class DataManager {
         print("add data")
     }
 
+    // MARK: update play
+    func updatePlay(_ play: Play) {
+        var playerDictList: [[String: String]] = []
+        for player in play.playerInfo {
+            let playerDict = ["Name": player.name, "Gender": player.gender]
+            playerDictList.append(playerDict)
+        }
+
+        plays.document(play.id).updateData([
+            "start_time": play.startTime,
+            "end_time": play.endTime,
+            "place": play.place,
+            "price": play.price,
+            "type": play.type,
+            "level_range": [
+                "set": play.levelRange.setBall,
+                "block": play.levelRange.block,
+                "dig": play.levelRange.dig,
+                "spike": play.levelRange.spike,
+                "sum": play.levelRange.sum
+            ],
+            "lack_amount": [
+                "male": play.lackAmount.male,
+                "female": play.lackAmount.female,
+                "unlimited": play.lackAmount.unlimited
+            ],
+            "palyer_info": playerDictList
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+
+    func deletePlay(_ play: Play) {
+        plays.document(play.id).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        deletePlayIdToUserPlayList(play.id)
+    }
+
     // MARK: get this user's play
     func getThisUserPlays() {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "").getDocument {(document, error) in
@@ -116,12 +163,12 @@ class DataManager {
                                 self.playDataDelegate?.manager(self, didGet: playsArray)
                             }
                         } else {
-                            print("Document does not exist")
+                            print("Play Document does not exist")
                         }
                     }
                 }
             } else {
-                print("Document does not exist")
+                print("User Document does not exist")
             }
         }
     }
@@ -454,6 +501,32 @@ extension DataManager {
                         var myPlayList = userDocument.data()[UserTitle.myPlayList.rawValue] as! [String]
                         print("\(userDocument.documentID) => \(userDocument.data())")
                         myPlayList.append(documentId)
+                        self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as! String).updateData([
+                            UserTitle.myPlayList.rawValue: myPlayList
+                        ]) { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
+                    }
+                }
+            }
+    }
+
+    func deletePlayIdToUserPlayList(_ documentId: String) {
+        self.users.whereField(UserTitle.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for userDocument in querySnapshot!.documents {
+                        var myPlayList = userDocument.data()[UserTitle.myPlayList.rawValue] as! [String]
+                        print("\(userDocument.documentID) => \(userDocument.data())")
+                        if let deleteIndex = myPlayList.firstIndex(of: documentId) {
+                            myPlayList.remove(at: deleteIndex)
+                        }
                         self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as! String).updateData([
                             UserTitle.myPlayList.rawValue: myPlayList
                         ]) { err in

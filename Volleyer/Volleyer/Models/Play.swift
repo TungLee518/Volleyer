@@ -37,6 +37,7 @@ struct LackAmount {
 
 enum EstablishPageEnum: String {
     case publish = "發文"
+    case deletePost = "刪除貼文"
     case save = "儲存"
     case level = "程度"
 }
@@ -77,5 +78,3 @@ enum LackGender: String {
     case female = "female"
     case unlimited = "unlimited"
 }
-
-
