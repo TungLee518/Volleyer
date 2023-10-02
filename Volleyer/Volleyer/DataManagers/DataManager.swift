@@ -94,7 +94,7 @@ class DataManager {
             } else {
                 print("Document added with ID: \(document.documentID)")
                 // finder must have to go to that play
-                self.appendPlayIdToUserPlayList(document.documentID)
+                self.appendPlayIdToUserPlayList(document.documentID, userId: play.finderId)
             }
         }
         print("add data")
@@ -143,9 +143,8 @@ class DataManager {
                 print("Document successfully removed!")
             }
         }
-        deletePlayIdToUserPlayList(play.id)
         for userId in play.playerInfo {
-            
+            deletePlayIdToUserPlayList(playId: play.id, userId: userId)
         }
         LKProgressHUD.showSuccess(text: "成功刪除貼文")
     }
@@ -363,7 +362,8 @@ class DataManager {
                     self.updateRequestsSentTableView?(aPlayRequest)
                     // if accept, add playId to myPlayList
                     if aPlayRequest.status == 99 {
-                        self.appendPlayIdToUserPlayList(aPlayRequest.playId)
+//                        self.appendPlayIdToUserPlayList(aPlayRequest.playId)
+//                        self.appendUserIdToPlayPlayerInfo(userId: aPlayRequest.requestSenderId, playId: aPlayRequest.playId)
                     }
                 }
                 if (diff.type == .removed) {
@@ -382,6 +382,8 @@ class DataManager {
                 print("Error updating document: \(err)")
             } else {
                 print("Request Document successfully updated")
+                self.appendPlayIdToUserPlayList(request.playId, userId: request.requestSenderId)
+                self.appendUserIdToPlayPlayerInfo(userId: request.requestSenderId, playId: request.playId)
             }
         }
     }
@@ -466,7 +468,7 @@ extension DataManager {
             type: document.data()?[PlayTitle.type.rawValue] as! Int,
             levelRange: levelRange,
             lackAmount: lackAmount,
-            playerInfo: [],
+            playerInfo: document.data()?[PlayTitle.playerInfo.rawValue] as! [String],
             status: document.data()?[PlayTitle.status.rawValue] as! Int
         )
         return aPlay
@@ -492,8 +494,8 @@ extension DataManager {
         return aUser
     }
 
-    func appendPlayIdToUserPlayList(_ documentId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any)
+    func appendPlayIdToUserPlayList(_ playId: String, userId: String) {
+        self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -501,7 +503,7 @@ extension DataManager {
                     for userDocument in querySnapshot!.documents {
                         var myPlayList = userDocument.data()[UserTitle.myPlayList.rawValue] as! [String]
                         print("\(userDocument.documentID) => \(userDocument.data())")
-                        myPlayList.append(documentId)
+                        myPlayList.append(playId)
                         self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as! String).updateData([
                             UserTitle.myPlayList.rawValue: myPlayList
                         ]) { err in
@@ -516,8 +518,8 @@ extension DataManager {
             }
     }
 
-    func deletePlayIdToUserPlayList(_ documentId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any)
+    func deletePlayIdToUserPlayList(playId: String, userId: String) {
+        self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -525,7 +527,7 @@ extension DataManager {
                     for userDocument in querySnapshot!.documents {
                         var myPlayList = userDocument.data()[UserTitle.myPlayList.rawValue] as! [String]
                         print("\(userDocument.documentID) => \(userDocument.data())")
-                        if let deleteIndex = myPlayList.firstIndex(of: documentId) {
+                        if let deleteIndex = myPlayList.firstIndex(of: playId) {
                             myPlayList.remove(at: deleteIndex)
                         }
                         self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as! String).updateData([
@@ -542,11 +544,45 @@ extension DataManager {
             }
     }
 
-    func appendUserIdToPlayPlayerInfo(_ userId: String, _ playId: String) {
-        
+    func appendUserIdToPlayPlayerInfo(userId: String, playId: String) {
+        plays.document(playId).getDocument { (document, error) in
+            if let document = document, document.exists {
+                var playInfo = document.data()?[PlayTitle.playerInfo.rawValue] as! [String]
+                playInfo.append(userId)
+                self.plays.document(playId).updateData([
+                    PlayTitle.playerInfo.rawValue: playInfo
+                ]) { err in
+                    if let err = err {
+                        print("Error updating document: \(err)")
+                    } else {
+                        print("Document successfully updated")
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
-    func deleteUserIdToPlayPlayerInfo(_ userId: String, _ playId: String) {
-        
+    func deleteUserIdToPlayPlayerInfo(userId: String, playId: String) {
+        plays.document(playId).getDocument { (document, error) in
+            if let document = document, document.exists {
+                var playInfo = document.data()?[PlayTitle.playerInfo.rawValue] as! [String]
+                if let deleteIndex = playInfo.firstIndex(of: userId) {
+                    playInfo.remove(at: deleteIndex)
+                }
+                self.plays.document(playId).updateData([
+                    PlayTitle.playerInfo.rawValue: playInfo
+                ]) { err in
+                    if let err = err {
+                        print("Error updating document: \(err)")
+                    } else {
+                        print("Document successfully updated")
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
 }
 // swiftlint:enable force_cast
