@@ -64,6 +64,7 @@
 		C899612E2AC80B3C00C5D35D /* MyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899612D2AC80B3C00C5D35D /* MyDataManager.swift */; };
 		C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */; };
 		C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */; };
+		C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961372ACABD3500C5D35D /* RequestDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 		C899612D2AC80B3C00C5D35D /* MyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataManager.swift; sourceTree = "<group>"; };
 		C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
+		C89961372ACABD3500C5D35D /* RequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataManager.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -318,6 +320,7 @@
 			children = (
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
 				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
+				C89961372ACABD3500C5D35D /* RequestDataManager.swift */,
 				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
 			);
 			path = DataManagers;
@@ -489,6 +492,7 @@
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
+				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,

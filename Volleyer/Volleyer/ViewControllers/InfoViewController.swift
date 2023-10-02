@@ -11,6 +11,22 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
 
     private var playView = PlayInfoView()
     private var profileView = ProfileView()
+    lazy var cancelRequestButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(RequestEnum.cancelRequest.rawValue, for: .normal)
+        button.titleLabel?.font =  .regularNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(cancelRequest), for: .touchUpInside)
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.clipsToBounds = true
+        button.isHidden = true
+        return button
+    }()
 
     var thisPlay: Play? {
         didSet {
@@ -30,6 +46,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         super.viewDidLoad()
         view.addSubview(playView)
         view.addSubview(profileView)
+        view.addSubview(cancelRequestButton)
         dataManager.getPlayById(id: thisPlayId ?? "")
         dataManager.getUserById(id: thisUserId ?? "")
         dataManager.thisPlayDelegate = self
@@ -56,7 +73,11 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
             profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             playView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             playView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: standardMargin),
-            playView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            playView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            cancelRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            cancelRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            cancelRequestButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+            cancelRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
     }
 
@@ -76,5 +97,12 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
 
     func manager(_ manager: DataManager, thisUser user: User) {
         thisUser = user
+    }
+
+    @objc func cancelRequest() {
+        
+    }
+    @objc func cancelAddPlay() {
+        
     }
 }

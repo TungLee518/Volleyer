@@ -146,6 +146,7 @@ class DataManager {
         for userId in play.playerInfo {
             deletePlayIdToUserPlayList(playId: play.id, userId: userId)
         }
+        deletaAllRequestOfPlayId(playId: play.id)
         LKProgressHUD.showSuccess(text: "成功刪除貼文")
     }
 
@@ -382,8 +383,10 @@ class DataManager {
                 print("Error updating document: \(err)")
             } else {
                 print("Request Document successfully updated")
-                self.appendPlayIdToUserPlayList(request.playId, userId: request.requestSenderId)
-                self.appendUserIdToPlayPlayerInfo(userId: request.requestSenderId, playId: request.playId)
+                if request.status == 99 {
+                    self.appendPlayIdToUserPlayList(request.playId, userId: request.requestSenderId)
+                    self.appendUserIdToPlayPlayerInfo(userId: request.requestSenderId, playId: request.playId)
+                }
             }
         }
     }
@@ -581,6 +584,25 @@ extension DataManager {
                 }
             } else {
                 print("Document does not exist")
+            }
+        }
+    }
+
+    func deletaAllRequestOfPlayId(playId: String) {
+        addPlayRQs.whereField("play_id", isEqualTo: playId).getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let thisRequestId = document.documentID
+                    self.addPlayRQs.document(thisRequestId).delete() { err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Request successfully removed!")
+                        }
+                    }
+                }
             }
         }
     }

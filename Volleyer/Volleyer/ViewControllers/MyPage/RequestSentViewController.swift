@@ -103,6 +103,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         // firebase get data by play id and request_sender_id
         nextVC.thisPlayId = myRequests[indexPath.row].playId
         nextVC.thisUserId = myRequests[indexPath.row].requestReceverId
+        nextVC.cancelRequestButton.isHidden = false
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
