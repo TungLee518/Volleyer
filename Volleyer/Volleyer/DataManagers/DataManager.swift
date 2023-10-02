@@ -162,7 +162,14 @@ class DataManager {
             } else {
                 var playsArray: [Play] = []
                 for document in querySnapshot!.documents {
-                    if document.data()[PlayTitle.status.rawValue] as! Int == 1 {
+                    // 之後若是有做只開場不發文就會用到
+//                    if document.data()[PlayTitle.status.rawValue] as! Int == 1 {
+//                        playsArray.append(self.decodePlay(document))
+//                    }
+                    // 只顯示 start time 在未來的
+                    let now = Date()
+                    let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
+                    if startTime.seconds > Int64(now.timeIntervalSince1970) {
                         playsArray.append(self.decodePlay(document))
                     }
                 }
