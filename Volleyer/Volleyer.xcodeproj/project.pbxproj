@@ -319,9 +319,9 @@
 			isa = PBXGroup;
 			children = (
 				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
-				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
 				C89961372ACABD3500C5D35D /* RequestDataManager.swift */,
 				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
+				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
 			);
 			path = DataManagers;
 			sourceTree = "<group>";

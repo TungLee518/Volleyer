@@ -60,7 +60,7 @@ class AddPlayViewController: UIViewController {
 
     private var addPlayers: [Player] = []
     
-    var dataManager = DataManager()
+    var dataManager = RequestDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()

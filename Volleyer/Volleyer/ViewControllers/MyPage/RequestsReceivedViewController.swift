@@ -11,7 +11,7 @@ import MJRefresh
 class RequestsReceivedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var requestsTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = RequestDataManager()
     var myRequests = [PlayRequest]()
 
     override func viewDidLoad() {
@@ -105,10 +105,10 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
 }
 
 extension RequestsReceivedViewController: RequestsDataManagerDelegate {
-    func manager(_ manager: DataManager, iReceive playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
         myRequests = playRequests
         requestsTableView.reloadData()
     }
-    func manager(_ manager: DataManager, iSent playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
     }
 }

@@ -11,7 +11,7 @@ import MJRefresh
 class RequestSentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var requestsTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = RequestDataManager()
     var myRequests = [PlayRequest]()
 
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         dataManager.getPlayRequests()
         dataManager.playRequestDelegate = self
         setTableView()
-        DataManager.sharedDataMenager.updateRequestsSentTableView = { [weak self] modifiedRequest in
+        RequestDataManager.sharedDataMenager.updateRequestsSentTableView = { [weak self] modifiedRequest in
             guard let self = self else { return }
             for i in 0..<myRequests.count {
                 if myRequests[i].id == modifiedRequest.id {
@@ -109,10 +109,10 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
 }
 
 extension RequestSentViewController: RequestsDataManagerDelegate {
-    func manager(_ manager: DataManager, iReceive playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
 
     }
-    func manager(_ manager: DataManager, iSent playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
         myRequests = playRequests
         requestsTableView.reloadData()
     }
