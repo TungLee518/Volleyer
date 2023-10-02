@@ -44,14 +44,46 @@ class RequestDataManager {
             PlayRequestTitle.requestPlayerList.rawValue: playerDictList,
             PlayRequestTitle.createTime.rawValue: Date()
         ]
-        document.setData(data) { err in
+        addPlayRQs.whereField(PlayRequestTitle.playId.rawValue, isEqualTo: play.id).getDocuments { (querySnapshot, err) in
             if let err = err {
-                print("Error adding document: \(err)")
+                print("Error getting documents: \(err)")
             } else {
-                print("Document added with ID: \(document.documentID)")
+                if querySnapshot!.documents.count == 0 {
+                    document.setData(data) { err in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("Document added with ID: \(document.documentID)")
+                        }
+                    }
+                    print("add data")
+                    LKProgressHUD.showSuccess(text: AlertTitile.requestSent.rawValue)
+                } else {
+                    var canSendRequest = true
+                    for document in querySnapshot!.documents {
+                        let theSender = document.data()[PlayRequestTitle.requestSenderId.rawValue] as! String
+                        let theReceiver = document.data()[PlayRequestTitle.requestReceiverId.rawValue] as! String
+                        if theSender == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) && theReceiver == play.finderId {
+                            canSendRequest = false
+                            break
+                        }
+                    }
+                    if canSendRequest {
+                        document.setData(data) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("Document added with ID: \(document.documentID)")
+                            }
+                        }
+                        print("add data")
+                        LKProgressHUD.showSuccess(text: AlertTitile.requestSent.rawValue)
+                    } else {
+                        LKProgressHUD.showFailure(text: AlertTitile.requestAlreadyExist.rawValue)
+                    }
+                }
             }
         }
-        print("add data")
     }
 
     // MARK: get play requests

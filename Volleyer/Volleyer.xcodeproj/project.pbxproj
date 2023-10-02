@@ -65,6 +65,7 @@
 		C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */; };
 		C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */; };
 		C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961372ACABD3500C5D35D /* RequestDataManager.swift */; };
+		C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961392ACAE8B400C5D35D /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +131,7 @@
 		C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		C89961372ACABD3500C5D35D /* RequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataManager.swift; sourceTree = "<group>"; };
+		C89961392ACAE8B400C5D35D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,6 +245,7 @@
 				C800512E2AB9890700FEA7FD /* User.swift */,
 				C89960FE2ABBEE9600C5D35D /* Requests.swift */,
 				C89961162AC043D200C5D35D /* PlayOne.swift */,
+				C89961392ACAE8B400C5D35D /* Alert.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */,
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
+				C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
 				C89961112AC03C0700C5D35D /* PlayOneViewController.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,

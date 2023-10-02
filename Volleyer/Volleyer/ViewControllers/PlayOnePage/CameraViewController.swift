@@ -71,7 +71,7 @@ class CameraViewController: UIViewController {
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.info.rawValue
+        self.title = NavBarEnum.camera.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = .purple2
