@@ -144,11 +144,6 @@ class RequestDataManager {
                         id: diff.document.documentID
                     )
                     self.updateRequestsSentTableView?(aPlayRequest)
-                    // if accept, add playId to myPlayList
-                    if aPlayRequest.status == 99 {
-//                        self.appendPlayIdToUserPlayList(aPlayRequest.playId)
-//                        self.appendUserIdToPlayPlayerInfo(userId: aPlayRequest.requestSenderId, playId: aPlayRequest.playId)
-                    }
                 }
                 if (diff.type == .removed) {
                     print("Removed request: \(diff.document.data())")
@@ -171,6 +166,23 @@ class RequestDataManager {
                     self.appendUserIdToPlayPlayerInfo(userId: request.requestSenderId, playId: request.playId)
                 }
             }
+        }
+    }
+
+    func cancelRequest(_ request: PlayRequest) {
+        addPlayRQs.document(request.id).updateData([
+            PlayRequestTitle.status.rawValue: -1
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+
+        if request.status == 99 {
+            deletePlayIdToUserPlayList(playId: request.playId, userId: request.requestSenderId)
+            deleteUserIdToPlayPlayerInfo(userId: request.requestSenderId, playId: request.playId)
         }
     }
 }

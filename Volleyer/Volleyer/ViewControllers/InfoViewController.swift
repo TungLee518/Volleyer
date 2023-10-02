@@ -40,6 +40,14 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
     }
     var thisPlayId: String?
     var thisUserId: String?
+    var thisRequest: PlayRequest? {
+        didSet {
+            if thisRequest?.status == -1 {
+                cancelRequestButton.isEnabled = false
+                cancelRequestButton.setTitle(RequestEnum.canceled.rawValue, for: .normal)
+            }
+        }
+    }
     let dataManager = DataManager()
 
     override func viewDidLoad() {
@@ -100,9 +108,13 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
     }
 
     @objc func cancelRequest() {
-        
+        if let thisRequest = thisRequest {
+            RequestDataManager.sharedDataMenager.cancelRequest(thisRequest)
+        }
+        navigationController?.popViewController(animated: true)
     }
     @objc func cancelAddPlay() {
-        
+        cancelRequestButton.isEnabled = false
+        cancelRequestButton.setTitle(RequestEnum.canceled.rawValue, for: .normal)
     }
 }

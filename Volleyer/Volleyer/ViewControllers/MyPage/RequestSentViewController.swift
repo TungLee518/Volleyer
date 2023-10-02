@@ -92,6 +92,8 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
             cell.showOnly(status: requestStatus[1])
         } else if thisRequest.status == 0 { // pending
             cell.showOnly(status: requestStatus[0])
+        } else if thisRequest.status == -1 { // cancel
+            cell.showOnly(status: requestStatus[3])
         } else { // deny
             cell.showOnly(status: requestStatus[2])
         }
@@ -103,6 +105,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         // firebase get data by play id and request_sender_id
         nextVC.thisPlayId = myRequests[indexPath.row].playId
         nextVC.thisUserId = myRequests[indexPath.row].requestReceverId
+        nextVC.thisRequest = myRequests[indexPath.row]
         nextVC.cancelRequestButton.isHidden = false
         navigationController?.pushViewController(nextVC, animated: true)
     }
