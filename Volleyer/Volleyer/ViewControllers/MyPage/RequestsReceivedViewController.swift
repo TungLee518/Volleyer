@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import MJRefresh
 
 class RequestsReceivedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var requestsTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = RequestDataManager()
     var myRequests = [PlayRequest]()
 
     override func viewDidLoad() {
@@ -47,6 +48,13 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
             requestsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             requestsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                dataManager.getPlayRequests()
+                self.requestsTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.requestsTableView)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,6 +85,8 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
             cell.acceptRequestButton.isHidden = false
             cell.denyRequestButton.isHidden = false
             cell.statusLable.isHidden = true
+        } else if thisRequest.status == -1 { // cancel
+            cell.showOnly(status: requestStatus[3])
         } else { // deny
             cell.showOnly(status: requestStatus[2])
         }
@@ -97,10 +107,10 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
 }
 
 extension RequestsReceivedViewController: RequestsDataManagerDelegate {
-    func manager(_ manager: DataManager, iReceive playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
         myRequests = playRequests
         requestsTableView.reloadData()
     }
-    func manager(_ manager: DataManager, iSent playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
     }
 }

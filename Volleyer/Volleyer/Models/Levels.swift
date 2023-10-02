@@ -8,4 +8,4 @@
 import Foundation
 
 let levelList = ["S", "A", "B", "C", "無"]
-let positions = ["接球", "攻擊", "舉球", "籃網", "綜合"]
+let positions = ["舉球", "攔網", "接球", "攻擊", "綜合"]

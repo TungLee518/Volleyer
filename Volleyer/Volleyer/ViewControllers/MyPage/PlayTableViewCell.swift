@@ -36,7 +36,7 @@ class PlayTableViewCell: UITableViewCell {
             playView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             playView.topAnchor.constraint(equalTo: contentView.topAnchor),
             playView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            playView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            playView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin)
         ])
     }
 

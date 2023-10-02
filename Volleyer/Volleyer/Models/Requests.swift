@@ -38,6 +38,9 @@ enum RequestEnum: String {
     case deny = "拒絕"
     case accepted = "已接受"
     case denied = "已拒絕"
+    case cancelRequest = "取消邀請"
+    case cancelAddPlay = "取消加場"
+    case canceled = "已取消"
 }
 
-let requestStatus = ["等待中", "已接受", "已拒絕"]
+let requestStatus = ["等待中", "已接受", "已拒絕", "已取消"]

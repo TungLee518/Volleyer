@@ -48,6 +48,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
             myPlaysTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             myPlaysTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        myPlaysTableView.isUserInteractionEnabled = false
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

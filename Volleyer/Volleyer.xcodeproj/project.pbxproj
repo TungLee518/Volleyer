@@ -62,6 +62,10 @@
 		C89961272AC2C49600C5D35D /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961262AC2C49600C5D35D /* UIFont+Extension.swift */; };
 		C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */; };
 		C899612E2AC80B3C00C5D35D /* MyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899612D2AC80B3C00C5D35D /* MyDataManager.swift */; };
+		C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */; };
+		C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */; };
+		C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961372ACABD3500C5D35D /* RequestDataManager.swift */; };
+		C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961392ACAE8B400C5D35D /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +128,10 @@
 		C89961262AC2C49600C5D35D /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayOneDataManager.swift; sourceTree = "<group>"; };
 		C899612D2AC80B3C00C5D35D /* MyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataManager.swift; sourceTree = "<group>"; };
+		C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
+		C89961372ACABD3500C5D35D /* RequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataManager.swift; sourceTree = "<group>"; };
+		C89961392ACAE8B400C5D35D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,17 +216,15 @@
 			isa = PBXGroup;
 			children = (
 				C89961212AC2C31200C5D35D /* Fonts */,
-				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
-				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
-				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
-				C899611C2AC267D700C5D35D /* Extension+ */,
-				C86E15222AB4A30300CBA201 /* Model */,
+				C899611C2AC267D700C5D35D /* Extensions */,
+				C89961322AC94CE700C5D35D /* DataManagers */,
+				C86E15222AB4A30300CBA201 /* Models */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
 				C89961292AC4286400C5D35D /* CommonViews */,
-				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
-				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
-				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
+				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
+				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
+				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
 				C86E14BF2AB1AF4E00CBA201 /* Info.plist */,
@@ -227,7 +233,7 @@
 			path = Volleyer;
 			sourceTree = "<group>";
 		};
-		C86E15222AB4A30300CBA201 /* Model */ = {
+		C86E15222AB4A30300CBA201 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C86E15142AB437AB00CBA201 /* NavBarAndTabBar.swift */,
@@ -239,8 +245,9 @@
 				C800512E2AB9890700FEA7FD /* User.swift */,
 				C89960FE2ABBEE9600C5D35D /* Requests.swift */,
 				C89961162AC043D200C5D35D /* PlayOne.swift */,
+				C89961392ACAE8B400C5D35D /* Alert.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C86E152F2AB5AD9D00CBA201 /* ViewControllers */ = {
@@ -257,14 +264,16 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		C899611C2AC267D700C5D35D /* Extension+ */ = {
+		C899611C2AC267D700C5D35D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				C899611D2AC2680300C5D35D /* UIImage+Extension.swift */,
 				C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */,
 				C89961262AC2C49600C5D35D /* UIFont+Extension.swift */,
+				C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */,
+				C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */,
 			);
-			path = "Extension+";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C89961212AC2C31200C5D35D /* Fonts */ = {
@@ -307,6 +316,17 @@
 				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
 			);
 			path = CompetitionPage;
+			sourceTree = "<group>";
+		};
+		C89961322AC94CE700C5D35D /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
+				C89961372ACABD3500C5D35D /* RequestDataManager.swift */,
+				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
+				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
+			);
+			path = DataManagers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +469,7 @@
 				C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */,
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
+				C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
 				C89961112AC03C0700C5D35D /* PlayOneViewController.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
@@ -471,10 +492,13 @@
 				C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
+				C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
+				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
+				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
@@ -560,7 +584,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -614,7 +638,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

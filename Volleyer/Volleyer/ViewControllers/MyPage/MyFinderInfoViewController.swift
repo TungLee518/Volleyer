@@ -113,6 +113,11 @@ class MyFinderInfoViewController: UIViewController {
 
     @objc func pushToEstablishVC() {
         let nextVC = EstablishFinderViewController()
+//        nextVC.startTimeTextField
+        if let thisPlay = thisPlay {
+            nextVC.thisPlay = thisPlay
+        }
+//        nextVC.placeTextField.text = thisPlay?.place
         navigationController?.pushViewController(nextVC, animated: true)
     }
 

@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import MJRefresh
 
 class RequestSentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var requestsTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = RequestDataManager()
     var myRequests = [PlayRequest]()
 
     override func viewDidLoad() {
@@ -19,7 +20,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         dataManager.getPlayRequests()
         dataManager.playRequestDelegate = self
         setTableView()
-        DataManager.sharedDataMenager.updateRequestsSentTableView = { [weak self] modifiedRequest in
+        RequestDataManager.sharedDataMenager.updateRequestsSentTableView = { [weak self] modifiedRequest in
             guard let self = self else { return }
             for i in 0..<myRequests.count {
                 if myRequests[i].id == modifiedRequest.id {
@@ -57,6 +58,13 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
             requestsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             requestsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                dataManager.getPlayRequests()
+                self.requestsTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.requestsTableView)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,10 +92,11 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
             cell.showOnly(status: requestStatus[1])
         } else if thisRequest.status == 0 { // pending
             cell.showOnly(status: requestStatus[0])
+        } else if thisRequest.status == -1 { // cancel
+            cell.showOnly(status: requestStatus[3])
         } else { // deny
             cell.showOnly(status: requestStatus[2])
         }
-        
         return cell
     }
 
@@ -96,15 +105,17 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         // firebase get data by play id and request_sender_id
         nextVC.thisPlayId = myRequests[indexPath.row].playId
         nextVC.thisUserId = myRequests[indexPath.row].requestReceverId
+        nextVC.thisRequest = myRequests[indexPath.row]
+        nextVC.cancelRequestButton.isHidden = false
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
 extension RequestSentViewController: RequestsDataManagerDelegate {
-    func manager(_ manager: DataManager, iReceive playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
 
     }
-    func manager(_ manager: DataManager, iSent playRequests: [PlayRequest]) {
+    func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
         myRequests = playRequests
         requestsTableView.reloadData()
     }
