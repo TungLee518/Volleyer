@@ -15,7 +15,7 @@ struct Play {
     var price, type: Int
     var levelRange: LevelRange
     var lackAmount: LackAmount
-    var playerInfo: [Player]
+    var playerInfo: [String]
     var status: Int
     var levelFilter: Bool = false
     var followerListId: [String] = []
@@ -59,7 +59,7 @@ enum PlayTitle: String {
     case type = "type"
     case levelRange = "level_range"
     case lackAmount = "lack_amount"
-    case playerInfo = "palyer_info"
+    case playerInfo = "player_info"
     case status = "status"
     case levelFilter = "level_filter"
     case followerListId = "follower_list_id"

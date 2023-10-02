@@ -133,14 +133,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="AJ3-xH-6CL">
-                                <rect key="frame" x="290" y="75" width="70" height="70"/>
+                                <rect key="frame" x="291" y="75" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="Z8Y-VZ-kCH"/>
                                     <constraint firstAttribute="height" constant="70" id="ejH-IJ-RZX"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="finderAccount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyt-fx-taR">
-                                <rect key="frame" x="271.66666666666669" y="161" width="107" height="16"/>
+                                <rect key="frame" x="272.66666666666669" y="161" width="107" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="nei-QY-HOK"/>
                                 </constraints>
@@ -155,14 +155,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="0aN-57-EeQ">
-                                <rect key="frame" x="306" y="197" width="70" height="70"/>
+                                <rect key="frame" x="307" y="197" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="1nh-06-kYU"/>
                                     <constraint firstAttribute="width" constant="70" id="hMN-r7-qdq"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce3-bG-2Kd">
-                                <rect key="frame" x="116" y="197" width="160" height="22"/>
+                                <rect key="frame" x="116.66666666666669" y="197" width="160" height="22"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -174,21 +174,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="gOW-1a-jso">
-                                <rect key="frame" x="306" y="283" width="70" height="70"/>
+                                <rect key="frame" x="307" y="283" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="FLm-0g-ywT"/>
                                     <constraint firstAttribute="height" constant="70" id="yVY-gX-WZK"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TXk-gk-oxJ">
-                                <rect key="frame" x="114" y="287" width="164" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXk-gk-oxJ">
+                                <rect key="frame" x="116.66666666666669" y="283" width="160" height="22"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TG8-JU-6qT">
-                                <rect key="frame" x="166.66666666666666" y="319" width="58.666666666666657" height="34"/>
+                                <rect key="frame" x="167.33333333333334" y="319" width="58.666666666666657" height="34"/>
                                 <color key="tintColor" red="0.28627450980000002" green="0.1019607843" blue="0.52156862749999999" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="更改"/>
@@ -203,21 +202,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="nBT-ML-CIW">
-                                <rect key="frame" x="306" y="369" width="70" height="70"/>
+                                <rect key="frame" x="307" y="369" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="KMl-1J-hYz"/>
                                     <constraint firstAttribute="width" constant="70" id="dxR-ix-roP"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZLD-GA-opS">
-                                <rect key="frame" x="114" y="373" width="164" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLD-GA-opS">
+                                <rect key="frame" x="116.66666666666669" y="369" width="160" height="22"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDS-YG-l9E">
-                                <rect key="frame" x="166.66666666666666" y="404" width="58.666666666666657" height="35"/>
+                                <rect key="frame" x="167.33333333333334" y="404" width="58.666666666666657" height="35"/>
                                 <color key="tintColor" red="0.28627450980000002" green="0.1019607843" blue="0.52156862749999999" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="更改"/>
@@ -232,21 +230,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="iux-SU-cfZ">
-                                <rect key="frame" x="306" y="455" width="70" height="70"/>
+                                <rect key="frame" x="307" y="455" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="Sue-Zj-Jnn"/>
                                     <constraint firstAttribute="height" constant="70" id="mj2-vn-CwA"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="74r-yY-hlD">
-                                <rect key="frame" x="114" y="459" width="164" height="20.000000000001137"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74r-yY-hlD">
+                                <rect key="frame" x="116.66666666666669" y="455" width="160" height="22"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KyR-5H-5A5">
-                                <rect key="frame" x="166.66666666666666" y="490" width="58.666666666666657" height="35"/>
+                                <rect key="frame" x="167.33333333333334" y="490" width="58.666666666666657" height="35"/>
                                 <color key="tintColor" red="0.28627450980000002" green="0.1019607843" blue="0.52156862749999999" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="更改"/>
@@ -261,21 +258,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ISA-wF-WOc">
-                                <rect key="frame" x="306" y="541" width="70" height="70"/>
+                                <rect key="frame" x="307" y="541" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="RwT-St-b0V"/>
                                     <constraint firstAttribute="width" constant="70" id="qUZ-Ly-cXO"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G0K-UP-A9Z">
-                                <rect key="frame" x="114" y="545" width="164" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="按按鈕輸入名字與拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0K-UP-A9Z">
+                                <rect key="frame" x="116.66666666666669" y="541" width="160" height="22"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TS4-oJ-nY0">
-                                <rect key="frame" x="166.66666666666666" y="576.66666666666663" width="58.666666666666657" height="34.333333333333371"/>
+                                <rect key="frame" x="167.33333333333334" y="576.66666666666663" width="58.666666666666657" height="34.333333333333371"/>
                                 <color key="tintColor" red="0.28627450980000002" green="0.1019607843" blue="0.52156862749999999" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="更改"/>
@@ -284,7 +280,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgx-Yq-EbT">
-                                <rect key="frame" x="166.66666666666666" y="232" width="58.666666666666657" height="35"/>
+                                <rect key="frame" x="167.33333333333334" y="232" width="58.666666666666657" height="35"/>
                                 <color key="tintColor" red="0.28627450980392155" green="0.10196078431372549" blue="0.52156862745098043" alpha="0.89803921568627454" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="更改"/>
@@ -300,7 +296,7 @@
                             <constraint firstItem="fyt-fx-taR" firstAttribute="top" secondItem="AJ3-xH-6CL" secondAttribute="bottom" constant="16" id="0f5-4i-A9I"/>
                             <constraint firstItem="G0K-UP-A9Z" firstAttribute="top" secondItem="ISA-wF-WOc" secondAttribute="top" id="3YI-Mm-3bJ"/>
                             <constraint firstItem="80x-qR-afP" firstAttribute="centerY" secondItem="nBT-ML-CIW" secondAttribute="centerY" id="4U4-tW-HEL"/>
-                            <constraint firstItem="Hgx-Yq-EbT" firstAttribute="centerX" secondItem="ihk-Se-7gM" secondAttribute="centerX" id="5E2-dJ-DGF"/>
+                            <constraint firstItem="Hgx-Yq-EbT" firstAttribute="centerX" secondItem="YEa-76-ca8" secondAttribute="centerX" id="5E2-dJ-DGF"/>
                             <constraint firstItem="TXk-gk-oxJ" firstAttribute="top" secondItem="gOW-1a-jso" secondAttribute="top" id="5No-BV-DHl"/>
                             <constraint firstItem="0aN-57-EeQ" firstAttribute="top" secondItem="fyt-fx-taR" secondAttribute="bottom" constant="20" id="8f0-lT-pOk"/>
                             <constraint firstItem="Ce3-bG-2Kd" firstAttribute="top" secondItem="0aN-57-EeQ" secondAttribute="top" id="Ajs-OO-CH0"/>
@@ -308,6 +304,7 @@
                             <constraint firstItem="0yC-jn-zS9" firstAttribute="centerY" secondItem="ISA-wF-WOc" secondAttribute="centerY" id="EhT-7W-Ipm"/>
                             <constraint firstItem="6up-gq-gTj" firstAttribute="centerY" secondItem="0aN-57-EeQ" secondAttribute="centerY" id="EuI-Ga-yed"/>
                             <constraint firstItem="fyt-fx-taR" firstAttribute="centerX" secondItem="AJ3-xH-6CL" secondAttribute="centerX" id="F3S-qH-bLh"/>
+                            <constraint firstItem="TXk-gk-oxJ" firstAttribute="centerX" secondItem="Ce3-bG-2Kd" secondAttribute="centerX" id="FeO-fB-PNw"/>
                             <constraint firstItem="0yC-jn-zS9" firstAttribute="leading" secondItem="YEa-76-ca8" secondAttribute="leading" constant="16" id="Fft-Cv-xcT"/>
                             <constraint firstItem="TS4-oJ-nY0" firstAttribute="centerX" secondItem="ihk-Se-7gM" secondAttribute="centerX" id="HhK-zN-hP4"/>
                             <constraint firstItem="YEa-76-ca8" firstAttribute="trailing" secondItem="nBT-ML-CIW" secondAttribute="trailing" constant="16" id="Mih-Mj-RAu"/>
@@ -319,7 +316,6 @@
                             <constraint firstItem="Ce3-bG-2Kd" firstAttribute="centerX" secondItem="ihk-Se-7gM" secondAttribute="centerX" id="WGZ-tP-fBz"/>
                             <constraint firstItem="KyR-5H-5A5" firstAttribute="centerX" secondItem="74r-yY-hlD" secondAttribute="centerX" id="WbA-xg-Xm0"/>
                             <constraint firstItem="TS4-oJ-nY0" firstAttribute="bottom" secondItem="ISA-wF-WOc" secondAttribute="bottom" id="WrK-Vg-nhP"/>
-                            <constraint firstItem="TXk-gk-oxJ" firstAttribute="centerX" secondItem="TG8-JU-6qT" secondAttribute="centerX" id="ZMg-7h-7Cn"/>
                             <constraint firstItem="8Qg-I9-N4h" firstAttribute="centerY" secondItem="gOW-1a-jso" secondAttribute="centerY" id="Zjx-o7-MA4"/>
                             <constraint firstItem="6nt-eW-kEo" firstAttribute="top" secondItem="YEa-76-ca8" secondAttribute="top" constant="32" id="Zpp-96-pXO"/>
                             <constraint firstItem="YEa-76-ca8" firstAttribute="trailing" secondItem="ISA-wF-WOc" secondAttribute="trailing" constant="16" id="cA8-dO-F4t"/>

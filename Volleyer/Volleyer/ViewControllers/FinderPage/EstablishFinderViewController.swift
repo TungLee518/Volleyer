@@ -558,7 +558,6 @@ class EstablishFinderViewController: UIViewController {
             thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
             thisPlay.lackAmount.male = Int(maleTextField.text!)!
             thisPlay.lackAmount.female = Int(femaleTextField.text!)!
-            thisPlay.playerInfo = players
             if thisPlay.id == "" {
                 dataManager.savePlay(thisPlay)
             } else {

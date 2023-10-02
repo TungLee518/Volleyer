@@ -57,11 +57,11 @@ class DataManager {
     // MARK: save play
     func savePlay(_ play: Play) {
         let document = plays.document()
-        var playerDictList: [[String: String]] = []
-        for player in play.playerInfo {
-            let playerDict = ["Name": player.name, "Gender": player.gender]
-            playerDictList.append(playerDict)
-        }
+//        var playerDictList: [[String: String]] = []
+//        for player in play.playerInfo {
+//            let playerDict = ["Name": player.name, "Gender": player.gender]
+//            playerDictList.append(playerDict)
+//        }
         let data: [String: Any] = [
             "id": document.documentID,
             "finder_id": play.finderId,
@@ -83,7 +83,7 @@ class DataManager {
                 "female": play.lackAmount.female,
                 "unlimited": play.lackAmount.unlimited
             ],
-            "palyer_info": playerDictList,
+            "player_info": [play.finderId], // 改成 user id
             "status": play.status,
             "level_filter": play.levelFilter,
             "follower_list_id": play.followerListId
@@ -102,11 +102,11 @@ class DataManager {
 
     // MARK: update play
     func updatePlay(_ play: Play) {
-        var playerDictList: [[String: String]] = []
-        for player in play.playerInfo {
-            let playerDict = ["Name": player.name, "Gender": player.gender]
-            playerDictList.append(playerDict)
-        }
+//        var playerDictList: [[String: String]] = []
+//        for player in play.playerInfo {
+//            let playerDict = ["Name": player.name, "Gender": player.gender]
+//            playerDictList.append(playerDict)
+//        }
 
         plays.document(play.id).updateData([
             "start_time": play.startTime,
@@ -125,8 +125,7 @@ class DataManager {
                 "male": play.lackAmount.male,
                 "female": play.lackAmount.female,
                 "unlimited": play.lackAmount.unlimited
-            ],
-            "palyer_info": playerDictList
+            ]
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -145,6 +144,9 @@ class DataManager {
             }
         }
         deletePlayIdToUserPlayList(play.id)
+        for userId in play.playerInfo {
+            
+        }
         LKProgressHUD.showSuccess(text: "成功刪除貼文")
     }
 
@@ -152,19 +154,17 @@ class DataManager {
     func getThisUserPlays() {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "").getDocument {(document, error) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 let myPlayList = document.data()?[UserTitle.myPlayList.rawValue] as! [String]
                 var playsArray: [Play] = []
                 for playId in myPlayList {
                     self.plays.document(playId).getDocument {(document, error) in
                         if let playDocument = document, playDocument.exists {
-                            let dataDescription = playDocument.data().map(String.init(describing:)) ?? "nil"
                             playsArray.append(self.decodePlayDS(playDocument))
                             if playsArray.count == myPlayList.count {
                                 self.playDataDelegate?.manager(self, didGet: playsArray)
                             }
                         } else {
-                            print("Play Document does not exist")
+                            print("\(playId) Play Document does not exist")
                         }
                     }
                 }
@@ -540,6 +540,13 @@ extension DataManager {
                     }
                 }
             }
+    }
+
+    func appendUserIdToPlayPlayerInfo(_ userId: String, _ playId: String) {
+        
+    }
+    func deleteUserIdToPlayPlayerInfo(_ userId: String, _ playId: String) {
+        
     }
 }
 // swiftlint:enable force_cast
