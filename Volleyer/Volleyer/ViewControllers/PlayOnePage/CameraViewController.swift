@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import FirebaseStorage
+import JGProgressHUD
 
 class CameraViewController: UIViewController {
 
@@ -130,9 +131,20 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
         takePhotoButton.addTarget(self, action: #selector(dismissSelf), for: .touchUpInside)
     }
     @objc func dismissSelf() {
-        self.navigationController?.popViewController(animated: true)
         if let finderInfo = finderInfo, let playerN = playerN, let imageTook = imageTook, nameTextField.text != "" {
-            dataManager.savePlayOneImage(finder: finderInfo, playerN: playerN, imageData: imageTook, playerName: nameTextField.text!)
+            let hud = JGProgressHUD()
+            hud.textLabel.text = "上傳中"
+            hud.show(in: self.view)
+            dataManager.savePlayOneImage(finder: finderInfo, playerN: playerN, imageData: imageTook, playerName: nameTextField.text!) { err in
+                if err == nil {
+                    print("推回去")
+                    hud.dismiss()
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    hud.dismiss()
+                    LKProgressHUD.showFailure(text: "上傳失敗:(")
+                }
+            }
         }
     }
     @objc func cancelToolbar() {

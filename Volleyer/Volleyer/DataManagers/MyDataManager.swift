@@ -45,7 +45,8 @@ class MyDataManager {
             } else {
                 if querySnapshot!.documents.count > 0 {
                     print("此 ID 已存在")
-                    LKProgressHUD.showFailure(text: "此 ID 已存在")
+//                    LKProgressHUD.showFailure(text: "此 ID 已存在")
+                    self.canGoToTabbarVC?(false)
                 } else {
                     document.setData(data) { err in
                         if let err = err {

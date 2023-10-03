@@ -163,10 +163,19 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     @objc func cancelPlay() {
-        navigationItem.setRightBarButton(nil, animated: false)
-        canAddPlay = true
-        playOneDataManager.deleteFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id", court: courtIAdded!)
-        playOneDataManager.deletaPlayOnefinder(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id")
-        courtIAdded = nil
+        let controller = UIAlertController(title: "確定？", message: "要取消 Play？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            print("確定要刪除")
+            self.navigationItem.setRightBarButton(nil, animated: false)
+            self.canAddPlay = true
+            self.playOneDataManager.deleteFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id", court: self.courtIAdded!)
+            self.playOneDataManager.deletaPlayOnefinder(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id")
+            self.courtIAdded = nil
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
+        
     }
 }

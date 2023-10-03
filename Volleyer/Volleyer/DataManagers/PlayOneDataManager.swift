@@ -116,15 +116,17 @@ class PlayOneDataManager {
         }
     }
 
-    func savePlayOneImage(finder: User, playerN: String, imageData: Data, playerName: String) {
+    func savePlayOneImage(finder: User, playerN: String, imageData: Data, playerName: String, completion: @escaping (Error?) -> Void) {
         let savePath = "playOneImages/\(finder.id) \(playerN).png"
         storage.child(savePath).putData(imageData) { _, error in
             guard error == nil else {
                 print("Upload Photo Fail")
+                completion(error)
                 return
             }
             self.storage.child(savePath).downloadURL { url, error in
                 guard let url = url, error == nil else {
+                    completion(error)
                     return
                 }
                 let urlString = url.absoluteString
@@ -137,8 +139,10 @@ class PlayOneDataManager {
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
+                        completion(err)
                     } else {
                         print("Document successfully written!")
+                        completion(nil)
                     }
                 }
             }

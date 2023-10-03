@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class InputProfileViewController: UIViewController {
     let genderPicker: UIPickerView = {
@@ -206,6 +207,12 @@ class InputProfileViewController: UIViewController {
                 let viewController = TabBarViewController()
                 viewController.modalPresentationStyle = .fullScreen
                 self.present(viewController, animated: true)
+            } else {
+                let hud = JGProgressHUD(style: .dark)
+                hud.textLabel.text = "此 ID 已存在"
+                hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                hud.show(in: view)
+                hud.dismiss(afterDelay: 1.5)
             }
         }
     }

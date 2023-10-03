@@ -105,7 +105,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     private func showInputProfileViewController(userIdentifier: String, fullName: PersonNameComponents?, email: String?) {
         let viewController = InputProfileViewController()
         DispatchQueue.main.async {
-            viewController.thisUser.loginWay = 0
+            viewController.thisUser.loginWay = 1
             viewController.thisUser.userIdentifier = userIdentifier
             if let givenName = fullName?.givenName,
                let familyName = fullName?.familyName {

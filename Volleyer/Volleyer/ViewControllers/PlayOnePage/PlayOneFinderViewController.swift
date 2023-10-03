@@ -50,6 +50,13 @@ class PlayOneFinderViewController: UIViewController {
             finderAccountLabel.text = finderInfo.id
             finderImageView.kf.setImage(with: URL(string: finderInfo.image))
             finderImageView.layer.cornerRadius = 35
+            if finderInfo.id != UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+                takePlayer1PhotoButton.isHidden = true
+                takePlayer2PhotoButton.isHidden = true
+                takePlayer3PhotoButton.isHidden = true
+                takePlayer4PhotoButton.isHidden = true
+                takePlayer5PhotoButton.isHidden = true
+            }
         }
         changeButtonUI(takePlayer1PhotoButton)
         changeButtonUI(takePlayer2PhotoButton)

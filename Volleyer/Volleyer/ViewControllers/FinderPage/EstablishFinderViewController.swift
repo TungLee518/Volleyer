@@ -578,8 +578,16 @@ class EstablishFinderViewController: UIViewController {
         }
     }
     @objc func deletePost() {
-        dataManager.deletePlay(thisPlay)
-        navigationController?.popToRootViewController(animated: true)
+        let controller = UIAlertController(title: "確定？", message: "要刪除貼文？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            print("確定要刪除")
+            self.dataManager.deletePlay(self.thisPlay)
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
 
     func setLayout() {
