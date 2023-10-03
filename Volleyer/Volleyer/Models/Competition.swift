@@ -12,6 +12,7 @@ struct Competition {
     var date: String
     var county: String
     var url: String
+    var isEnrolling: Bool
 }
 
 enum CompetitionTitle: String {
@@ -19,4 +20,5 @@ enum CompetitionTitle: String {
     case date = "date"
     case county = "county"
     case url = "enroll_url"
+    case isEnrolling = "is_enrolling"
 }

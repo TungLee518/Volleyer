@@ -221,7 +221,8 @@ class DataManager {
                         title: document.data()[CompetitionTitle.title.rawValue] as! String,
                         date: document.data()[CompetitionTitle.date.rawValue] as! String,
                         county: document.data()[CompetitionTitle.county.rawValue] as! String,
-                        url: document.data()[CompetitionTitle.url.rawValue] as! String
+                        url: document.data()[CompetitionTitle.url.rawValue] as! String,
+                        isEnrolling: document.data()[CompetitionTitle.isEnrolling.rawValue] as! Bool
                     )
                     competitionsArray.append(aCompetition)
                 }
