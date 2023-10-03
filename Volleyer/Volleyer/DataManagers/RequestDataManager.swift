@@ -24,7 +24,7 @@ class RequestDataManager {
 
     let users = Firestore.firestore().collection("users")
     let plays = Firestore.firestore().collection("plays")
-    let addPlayRQs = Firestore.firestore().collection("add_play_requests")
+    let addPlayRQs = Firestore.firestore().collection("requests")
 
     var updateRequestsSentTableView: ((PlayRequest) -> Void)?
 

@@ -66,6 +66,10 @@
 		C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */; };
 		C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961372ACABD3500C5D35D /* RequestDataManager.swift */; };
 		C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961392ACAE8B400C5D35D /* Alert.swift */; };
+		C899613D2ACBBA6700C5D35D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899613C2ACBBA6700C5D35D /* LoginViewController.swift */; };
+		C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */; };
+		C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */; };
+		C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +136,10 @@
 		C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		C89961372ACABD3500C5D35D /* RequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataManager.swift; sourceTree = "<group>"; };
 		C89961392ACAE8B400C5D35D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		C899613C2ACBBA6700C5D35D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileViewController.swift; sourceTree = "<group>"; };
+		C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProfileViewController.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -254,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				C86E151E2AB43B8600CBA201 /* TabBarViewController.swift */,
+				C899613B2ACBBA1400C5D35D /* LoginPage */,
 				C80051212AB8445D00FEA7FD /* FinderPage */,
 				C80051202AB8443B00FEA7FD /* MyPage */,
 				C899612A2AC42BEF00C5D35D /* CompetitionPage */,
@@ -327,6 +336,17 @@
 				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
 			);
 			path = DataManagers;
+			sourceTree = "<group>";
+		};
+		C899613B2ACBBA1400C5D35D /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				C899613C2ACBBA6700C5D35D /* LoginViewController.swift */,
+				C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */,
+				C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */,
+				C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */,
+			);
+			path = LoginPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,12 +496,14 @@
 				C89961072ABD687300C5D35D /* RequestSentViewController.swift in Sources */,
 				C86E15192AB438EE00CBA201 /* CompetitionsViewController.swift in Sources */,
 				C89961032ABC183200C5D35D /* Notifications.swift in Sources */,
+				C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
 				C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
 				C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */,
+				C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */,
 				C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */,
 				C89961272AC2C49600C5D35D /* UIFont+Extension.swift in Sources */,
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
@@ -490,6 +512,7 @@
 				C899610D2ABDD3E300C5D35D /* InfoViewController.swift in Sources */,
 				C89961172AC043D200C5D35D /* PlayOne.swift in Sources */,
 				C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */,
+				C899613D2ACBBA6700C5D35D /* LoginViewController.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
 				C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */,
@@ -497,6 +520,7 @@
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
 				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
+				C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,

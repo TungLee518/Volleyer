@@ -166,6 +166,14 @@ class EstablishFinderViewController: UIViewController {
         textField.inputAccessoryView = toolbar
         return textField
     }()
+    private let unitLabel: UILabel = {
+        let label = UILabel()
+        label.text = "元/人"
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     private let typeLabel: UILabel = {
         let label = UILabel()
         label.text = "場種"
@@ -363,7 +371,7 @@ class EstablishFinderViewController: UIViewController {
         view.addSubview(placeTextField)
         view.addSubview(priceLabel)
         view.addSubview(priceTextField)
-        view.addSubview(unitTextField)
+        view.addSubview(unitLabel)
         view.addSubview(typeLabel)
         view.addSubview(typeTextField)
         view.addSubview(levelLabel)
@@ -605,11 +613,11 @@ class EstablishFinderViewController: UIViewController {
             priceTextField.leadingAnchor.constraint(equalTo: placeTextField.leadingAnchor),
             priceTextField.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
             priceTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
-            unitTextField.leadingAnchor.constraint(equalTo: priceTextField.trailingAnchor, constant: standardMargin),
-            unitTextField.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
-            unitTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            unitTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
-            unitTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
+            unitLabel.leadingAnchor.constraint(equalTo: priceTextField.trailingAnchor, constant: standardMargin),
+            unitLabel.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
+            unitLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            unitLabel.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
+            unitLabel.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
 
             typeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             typeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: standardMargin),
