@@ -93,7 +93,7 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "maymmm518").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {

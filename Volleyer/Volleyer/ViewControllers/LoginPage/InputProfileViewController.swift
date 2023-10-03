@@ -16,7 +16,7 @@ class InputProfileViewController: UIViewController {
     }()
     private let pleaseInputLabel: UILabel = {
         let label = UILabel()
-        label.text = "來輸入資訊"
+        label.text = "歡迎加入排球人"
         label.textColor = UIColor.gray2
         label.font = .semiboldNunito(size: 32)
         label.translatesAutoresizingMaskIntoConstraints = false

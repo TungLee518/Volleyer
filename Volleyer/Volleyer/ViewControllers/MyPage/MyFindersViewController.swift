@@ -86,16 +86,16 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
 extension MyFindersViewController: PlayDataManagerDelegate {
     func manager(_ manager: DataManager, didGet plays: [Play]) {
-        if plays.count == 0 {
+        for i in plays {
+            if i.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+                myFinders.append(i)
+            }
+        }
+        if myFinders.count == 0 {
             photoImageView.isHidden = false
             myFindersTableView.isHidden = true
         } else {
             photoImageView.isHidden = true
-            for i in plays {
-                if i.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
-                    myFinders.append(i)
-                }
-            }
             myFindersTableView.reloadData()
         }
     }
