@@ -168,6 +168,46 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    lazy var editPhotoButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("更改照片", for: .normal)
+        button.titleLabel?.font =  .regularNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.addTarget(self, action: #selector(pushToEditPhoto), for: .touchUpInside)
+        return button
+    }()
+    lazy var editProfileButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("更改資料", for: .normal)
+        button.titleLabel?.font =  .regularNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.addTarget(self, action: #selector(pushToInputProfile), for: .touchUpInside)
+        return button
+    }()
+    lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("登出", for: .normal)
+        button.titleLabel?.font =  .semiboldNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .purple1
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,6 +226,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         view.addSubview(blockLevelLable)
         view.addSubview(sumLable)
         view.addSubview(sumLevelLable)
+        view.addSubview(editPhotoButton)
+        view.addSubview(editProfileButton)
+        view.addSubview(logoutButton)
         setNavBar()
         setLayout()
         setContent()
@@ -216,7 +259,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         backButton.title = ""
         backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.editContent.rawValue, style: .plain, target: self, action: #selector(pushToEditProfile))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.editContent.rawValue, style: .plain, target: self, action: #selector(pushToEditPhoto))
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.purple2], for: .normal)
 
     }
@@ -263,16 +306,58 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
             sumLable.leadingAnchor.constraint(equalTo: blockLable.trailingAnchor, constant: standardMargin*2),
             sumLable.centerYAnchor.constraint(equalTo: digLable.centerYAnchor),
             sumLevelLable.centerXAnchor.constraint(equalTo: sumLable.centerXAnchor),
-            sumLevelLable.topAnchor.constraint(equalTo: sumLable.bottomAnchor, constant: standardMargin)
+            sumLevelLable.topAnchor.constraint(equalTo: sumLable.bottomAnchor, constant: standardMargin),
+            
+            editPhotoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            editPhotoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+            editPhotoButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            editPhotoButton.trailingAnchor.constraint(equalTo: editProfileButton.leadingAnchor, constant: -standardMargin),
+            editProfileButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+            editProfileButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            editProfileButton.trailingAnchor.constraint(equalTo: logoutButton.leadingAnchor, constant: -standardMargin),
+            logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+            logoutButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin)
         ])
+        self.view.addConstraint(NSLayoutConstraint(item: editPhotoButton, attribute: .width, relatedBy: .equal, toItem: editProfileButton, attribute: .width, multiplier: 1.0, constant: 0.0))
+        self.view.addConstraint(NSLayoutConstraint(item: editProfileButton, attribute: .width, relatedBy: .equal, toItem: logoutButton, attribute: .width, multiplier: 1.0, constant: 0.0))
     }
 
-    @objc func pushToEditProfile() {
+    @objc func pushToEditPhoto() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
+    }
+    @objc func pushToInputProfile() {
+        
+    }
+    @objc func logout() {
+        let controller = UIAlertController(title: "確定？", message: "要登出？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            print("確定要登出")
+            LKProgressHUD.showSuccess(text: "已登出")
+            UserDefaults.standard.set(nil, forKey: UserTitle.firebaseId.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.userIdentifier.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.id.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.name.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.image.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.email.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.gender.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.setBall.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.block.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.dig.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.spike.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.sum.rawValue)
+            let nextVC = LoginViewController()
+            nextVC.modalPresentationStyle = .fullScreen
+            self.present(nextVC, animated: true)
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

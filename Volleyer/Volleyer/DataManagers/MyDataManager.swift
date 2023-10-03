@@ -53,7 +53,9 @@ class MyDataManager {
                         } else {
                             print("User Document added with ID: \(document.documentID)")
 //                            LKProgressHUD.showSuccess(text: "儲存成功")
-                            self.saveUserDefault(user)
+                            var userCopy = user
+                            userCopy.firebaseId = document.documentID
+                            self.saveUserDefault(userCopy)
                             UserDefaults.standard.set(user.userIdentifier, forKey: UserTitle.userIdentifier.rawValue)
                             self.canGoToTabbarVC?(true)
                         }

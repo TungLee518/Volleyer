@@ -10,6 +10,14 @@ import AuthenticationServices
 import FirebaseFirestore
 
 class LoginViewController: UIViewController {
+    private let welcomeLable: UILabel = {
+        let label = UILabel()
+        label.text = "歡迎來到排球人"
+        label.textColor = .gray2
+        label.font = .semiboldNunito(size: 25)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     lazy var appleLogInButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton()
         button.addTarget(self, action: #selector(handleLogInWithAppleID), for: .touchUpInside)
@@ -21,14 +29,20 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        view.addSubview(welcomeLable)
         view.addSubview(appleLogInButton)
         setLayout()
     }
-    
+
     func setLayout() {
         NSLayoutConstraint.activate([
+            welcomeLable.bottomAnchor.constraint(equalTo: appleLogInButton.topAnchor, constant: -standardMargin*3),
+            welcomeLable.centerXAnchor.constraint(equalTo:view.safeAreaLayoutGuide.centerXAnchor),
             appleLogInButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            appleLogInButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+            appleLogInButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            appleLogInButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            appleLogInButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            appleLogInButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin)
         ])
     }
 
