@@ -40,7 +40,7 @@ class DataManager {
     let users = Firestore.firestore().collection("users")
     let plays = Firestore.firestore().collection("plays")
     let competitions = Firestore.firestore().collection("competitions")
-    let addPlayRQs = Firestore.firestore().collection("add_play_requests")
+    let addPlayRQs = Firestore.firestore().collection("requests")
 
     let dispatchSemaphore = DispatchSemaphore(value: 1)
 

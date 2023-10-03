@@ -40,6 +40,7 @@ class PlayOneDataManager {
                     for document in querySnapshot!.documents {
                         print("pppp\(querySnapshot!.documents.count)")
                         let userIds: [String] = document.data()["finder_ids"] as! [String]
+                        print("=====", userIds)
                         let order: Int = document.data()["order"] as! Int
                         if userIds.count == 0 {
                             playOneDataArray.append(PlayOne(court: document.documentID, finders: [], order: order))
@@ -48,16 +49,18 @@ class PlayOneDataManager {
                             }
                         } else {
                             var finders: [User] = []
-                            for userId in userIds {
-                                self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId).getDocuments() { (userQuerySnapshot, err) in
+                            for i in 0..<userIds.count {
+                                self.users.whereField(UserTitle.id.rawValue, isEqualTo: userIds[i]).getDocuments() { (userQuerySnapshot, err) in
                                         if let err = err {
                                             print("Error getting documents: \(err)")
                                         } else {
                                             for userDocument in userQuerySnapshot!.documents {
-                                                let thisUser = self.decodeUser(userDocument)
+                                                var thisUser = self.decodeUser(userDocument)
+                                                thisUser.playN = i
                                                 finders.insert(thisUser, at: 0)
                                                 print("===\(finders)")
                                                 if finders.count == userIds.count {
+                                                    finders.sort { $0.playN < $1.playN }
                                                     playOneDataArray.append(PlayOne(court: document.documentID, finders: finders, order: order))
                                                     if querySnapshot!.documents.count == playOneDataArray.count {
                                                         self.playOneDataDelegate?.manager(self, didget: playOneDataArray)
@@ -116,15 +119,17 @@ class PlayOneDataManager {
         }
     }
 
-    func savePlayOneImage(finder: User, playerN: String, imageData: Data, playerName: String) {
+    func savePlayOneImage(finder: User, playerN: String, imageData: Data, playerName: String, completion: @escaping (Error?) -> Void) {
         let savePath = "playOneImages/\(finder.id) \(playerN).png"
         storage.child(savePath).putData(imageData) { _, error in
             guard error == nil else {
                 print("Upload Photo Fail")
+                completion(error)
                 return
             }
             self.storage.child(savePath).downloadURL { url, error in
                 guard let url = url, error == nil else {
+                    completion(error)
                     return
                 }
                 let urlString = url.absoluteString
@@ -137,8 +142,10 @@ class PlayOneDataManager {
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
+                        completion(err)
                     } else {
                         print("Document successfully written!")
+                        completion(nil)
                     }
                 }
             }

@@ -9,6 +9,14 @@ import UIKit
 
 class MyFindersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    lazy var photoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "no data yet")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.isHidden = true
+        return imageView
+    }()
+
     private var myFindersTableView: UITableView!
 
     private let dataManager = DataManager()
@@ -38,6 +46,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         myFindersTableView.register(PlayTableViewCell.self, forCellReuseIdentifier: PlayTableViewCell.identifier)
         myFindersTableView.separatorStyle = .singleLine
         view.addSubview(myFindersTableView)
+        view.addSubview(photoImageView)
 
         myFindersTableView.translatesAutoresizingMaskIntoConstraints = false
         myFindersTableView.rowHeight = UITableView.automaticDimension
@@ -46,7 +55,11 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
             myFindersTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             myFindersTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myFindersTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            myFindersTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            myFindersTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            photoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            photoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            photoImageView.widthAnchor.constraint(equalToConstant: 200),
+            photoImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 
@@ -78,6 +91,12 @@ extension MyFindersViewController: PlayDataManagerDelegate {
                 myFinders.append(i)
             }
         }
-        myFindersTableView.reloadData()
+        if myFinders.count == 0 {
+            photoImageView.isHidden = false
+            myFindersTableView.isHidden = true
+        } else {
+            photoImageView.isHidden = true
+            myFindersTableView.reloadData()
+        }
     }
 }
