@@ -13,7 +13,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
     private var profileView = ProfileView()
     lazy var cancelRequestButton: UIButton = {
         let button = UIButton()
-        button.setTitle(RequestEnum.cancelRequest.rawValue, for: .normal)
+        button.setTitle(RequestEnum.cancelAddPlay.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
@@ -108,13 +108,17 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
     }
 
     @objc func cancelRequest() {
-        if let thisRequest = thisRequest {
-            RequestDataManager.sharedDataMenager.cancelRequest(thisRequest)
+        let controller = UIAlertController(title: "確定？", message: "要刪除加場？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            print("確定要刪除")
+            if let thisRequest = self.thisRequest {
+                RequestDataManager.sharedDataMenager.cancelRequest(thisRequest)
+            }
+            self.navigationController?.popViewController(animated: true)
         }
-        navigationController?.popViewController(animated: true)
-    }
-    @objc func cancelAddPlay() {
-        cancelRequestButton.isEnabled = false
-        cancelRequestButton.setTitle(RequestEnum.canceled.rawValue, for: .normal)
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
 }

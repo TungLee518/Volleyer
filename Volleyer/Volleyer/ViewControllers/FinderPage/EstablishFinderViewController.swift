@@ -523,6 +523,9 @@ class EstablishFinderViewController: UIViewController {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         startTimeTextField.text = formatter.string(from: startDatePicker.date)
         thisPlay.startTime = startDatePicker.date
+        if endTimeTextField.text == "" {
+            endDatePicker.date = startDatePicker.date
+        }
         self.view.endEditing(true)
     }
     @objc func doneEndDatePicker() {

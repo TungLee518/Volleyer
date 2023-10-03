@@ -209,12 +209,12 @@ class RequestDataManager {
                 print("Error updating document: \(err)")
             } else {
                 print("Document successfully updated")
+                if request.status == 99 {
+                    self.deletePlayIdToUserPlayList(playId: request.playId, userId: request.requestSenderId)
+                    self.deleteUserIdToPlayPlayerInfo(userId: request.requestSenderId, playId: request.playId)
+                    LKProgressHUD.showSuccess(text: AlertTitile.successCancelRequest.rawValue)
+                }
             }
-        }
-
-        if request.status == 99 {
-            deletePlayIdToUserPlayList(playId: request.playId, userId: request.requestSenderId)
-            deleteUserIdToPlayPlayerInfo(userId: request.requestSenderId, playId: request.playId)
         }
     }
 }

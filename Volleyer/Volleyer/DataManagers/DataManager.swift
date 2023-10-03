@@ -127,7 +127,7 @@ class DataManager {
             deletePlayIdToUserPlayList(playId: play.id, userId: userId)
         }
         deletaAllRequestOfPlayId(playId: play.id)
-        LKProgressHUD.showSuccess(text: "成功刪除貼文")
+        LKProgressHUD.showSuccess(text: AlertTitile.successDeletePost.rawValue)
     }
 
     // MARK: get this user's play
