@@ -94,6 +94,7 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
             guard let self = self else { return }
             dataManager.updateRequest(thisRequest, status: status)
         }
+        cell.selectionStyle = .none
         return cell
     }
 

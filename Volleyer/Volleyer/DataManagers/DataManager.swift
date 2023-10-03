@@ -127,7 +127,7 @@ class DataManager {
             deletePlayIdToUserPlayList(playId: play.id, userId: userId)
         }
         deletaAllRequestOfPlayId(playId: play.id)
-        LKProgressHUD.showSuccess(text: "成功刪除貼文")
+        LKProgressHUD.showSuccess(text: AlertTitile.successDeletePost.rawValue)
     }
 
     // MARK: get this user's play
@@ -162,7 +162,14 @@ class DataManager {
             } else {
                 var playsArray: [Play] = []
                 for document in querySnapshot!.documents {
-                    if document.data()[PlayTitle.status.rawValue] as! Int == 1 {
+                    // 之後若是有做只開場不發文就會用到
+//                    if document.data()[PlayTitle.status.rawValue] as! Int == 1 {
+//                        playsArray.append(self.decodePlay(document))
+//                    }
+                    // 只顯示 start time 在未來的
+                    let now = Date()
+                    let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
+                    if startTime.seconds > Int64(now.timeIntervalSince1970) {
                         playsArray.append(self.decodePlay(document))
                     }
                 }
@@ -214,7 +221,8 @@ class DataManager {
                         title: document.data()[CompetitionTitle.title.rawValue] as! String,
                         date: document.data()[CompetitionTitle.date.rawValue] as! String,
                         county: document.data()[CompetitionTitle.county.rawValue] as! String,
-                        url: document.data()[CompetitionTitle.url.rawValue] as! String
+                        url: document.data()[CompetitionTitle.url.rawValue] as! String,
+                        isEnrolling: document.data()[CompetitionTitle.isEnrolling.rawValue] as! Bool
                     )
                     competitionsArray.append(aCompetition)
                 }

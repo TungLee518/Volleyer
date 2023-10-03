@@ -22,7 +22,7 @@ class AddPlayViewController: UIViewController {
         button.layer.cornerRadius = 16
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addPlayer), for: .touchUpInside)
         return button
     }()
     lazy var deleteButton: UIButton = {
@@ -59,7 +59,7 @@ class AddPlayViewController: UIViewController {
     }
 
     private var addPlayers: [Player] = []
-    
+
     var dataManager = RequestDataManager()
 
     override func viewDidLoad() {

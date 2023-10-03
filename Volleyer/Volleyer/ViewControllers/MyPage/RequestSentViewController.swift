@@ -97,6 +97,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         } else { // deny
             cell.showOnly(status: requestStatus[2])
         }
+        cell.selectionStyle = .none
         return cell
     }
 
