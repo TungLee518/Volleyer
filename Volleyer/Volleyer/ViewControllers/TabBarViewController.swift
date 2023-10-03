@@ -9,7 +9,7 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
-    private let tabs: [Tab] = [.finder, .profile, .competition, .playOne]
+    private let tabs: [Tab] = [.finder, .playOne, .competition, .profile]
 
     private var trolleyTabBarItem: UITabBarItem?
 

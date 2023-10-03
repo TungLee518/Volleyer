@@ -13,7 +13,7 @@ class AddPlayViewController: UIViewController {
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var addPlayerButton: UIButton = {
         let button = UIButton()
-        button.setTitle("add player", for: .normal)
+        button.setTitle(AddPlayPageEnum.addPlayer.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
@@ -22,7 +22,7 @@ class AddPlayViewController: UIViewController {
         button.layer.cornerRadius = 16
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addPlayer), for: .touchUpInside)
         return button
     }()
     lazy var deleteButton: UIButton = {
@@ -41,7 +41,7 @@ class AddPlayViewController: UIViewController {
     }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
-        button.setTitle("send request", for: .normal)
+        button.setTitle(AddPlayPageEnum.sendRequest.rawValue, for: .normal)
         button.titleLabel?.font =  .semiboldNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple1
@@ -59,8 +59,8 @@ class AddPlayViewController: UIViewController {
     }
 
     private var addPlayers: [Player] = []
-    
-    var dataManager = DataManager()
+
+    var dataManager = RequestDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class AddPlayViewController: UIViewController {
         self.title = NavBarEnum.addOnePage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 

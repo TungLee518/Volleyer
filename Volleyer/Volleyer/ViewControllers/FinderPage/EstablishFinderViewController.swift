@@ -7,9 +7,19 @@
 
 import UIKit
 import FirebaseFirestore
+import JGProgressHUD
 
 class EstablishFinderViewController: UIViewController {
-    let datePicker: UIDatePicker = {
+    let formatter = DateFormatter()
+    let startDatePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+        datePicker.minuteInterval = 5
+        datePicker.sizeToFit()
+        return datePicker
+    }()
+    let endDatePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .dateAndTime
         datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
@@ -32,7 +42,7 @@ class EstablishFinderViewController: UIViewController {
         label.sizeToFit()
         return label
     }()
-    private lazy var startTimeTextField: UITextField = {
+    lazy var startTimeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
@@ -50,7 +60,7 @@ class EstablishFinderViewController: UIViewController {
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
 
         textField.inputAccessoryView = toolbar
-        textField.inputView = datePicker
+        textField.inputView = startDatePicker
 
         return textField
     }()
@@ -64,7 +74,7 @@ class EstablishFinderViewController: UIViewController {
         label.sizeToFit()
         return label
     }()
-    private lazy var endTimeTextField: UITextField = {
+    lazy var endTimeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
@@ -82,7 +92,7 @@ class EstablishFinderViewController: UIViewController {
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
 
         textField.inputAccessoryView = toolbar
-        textField.inputView = datePicker
+        textField.inputView = endDatePicker
         return textField
     }()
     private let placeLabel: UILabel = {
@@ -93,7 +103,7 @@ class EstablishFinderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private lazy var placeTextField: UITextField = {
+    lazy var placeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
@@ -119,7 +129,7 @@ class EstablishFinderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private lazy var priceTextField: UITextField = {
+    lazy var priceTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
@@ -156,6 +166,14 @@ class EstablishFinderViewController: UIViewController {
         textField.inputAccessoryView = toolbar
         return textField
     }()
+    private let unitLabel: UILabel = {
+        let label = UILabel()
+        label.text = "元/人"
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     private let typeLabel: UILabel = {
         let label = UILabel()
         label.text = "場種"
@@ -164,7 +182,7 @@ class EstablishFinderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private lazy var typeTextField: UITextField = {
+    lazy var typeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
@@ -199,7 +217,7 @@ class EstablishFinderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private lazy var maleTextField: UITextField = {
+    lazy var maleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
@@ -226,7 +244,7 @@ class EstablishFinderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private lazy var femaleTextField: UITextField = {
+    lazy var femaleTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
@@ -271,7 +289,7 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var publishButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Publish", for: .normal)
+        button.setTitle(EstablishPageEnum.publish.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .purple1
@@ -284,7 +302,7 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save", for: .normal)
+        button.setTitle(EstablishPageEnum.save.rawValue, for: .normal)
         button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .clear
@@ -295,29 +313,46 @@ class EstablishFinderViewController: UIViewController {
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor.purple1.cgColor
         button.clipsToBounds = true
+        button.isHidden = true
+        return button
+    }()
+    lazy var deletePostButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(EstablishPageEnum.deletePost.rawValue, for: .normal)
+        button.titleLabel?.font =  .regularNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.clipsToBounds = true
+        button.isHidden = true
         return button
     }()
     private let levelLabel: UILabel = {
         let label = UILabel()
-        label.text = "程度"
+        label.text = EstablishPageEnum.level.rawValue
         label.textColor = UIColor.gray2
         label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private var setCheckboxes: [UIButton] = []
-    private var blocCheckboxes: [UIButton] = []
-    private var digCheckboxes: [UIButton] = []
-    private var spickCheckboxes: [UIButton] = []
-    private var sumCheckboxes: [UIButton] = []
+    var setCheckboxes: [UIButton] = []
+    var blocCheckboxes: [UIButton] = []
+    var digCheckboxes: [UIButton] = []
+    var spickCheckboxes: [UIButton] = []
+    var sumCheckboxes: [UIButton] = []
 
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
 
     private var levelRange = LevelRange(setBall: 4, block: 4, dig: 4, spike: 4, sum: 4)
     private var lackAmount = LackAmount(male: 0, female: 0, unlimited: 0)
 
-    lazy private var thisPlay: Play = Play(id: "", finderId: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "Wrong User Id", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
+    lazy var thisPlay: Play = Play(id: "", finderId: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "Wrong User Id", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
 
     var players: [Player] = []
     var SABCLabels: [UILabel] = []
@@ -336,7 +371,7 @@ class EstablishFinderViewController: UIViewController {
         view.addSubview(placeTextField)
         view.addSubview(priceLabel)
         view.addSubview(priceTextField)
-        view.addSubview(unitTextField)
+        view.addSubview(unitLabel)
         view.addSubview(typeLabel)
         view.addSubview(typeTextField)
         view.addSubview(levelLabel)
@@ -345,7 +380,7 @@ class EstablishFinderViewController: UIViewController {
         view.addSubview(maleTextField)
         view.addSubview(femaleLabel)
         view.addSubview(femaleTextField)
-        view.addSubview(saveButton)
+        view.addSubview(deletePostButton)
         view.addSubview(publishButton)
 //        view.addSubview(deleteButton)
 //        view.addSubview(addButton)
@@ -363,6 +398,7 @@ class EstablishFinderViewController: UIViewController {
         setLayout()
         typePicker.dataSource = self
         typePicker.delegate = self
+        ifEditMode()
     }
 
     func setUpNavBar() {
@@ -370,7 +406,7 @@ class EstablishFinderViewController: UIViewController {
         self.navigationItem.title = NavBarEnum.establishFinderPage.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
@@ -386,8 +422,8 @@ class EstablishFinderViewController: UIViewController {
         for i in 0...4 {
             let label = UILabel()
             label.text = levelList[i]
-            label.textColor = UIColor.gray
-            label.font = UIFont.systemFont(ofSize: 16)
+            label.textColor = .gray3
+            label.font = .regularNunito(size: 16)
             label.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(label)
             if i == 0 {
@@ -434,6 +470,28 @@ class EstablishFinderViewController: UIViewController {
         }
         return choiceButtons
     }
+
+    func ifEditMode() {
+        if thisPlay.id != "" {
+            deletePostButton.isHidden = false
+            publishButton.setTitle(EstablishPageEnum.save.rawValue, for: .normal)
+            formatter.dateFormat = "yyyy/MM/dd HH:mm"
+            startTimeTextField.text = formatter.string(from: thisPlay.startTime)
+            startDatePicker.date = thisPlay.startTime
+            endTimeTextField.text = formatter.string(from: thisPlay.endTime)
+            endDatePicker.date = thisPlay.endTime
+            placeTextField.text = thisPlay.place
+            priceTextField.text = String(thisPlay.price)
+            typeTextField.text = playTypes[thisPlay.type]
+            maleTextField.text = String(thisPlay.lackAmount.male)
+            femaleTextField.text = String(thisPlay.lackAmount.female)
+            setCheckboxes[thisPlay.levelRange.setBall].isSelected = true
+            blocCheckboxes[thisPlay.levelRange.block].isSelected = true
+            digCheckboxes[thisPlay.levelRange.dig].isSelected = true
+            spickCheckboxes[thisPlay.levelRange.spike].isSelected = true
+            sumCheckboxes[thisPlay.levelRange.sum].isSelected = true
+        }
+    }
     @objc func setCheckboxTapped(sender: UIButton) {
         print(sender.tag)
         thisPlay.levelRange.setBall = sender.tag
@@ -469,18 +527,19 @@ class EstablishFinderViewController: UIViewController {
             checkbox.isSelected = (checkbox == sender)
         }
     }
-    @objc func doneStartDatePicker() {
-        let formatter = DateFormatter()
+    @objc func doneStartDatePicker(_ sender: UIBarItem) {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        startTimeTextField.text = formatter.string(from: datePicker.date)
-        thisPlay.startTime = datePicker.date
+        startTimeTextField.text = formatter.string(from: startDatePicker.date)
+        thisPlay.startTime = startDatePicker.date
+        if endTimeTextField.text == "" {
+            endDatePicker.date = startDatePicker.date
+        }
         self.view.endEditing(true)
     }
     @objc func doneEndDatePicker() {
-        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        endTimeTextField.text = formatter.string(from: datePicker.date)
-        thisPlay.endTime = datePicker.date
+        endTimeTextField.text = formatter.string(from: endDatePicker.date)
+        thisPlay.endTime = endDatePicker.date
         self.view.endEditing(true)
     }
     @objc func cancelToolbar() {
@@ -510,10 +569,25 @@ class EstablishFinderViewController: UIViewController {
             thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
             thisPlay.lackAmount.male = Int(maleTextField.text!)!
             thisPlay.lackAmount.female = Int(femaleTextField.text!)!
-            thisPlay.playerInfo = players
-            dataManager.savePlay(thisPlay)
-            navigationController?.popToRootViewController(animated: true)
+            if thisPlay.id == "" {
+                dataManager.savePlay(thisPlay)
+            } else {
+                dataManager.updatePlay(thisPlay)
+            }
+            navigationController?.popViewController(animated: true)
         }
+    }
+    @objc func deletePost() {
+        let controller = UIAlertController(title: "確定？", message: "要刪除貼文？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            print("確定要刪除")
+            self.dataManager.deletePlay(self.thisPlay)
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
 
     func setLayout() {
@@ -547,11 +621,11 @@ class EstablishFinderViewController: UIViewController {
             priceTextField.leadingAnchor.constraint(equalTo: placeTextField.leadingAnchor),
             priceTextField.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
             priceTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
-            unitTextField.leadingAnchor.constraint(equalTo: priceTextField.trailingAnchor, constant: standardMargin),
-            unitTextField.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
-            unitTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            unitTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
-            unitTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
+            unitLabel.leadingAnchor.constraint(equalTo: priceTextField.trailingAnchor, constant: standardMargin),
+            unitLabel.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
+            unitLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            unitLabel.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
+            unitLabel.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth),
 
             typeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             typeLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: standardMargin),
@@ -584,16 +658,16 @@ class EstablishFinderViewController: UIViewController {
 //            playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
 //            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
 
-//            saveButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
+//            deletePostButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             publishButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             publishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             publishButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             publishButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: standardMargin/2),
 
-            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: standardMargin),
-            saveButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin/2),
-            saveButton.centerYAnchor.constraint(equalTo: publishButton.centerYAnchor),
-            saveButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
+            deletePostButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: standardMargin),
+            deletePostButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin/2),
+            deletePostButton.centerYAnchor.constraint(equalTo: publishButton.centerYAnchor),
+            deletePostButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
 
 //            deleteButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin),
 //            deleteButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),

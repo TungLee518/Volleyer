@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import MJRefresh
 
 class FinderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var db: Firestore!
@@ -21,7 +22,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         dataManager.playDataDelegate = self
         setTableView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         dataManager.getPublishPlay()
     }
@@ -44,6 +45,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     @objc func pushToEstablishVC() {
         let nextVC = EstablishFinderViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
 
@@ -65,6 +67,13 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
             finderTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             finderTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                dataManager.getPublishPlay()
+                self.finderTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.finderTableView)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

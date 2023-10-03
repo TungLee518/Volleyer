@@ -27,7 +27,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         self.title = NavBarEnum.myPlays.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor.black
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
 
@@ -48,6 +48,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
             myPlaysTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             myPlaysTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        myPlaysTableView.allowsSelection = false
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

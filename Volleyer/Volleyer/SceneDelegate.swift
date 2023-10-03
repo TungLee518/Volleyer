@@ -9,6 +9,9 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    // swiftlint:disable force_cast
+    static let shared = SceneDelegate()
+    // swiftlint:enable force_cast
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,13 +23,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // let viewController = FindPlayerViewController()
         // let navigationController = UINavigationController(rootViewController: viewController)
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-
         window?.windowScene = windowScene
-        window?.rootViewController = TabBarViewController()
+
+        // for simulator
+//        MyDataManager.shared.getSimulatorProfileData()
+//        window?.rootViewController = TabBarViewController()
+        // for user
+        if UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) != nil {
+            MyDataManager.shared.getProfileData(userId: UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue)!)
+            window?.rootViewController = TabBarViewController()
+        } else {
+            window?.rootViewController = LoginViewController()
+        }
+
         window?.makeKeyAndVisible()
-        
         UserDefaults.standard.set(Date(), forKey: launchAppDate)
-        DataManager.sharedDataMenager.listenPlayRequests()
+        RequestDataManager.sharedDataMenager.listenPlayRequests()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
