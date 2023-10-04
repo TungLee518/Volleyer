@@ -161,6 +161,16 @@ class InputProfileViewController: UIViewController {
         button.addTarget(self, action: #selector(doneInput), for: .touchUpInside)
         return button
     }()
+//    var levelImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.backgroundColor = .secondarySystemBackground
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.image = UIImage(named: "levels")
+//        imageView.isUserInteractionEnabled = true
+//        return imageView
+//    }()
+    let levelImageView = PanZoomImageView(named: "levels")
 
     var setCheckboxes: [UIButton] = []
     var blocCheckboxes: [UIButton] = []
@@ -170,6 +180,8 @@ class InputProfileViewController: UIViewController {
     var SABCLabels: [UILabel] = []
 
     lazy var thisUser = User(id: "", email: "", gender: -1, name: "")
+
+    var levelImageIsHidden = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -200,6 +212,7 @@ class InputProfileViewController: UIViewController {
 
         genderPicker.dataSource = self
         genderPicker.delegate = self
+        setLevelImage()
 
         MyDataManager.shared.canGoToTabbarVC = { [weak self] canGoToTabbarVc in
             guard let self = self else { return }
@@ -318,6 +331,19 @@ class InputProfileViewController: UIViewController {
         }
         return choiceButtons
     }
+    func setLevelImage() {
+        view.addSubview(levelImageView)
+        levelImageView.backgroundColor = .gray5
+        levelImageView.isHidden = levelImageIsHidden
+        levelImageView.imageView.image = UIImage(named: "levels")
+        levelImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            levelImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            levelImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            levelImageView.heightAnchor.constraint(equalTo: levelImageView.widthAnchor, multiplier: 1.3),
+            levelImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
+    }
     @objc func cancelToolbar() {
         self.view.endEditing(true)
     }
@@ -357,7 +383,15 @@ class InputProfileViewController: UIViewController {
         }
     }
     @objc func viewLevel() {
-        
+        levelImageIsHidden = !levelImageIsHidden
+        levelImageView.isHidden = levelImageIsHidden
+        if levelImageIsHidden {
+            doneInputButton.isHidden = false
+            viewLevelButton.setTitle("自評表", for: .normal)
+        } else {
+            doneInputButton.isHidden = true
+            viewLevelButton.setTitle("OK", for: .normal)
+        }
     }
     @objc func doneInput() {
         if idTextField.text != "", nameTextField.text != "", emailTextField.text != "", genderTextField.text != "", nameTextField.text != "", thisUser.level.block != 4, thisUser.level.setBall != 4, thisUser.level.dig != 4, thisUser.level.spike != 4, thisUser.level.sum != 4 {

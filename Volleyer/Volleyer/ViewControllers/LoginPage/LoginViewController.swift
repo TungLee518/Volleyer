@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,7 +38,7 @@ class LoginViewController: UIViewController {
     func setLayout() {
         NSLayoutConstraint.activate([
             welcomeLable.bottomAnchor.constraint(equalTo: appleLogInButton.topAnchor, constant: -standardMargin*3),
-            welcomeLable.centerXAnchor.constraint(equalTo:view.safeAreaLayoutGuide.centerXAnchor),
+            welcomeLable.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             appleLogInButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             appleLogInButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             appleLogInButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
@@ -82,6 +83,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         MyDataManager.shared.getProfileData(userId: userIdentifier)
                         UserDefaults.standard.set(userIdentifier, forKey: UserTitle.userIdentifier.rawValue)
                         let viewController = TabBarViewController()
+//                        RequestDataManager.sharedDataMenager.listenPlayRequests()
                         viewController.modalPresentationStyle = .fullScreen
                         self.present(viewController, animated: true)
                     } else { // 沒有帳號

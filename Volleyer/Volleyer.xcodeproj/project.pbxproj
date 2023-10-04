@@ -70,6 +70,7 @@
 		C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */; };
 		C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */; };
 		C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */; };
+		C89961742ACD9AC400C5D35D /* ScrollImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961732ACD9AC400C5D35D /* ScrollImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +141,7 @@
 		C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileViewController.swift; sourceTree = "<group>"; };
 		C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProfileViewController.swift; sourceTree = "<group>"; };
+		C89961732ACD9AC400C5D35D /* ScrollImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollImageView.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,6 +316,7 @@
 				C89961082ABD933700C5D35D /* ProfileView.swift */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
+				C89961732ACD9AC400C5D35D /* ScrollImageView.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
+				C89961742ACD9AC400C5D35D /* ScrollImageView.swift in Sources */,
 				C89961112AC03C0700C5D35D /* PlayOneViewController.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
 				C89961072ABD687300C5D35D /* RequestSentViewController.swift in Sources */,

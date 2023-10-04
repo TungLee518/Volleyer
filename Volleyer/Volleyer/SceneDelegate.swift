@@ -32,13 +32,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) != nil {
             MyDataManager.shared.getProfileData(userId: UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue)!)
             window?.rootViewController = TabBarViewController()
+//            RequestDataManager.sharedDataMenager.listenPlayRequests()
         } else {
             window?.rootViewController = LoginViewController()
         }
 
         window?.makeKeyAndVisible()
         UserDefaults.standard.set(Date(), forKey: launchAppDate)
-        RequestDataManager.sharedDataMenager.listenPlayRequests()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
