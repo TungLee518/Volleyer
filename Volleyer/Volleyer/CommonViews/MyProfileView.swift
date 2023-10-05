@@ -229,7 +229,7 @@ class MyProfileView: UIView {
             sumLable.leadingAnchor.constraint(equalTo: blockLable.trailingAnchor, constant: standardMargin*2),
             sumLable.centerYAnchor.constraint(equalTo: digLable.centerYAnchor),
             sumLevelLable.centerXAnchor.constraint(equalTo: sumLable.centerXAnchor),
-            sumLevelLable.topAnchor.constraint(equalTo: sumLable.bottomAnchor, constant: standardMargin),
+            sumLevelLable.topAnchor.constraint(equalTo: sumLable.bottomAnchor, constant: standardMargin)
         ])
     }
 }

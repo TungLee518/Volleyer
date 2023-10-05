@@ -106,8 +106,20 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
             ballImage.trailingAnchor.constraint(equalTo: headerView.contentView.trailingAnchor, constant: -16),
             ballImage.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
             ballImage.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12),
-            ballImage.heightAnchor.constraint(equalToConstant: 100),
-            ballImage.widthAnchor.constraint(equalToConstant: 100)
+            ballImage.heightAnchor.constraint(equalToConstant: 60),
+            ballImage.widthAnchor.constraint(equalToConstant: 60)
+        ])
+        let headerLabel = UILabel()
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerLabel.text = "快來找適合自己的場！"
+        headerLabel.font = .boldSystemFont(ofSize: 20)
+        headerLabel.textColor = .purple2
+        headerView.contentView.addSubview(headerLabel)
+
+        NSLayoutConstraint.activate([
+            headerLabel.leadingAnchor.constraint(equalTo: headerView.contentView.leadingAnchor, constant: 16),
+            headerLabel.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
+            headerLabel.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12)
         ])
 
         return headerView
