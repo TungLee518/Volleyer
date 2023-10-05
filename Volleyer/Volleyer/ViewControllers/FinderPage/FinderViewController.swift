@@ -89,6 +89,29 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         cell.parent = self
         return cell
     }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UITableViewHeaderFooterView()
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.backgroundView = {
+            let view = UIView()
+            view.backgroundColor = .purple7
+            return view
+        }()
+        let ballImage = UIImageView()
+        ballImage.image = UIImage(named: "players")
+        ballImage.translatesAutoresizingMaskIntoConstraints = false
+        headerView.contentView.addSubview(ballImage)
+        NSLayoutConstraint.activate([
+            ballImage.trailingAnchor.constraint(equalTo: headerView.contentView.trailingAnchor, constant: -16),
+            ballImage.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
+            ballImage.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12),
+            ballImage.heightAnchor.constraint(equalToConstant: 100),
+            ballImage.widthAnchor.constraint(equalToConstant: 100)
+        ])
+
+        return headerView
+    }
 }
 
 // not determine public or not yet

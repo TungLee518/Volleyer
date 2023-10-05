@@ -7,24 +7,10 @@
 
 import UIKit
 
-class MyViewController: UIViewController {
+class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
-    private lazy var photoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "placeholder")
-        imageView.layer.cornerRadius = photoHeight / 2
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    private let accountLable: UILabel = {
-        let label = UILabel()
-        label.text = "maymmm518"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    let myProfileView = MyProfileView()
+
     lazy var myProfileButton: UIButton = {
         let button = UIButton()
         button.setTitle(MyPageEnum.myProfile.rawValue, for: .normal)
@@ -35,6 +21,46 @@ class MyViewController: UIViewController {
         button.layer.cornerRadius = 16
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(pushToMyProfile), for: .touchUpInside)
+        return button
+    }()
+    lazy var editPhotoButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("更改照片", for: .normal)
+        button.titleLabel?.font =  .regularNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.addTarget(self, action: #selector(pushToEditPhoto), for: .touchUpInside)
+        return button
+    }()
+    lazy var editProfileButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("更改資料", for: .normal)
+        button.titleLabel?.font =  .regularNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.addTarget(self, action: #selector(pushToInputProfile), for: .touchUpInside)
+        return button
+    }()
+    lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("登出", for: .normal)
+        button.titleLabel?.font =  .semiboldNunito(size: 16)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .purple1
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(logout), for: .touchUpInside)
         return button
     }()
     lazy var myFinderButton: UIButton = {
@@ -99,40 +125,66 @@ class MyViewController: UIViewController {
 
         self.view.backgroundColor = UIColor.white
 
-//        view.addSubview(photoImageView)
-//        view.addSubview(accountLable)
-        view.addSubview(myProfileButton)
+//        view.addSubview(myProfileButton)
+        view.addSubview(myProfileView)
+        view.addSubview(editPhotoButton)
+        view.addSubview(editProfileButton)
+        view.addSubview(logoutButton)
         view.addSubview(myFinderButton)
         view.addSubview(myPlayButton)
         view.addSubview(requestsReceiveButton)
         view.addSubview(requestsSendButton)
 
         setLayout()
+        setProfileData()
         navigationItem.title = NavBarEnum.myPage.rawValue
+    }
+
+    func setProfileData() {
+        myProfileView.translatesAutoresizingMaskIntoConstraints = false
+        myProfileView.thisUser = User(
+            id: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No id found",
+            email: UserDefaults.standard.string(forKey: UserTitle.email.rawValue) ?? "No email found",
+            gender: UserDefaults.standard.integer(forKey: UserTitle.gender.rawValue),
+            name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue) ?? "No name found",
+            level: LevelRange(setBall: UserDefaults.standard.integer(forKey: Level.setBall.rawValue),
+                              block: UserDefaults.standard.integer(forKey: Level.block.rawValue),
+                              dig: UserDefaults.standard.integer(forKey: Level.dig.rawValue),
+                              spike: UserDefaults.standard.integer(forKey: Level.spike.rawValue),
+                              sum: UserDefaults.standard.integer(forKey: Level.sum.rawValue)),
+            image: UserDefaults.standard.string(forKey: UserTitle.image.rawValue) ?? "https://firebasestorage.googleapis.com/v0/b/volleyer-a15b6.appspot.com/o/defaults%2Fplaceholder.png?alt=media&token=d686707b-7b55-4291-8d67-c809c14f9528&_gl=1*gmtbad*_ga*MTE1Njk3OTU3Ny4xNjkxNjU1MTk0*_ga_CW55HF8NVT*MTY5NjA2MDc1Ni45Mi4xLjE2OTYwNjEwMTguNTQuMC4w"
+        )
+        myProfileView.setView()
     }
 
     private func setLayout() {
         NSLayoutConstraint.activate([
-//            photoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-//            photoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin),
-//            photoImageView.heightAnchor.constraint(equalToConstant: photoHeight),
-//            photoImageView.widthAnchor.constraint(equalToConstant: photoHeight),
-//
-//            accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
-//            accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
+//            myProfileButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+//            myProfileButton.bottomAnchor.constraint(equalTo: myFinderButton.topAnchor, constant: -standardMargin),
+//            myProfileButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+//            myProfileButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
 
-            myProfileButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            myProfileButton.bottomAnchor.constraint(equalTo: myFinderButton.topAnchor, constant: -standardMargin),
-            myProfileButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            myProfileButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-
+            myProfileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            myProfileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            myProfileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            editPhotoButton.topAnchor.constraint(equalTo: myProfileView.bottomAnchor, constant: standardMargin),
+            editPhotoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            editPhotoButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            editPhotoButton.trailingAnchor.constraint(equalTo: editProfileButton.leadingAnchor, constant: -standardMargin),
+            editProfileButton.centerYAnchor.constraint(equalTo: editPhotoButton.centerYAnchor),
+            editProfileButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            editProfileButton.trailingAnchor.constraint(equalTo: logoutButton.leadingAnchor, constant: -standardMargin),
+            logoutButton.centerYAnchor.constraint(equalTo: editPhotoButton.centerYAnchor),
+            logoutButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            
             myFinderButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            myFinderButton.bottomAnchor.constraint(equalTo: myPlayButton.topAnchor, constant: -standardMargin),
+            myFinderButton.topAnchor.constraint(equalTo: editPhotoButton.bottomAnchor, constant: standardMargin),
             myFinderButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             myFinderButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
 
             myPlayButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            myPlayButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            myPlayButton.topAnchor.constraint(equalTo: myFinderButton.bottomAnchor, constant: standardMargin),
             myPlayButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             myPlayButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
 
@@ -146,6 +198,8 @@ class MyViewController: UIViewController {
             requestsSendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             requestsSendButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
+        self.view.addConstraint(NSLayoutConstraint(item: editPhotoButton, attribute: .width, relatedBy: .equal, toItem: editProfileButton, attribute: .width, multiplier: 1.0, constant: 0.0))
+        self.view.addConstraint(NSLayoutConstraint(item: editProfileButton, attribute: .width, relatedBy: .equal, toItem: logoutButton, attribute: .width, multiplier: 1.0, constant: 0.0))
     }
 
     @objc func pushToMyProfile() {
@@ -165,6 +219,42 @@ class MyViewController: UIViewController {
         navigationController?.pushViewController(nextVC, animated: true)
     }
 
+    @objc func pushToEditPhoto() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    @objc func pushToInputProfile() {
+        
+    }
+    @objc func logout() {
+        let controller = UIAlertController(title: "確定？", message: "要登出？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            print("確定要登出")
+            LKProgressHUD.showSuccess(text: "已登出")
+            UserDefaults.standard.set(nil, forKey: UserTitle.firebaseId.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.userIdentifier.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.id.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.name.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.image.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.email.rawValue)
+            UserDefaults.standard.set(nil, forKey: UserTitle.gender.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.setBall.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.block.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.dig.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.spike.rawValue)
+            UserDefaults.standard.set(nil, forKey: Level.sum.rawValue)
+            let nextVC = LoginViewController()
+            nextVC.modalPresentationStyle = .fullScreen
+            self.present(nextVC, animated: true)
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
+    }
     @objc func pushToMyFinders() {
         let nextVC = MyFindersViewController()
         navigationController?.pushViewController(nextVC, animated: true)

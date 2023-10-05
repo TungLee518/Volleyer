@@ -93,11 +93,10 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamMay").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
-                    
                     for document in querySnapshot!.documents {
                         let documentLevel = document.data()["self_level"] as! [String: Int]
                         let thisUser = User(firebaseId: document.documentID,
@@ -118,7 +117,6 @@ class MyDataManager {
                         // all strings
                         self.saveUserDefault(thisUser)
                     }
-                   
                 }
         }
     }

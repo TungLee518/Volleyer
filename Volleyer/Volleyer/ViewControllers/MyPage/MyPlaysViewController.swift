@@ -9,6 +9,21 @@ import UIKit
 
 class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    lazy var photoImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "blow")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+    private let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "目前沒有要打的場"
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 32)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     private var myPlaysTableView: UITableView!
 
     private let dataManager = DataManager()
@@ -20,6 +35,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         dataManager.getThisUserPlays()
         dataManager.playDataDelegate = self
         setTableView()
+        setImageView()
     }
 
     private func setNavBar() {
@@ -51,6 +67,19 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         myPlaysTableView.allowsSelection = false
     }
 
+    func setImageView() {
+        view.addSubview(photoImageView)
+        view.addSubview(noDataLabel)
+        NSLayoutConstraint.activate([
+            photoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            photoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            photoImageView.widthAnchor.constraint(equalToConstant: 150),
+            photoImageView.heightAnchor.constraint(equalToConstant: 150),
+            noDataLabel.centerXAnchor.constraint(equalTo: photoImageView.centerXAnchor),
+            noDataLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin)
+        ])
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myPlays.count
     }
@@ -75,6 +104,15 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
 extension MyPlaysViewController: PlayDataManagerDelegate {
     func manager(_ manager: DataManager, didGet plays: [Play]) {
         myPlays = plays
-        myPlaysTableView.reloadData()
+        if myPlays.count == 0 {
+            photoImageView.isHidden = false
+            noDataLabel.isHidden = false
+            myPlaysTableView.isHidden = true
+        } else {
+            photoImageView.isHidden = true
+            noDataLabel.isHidden = true
+            myPlaysTableView.isHidden = false
+            myPlaysTableView.reloadData()
+        }
     }
 }

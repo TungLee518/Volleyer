@@ -11,10 +11,6 @@ class TabBarViewController: UITabBarController {
 
     private let tabs: [Tab] = [.finder, .playOne, .competition, .profile]
 
-    private var trolleyTabBarItem: UITabBarItem?
-
-    private var orderObserver: NSKeyValueObservation?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +20,11 @@ class TabBarViewController: UITabBarController {
         }
         self.tabBar.tintColor = .purple4
         viewControllers = tabs.map { $0.makeViewController() }
+        RequestDataManager.sharedDataMenager.listenPlayRequests()
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            return
+        }
+        sceneDelegate.window?.rootViewController = self
     }
 }
 
