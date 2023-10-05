@@ -32,7 +32,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) != nil {
             MyDataManager.shared.getProfileData(userId: UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue)!)
             window?.rootViewController = TabBarViewController()
-//            RequestDataManager.sharedDataMenager.listenPlayRequests()
         } else {
             window?.rootViewController = LoginViewController()
         }

@@ -35,7 +35,7 @@ class InputProfileViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
         textField.textColor = .gray2
-        textField.placeholder = "id"
+        textField.placeholder = "用於顯示且不重複的ID"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
@@ -61,7 +61,7 @@ class InputProfileViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
         textField.textColor = .gray2
-        textField.placeholder = "name"
+        textField.placeholder = "輸入姓名"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
@@ -87,7 +87,7 @@ class InputProfileViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
         textField.textColor = .gray2
-        textField.placeholder = "email"
+        textField.placeholder = "輸入 email"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
@@ -113,7 +113,7 @@ class InputProfileViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
         textField.textColor = .gray2
-        textField.placeholder = "gender"
+        textField.placeholder = "請選擇"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect

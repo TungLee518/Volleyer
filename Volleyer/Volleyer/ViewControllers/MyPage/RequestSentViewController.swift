@@ -9,6 +9,20 @@ import UIKit
 import MJRefresh
 
 class RequestSentViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    lazy var photoImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "blow")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+    private let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "目前沒有送出邀請"
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 32)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     private var requestsTableView: UITableView!
 
     private let dataManager = RequestDataManager()
@@ -20,6 +34,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         dataManager.getPlayRequests()
         dataManager.playRequestDelegate = self
         setTableView()
+        setImageView()
         RequestDataManager.sharedDataMenager.updateRequestsSentTableView = { [weak self] modifiedRequest in
             guard let self = self else { return }
             for i in 0..<myRequests.count {
@@ -65,6 +80,18 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
                 self.requestsTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.requestsTableView)
+    }
+    func setImageView() {
+        view.addSubview(photoImageView)
+        view.addSubview(noDataLabel)
+        NSLayoutConstraint.activate([
+            photoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            photoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            photoImageView.widthAnchor.constraint(equalToConstant: 150),
+            photoImageView.heightAnchor.constraint(equalToConstant: 150),
+            noDataLabel.centerXAnchor.constraint(equalTo: photoImageView.centerXAnchor),
+            noDataLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin)
+        ])
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -118,6 +145,16 @@ extension RequestSentViewController: RequestsDataManagerDelegate {
     }
     func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
         myRequests = playRequests
-        requestsTableView.reloadData()
+//        requestsTableView.reloadData()
+        if myRequests.count == 0 {
+            photoImageView.isHidden = false
+            noDataLabel.isHidden = false
+            requestsTableView.isHidden = true
+        } else {
+            photoImageView.isHidden = true
+            noDataLabel.isHidden = true
+            requestsTableView.isHidden = false
+            requestsTableView.reloadData()
+        }
     }
 }
