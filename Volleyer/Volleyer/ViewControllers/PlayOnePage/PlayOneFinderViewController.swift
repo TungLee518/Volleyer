@@ -20,11 +20,31 @@ class PlayOneFinderViewController: UIViewController {
     @IBOutlet weak var takePlayer4PhotoButton: UIButton!
     @IBOutlet weak var takePlayer5PhotoButton: UIButton!
 
-    @IBOutlet weak var player1ImageView: UIImageView!
-    @IBOutlet weak var player2ImageView: UIImageView!
-    @IBOutlet weak var player3ImageView: UIImageView!
-    @IBOutlet weak var player4ImageView: UIImageView!
-    @IBOutlet weak var player5ImageView: UIImageView!
+    @IBOutlet weak var player1ImageView: UIImageView! {
+        didSet {
+            self.player1ImageView.tappable = true
+        }
+    }
+    @IBOutlet weak var player2ImageView: UIImageView! {
+        didSet {
+            self.player2ImageView.tappable = true
+        }
+    }
+    @IBOutlet weak var player3ImageView: UIImageView! {
+        didSet {
+            self.player3ImageView.tappable = true
+        }
+    }
+    @IBOutlet weak var player4ImageView: UIImageView! {
+        didSet {
+            self.player4ImageView.tappable = true
+        }
+    }
+    @IBOutlet weak var player5ImageView: UIImageView! {
+        didSet {
+            self.player5ImageView.tappable = true
+        }
+    }
 
     @IBOutlet weak var player1NameLabel: UILabel!
     @IBOutlet weak var player2NameLabel: UILabel!
@@ -65,6 +85,21 @@ class PlayOneFinderViewController: UIViewController {
         changeButtonUI(takePlayer5PhotoButton)
         dataManager.playOneFinderDataDelegate = self
         setNavBar()
+        self.player1ImageView.callback = {
+            self.enlargeImage(self.player1ImageView)
+        }
+        self.player2ImageView.callback = {
+            self.enlargeImage(self.player2ImageView)
+        }
+        self.player3ImageView.callback = {
+            self.enlargeImage(self.player3ImageView)
+        }
+        self.player4ImageView.callback = {
+            self.enlargeImage(self.player4ImageView)
+        }
+        self.player5ImageView.callback = {
+            self.enlargeImage(self.player5ImageView)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +140,31 @@ class PlayOneFinderViewController: UIViewController {
         nextVC.playerN = "player5"
         nextVC.finderInfo = finderInfo
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+
+    func enlargeImage(_ imageView: UIImageView) {
+        view.bringSubviewToFront(imageView)
+        if imageView.frame.size.width == self.view.frame.size.width {
+            // If the image is already enlarged, shrink it back to its original size
+            UIView.animate(withDuration: 0.3) {
+//                imageView.transform = CGAffineTransform.identity
+                let translation = CGPoint(x: 0, y: -0)
+                let scaledTransform = CGAffineTransform.identity
+                let translatedTransform = scaledTransform.translatedBy(x: translation.x, y: translation.y)
+                imageView.transform = translatedTransform
+            }
+        } else {
+            // If the image is not enlarged, make it larger
+            UIView.animate(withDuration: 0.3) {
+                let scale = self.view.frame.size.width / imageView.frame.size.width
+                let goToCenterX = (self.view.frame.midX - imageView.frame.midX)/scale
+                let goToCenterY = (self.view.frame.midY - imageView.frame.midY)/scale
+                let translation = CGPoint(x: goToCenterX, y: goToCenterY) // Adjust these values as needed
+                let scaledTransform = CGAffineTransform(scaleX: scale, y: scale)
+                let translatedTransform = scaledTransform.translatedBy(x: translation.x, y: translation.y)
+                imageView.transform = translatedTransform
+            }
+        }
     }
 
     private func setNavBar() {

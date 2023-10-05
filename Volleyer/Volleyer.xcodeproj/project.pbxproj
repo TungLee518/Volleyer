@@ -71,6 +71,8 @@
 		C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */; };
 		C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */; };
 		C89961742ACD9AC400C5D35D /* ScrollImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961732ACD9AC400C5D35D /* ScrollImageView.swift */; };
+		C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961752ACE875400C5D35D /* KeyChainManager.swift */; };
+		C89961782ACE906300C5D35D /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961772ACE906300C5D35D /* UIImageView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +144,8 @@
 		C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileViewController.swift; sourceTree = "<group>"; };
 		C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProfileViewController.swift; sourceTree = "<group>"; };
 		C89961732ACD9AC400C5D35D /* ScrollImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollImageView.swift; sourceTree = "<group>"; };
+		C89961752ACE875400C5D35D /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		C89961772ACE906300C5D35D /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -282,6 +286,7 @@
 				C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */,
 				C89961262AC2C49600C5D35D /* UIFont+Extension.swift */,
 				C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */,
+				C89961772ACE906300C5D35D /* UIImageView+Extension.swift */,
 				C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */,
 			);
 			path = Extensions;
@@ -337,6 +342,7 @@
 				C89961372ACABD3500C5D35D /* RequestDataManager.swift */,
 				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
 				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
+				C89961752ACE875400C5D35D /* KeyChainManager.swift */,
 			);
 			path = DataManagers;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 				C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
 				C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */,
+				C89961782ACE906300C5D35D /* UIImageView+Extension.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
@@ -526,6 +533,7 @@
 				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
 				C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
+				C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */,
 				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
