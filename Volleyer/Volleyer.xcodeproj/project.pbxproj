@@ -73,6 +73,7 @@
 		C89961742ACD9AC400C5D35D /* ScrollImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961732ACD9AC400C5D35D /* ScrollImageView.swift */; };
 		C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961752ACE875400C5D35D /* KeyChainManager.swift */; };
 		C89961782ACE906300C5D35D /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961772ACE906300C5D35D /* UIImageView+Extension.swift */; };
+		C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961792ACEC05D00C5D35D /* MyProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		C89961732ACD9AC400C5D35D /* ScrollImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollImageView.swift; sourceTree = "<group>"; };
 		C89961752ACE875400C5D35D /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		C89961772ACE906300C5D35D /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		C89961792ACEC05D00C5D35D /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -319,6 +321,7 @@
 			children = (
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C89961082ABD933700C5D35D /* ProfileView.swift */,
+				C89961792ACEC05D00C5D35D /* MyProfileView.swift */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C89961732ACD9AC400C5D35D /* ScrollImageView.swift */,
@@ -536,6 +539,7 @@
 				C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */,
 				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
+				C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
 				C89960FD2ABBE0D200C5D35D /* RequestsReceivedViewController.swift in Sources */,
