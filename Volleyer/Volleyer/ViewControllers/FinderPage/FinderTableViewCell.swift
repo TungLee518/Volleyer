@@ -174,7 +174,6 @@ class FinderTableViewCell: UITableViewCell {
         didSet {
 //            sendDataToPlayView(thisPlay!)
             setContent()
-            
 //            photoImageView.image = UIImage(named: )
             if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 wantToAddImageView.isHidden = true
@@ -205,23 +204,27 @@ class FinderTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(courtImageView)
+//        contentView.addSubview(courtImageView)
+        self.selectionStyle = .none
+        applyShadow()
+//        self.clipsToBounds = true
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         contentView.addSubview(calanderImageView)
         contentView.addSubview(startTimeLable)
         contentView.addSubview(endTimeLable)
         contentView.addSubview(placeImageView)
         contentView.addSubview(placeLabel)
-        contentView.addSubview(typeLable)
-        contentView.addSubview(setLevelLable)
-        contentView.addSubview(blockLevelLable)
-        contentView.addSubview(digLevelLable)
-        contentView.addSubview(spikeLevelLable)
-        contentView.addSubview(sumLevelLable)
-        contentView.addSubview(priceLable)
+//        contentView.addSubview(typeLable)
+//        contentView.addSubview(setLevelLable)
+//        contentView.addSubview(blockLevelLable)
+//        contentView.addSubview(digLevelLable)
+//        contentView.addSubview(spikeLevelLable)
+//        contentView.addSubview(sumLevelLable)
+//        contentView.addSubview(priceLable)
 //        contentView.addSubview(playView)
 //        playView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(photoImageView)
-        contentView.addSubview(accountLable)
+//        contentView.addSubview(photoImageView)
+//        contentView.addSubview(accountLable)
         contentView.addSubview(wantToAddImageView)
         setLayout()
     }
@@ -264,58 +267,58 @@ class FinderTableViewCell: UITableViewCell {
 
     private func setLayout() {
         NSLayoutConstraint.activate([
-            courtImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            courtImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            courtImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            courtImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            courtImageView.heightAnchor.constraint(equalTo: courtImageView.widthAnchor, multiplier: 1.5),
-
-            calanderImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin*4.2),
-            calanderImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin*5),
+//            courtImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            courtImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            courtImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            courtImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            courtImageView.heightAnchor.constraint(equalTo: courtImageView.widthAnchor, multiplier: 1.5),
+            calanderImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+            calanderImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
             calanderImageView.heightAnchor.constraint(equalToConstant: 40),
             calanderImageView.widthAnchor.constraint(equalTo: calanderImageView.heightAnchor, multiplier: 1),
             startTimeLable.centerYAnchor.constraint(equalTo: calanderImageView.topAnchor),
-            startTimeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: standardMargin*1.2),
+            startTimeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: standardMargin),
             endTimeLable.centerYAnchor.constraint(equalTo: calanderImageView.bottomAnchor),
-            endTimeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: standardMargin*1.2),
-            placeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin*4.2),
-            placeImageView.topAnchor.constraint(equalTo: calanderImageView.bottomAnchor, constant: standardMargin*2),
+            endTimeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: standardMargin),
+            placeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+            placeImageView.topAnchor.constraint(equalTo: calanderImageView.bottomAnchor, constant: standardMargin),
             placeImageView.heightAnchor.constraint(equalToConstant: 40),
             placeImageView.widthAnchor.constraint(equalTo: calanderImageView.heightAnchor, multiplier: 1),
+            placeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
 //            placeLabel.leadingAnchor.constraint(equalTo: placeImageView.trailingAnchor, constant: standardMargin),
             placeLabel.centerXAnchor.constraint(equalTo: endTimeLable.centerXAnchor),
 //            placeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin*4.7),
             placeLabel.centerYAnchor.constraint(equalTo: placeImageView.centerYAnchor),
-            typeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            typeLable.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -standardMargin*2),
-            digLevelLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            digLevelLable.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: standardMargin*2),
+//            typeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            typeLable.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -standardMargin*2),
+//            digLevelLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            digLevelLable.topAnchor.constraint(equalTo: contentView.centerYAnchor, constant: standardMargin*2),
+//
+//            blockLevelLable.trailingAnchor.constraint(equalTo: digLevelLable.leadingAnchor, constant: -standardMargin),
+//            blockLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
+//
+//            setLevelLable.trailingAnchor.constraint(equalTo: blockLevelLable.leadingAnchor, constant: -standardMargin),
+//            setLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
+//
+//            spikeLevelLable.leadingAnchor.constraint(equalTo: digLevelLable.trailingAnchor, constant: standardMargin),
+//            spikeLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
+//
+//            sumLevelLable.leadingAnchor.constraint(equalTo: spikeLevelLable.trailingAnchor, constant: standardMargin),
+//            sumLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
+//
+//            priceLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            priceLable.bottomAnchor.constraint(equalTo: accountLable.topAnchor, constant: -standardMargin*2),
+//
+//            photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin*4.2),
+//            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin*4.5),
+//            photoImageView.heightAnchor.constraint(equalToConstant: photoHeight),
+//            photoImageView.widthAnchor.constraint(equalToConstant: photoHeight),
+//
+//            accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
+//            accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
 
-            blockLevelLable.trailingAnchor.constraint(equalTo: digLevelLable.leadingAnchor, constant: -standardMargin),
-            blockLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
-
-            setLevelLable.trailingAnchor.constraint(equalTo: blockLevelLable.leadingAnchor, constant: -standardMargin),
-            setLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
-
-            spikeLevelLable.leadingAnchor.constraint(equalTo: digLevelLable.trailingAnchor, constant: standardMargin),
-            spikeLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
-
-            sumLevelLable.leadingAnchor.constraint(equalTo: spikeLevelLable.trailingAnchor, constant: standardMargin),
-            sumLevelLable.centerYAnchor.constraint(equalTo: digLevelLable.centerYAnchor),
-
-            priceLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            priceLable.bottomAnchor.constraint(equalTo: accountLable.topAnchor, constant: -standardMargin*2),
-
-            photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin*4.2),
-            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin*4.5),
-            photoImageView.heightAnchor.constraint(equalToConstant: photoHeight),
-            photoImageView.widthAnchor.constraint(equalToConstant: photoHeight),
-
-            accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
-            accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
-
-            wantToAddImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin*4.7),
-            wantToAddImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin*4.6),
+            wantToAddImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
+            wantToAddImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
             wantToAddImageView.heightAnchor.constraint(equalToConstant: 40),
             wantToAddImageView.widthAnchor.constraint(equalTo: wantToAddImageView.heightAnchor, multiplier: 1)
         ])

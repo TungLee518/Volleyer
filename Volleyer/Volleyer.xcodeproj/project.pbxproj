@@ -74,6 +74,8 @@
 		C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961752ACE875400C5D35D /* KeyChainManager.swift */; };
 		C89961782ACE906300C5D35D /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961772ACE906300C5D35D /* UIImageView+Extension.swift */; };
 		C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961792ACEC05D00C5D35D /* MyProfileView.swift */; };
+		C8D54A0E2ACFD5A10020C06C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */; };
+		C8D54A102AD008420020C06C /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D54A0F2AD008420020C06C /* LevelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +150,8 @@
 		C89961752ACE875400C5D35D /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		C89961772ACE906300C5D35D /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		C89961792ACEC05D00C5D35D /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C8D54A0F2AD008420020C06C /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -289,6 +293,7 @@
 				C89961262AC2C49600C5D35D /* UIFont+Extension.swift */,
 				C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */,
 				C89961772ACE906300C5D35D /* UIImageView+Extension.swift */,
+				C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */,
 				C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */,
 			);
 			path = Extensions;
@@ -322,6 +327,7 @@
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C89961082ABD933700C5D35D /* ProfileView.swift */,
 				C89961792ACEC05D00C5D35D /* MyProfileView.swift */,
+				C8D54A0F2AD008420020C06C /* LevelView.swift */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C89961732ACD9AC400C5D35D /* ScrollImageView.swift */,
@@ -516,6 +522,7 @@
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
+				C8D54A0E2ACFD5A10020C06C /* UIView+Extension.swift in Sources */,
 				C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */,
 				C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */,
 				C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */,
@@ -529,6 +536,7 @@
 				C899613D2ACBBA6700C5D35D /* LoginViewController.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
+				C8D54A102AD008420020C06C /* LevelView.swift in Sources */,
 				C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
