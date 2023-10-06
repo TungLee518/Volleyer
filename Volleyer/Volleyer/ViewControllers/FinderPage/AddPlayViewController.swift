@@ -78,7 +78,7 @@ class AddPlayViewController: UIViewController {
     let placeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray2
-        label.font = .regularNunito(size: 18)
+        label.font = .regularNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -92,7 +92,7 @@ class AddPlayViewController: UIViewController {
     let priceLable: UILabel = {
         let label = UILabel()
         label.textColor = .gray2
-        label.font = .regularNunito(size: 18)
+        label.font = .regularNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -106,7 +106,7 @@ class AddPlayViewController: UIViewController {
     let maleLackLable: UILabel = {
         let label = UILabel()
         label.textColor = .gray2
-        label.font = .regularNunito(size: 18)
+        label.font = .regularNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -120,7 +120,7 @@ class AddPlayViewController: UIViewController {
     let femaleLackLable: UILabel = {
         let label = UILabel()
         label.textColor = .gray2
-        label.font = .regularNunito(size: 18)
+        label.font = .regularNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -225,7 +225,6 @@ class AddPlayViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var addPlayerButton: UIButton = {
         let button = UIButton()
@@ -266,14 +265,16 @@ class AddPlayViewController: UIViewController {
 //        button.layer.cornerRadius = 16
 //        button.clipsToBounds = true
         button.setImage(UIImage(named: "plus 1"), for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
+        button.tintColor = .purple4
+//        button.tintColor = .gray3
+//        button.titleLabel?.font =  .regularNunito(size: 16)
+//        button.titleLabel?.textAlignment = .center
+//        button.backgroundColor = .clear
+//        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 16
-//        button.layer.borderWidth = 3
-//        button.layer.borderColor = UIColor.purple1.cgColor
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.gray1.cgColor
         button.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
         return button
     }()
@@ -405,14 +406,8 @@ class AddPlayViewController: UIViewController {
 ////            playerListTableView.topAnchor.constraint(equalTo: playView.bottomAnchor, constant: standardMargin),
 //            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
 //            playerListTableView.heightAnchor.constraint(equalToConstant: 200),
-            topImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            topImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            topImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            topImageView.heightAnchor.constraint(equalToConstant: 150),
-            wantToAddLable.centerXAnchor.constraint(equalTo: topImageView.centerXAnchor),
-            wantToAddLable.centerYAnchor.constraint(equalTo: topImageView.centerYAnchor),
-            typeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            typeLable.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: standardMargin*4),
+           
+
             photoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             photoImageView.topAnchor.constraint(equalTo: typeLable.bottomAnchor, constant: standardMargin),
             photoImageView.heightAnchor.constraint(equalToConstant: photoHeight/2),
@@ -424,7 +419,7 @@ class AddPlayViewController: UIViewController {
 //            calanderImageView.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
 //            calanderImageView.heightAnchor.constraint(equalToConstant: 20),
 //            calanderImageView.widthAnchor.constraint(equalTo: calanderImageView.heightAnchor, multiplier: 1),
-            startTimeLable.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant:  standardMargin),
+            startTimeLable.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin*1.5),
             startTimeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             endTimeLable.topAnchor.constraint(equalTo: startTimeLable.bottomAnchor, constant: standardMargin),
             endTimeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
@@ -438,14 +433,14 @@ class AddPlayViewController: UIViewController {
             placeLabel.centerYAnchor.constraint(equalTo: placeImageView.centerYAnchor),
 
             priceImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            priceImageView.topAnchor.constraint(equalTo: placeImageView.bottomAnchor, constant: standardMargin),
+            priceImageView.topAnchor.constraint(equalTo: placeImageView.bottomAnchor, constant: standardMargin*1.5),
             priceImageView.heightAnchor.constraint(equalToConstant: 20),
             priceImageView.widthAnchor.constraint(equalTo: placeImageView.heightAnchor, multiplier: 1),
             priceLable.leadingAnchor.constraint(equalTo: priceImageView.trailingAnchor, constant: standardMargin),
             priceLable.centerYAnchor.constraint(equalTo: priceImageView.centerYAnchor),
 
             maleImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            maleImageView.topAnchor.constraint(equalTo: priceImageView.bottomAnchor, constant: standardMargin),
+            maleImageView.topAnchor.constraint(equalTo: priceImageView.bottomAnchor, constant: standardMargin*1.5),
             maleImageView.heightAnchor.constraint(equalToConstant: 20),
             maleImageView.widthAnchor.constraint(equalTo: placeImageView.heightAnchor, multiplier: 1),
             maleLackLable.leadingAnchor.constraint(equalTo: maleImageView.trailingAnchor, constant: standardMargin),
@@ -457,6 +452,7 @@ class AddPlayViewController: UIViewController {
             femaleLackLable.leadingAnchor.constraint(equalTo: femaleImageView.trailingAnchor, constant: standardMargin),
             femaleLackLable.centerYAnchor.constraint(equalTo: maleImageView.centerYAnchor),
 
+            digView.topAnchor.constraint(equalTo: maleImageView.bottomAnchor, constant: standardMargin*2),
             digView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             digView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin*2),
 //            digView.widthAnchor.constraint(equalToConstant: 60),
@@ -476,11 +472,23 @@ class AddPlayViewController: UIViewController {
             addPlayerButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             addPlayerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -standardMargin/2),
 
-            sendRequestButton.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: standardMargin*2),
+            sendRequestButton.centerYAnchor.constraint(equalTo: typeLable.centerYAnchor),
             sendRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight*2),
-            sendRequestButton.widthAnchor.constraint(equalTo: sendRequestButton.heightAnchor, multiplier: 1.0)
+            sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            sendRequestButton.widthAnchor.constraint(equalTo: sendRequestButton.heightAnchor, multiplier: 1.0),
+            wantToAddLable.centerXAnchor.constraint(equalTo: topImageView.centerXAnchor),
+            wantToAddLable.centerYAnchor.constraint(equalTo: topImageView.centerYAnchor),
+            typeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+//            typeLable.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: standardMargin*3),
+            topImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            topImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            topImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            topImageView.heightAnchor.constraint(equalToConstant: 150),
+            topImageView.bottomAnchor.constraint(equalTo: typeLable.topAnchor, constant: -standardMargin)
         ])
+//        topImageView.bottomAnchor.constraint(equalTo: typeLable.topAnchor, constant: -standardMargin).isActive = true
+//        topImageView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
+//        typeLable.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         self.view.addConstraint(NSLayoutConstraint(item: setView, attribute: .width, relatedBy: .equal, toItem: digView, attribute: .width, multiplier: 1.0, constant: 0.0))
         self.view.addConstraint(NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: digView, attribute: .width, multiplier: 1.0, constant: 0.0))
         self.view.addConstraint(NSLayoutConstraint(item: spikeView, attribute: .width, relatedBy: .equal, toItem: digView, attribute: .width, multiplier: 1.0, constant: 0.0))

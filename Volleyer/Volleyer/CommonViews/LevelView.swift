@@ -12,14 +12,14 @@ class LevelView: UIView {
     let levelLabel: UILabel = {
         let label = UILabel()
 //        label.textColor = .gray2
-        label.font = .semiboldNunito(size: 25)
+        label.font = .semiboldNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     let markLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray3
-        label.font = .regularNunito(size: 14)
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
