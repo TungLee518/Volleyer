@@ -40,7 +40,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavBar()
+//        setNavBar()
         dataManager.playDataDelegate = self
         setHeader()
         setTableView()
@@ -48,7 +48,9 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         dataManager.getPublishPlay()
+        setNavBar()
     }
 
     func setNavBar() {
@@ -61,6 +63,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
             .foregroundColor: UIColor.black,
             .font: UIFont.semiboldNunito(size: 20)
          ]
+        navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushToEstablishVC))
@@ -85,7 +88,6 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         finderTableView.delegate = self
         finderTableView.register(FinderTableViewCell.self, forCellReuseIdentifier: FinderTableViewCell.identifier)
         finderTableView.separatorStyle = .none
-//        finderTableView.allowsSelection = false
         finderTableView.showsVerticalScrollIndicator = false
         view.addSubview(finderTableView)
 
@@ -123,6 +125,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     func numberOfSections(in tableView: UITableView) -> Int {
         publicPlays.count
     }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         20
     }
@@ -132,6 +135,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         headerView.backgroundColor = UIColor.clear
         return headerView
     }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -143,54 +147,15 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         let thisPlay = publicPlays[indexPath.section]
         cell.thisPlay = thisPlay
         cell.parent = self
-//        cell.selectionStyle = .none
-//        cell.layer.cornerRadius = 10
-//        cell.layer.borderColor = UIColor.gray3.cgColor
-//        cell.layer.borderWidth = 2
-        cell.clipsToBounds = true
-//        cell.layer.masksToBounds = false
-//        cell.layer.shadowRadius = 4
-//        cell.layer.shadowOffset = CGSize(width: 0, height: 3)
-//        cell.layer.shadowOpacity = 0.3
-//        cell.layer.shadowColor = UIColor.gray2.cgColor
         return cell
     }
 
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = UITableViewHeaderFooterView()
-//        headerView.translatesAutoresizingMaskIntoConstraints = false
-//        headerView.backgroundView = {
-//            let view = UIView()
-//            view.backgroundColor = .purple7
-//            return view
-//        }()
-//        let ballImage = UIImageView()
-//        ballImage.image = UIImage(named: "players")
-//        ballImage.translatesAutoresizingMaskIntoConstraints = false
-//        headerView.contentView.addSubview(ballImage)
-//        NSLayoutConstraint.activate([
-//            ballImage.trailingAnchor.constraint(equalTo: headerView.contentView.trailingAnchor, constant: -16),
-//            ballImage.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
-//            ballImage.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12),
-//            ballImage.heightAnchor.constraint(equalToConstant: 60),
-//            ballImage.widthAnchor.constraint(equalToConstant: 60)
-//        ])
-//        let headerLabel = UILabel()
-//        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-//        headerLabel.text = "快來找適合自己的場！"
-//        headerLabel.font = .boldSystemFont(ofSize: 20)
-//        headerLabel.textColor = .purple2
-//        headerView.contentView.addSubview(headerLabel)
-//
-//        NSLayoutConstraint.activate([
-//            headerLabel.leadingAnchor.constraint(equalTo: headerView.contentView.leadingAnchor, constant: 16),
-//            headerLabel.topAnchor.constraint(equalTo: headerView.contentView.topAnchor, constant: 12),
-//            headerLabel.bottomAnchor.constraint(equalTo: headerView.contentView.bottomAnchor, constant: -12)
-//        ])
-//
-//        return headerView
-//    }
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = AddPlayViewController()
         nextVC.thisPlay = publicPlays[indexPath.section]

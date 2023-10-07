@@ -9,17 +9,17 @@ import UIKit
 
 class AddPlayViewController: UIViewController {
 
-//    private var playView = PlayInfoView()
     lazy var topImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "bar")
+        imageView.image = UIImage(named: "ballnet")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.7
         return imageView
     }()
     let wantToAddLable: UILabel = {
         let label = UILabel()
-        label.textColor = .gray7
+        label.textColor = .gray1
         label.text = "我要加"
         label.font = .semiboldNunito(size: 30)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,12 +48,6 @@ class AddPlayViewController: UIViewController {
         label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    lazy var calanderImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "calendar")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
     }()
     let startTimeLable: UILabel = {
         let label = UILabel()
@@ -165,66 +159,6 @@ class AddPlayViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private let setLevelLable: UILabel = {
-        let label = UILabel()
-        let padding = 3
-        label.text = "No"
-        label.textColor = .purple3
-        label.backgroundColor = .purple7
-        label.layer.cornerRadius = 12
-        label.clipsToBounds = true
-        label.font = .semiboldNunito(size: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private let blockLevelLable: UILabel = {
-        let label = UILabel()
-        let padding = 3
-        label.text = "No"
-        label.textColor = .purple3
-        label.backgroundColor = .purple6
-        label.layer.cornerRadius = 12
-        label.clipsToBounds = true
-        label.font = .semiboldNunito(size: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private let digLevelLable: UILabel = {
-        let label = UILabel()
-        let padding = 3
-        label.text = "No"
-        label.textColor = .purple7
-        label.backgroundColor = .purple5
-        label.layer.cornerRadius = 12
-        label.clipsToBounds = true
-        label.font = .semiboldNunito(size: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private let spikeLevelLable: UILabel = {
-        let label = UILabel()
-        let padding = 3
-        label.text = "No"
-        label.textColor = .purple7
-        label.backgroundColor = .purple4
-        label.layer.cornerRadius = 12
-        label.clipsToBounds = true
-        label.font = .semiboldNunito(size: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private let sumLevelLable: UILabel = {
-        let label = UILabel()
-        let padding = 3
-        label.text = "No"
-        label.textColor = .purple7
-        label.backgroundColor = .purple3
-        label.layer.cornerRadius = 12
-        label.clipsToBounds = true
-        label.font = .semiboldNunito(size: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var addPlayerButton: UIButton = {
         let button = UIButton()
@@ -257,20 +191,8 @@ class AddPlayViewController: UIViewController {
     }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
-//        button.setTitle(AddPlayPageEnum.sendRequest.rawValue, for: .normal)
-//        button.titleLabel?.font =  .semiboldNunito(size: 16)
-//        button.titleLabel?.textAlignment = .center
-//        button.backgroundColor = .purple1
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 16
-//        button.clipsToBounds = true
         button.setImage(UIImage(named: "plus 1"), for: .normal)
         button.tintColor = .purple4
-//        button.tintColor = .gray3
-//        button.titleLabel?.font =  .regularNunito(size: 16)
-//        button.titleLabel?.textAlignment = .center
-//        button.backgroundColor = .clear
-//        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 2
@@ -283,6 +205,11 @@ class AddPlayViewController: UIViewController {
         didSet {
             sendDataToPlayView(thisPlay!)
             setContent()
+            if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+                sendRequestButton.isHidden = true
+            } else {
+                sendRequestButton.isHidden = false
+            }
         }
     }
 
@@ -292,23 +219,16 @@ class AddPlayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.addSubview(playView)
+        setNavBar()
         view.addSubview(topImageView)
         topImageView.addSubview(wantToAddLable)
-//        view.addSubview(calanderImageView)
         view.addSubview(photoImageView)
         view.addSubview(accountLable)
         view.addSubview(startTimeLable)
         view.addSubview(endTimeLable)
         view.addSubview(placeImageView)
         view.addSubview(placeLabel)
-//        view.addSubview(lackLable)
         view.addSubview(typeLable)
-//        view.addSubview(setLevelLable)
-//        view.addSubview(blockLevelLable)
-//        view.addSubview(digLevelLable)
-//        view.addSubview(spikeLevelLable)
-//        view.addSubview(sumLevelLable)
         view.addSubview(priceImageView)
         view.addSubview(priceLable)
         view.addSubview(maleImageView)
@@ -324,7 +244,6 @@ class AddPlayViewController: UIViewController {
         view.addSubview(sendRequestButton)
 //        setPlayersTableView()
         setLayout()
-        setNavBar()
     }
 
     private func setNavBar() {
@@ -362,11 +281,6 @@ class AddPlayViewController: UIViewController {
             digView.thisLevel = thisPlay.levelRange.dig
             spikeView.thisLevel = thisPlay.levelRange.spike
             sumView.thisLevel = thisPlay.levelRange.sum
-            setLevelLable.text = "  \(levelList[thisPlay.levelRange.setBall])  "
-            spikeLevelLable.text = "  \(levelList[thisPlay.levelRange.spike])  "
-            digLevelLable.text = "  \(levelList[thisPlay.levelRange.dig])  "
-            blockLevelLable.text = "  \(levelList[thisPlay.levelRange.block])  "
-            sumLevelLable.text = "  \(levelList[thisPlay.levelRange.sum])  "
             priceLable.text = "\(thisPlay.price) 元 /人"
             accountLable.text = thisPlay.finderId
             DataManager.sharedDataMenager.getImageFromUserId(id: thisPlay.finderId) { imageUrl, err in
@@ -398,16 +312,6 @@ class AddPlayViewController: UIViewController {
     private func setLayout() {
         setView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            playView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            playView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            playView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-
-//            playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-////            playerListTableView.topAnchor.constraint(equalTo: playView.bottomAnchor, constant: standardMargin),
-//            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            playerListTableView.heightAnchor.constraint(equalToConstant: 200),
-           
-
             photoImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             photoImageView.topAnchor.constraint(equalTo: typeLable.bottomAnchor, constant: standardMargin),
             photoImageView.heightAnchor.constraint(equalToConstant: photoHeight/2),
@@ -415,10 +319,6 @@ class AddPlayViewController: UIViewController {
 
             accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
             accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
-//            calanderImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-//            calanderImageView.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
-//            calanderImageView.heightAnchor.constraint(equalToConstant: 20),
-//            calanderImageView.widthAnchor.constraint(equalTo: calanderImageView.heightAnchor, multiplier: 1),
             startTimeLable.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin*1.5),
             startTimeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             endTimeLable.topAnchor.constraint(equalTo: startTimeLable.bottomAnchor, constant: standardMargin),
@@ -427,9 +327,7 @@ class AddPlayViewController: UIViewController {
             placeImageView.topAnchor.constraint(equalTo: endTimeLable.bottomAnchor, constant: standardMargin*1.5),
             placeImageView.heightAnchor.constraint(equalToConstant: 20),
             placeImageView.widthAnchor.constraint(equalTo: placeImageView.heightAnchor, multiplier: 1),
-//            placeLabel.leadingAnchor.constraint(equalTo: placeImageView.trailingAnchor, constant: standardMargin),
             placeLabel.leadingAnchor.constraint(equalTo: placeImageView.trailingAnchor, constant: standardMargin),
-//            placeLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin*4.7),
             placeLabel.centerYAnchor.constraint(equalTo: placeImageView.centerYAnchor),
 
             priceImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
@@ -455,7 +353,6 @@ class AddPlayViewController: UIViewController {
             digView.topAnchor.constraint(equalTo: maleImageView.bottomAnchor, constant: standardMargin*2),
             digView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             digView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin*2),
-//            digView.widthAnchor.constraint(equalToConstant: 60),
             setView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             setView.centerYAnchor.constraint(equalTo: digView.centerYAnchor),
             blockView.centerYAnchor.constraint(equalTo: digView.centerYAnchor),
@@ -479,16 +376,11 @@ class AddPlayViewController: UIViewController {
             wantToAddLable.centerXAnchor.constraint(equalTo: topImageView.centerXAnchor),
             wantToAddLable.centerYAnchor.constraint(equalTo: topImageView.centerYAnchor),
             typeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-//            typeLable.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: standardMargin*3),
             topImageView.topAnchor.constraint(equalTo: view.topAnchor),
             topImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             topImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            topImageView.heightAnchor.constraint(equalToConstant: 150),
             topImageView.bottomAnchor.constraint(equalTo: typeLable.topAnchor, constant: -standardMargin)
         ])
-//        topImageView.bottomAnchor.constraint(equalTo: typeLable.topAnchor, constant: -standardMargin).isActive = true
-//        topImageView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
-//        typeLable.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         self.view.addConstraint(NSLayoutConstraint(item: setView, attribute: .width, relatedBy: .equal, toItem: digView, attribute: .width, multiplier: 1.0, constant: 0.0))
         self.view.addConstraint(NSLayoutConstraint(item: blockView, attribute: .width, relatedBy: .equal, toItem: digView, attribute: .width, multiplier: 1.0, constant: 0.0))
         self.view.addConstraint(NSLayoutConstraint(item: spikeView, attribute: .width, relatedBy: .equal, toItem: digView, attribute: .width, multiplier: 1.0, constant: 0.0))
@@ -501,11 +393,18 @@ class AddPlayViewController: UIViewController {
     }
 
     @objc func sendRequest() {
-        addPlayers = playerListTableView.players
-        print(addPlayers)
-        dataManager.saveRequest(thisPlay!, playerList: addPlayers)
-        print("request sent")
-        navigationController?.popToRootViewController(animated: true)
+        let controller = UIAlertController(title: "確定？", message: "要發加場邀請給 \(thisPlay?.finderId ??  "Internet Error")？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            self.addPlayers = self.playerListTableView.players
+            print(self.addPlayers)
+            self.dataManager.saveRequest(self.thisPlay!, playerList: self.addPlayers)
+            print("request sent")
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
 
     @objc func toggleEditingMode() {
