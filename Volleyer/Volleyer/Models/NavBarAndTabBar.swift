@@ -41,6 +41,8 @@ enum MyPageEnum: String {
     case myPlays = "我的打場"
     case requestIReceive = "我收到的邀請"
     case requestISent = "我送出的邀請"
+    case report = "檢舉"
+    case lock = "封鎖"
 }
 
 enum TabBarImageEnum: String {

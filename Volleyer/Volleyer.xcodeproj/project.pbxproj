@@ -13,6 +13,7 @@
 		C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */; };
 		C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */; };
 		C800512F2AB9890700FEA7FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512E2AB9890700FEA7FD /* User.swift */; };
+		C85BCF632AD147CA002B900C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF622AD147CA002B900C /* CardView.swift */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
@@ -86,6 +87,7 @@
 		C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTeamViewController.swift; sourceTree = "<group>"; };
 		C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C800512E2AB9890700FEA7FD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C85BCF622AD147CA002B900C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				C89961082ABD933700C5D35D /* ProfileView.swift */,
 				C89961792ACEC05D00C5D35D /* MyProfileView.swift */,
 				C8D54A0F2AD008420020C06C /* LevelView.swift */,
+				C85BCF622AD147CA002B900C /* CardView.swift */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
 				C89961732ACD9AC400C5D35D /* ScrollImageView.swift */,
@@ -544,6 +547,7 @@
 				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
 				C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
+				C85BCF632AD147CA002B900C /* CardView.swift in Sources */,
 				C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */,
 				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,

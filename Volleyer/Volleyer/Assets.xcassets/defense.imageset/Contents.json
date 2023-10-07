@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "dollar.png",
+      "filename" : "defense.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "dollar@2x.png",
+      "filename" : "defense@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "dollar@3x.png",
+      "filename" : "defense@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -32,7 +32,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
+        button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.purple1.cgColor
         button.addTarget(self, action: #selector(pushToEditPhoto), for: .touchUpInside)
         return button
@@ -46,7 +46,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
+        button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.purple1.cgColor
         button.addTarget(self, action: #selector(pushToInputProfile), for: .touchUpInside)
         return button
@@ -63,61 +63,72 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         button.addTarget(self, action: #selector(logout), for: .touchUpInside)
         return button
     }()
-    lazy var myFinderButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(MyPageEnum.myFinders.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple6
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(pushToMyFinders), for: .touchUpInside)
-        return button
+    lazy var myFinderCard: CardView = {
+        let view = CardView()
+        view.thisCardImage = "blow"
+        view.thisCardLabel = MyPageEnum.myFinders.rawValue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tappable = true
+        view.callback = {
+            self.pushToMyFinders()
+        }
+        return view
     }()
-    lazy var myPlayButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(MyPageEnum.myPlays.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple6
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(pushToMyPlays), for: .touchUpInside)
-        return button
+    lazy var myPlayCard: CardView = {
+        let view = CardView()
+        view.thisCardImage = "rescue"
+        view.thisCardLabel = MyPageEnum.myPlays.rawValue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tappable = true
+        view.callback = {
+            self.pushToMyPlays()
+        }
+        return view
     }()
-    lazy var requestsReceiveButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(MyPageEnum.requestIReceive.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(pushToRequestsReceive), for: .touchUpInside)
-        return button
+    lazy var requestSentCard: CardView = {
+        let view = CardView()
+        view.thisCardImage = "kick"
+        view.thisImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
+        view.thisCardLabel = MyPageEnum.requestIReceive.rawValue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tappable = true
+        view.callback = {
+            self.pushToRequestsReceive()
+        }
+        return view
     }()
-    lazy var requestsSendButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(MyPageEnum.requestISent.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(pushToRequestsSend), for: .touchUpInside)
-        return button
+    lazy var requestReceiveCard: CardView = {
+        let view = CardView()
+        view.thisCardImage = "defense"
+        view.thisCardLabel = MyPageEnum.requestISent.rawValue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tappable = true
+        view.callback = {
+            self.pushToRequestsSend()
+        }
+        return view
+    }()
+    lazy var reportCard: CardView = {
+        let view = CardView()
+        view.thisCardImage = "yellow"
+        view.thisCardLabel = MyPageEnum.report.rawValue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tappable = true
+        view.callback = {
+            self.pushToReport()
+        }
+        return view
+    }()
+    lazy var lockCard: CardView = {
+        let view = CardView()
+        view.thisCardImage = "red"
+        view.thisCardLabel = MyPageEnum.lock.rawValue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tappable = true
+        view.callback = {
+            self.pushToLock()
+        }
+        return view
     }()
 
     override func viewDidLoad() {
@@ -125,16 +136,16 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
 
         self.view.backgroundColor = UIColor.white
 
-//        view.addSubview(myProfileButton)
         view.addSubview(myProfileView)
         view.addSubview(editPhotoButton)
         view.addSubview(editProfileButton)
         view.addSubview(logoutButton)
-        view.addSubview(myFinderButton)
-        view.addSubview(myPlayButton)
-        view.addSubview(requestsReceiveButton)
-        view.addSubview(requestsSendButton)
-
+        view.addSubview(myPlayCard)
+        view.addSubview(reportCard)
+        view.addSubview(myFinderCard)
+        view.addSubview(requestReceiveCard)
+        view.addSubview(requestSentCard)
+        view.addSubview(lockCard)
         setLayout()
         setProfileData()
         navigationItem.title = NavBarEnum.myPage.rawValue
@@ -158,12 +169,9 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     }
 
     private func setLayout() {
+        self.view.addConstraint(NSLayoutConstraint(item: editPhotoButton, attribute: .width, relatedBy: .equal, toItem: editProfileButton, attribute: .width, multiplier: 1.0, constant: 0.0))
+        self.view.addConstraint(NSLayoutConstraint(item: editProfileButton, attribute: .width, relatedBy: .equal, toItem: logoutButton, attribute: .width, multiplier: 1.0, constant: 0.0))
         NSLayoutConstraint.activate([
-//            myProfileButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-//            myProfileButton.bottomAnchor.constraint(equalTo: myFinderButton.topAnchor, constant: -standardMargin),
-//            myProfileButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-//            myProfileButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-
             myProfileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             myProfileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             myProfileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -177,29 +185,26 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
             logoutButton.centerYAnchor.constraint(equalTo: editPhotoButton.centerYAnchor),
             logoutButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            
-            myFinderButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            myFinderButton.topAnchor.constraint(equalTo: editPhotoButton.bottomAnchor, constant: standardMargin),
-            myFinderButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            myFinderButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
 
-            myPlayButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            myPlayButton.topAnchor.constraint(equalTo: myFinderButton.bottomAnchor, constant: standardMargin),
-            myPlayButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            myPlayButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-
-            requestsReceiveButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            requestsReceiveButton.topAnchor.constraint(equalTo: myPlayButton.bottomAnchor, constant: standardMargin),
-            requestsReceiveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            requestsReceiveButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-
-            requestsSendButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            requestsSendButton.topAnchor.constraint(equalTo: requestsReceiveButton.bottomAnchor, constant: standardMargin),
-            requestsSendButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            requestsSendButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
+            myPlayCard.topAnchor.constraint(equalTo: editProfileButton.bottomAnchor, constant: standardMargin),
+            myPlayCard.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            myPlayCard.widthAnchor.constraint(equalTo: editProfileButton.widthAnchor, multiplier: 0.8),
+            myFinderCard.topAnchor.constraint(equalTo: editPhotoButton.bottomAnchor, constant: standardMargin),
+            myFinderCard.centerXAnchor.constraint(equalTo: editPhotoButton.centerXAnchor),
+            myFinderCard.widthAnchor.constraint(equalTo: editPhotoButton.widthAnchor, multiplier: 0.8),
+            reportCard.topAnchor.constraint(equalTo: logoutButton.bottomAnchor, constant: standardMargin),
+            reportCard.centerXAnchor.constraint(equalTo: logoutButton.centerXAnchor),
+            reportCard.widthAnchor.constraint(equalTo: logoutButton.widthAnchor, multiplier: 0.8),
+            requestReceiveCard.topAnchor.constraint(equalTo: myFinderCard.bottomAnchor, constant: standardMargin),
+            requestReceiveCard.centerXAnchor.constraint(equalTo: editPhotoButton.centerXAnchor),
+            requestReceiveCard.widthAnchor.constraint(equalTo: editPhotoButton.widthAnchor, multiplier: 0.8),
+            requestSentCard.topAnchor.constraint(equalTo: myPlayCard.bottomAnchor, constant: standardMargin),
+            requestSentCard.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            requestSentCard.widthAnchor.constraint(equalTo: editProfileButton.widthAnchor, multiplier: 0.8),
+            lockCard.topAnchor.constraint(equalTo: reportCard.bottomAnchor, constant: standardMargin),
+            lockCard.centerXAnchor.constraint(equalTo: logoutButton.centerXAnchor),
+            lockCard.widthAnchor.constraint(equalTo: logoutButton.widthAnchor, multiplier: 0.8)
         ])
-        self.view.addConstraint(NSLayoutConstraint(item: editPhotoButton, attribute: .width, relatedBy: .equal, toItem: editProfileButton, attribute: .width, multiplier: 1.0, constant: 0.0))
-        self.view.addConstraint(NSLayoutConstraint(item: editProfileButton, attribute: .width, relatedBy: .equal, toItem: logoutButton, attribute: .width, multiplier: 1.0, constant: 0.0))
     }
 
     @objc func pushToMyProfile() {
@@ -227,7 +232,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         present(picker, animated: true)
     }
     @objc func pushToInputProfile() {
-        
+
     }
     @objc func logout() {
         let controller = UIAlertController(title: "確定？", message: "要登出？", preferredStyle: .alert)
@@ -273,5 +278,13 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     @objc func pushToRequestsSend() {
         let nextVC = RequestSentViewController()
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    @objc func pushToReport() {
+//        let nextVC = RequestSentViewController()
+//        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    @objc func pushToLock() {
+//        let nextVC = RequestSentViewController()
+//        navigationController?.pushViewController(nextVC, animated: true)
     }
 }

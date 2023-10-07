@@ -191,7 +191,7 @@ class AddPlayViewController: UIViewController {
     }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "plus 1"), for: .normal)
+        button.setImage(UIImage(named: "plus"), for: .normal)
         button.tintColor = .purple4
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
