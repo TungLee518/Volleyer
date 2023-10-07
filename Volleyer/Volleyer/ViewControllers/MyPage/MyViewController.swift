@@ -11,18 +11,6 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
 
     let myProfileView = MyProfileView()
 
-    lazy var myProfileButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(MyPageEnum.myProfile.rawValue, for: .normal)
-        button.titleLabel?.font =  .semiboldNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple1
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(pushToMyProfile), for: .touchUpInside)
-        return button
-    }()
     lazy var editPhotoButton: UIButton = {
         let button = UIButton()
         button.setTitle("更改照片", for: .normal)
@@ -208,23 +196,6 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         ])
     }
 
-    @objc func pushToMyProfile() {
-        let nextVC = ProfileViewController()
-        nextVC.thisUser = User(
-            id: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No id found",
-            email: UserDefaults.standard.string(forKey: UserTitle.email.rawValue) ?? "No email found",
-            gender: UserDefaults.standard.integer(forKey: UserTitle.gender.rawValue),
-            name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue) ?? "No name found",
-            level: LevelRange(setBall: UserDefaults.standard.integer(forKey: Level.setBall.rawValue),
-                              block: UserDefaults.standard.integer(forKey: Level.block.rawValue),
-                              dig: UserDefaults.standard.integer(forKey: Level.dig.rawValue),
-                              spike: UserDefaults.standard.integer(forKey: Level.spike.rawValue),
-                              sum: UserDefaults.standard.integer(forKey: Level.sum.rawValue)),
-            image: UserDefaults.standard.string(forKey: UserTitle.image.rawValue) ?? "https://firebasestorage.googleapis.com/v0/b/volleyer-a15b6.appspot.com/o/defaults%2Fplaceholder.png?alt=media&token=d686707b-7b55-4291-8d67-c809c14f9528&_gl=1*gmtbad*_ga*MTE1Njk3OTU3Ny4xNjkxNjU1MTk0*_ga_CW55HF8NVT*MTY5NjA2MDc1Ni45Mi4xLjE2OTYwNjEwMTguNTQuMC4w"
-        )
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
-
     @objc func pushToEditPhoto() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -293,6 +264,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
 
     @objc func pushToRequestsSend() {
         let nextVC = RequestSentViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func pushToReport() {

@@ -21,7 +21,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(cancelRequest), for: .touchUpInside)
         button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
+        button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.purple1.cgColor
         button.clipsToBounds = true
         button.isHidden = true
@@ -30,12 +30,12 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
 
     var thisPlay: Play? {
         didSet {
-            sendDataToPlayView(thisPlay!)
+            playView.thisPlay = thisPlay
         }
     }
     var thisUser: User? {
         didSet {
-            sendDataToProfileView(thisUser!)
+            profileView.thisUser = thisUser
         }
     }
     var thisPlayId: String?
@@ -61,6 +61,8 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         dataManager.thisUserDelegate = self
         setLayout()
         setNavBar()
+        playView.applyShadow()
+        playView.backgroundColor = .white
     }
 
     private func setNavBar() {
@@ -79,24 +81,15 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
             profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            playView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            playView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: standardMargin),
-            playView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            cancelRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            playView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            playView.topAnchor.constraint(equalTo: profileView.bottomAnchor),
+            playView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            playView.bottomAnchor.constraint(equalTo: cancelRequestButton.topAnchor, constant: -standardMargin),
+            cancelRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: standardMargin),
             cancelRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             cancelRequestButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             cancelRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
-    }
-
-    func sendDataToPlayView(_ data: Play) {
-        playView.play = thisPlay
-        playView.setUI()
-    }
-
-    func sendDataToProfileView(_ data: User) {
-        profileView.thisUser = thisUser
-        profileView.setContent()
     }
 
     func manager(_ manager: DataManager, thisPlay play: Play) {

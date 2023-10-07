@@ -37,7 +37,7 @@ class MyFinderInfoViewController: UIViewController {
 
     var thisPlay: Play? {
         didSet {
-            sendDataToPlayView(thisPlay!)
+            playView.thisPlay = thisPlay
         }
     }
 
@@ -98,11 +98,6 @@ class MyFinderInfoViewController: UIViewController {
             randomTeamButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             randomTeamButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
-    }
-
-    func sendDataToPlayView(_ data: Play) {
-        playView.play = thisPlay
-        playView.setUI()
     }
 
     func didTapProfileButton(for player: Player) {
