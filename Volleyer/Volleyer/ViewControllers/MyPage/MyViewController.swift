@@ -130,6 +130,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         }
         return view
     }()
+    let dataManager = MyDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -260,6 +261,21 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         controller.addAction(cancelAction)
         present(controller, animated: true)
     }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true)
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        guard let imageData = image.pngData() else {
+            return
+        }
+        myProfileView.photoImageView.image = UIImage(data: imageData)
+        dataManager.saveProfileImage(imageData: imageData)
+    }
     @objc func pushToMyFinders() {
         let nextVC = MyFindersViewController()
         navigationController?.pushViewController(nextVC, animated: true)
@@ -280,8 +296,8 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func pushToReport() {
-//        let nextVC = RequestSentViewController()
-//        navigationController?.pushViewController(nextVC, animated: true)
+        let nextVC = ReportViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func pushToLock() {
 //        let nextVC = RequestSentViewController()

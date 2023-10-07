@@ -25,6 +25,8 @@ enum NavBarEnum: String {
     case competitionPage = "Competitions"
     case camera = "輸入名字與相片"
     case info = "詳細資訊"
+    case report = "檢舉"
+    case block = "封鎖名單"
 }
 
 enum TabBarEnum: String {
