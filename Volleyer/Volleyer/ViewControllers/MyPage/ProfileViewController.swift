@@ -50,8 +50,9 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
         NSLayoutConstraint.activate([
             profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            profileView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin)
+            profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+//            profileView.heightAnchor.constraint(equalToConstant: 270)
+//            profileView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin)
         ])
     }
 

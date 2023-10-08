@@ -81,13 +81,15 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
             profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            profileView.heightAnchor.constraint(equalToConstant: 200),
+            playView.topAnchor.constraint(equalTo: profileView.bottomAnchor, constant: standardMargin),
             playView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            playView.topAnchor.constraint(equalTo: profileView.bottomAnchor),
             playView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             playView.bottomAnchor.constraint(equalTo: cancelRequestButton.topAnchor, constant: -standardMargin),
+//            playView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             cancelRequestButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: standardMargin),
             cancelRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            cancelRequestButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+//            cancelRequestButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             cancelRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
     }

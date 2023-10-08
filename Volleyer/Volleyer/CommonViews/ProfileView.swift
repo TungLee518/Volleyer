@@ -227,7 +227,7 @@ class ProfileView: UIView {
     }
     private func setLayout() {
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 150),
+//            self.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.57),
             photoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
             photoImageView.topAnchor.constraint(equalTo: topAnchor, constant: standardMargin),
             photoImageView.heightAnchor.constraint(equalToConstant: photoHeight),
@@ -240,16 +240,6 @@ class ProfileView: UIView {
             nameLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin),
             genderLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: standardMargin/2),
             genderLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin),
-//            digLable.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            digLable.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
-            digLevelLable.centerXAnchor.constraint(equalTo: digLable.centerXAnchor),
-            digLevelLable.topAnchor.constraint(equalTo: digLable.bottomAnchor, constant: standardMargin),
-
-//            spikeLable.trailingAnchor.constraint(equalTo: digLable.leadingAnchor, constant: -standardMargin*2),
-//            spikeLable.centerYAnchor.constraint(equalTo: digLable.centerYAnchor),
-            spikeLevelLable.centerXAnchor.constraint(equalTo: spikeLable.centerXAnchor),
-            spikeLevelLable.topAnchor.constraint(equalTo: spikeLable.bottomAnchor, constant: standardMargin),
-
             digLable.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin),
             digLable.centerXAnchor.constraint(equalTo: centerXAnchor),
             setLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: standardMargin),
@@ -262,25 +252,21 @@ class ProfileView: UIView {
             sumLable.leadingAnchor.constraint(equalTo: spikeLable.trailingAnchor, constant: standardMargin),
             sumLable.centerYAnchor.constraint(equalTo: digLable.centerYAnchor),
             sumLable.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin),
-
-//            setLable.trailingAnchor.constraint(equalTo: spikeLable.leadingAnchor, constant: -standardMargin*2),
-//            setLable.centerYAnchor.constraint(equalTo: digLable.centerYAnchor),
+            digLevelLable.centerXAnchor.constraint(equalTo: digLable.centerXAnchor),
+            digLevelLable.topAnchor.constraint(equalTo: digLable.bottomAnchor, constant: standardMargin),
+            spikeLevelLable.centerXAnchor.constraint(equalTo: spikeLable.centerXAnchor),
+            spikeLevelLable.topAnchor.constraint(equalTo: spikeLable.bottomAnchor, constant: standardMargin),
             setLevelLable.centerXAnchor.constraint(equalTo: setLable.centerXAnchor),
             setLevelLable.topAnchor.constraint(equalTo: setLable.bottomAnchor, constant: standardMargin),
-
-//            blockLable.leadingAnchor.constraint(equalTo: digLable.trailingAnchor, constant: standardMargin*2),
-//            blockLable.centerYAnchor.constraint(equalTo: digLable.centerYAnchor),
             blockLevelLable.centerXAnchor.constraint(equalTo: blockLable.centerXAnchor),
             blockLevelLable.topAnchor.constraint(equalTo: blockLable.bottomAnchor, constant: standardMargin),
-
-//            sumLable.leadingAnchor.constraint(equalTo: blockLable.trailingAnchor, constant: standardMargin*2),
-//            sumLable.centerYAnchor.constraint(equalTo: digLable.centerYAnchor),
             sumLevelLable.centerXAnchor.constraint(equalTo: sumLable.centerXAnchor),
             sumLevelLable.topAnchor.constraint(equalTo: sumLable.bottomAnchor, constant: standardMargin),
-            blockUserView.topAnchor.constraint(equalTo: sumLevelLable.bottomAnchor, constant: standardMargin),
+            blockUserView.topAnchor.constraint(equalTo: digLevelLable.bottomAnchor, constant: standardMargin),
             blockUserView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -standardMargin),
             blockUserView.leadingAnchor.constraint(equalTo: centerXAnchor, constant: standardMargin/2),
-            blockUserView.heightAnchor.constraint(equalToConstant: standardButtonHeight*2/3),
+            blockUserView.heightAnchor.constraint(equalToConstant: standardButtonHeight),
+            blockUserView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -standardMargin),
             blockUserLable.centerXAnchor.constraint(equalTo: blockUserView.centerXAnchor, constant: standardMargin/2),
             blockUserLable.centerYAnchor.constraint(equalTo: blockUserView.centerYAnchor),
             blockUserImageView.centerYAnchor.constraint(equalTo: blockUserView.centerYAnchor),

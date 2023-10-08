@@ -249,16 +249,19 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     }
     @objc func pushToMyFinders() {
         let nextVC = MyFindersViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @objc func pushToMyPlays() {
         let nextVC = MyPlaysViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @objc func pushToRequestsReceive() {
         let nextVC = RequestsReceivedViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
 
