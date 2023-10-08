@@ -13,7 +13,7 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
 
     private var competitionsTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = FinderDataManager()
     var allCompetitions = [Competition]()
 
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
 }
 
 extension CompetitionsViewController: CompetitionDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet competitions: [Competition]) {
+    func manager(_ manager: FinderDataManager, didGet competitions: [Competition]) {
         allCompetitions = competitions
         competitionsTableView.reloadData()
     }

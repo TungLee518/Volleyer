@@ -38,6 +38,10 @@ class AddPlayViewController: UIViewController {
         imageView.layer.cornerRadius = photoHeight / 4
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tappable = true
+        imageView.callback = {
+            self.pushToProfileVC()
+        }
         return imageView
     }()
 
@@ -191,12 +195,12 @@ class AddPlayViewController: UIViewController {
     }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "plus"), for: .normal)
-        button.tintColor = .purple4
+        button.setImage(UIImage(named: "plus")?.withTintColor(.purple4), for: .normal)
+//        button.tintColor = .purple4
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.gray1.cgColor
+//        button.layer.cornerRadius = 10
+//        button.layer.borderWidth = 2
+//        button.layer.borderColor = UIColor.gray1.cgColor
         button.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
         return button
     }()
@@ -283,7 +287,7 @@ class AddPlayViewController: UIViewController {
             sumView.thisLevel = thisPlay.levelRange.sum
             priceLable.text = "\(thisPlay.price) 元 /人"
             accountLable.text = thisPlay.finderId
-            DataManager.sharedDataMenager.getImageFromUserId(id: thisPlay.finderId) { imageUrl, err in
+            FinderDataManager.sharedDataMenager.getImageFromUserId(id: thisPlay.finderId) { imageUrl, err in
                 if let error = err {
                     // Handle the error
                     print("Error: \(error)")
@@ -415,5 +419,10 @@ class AddPlayViewController: UIViewController {
     @objc func addPlayer() {
         let newPlayer = Player(name: "", gender: "") // Customize as needed
         playerListTableView.addNewPlayer(newPlayer)
+    }
+    func pushToProfileVC() {
+        let nextVC = ProfileViewController()
+        nextVC.thisUserId = thisPlay?.finderId
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }

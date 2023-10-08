@@ -25,7 +25,7 @@ class MyPlayInfoViewController: UIViewController {
 
     var thisPlay: Play? {
         didSet {
-            sendDataToPlayView(thisPlay!)
+            playView.thisPlay = thisPlay
         }
     }
 
@@ -76,11 +76,6 @@ class MyPlayInfoViewController: UIViewController {
             changeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             changeButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
-    }
-
-    func sendDataToPlayView(_ data: Play) {
-        playView.play = thisPlay
-        playView.setUI()
     }
 
     func didTapProfileButton(for player: Player) {

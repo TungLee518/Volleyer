@@ -18,6 +18,7 @@ enum UserTitle: String {
     case level = "self_level"
     case myPlayList = "my_play_list"
     case image = "image"
+    case blockList = "block_list"
 }
 
 struct User {
@@ -29,9 +30,10 @@ struct User {
     var gender: Int
     var name: String
     var level: LevelRange = LevelRange(setBall: 4, block: 4, dig: 4, spike: 4, sum: 4)
-    var myPlayList: [String] = []
+    var myPlayList: [String] = [] // play id
     var image: String = "https://firebasestorage.googleapis.com/v0/b/volleyer-a15b6.appspot.com/o/defaults%2Fplaceholder.png?alt=media&token=d686707b-7b55-4291-8d67-c809c14f9528&_gl=1*gmtbad*_ga*MTE1Njk3OTU3Ny4xNjkxNjU1MTk0*_ga_CW55HF8NVT*MTY5NjA2MDc1Ni45Mi4xLjE2OTYwNjEwMTguNTQuMC4w"
     var playN: Int = 0
+    var blockList: [String] = [] // user id
 }
 
 enum Level: String {

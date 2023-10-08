@@ -26,7 +26,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
 
     private var myPlaysTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = FinderDataManager()
     var myPlays = [Play]()
 
     override func viewDidLoad() {
@@ -102,7 +102,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
 }
 
 extension MyPlaysViewController: PlayDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet plays: [Play]) {
+    func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
         myPlays = plays
         if myPlays.count == 0 {
             photoImageView.isHidden = false

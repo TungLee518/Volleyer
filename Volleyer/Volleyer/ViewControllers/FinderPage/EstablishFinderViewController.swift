@@ -357,7 +357,7 @@ class EstablishFinderViewController: UIViewController {
     var players: [Player] = []
     var SABCLabels: [UILabel] = []
 
-    var dataManager = DataManager()
+    var dataManager = FinderDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()

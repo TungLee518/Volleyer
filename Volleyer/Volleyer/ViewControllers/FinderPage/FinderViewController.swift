@@ -35,7 +35,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     
     var finderTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = FinderDataManager()
     var publicPlays = [Play]()
 
     override func viewDidLoad() {
@@ -166,7 +166,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
 // not determine public or not yet
 extension FinderViewController: PlayDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet plays: [Play]) {
+    func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
         publicPlays = plays
         finderTableView.reloadData()
     }
