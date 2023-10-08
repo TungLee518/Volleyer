@@ -27,7 +27,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
     private var myFindersTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = FinderDataManager()
     var myFinders = [Play]()
 
     override func viewDidLoad() {
@@ -96,7 +96,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 }
 
 extension MyFindersViewController: PlayDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet plays: [Play]) {
+    func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
         for i in plays {
             if i.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 myFinders.append(i)

@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
 
     private var profileView = ProfileView()
 
-    let dataManager = DataManager()
+    let dataManager = FinderDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
         ])
     }
 
-    func manager(_ manager: DataManager, thisUser user: User) {
+    func manager(_ manager: FinderDataManager, thisUser user: User) {
         profileView.thisUser = user
     }
 }

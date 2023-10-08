@@ -15,7 +15,7 @@
 		C800512F2AB9890700FEA7FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512E2AB9890700FEA7FD /* User.swift */; };
 		C85BCF632AD147CA002B900C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF622AD147CA002B900C /* CardView.swift */; };
 		C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF642AD1646B002B900C /* ReportViewController.swift */; };
-		C85BCF672AD16487002B900C /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF662AD16487002B900C /* BlackListViewController.swift */; };
+		C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF662AD16487002B900C /* BlockListViewController.swift */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
@@ -35,7 +35,7 @@
 		C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */; };
 		C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E152B2AB5897500CBA201 /* Seletions.swift */; };
 		C86E152E2AB598CD00CBA201 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E152D2AB598CD00CBA201 /* Play.swift */; };
-		C86E15312AB5D69A00CBA201 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15302AB5D69A00CBA201 /* DataManager.swift */; };
+		C86E15312AB5D69A00CBA201 /* FinderDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15302AB5D69A00CBA201 /* FinderDataManager.swift */; };
 		C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */; };
 		C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */; };
 		C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */; };
@@ -91,7 +91,7 @@
 		C800512E2AB9890700FEA7FD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C85BCF622AD147CA002B900C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C85BCF642AD1646B002B900C /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
-		C85BCF662AD16487002B900C /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
+		C85BCF662AD16487002B900C /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListTableViewCell.swift; sourceTree = "<group>"; };
 		C86E152B2AB5897500CBA201 /* Seletions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seletions.swift; sourceTree = "<group>"; };
 		C86E152D2AB598CD00CBA201 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
-		C86E15302AB5D69A00CBA201 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C86E15302AB5D69A00CBA201 /* FinderDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderDataManager.swift; sourceTree = "<group>"; };
 		C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFindersViewController.swift; sourceTree = "<group>"; };
 		C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaysViewController.swift; sourceTree = "<group>"; };
 		C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoView.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 				C89961062ABD687300C5D35D /* RequestSentViewController.swift */,
 				C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */,
 				C85BCF642AD1646B002B900C /* ReportViewController.swift */,
-				C85BCF662AD16487002B900C /* BlackListViewController.swift */,
+				C85BCF662AD16487002B900C /* BlockListViewController.swift */,
 				C899610A2ABD963D00C5D35D /* ProfileViewController.swift */,
 				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
 			);
@@ -356,7 +356,7 @@
 		C89961322AC94CE700C5D35D /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
-				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
+				C86E15302AB5D69A00CBA201 /* FinderDataManager.swift */,
 				C89961372ACABD3500C5D35D /* RequestDataManager.swift */,
 				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
 				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
@@ -561,12 +561,12 @@
 				C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
-				C85BCF672AD16487002B900C /* BlackListViewController.swift in Sources */,
+				C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */,
 				C89960FD2ABBE0D200C5D35D /* RequestsReceivedViewController.swift in Sources */,
 				C86E15242AB4A33600CBA201 /* StandardAmounts.swift in Sources */,
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,
 				C86E15102AB31FF300CBA201 /* FinderTableViewCell.swift in Sources */,
-				C86E15312AB5D69A00CBA201 /* DataManager.swift in Sources */,
+				C86E15312AB5D69A00CBA201 /* FinderDataManager.swift in Sources */,
 				C86E15422AB8249400CBA201 /* AddPlayViewController.swift in Sources */,
 				C899612E2AC80B3C00C5D35D /* MyDataManager.swift in Sources */,
 				C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */,

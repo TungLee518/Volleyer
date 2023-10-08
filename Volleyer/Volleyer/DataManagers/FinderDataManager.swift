@@ -11,25 +11,25 @@ import FirebaseCore
 import FirebaseStorage
 
 protocol PlayDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet plays: [Play])
+    func manager(_ manager: FinderDataManager, didGet plays: [Play])
 }
 
 protocol ThisPlayDataManagerDelegate {
-    func manager(_ manager: DataManager, thisPlay play: Play)
+    func manager(_ manager: FinderDataManager, thisPlay play: Play)
 }
 
 protocol ThisUserDataManagerDelegate {
-    func manager(_ manager: DataManager, thisUser user: User)
+    func manager(_ manager: FinderDataManager, thisUser user: User)
 }
 
 protocol CompetitionDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet competitions: [Competition])
+    func manager(_ manager: FinderDataManager, didGet competitions: [Competition])
 }
 
 // swiftlint:disable force_cast
-class DataManager {
+class FinderDataManager {
 
-    static let sharedDataMenager = DataManager()
+    static let sharedDataMenager = FinderDataManager()
 
     var playDataDelegate: PlayDataManagerDelegate?
     var thisPlayDelegate: ThisPlayDataManagerDelegate?
@@ -253,7 +253,7 @@ class DataManager {
 }
 
 // function used only in DataManager
-extension DataManager {
+extension FinderDataManager {
     func decodePlay(_ document: QueryDocumentSnapshot) -> Play {
         let levelDict = document.data()[PlayTitle.levelRange.rawValue] as! [String: Int]
         let levelRange = LevelRange(

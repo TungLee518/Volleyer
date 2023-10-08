@@ -48,7 +48,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
             }
         }
     }
-    let dataManager = DataManager()
+    let dataManager = FinderDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,11 +94,11 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         ])
     }
 
-    func manager(_ manager: DataManager, thisPlay play: Play) {
+    func manager(_ manager: FinderDataManager, thisPlay play: Play) {
         thisPlay = play
     }
 
-    func manager(_ manager: DataManager, thisUser user: User) {
+    func manager(_ manager: FinderDataManager, thisUser user: User) {
         thisUser = user
     }
 

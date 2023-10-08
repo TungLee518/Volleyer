@@ -169,7 +169,7 @@ class PlayInfoView: UIView {
             sumView.thisLevel = thisPlay.levelRange.sum
             priceLable.text = "\(thisPlay.price) 元 /人"
             accountLable.text = thisPlay.finderId
-            DataManager.sharedDataMenager.getImageFromUserId(id: thisPlay.finderId) { imageUrl, err in
+            FinderDataManager.sharedDataMenager.getImageFromUserId(id: thisPlay.finderId) { imageUrl, err in
                 if let error = err {
                     // Handle the error
                     print("Error: \(error)")

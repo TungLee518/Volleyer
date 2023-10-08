@@ -135,6 +135,10 @@ class MyDataManager {
         }
     }
 
+    func getBlockList() {
+        
+    }
+
     func decodeUser(_ document: QueryDocumentSnapshot) -> User {
         let levelDict = document.data()[UserTitle.level.rawValue] as! [String: Int]
         let levelRange = LevelRange(
@@ -154,7 +158,8 @@ class MyDataManager {
             name: document.data()[UserTitle.name.rawValue] as! String,
             level: levelRange,
             myPlayList: document.data()[UserTitle.myPlayList.rawValue] as! [String],
-            image: document.data()[UserTitle.image.rawValue] as! String
+            image: document.data()[UserTitle.image.rawValue] as! String,
+            blockList: document.data()[UserTitle.blockList.rawValue] as! [String]
         )
         return aUser
     }
