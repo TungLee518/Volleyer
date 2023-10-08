@@ -18,6 +18,7 @@ class ProfileView: UIView {
     }
 
     let dataManager = MyDataManager()
+    weak var parent: UIViewController?
 
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -281,6 +282,17 @@ class ProfileView: UIView {
     }
 
     func blockAction() {
-        print("block")
+        if let thisUserId = self.thisUser?.id {
+            let controller = UIAlertController(title: "確定？", message: "要封鎖 \(thisUserId)？", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "是", style: .default) { _ in
+                print("block")
+                MyDataManager.shared.addToBlocklist(userId: thisUserId)
+                self.parent?.navigationController?.popToRootViewController(animated: true)
+            }
+            controller.addAction(okAction)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            controller.addAction(cancelAction)
+            parent?.present(controller, animated: true)
+        }
     }
 }

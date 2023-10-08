@@ -58,5 +58,6 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
 
     func manager(_ manager: FinderDataManager, thisUser user: User) {
         profileView.thisUser = user
+        profileView.parent = self
     }
 }

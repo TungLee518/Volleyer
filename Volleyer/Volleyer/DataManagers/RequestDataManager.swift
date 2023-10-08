@@ -296,12 +296,17 @@ extension RequestDataManager {
             sum: levelDict[LevelTitle.sum.rawValue]!
         )
         let aUser = User(
+            firebaseId: document.documentID,
+            loginWay: document.data()[UserTitle.loginWay.rawValue] as! Int,
+            userIdentifier: document.data()[UserTitle.userIdentifier.rawValue] as! String,
             id: document.data()[UserTitle.id.rawValue] as! String,
             email: document.data()[UserTitle.email.rawValue] as! String,
             gender: document.data()[UserTitle.gender.rawValue] as! Int,
             name: document.data()[UserTitle.name.rawValue] as! String,
             level: levelRange,
-            image: document.data()[UserTitle.image.rawValue] as! String
+            myPlayList: document.data()[UserTitle.myPlayList.rawValue] as! [String],
+            image: document.data()[UserTitle.image.rawValue] as! String,
+            blockList: document.data()[UserTitle.blockList.rawValue] as! [String]
         )
         return aUser
     }

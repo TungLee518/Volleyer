@@ -9,35 +9,37 @@ import UIKit
 
 class BlockListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private lazy var photoImageView: UIImageView = {
-            let imageView = UIImageView()
-            imageView.image = UIImage(named: "red")
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "red")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isHidden = true
+        return imageView
+    }()
     private let noDataLabel: UILabel = {
         let label = UILabel()
         label.text = "目前沒有封鎖名單"
         label.textColor = UIColor.gray2
         label.font = .semiboldNunito(size: 32)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
         return label
     }()
     private var blockListTableView: UITableView!
-    private let dataManager = RequestDataManager()
+    private let dataManager = MyDataManager()
     var blockUsers = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
-        dataManager.getPlayRequests()
-        dataManager.playRequestDelegate = self
+        dataManager.getBlockList()
+        dataManager.blockListDataManager = self
         setTableView()
         setImageView()
     }
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.myRequestsSent.rawValue
+        self.title = NavBarEnum.block.rawValue
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = .purple2
@@ -48,7 +50,7 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
         blockListTableView = UITableView()
         blockListTableView.dataSource = self
         blockListTableView.delegate = self
-        blockListTableView.register(RequestsTableViewCell.self, forCellReuseIdentifier: RequestsTableViewCell.identifier)
+        blockListTableView.register(BlockListTableViewCell.self, forCellReuseIdentifier: BlockListTableViewCell.identifier)
         blockListTableView.separatorStyle = .singleLine
         view.addSubview(blockListTableView)
 
@@ -81,20 +83,20 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // swiftlint:disable force_cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: RequestsTableViewCell.identifier, for: indexPath) as! RequestsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: BlockListTableViewCell.identifier, for: indexPath) as! BlockListTableViewCell
         // swiftlint:enable force_cast
 
+        let thisUser = blockUsers[indexPath.row]
+        cell.accountIdLable.text = thisUser.id
         cell.selectionStyle = .none
         return cell
     }
 }
 
-extension BlockListViewController: RequestsDataManagerDelegate {
-    func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
-
-    }
-    func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
-//        blockUsers = playRequests
+extension BlockListViewController: BlockListDataManagerDelegate {
+    func manager(_ manager: MyDataManager, didGet blockList: [User]) {
+        blockUsers = blockList
+        print(blockUsers)
 //        requestsTableView.reloadData()
         if blockUsers.count == 0 {
             photoImageView.isHidden = false

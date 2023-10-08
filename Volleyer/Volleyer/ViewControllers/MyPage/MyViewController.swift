@@ -275,7 +275,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func pushToLock() {
-//        let nextVC = RequestSentViewController()
-//        navigationController?.pushViewController(nextVC, animated: true)
+        let nextVC = BlockListViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }

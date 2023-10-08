@@ -36,6 +36,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
     var thisUser: User? {
         didSet {
             profileView.thisUser = thisUser
+            profileView.parent = self
         }
     }
     var thisPlayId: String?

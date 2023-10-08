@@ -10,6 +10,10 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
 // swiftlint:disable force_cast
+protocol BlockListDataManagerDelegate {
+    func manager(_ manager: MyDataManager, didGet blockList: [User])
+}
+
 class MyDataManager {
 
     static let shared = MyDataManager()
@@ -18,6 +22,8 @@ class MyDataManager {
     private let storage = Storage.storage().reference()
 
     var canGoToTabbarVC: ((Bool) -> Void)?
+
+    var blockListDataManager: BlockListDataManagerDelegate?
 
     func saveProfileInfo(_ user: User) {
         let document = users.document()
@@ -91,18 +97,74 @@ class MyDataManager {
             }
         }
     }
-    func updateBlocklist(userId: String) {
-        users.document(UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "no my id").getDocument { (document, error) in
+    func addToBlocklist(userId: String) {
+        print(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue))
+        users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
                 var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
-                blockList.append(userId)
-                self.users.document(UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "no my id").updateData([
-                    UserTitle.blockList.rawValue: blockList
-                ]) { err in
-                    if let err = err {
-                        print("Error updating document: \(err)")
-                    } else {
-                        print("BlockList successfully updated")
+                let blockListIdx = blockList.firstIndex(of: userId)
+                if blockListIdx == nil {
+                    blockList.append(userId)
+                    self.users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").updateData([
+                        UserTitle.blockList.rawValue: blockList
+                    ]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("BlockList successfully updated")
+                            LKProgressHUD.showSuccess(text: "成功封鎖")
+                        }
+                    }
+                } else {
+                    LKProgressHUD.showFailure(text: "已封鎖此用戶")
+                }
+            } else {
+                print("User Document does not exist")
+            }
+        }
+    }
+
+    func removeFromBlocklist(userId: String) {
+        users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
+            if let document = document, document.exists {
+                var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
+                let blockListIdx = blockList.firstIndex(of: userId)
+                if let blockListIdx = blockListIdx {
+                    blockList.remove(at: blockListIdx)
+                    self.users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").updateData([
+                        UserTitle.blockList.rawValue: blockList
+                    ]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("BlockList successfully updated")
+                            LKProgressHUD.showSuccess(text: "成功解除封鎖")
+                        }
+                    }
+                }
+            } else {
+                print("User Document does not exist")
+            }
+        }
+    }
+
+    func getBlockList() {
+        users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
+            if let document = document, document.exists {
+                var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
+                var blockListUser = [User]()
+                for id in blockList {
+                    self.getUserById(id: id) { theUser, err in
+                        if let error = err {
+                            print("Error: \(error)")
+                        } else if let theUser = theUser {
+                            blockListUser.append(theUser)
+                            if blockListUser.count == blockList.count {
+                                self.blockListDataManager?.manager(self, didGet: blockListUser)
+                            }
+                        } else {
+                            print("No matching document found")
+                        }
                     }
                 }
             } else {
@@ -166,7 +228,7 @@ class MyDataManager {
         let aUser = User(
             firebaseId: document.documentID,
             loginWay: document.data()[UserTitle.loginWay.rawValue] as! Int,
-            userIdentifier: document.data()[UserTitle.userIdentifier.rawValue] as! String,
+            userIdentifier: document.data()[UserTitle.userIdentifier.rawValue] as? String ?? "",
             id: document.data()[UserTitle.id.rawValue] as! String,
             email: document.data()[UserTitle.email.rawValue] as! String,
             gender: document.data()[UserTitle.gender.rawValue] as! Int,
@@ -177,6 +239,21 @@ class MyDataManager {
             blockList: document.data()[UserTitle.blockList.rawValue] as! [String]
         )
         return aUser
+    }
+
+    func getUserById(id: String, completion: @escaping (User?, Error?) -> Void) {
+        users.whereField(UserTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                    completion(nil, err)
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        let thisUser = self.decodeUser(document)
+                        completion(thisUser, nil)
+                    }
+                }
+        }
     }
 
     func saveUserDefault(_ thisUser: User) {
