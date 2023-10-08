@@ -156,25 +156,51 @@ class FinderDataManager {
 
     // MARK: get publish play
     func getPublishPlay() {
-        plays.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                var playsArray: [Play] = []
-                for document in querySnapshot!.documents {
-                    // 之後若是有做只開場不發文就會用到
-//                    if document.data()[PlayTitle.status.rawValue] as! Int == 1 {
-//                        playsArray.append(self.decodePlay(document))
-//                    }
-                    // 只顯示 start time 在未來的
-                    let now = Date()
-                    let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
-                    if startTime.seconds > Int64(now.timeIntervalSince1970) {
-                        playsArray.append(self.decodePlay(document))
+        users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
+            if let document = document, document.exists {
+
+                let myBlockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
+
+                self.plays.getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        var playsArray: [Play] = []
+                        var numOfDocument = 0
+                        for document in querySnapshot!.documents {
+
+                            // 之後若是有做只開場不發文就會用到
+//                            if document.data()[PlayTitle.status.rawValue] as! Int == 1 {
+//                                playsArray.append(self.decodePlay(document))
+//                            }
+                            let now = Date()
+                            let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
+                            // 只顯示 start time 在未來的
+                            if startTime.seconds > Int64(now.timeIntervalSince1970) {
+                                let finderId = document.data()[PlayTitle.finderId.rawValue] as! String
+                                // 只顯示不再封鎖名單的貼文
+                                if myBlockList.firstIndex(of: finderId) == nil {
+                                    playsArray.append(self.decodePlay(document))
+                                    numOfDocument += 1
+                                } else {
+                                    numOfDocument += 1
+                                }
+                                if numOfDocument == querySnapshot!.documents.count {
+                                    playsArray.sort { $0.startTime < $1.startTime }
+                                    self.playDataDelegate?.manager(self, didGet: playsArray)
+                                }
+                            } else {
+                                numOfDocument += 1
+                                if numOfDocument == querySnapshot!.documents.count {
+                                    playsArray.sort { $0.startTime < $1.startTime }
+                                    self.playDataDelegate?.manager(self, didGet: playsArray)
+                                }
+                            }
+                        }
                     }
                 }
-                playsArray.sort { $0.startTime < $1.startTime }
-                self.playDataDelegate?.manager(self, didGet: playsArray)
+            } else {
+                print("User Document does not exist")
             }
         }
     }

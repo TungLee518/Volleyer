@@ -152,18 +152,22 @@ class MyDataManager {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
                 var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
-                var blockListUser = [User]()
-                for id in blockList {
-                    self.getUserById(id: id) { theUser, err in
-                        if let error = err {
-                            print("Error: \(error)")
-                        } else if let theUser = theUser {
-                            blockListUser.append(theUser)
-                            if blockListUser.count == blockList.count {
-                                self.blockListDataManager?.manager(self, didGet: blockListUser)
+                if blockList.count == 0 {
+                    self.blockListDataManager?.manager(self, didGet: [])
+                } else {
+                    var blockListUser = [User]()
+                    for id in blockList {
+                        self.getUserById(id: id) { theUser, err in
+                            if let error = err {
+                                print("Error: \(error)")
+                            } else if let theUser = theUser {
+                                blockListUser.append(theUser)
+                                if blockListUser.count == blockList.count {
+                                    self.blockListDataManager?.manager(self, didGet: blockListUser)
+                                }
+                            } else {
+                                print("No matching document found")
                             }
-                        } else {
-                            print("No matching document found")
                         }
                     }
                 }
@@ -174,7 +178,7 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamMay").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {

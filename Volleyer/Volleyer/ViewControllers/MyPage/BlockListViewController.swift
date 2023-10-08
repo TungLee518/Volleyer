@@ -12,7 +12,6 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
         let imageView = UIImageView()
         imageView.image = UIImage(named: "red")
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isHidden = true
         return imageView
     }()
     private let noDataLabel: UILabel = {
@@ -21,7 +20,6 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
         label.textColor = UIColor.gray2
         label.font = .semiboldNunito(size: 32)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.isHidden = true
         return label
     }()
     private var blockListTableView: UITableView!
@@ -30,6 +28,8 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoImageView.isHidden = true
+        noDataLabel.isHidden = true
         setNavBar()
         dataManager.getBlockList()
         dataManager.blockListDataManager = self
