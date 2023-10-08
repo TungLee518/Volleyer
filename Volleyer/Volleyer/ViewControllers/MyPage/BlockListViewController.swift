@@ -91,6 +91,18 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
         cell.selectionStyle = .none
         return cell
     }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            MyDataManager.shared.removeFromBlocklist(userId: blockUsers[indexPath.row].id)
+            self.blockUsers.remove(at: indexPath.row)
+            blockListTableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 
 extension BlockListViewController: BlockListDataManagerDelegate {
