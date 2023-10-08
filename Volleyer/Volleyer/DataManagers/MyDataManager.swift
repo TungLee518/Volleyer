@@ -91,6 +91,25 @@ class MyDataManager {
             }
         }
     }
+    func updateBlocklist(userId: String) {
+        users.document(UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "no my id").getDocument { (document, error) in
+            if let document = document, document.exists {
+                var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
+                blockList.append(userId)
+                self.users.document(UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "no my id").updateData([
+                    UserTitle.blockList.rawValue: blockList
+                ]) { err in
+                    if let err = err {
+                        print("Error updating document: \(err)")
+                    } else {
+                        print("BlockList successfully updated")
+                    }
+                }
+            } else {
+                print("User Document does not exist")
+            }
+        }
+    }
 
     func getSimulatorProfileData() {
         users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
@@ -133,10 +152,6 @@ class MyDataManager {
                     }
                 }
         }
-    }
-
-    func getBlockList() {
-        
     }
 
     func decodeUser(_ document: QueryDocumentSnapshot) -> User {
