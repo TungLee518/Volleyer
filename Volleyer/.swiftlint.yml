@@ -9,6 +9,7 @@ identifier_name:
     - app
     - i
     - db
+    - j
 
 line_length:
     warning: 500 # warning

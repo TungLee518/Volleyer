@@ -54,7 +54,7 @@ class CompetitionTableViewCell: UITableViewCell {
                 if isEnrolling {
                     enrollingLabel.isHidden = false
                     yAnchor.isActive = true
-                    setAnimate()
+//                    setAnimate()
                 }
             }
         }
@@ -101,7 +101,7 @@ class CompetitionTableViewCell: UITableViewCell {
             titleLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
 
             enrollingLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-//            enrollingLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
+            enrollingLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
 
             countyLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
             countyLable.topAnchor.constraint(equalTo: titleLable.bottomAnchor, constant: standardMargin),
