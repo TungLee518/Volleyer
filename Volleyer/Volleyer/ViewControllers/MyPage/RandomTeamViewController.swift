@@ -6,8 +6,35 @@
 //
 
 import UIKit
+import Lottie
 
 class RandomTeamViewController: UIViewController {
+    
+    @IBOutlet weak var aTeam1: UILabel!
+    @IBOutlet weak var aTeam2: UILabel!
+    @IBOutlet weak var aTeam3: UILabel!
+    @IBOutlet weak var aTeam4: UILabel!
+    @IBOutlet weak var aTeam5: UILabel!
+    @IBOutlet weak var aTeam6: UILabel!
+
+    @IBOutlet weak var bTeam1: UILabel!
+    @IBOutlet weak var bTeam2: UILabel!
+    @IBOutlet weak var bTeam3: UILabel!
+    @IBOutlet weak var bTeam4: UILabel!
+    @IBOutlet weak var bTeam5: UILabel!
+    @IBOutlet weak var bTeam6: UILabel!
+
+    @IBOutlet weak var cTeam1: UILabel!
+    @IBOutlet weak var cTeam2: UILabel!
+    @IBOutlet weak var cTeam3: UILabel!
+    @IBOutlet weak var cTeam4: UILabel!
+    @IBOutlet weak var cTeam5: UILabel!
+    @IBOutlet weak var cTeam6: UILabel!
+
+    lazy var aTeam: [UILabel] = [aTeam1, aTeam2, aTeam3, aTeam4, aTeam5, aTeam6]
+    lazy var bTeam: [UILabel] = [bTeam1, bTeam2, bTeam3, bTeam4, bTeam5, bTeam6]
+    lazy var cTeam: [UILabel] = [cTeam1, cTeam2, cTeam3, cTeam4, cTeam5, cTeam6]
+    lazy var teams = [aTeam, bTeam, cTeam]
 
     private var players: [Player] = [
         Player(name: "May", gender: "Female"),
@@ -19,29 +46,35 @@ class RandomTeamViewController: UIViewController {
         Player(name: "Finn", gender: "Female"),
         Player(name: "Jenny", gender: "Female"),
         Player(name: "Bonnie", gender: "Female"),
-        Player(name: "Angus", gender: "Female"),
+        Player(name: "Angus", gender: "Male"),
         Player(name: "Aaron", gender: "Male"),
-        Player(name: "Steven", gender: "Female"),
+        Player(name: "Steven", gender: "Male"),
         Player(name: "Jimmy", gender: "Male"),
-        Player(name: "Brain", gender: "Male"),
+        Player(name: "品芸", gender: "Female"),
         Player(name: "Jason", gender: "Male"),
         Player(name: "Tim", gender: "Male"),
         Player(name: "Roland", gender: "Male"),
         Player(name: "Elven", gender: "Male")
     ]
 
+    private let aTeamLabel: [UILabel] = []
+    private let bTeamLabel: [UILabel] = []
+    private let cTeamLabel: [UILabel] = []
+
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
 
     lazy var generateRandomTeamButton: UIButton = {
         let button = UIButton()
         button.setTitle("開始分隊", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 16
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.purple1.cgColor
         button.addTarget(self, action: #selector(generateRandomTeam), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
         return button
     }()
     let doneRandonTeamLable: UILabel = {
@@ -56,13 +89,27 @@ class RandomTeamViewController: UIViewController {
         return label
     }()
 
+    private var animationView: LottieAnimationView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(generateRandomTeamButton)
-        view.addSubview(doneRandonTeamLable)
-        setPlayersTableView()
+//        view.addSubview(generateRandomTeamButton)
+//        view.addSubview(doneRandonTeamLable)
+//        setPlayersTableView()
         setNavBar()
-        setLayout()
+//        setLayout()
+        setAnimate()
+        generateRandomTeam()
+//        playAnimate()
+    }
+
+    private func setTeamLabels() {
+        let teams = ["A","B","C"]
+        for team in teams {
+            let teamLabel = UILabel()
+            teamLabel.text = team
+            
+        }
     }
 
     private func setNavBar() {
@@ -98,7 +145,34 @@ class RandomTeamViewController: UIViewController {
         ])
     }
 
+    func setAnimate() {
+        animationView = .init(name: "paper_scissor_stone")
+        animationView?.frame = view.bounds
+        animationView?.backgroundColor = .gray7
+        animationView?.contentMode = .scaleAspectFit
+        animationView?.isHidden = true
+        view.addSubview(animationView!)
+//        animationView?.loopMode = .playOnce
+//        animationView?.animationSpeed = 1.0
+//        animationView?.play()
+    }
+    func playAnimate() {
+        UIView.transition(with: animationView!, duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            self.animationView?.isHidden = false
+            self.animationView?.loopMode = .playOnce
+            self.animationView?.animationSpeed = 1.0
+            self.animationView?.play(completion: { [weak self] completed in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    self?.animationView?.isHidden = true
+                }
+            })
+        })
+    }
+
     @objc func generateRandomTeam() {
+        playAnimate()
         // Shuffle the players array randomly
         var shuffledPlayers = players.shuffled()
         shuffledPlayers.sort { $0.gender > $1.gender }
@@ -115,18 +189,16 @@ class RandomTeamViewController: UIViewController {
             nthTotal = totalNumber % 3
         }
 
-        var groupNames: [String] = []
-
-        for group in groups {
-            var groupName = ""
-            for player in group {
-                groupName += (player.name + " ")
+        for i in 0...2 {
+            for j in 0...5 {
+                teams[i][j].text = groups[i][j].name
+                if groups[i][j].gender == "Male" {
+                    teams[i][j].textColor = .gray1
+                } else {
+                    teams[i][j].textColor = .gray2
+                }
             }
-            groupNames.append(groupName)
         }
-
-        doneRandonTeamLable.text = "A: \(groupNames[0])\n B: \(groupNames[1])\n C: \(groupNames[2])"
-        doneRandonTeamLable.isHidden = false
     }
 
     func didTapProfileButton(for player: Player) {

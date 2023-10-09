@@ -85,6 +85,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
         let thisPlay = myFinders[indexPath.row]
         cell.thisPlay = thisPlay
+        cell.selectionStyle = .none
         return cell
     }
 

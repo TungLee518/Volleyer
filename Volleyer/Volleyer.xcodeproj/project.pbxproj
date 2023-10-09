@@ -17,6 +17,10 @@
 		C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF642AD1646B002B900C /* ReportViewController.swift */; };
 		C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF662AD16487002B900C /* BlockListViewController.swift */; };
 		C85BCF692AD2990D002B900C /* BlockListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */; };
+		C85BCF6C2AD2E286002B900C /* paper_scissor_stone.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */; };
+		C85BCF6E2AD2E28F002B900C /* fortune_cookie.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */; };
+		C85BCF702AD2E2B8002B900C /* japan_lottery.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */; };
+		C85BCF722AD406EA002B900C /* RandomTeam.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF712AD406EA002B900C /* RandomTeam.storyboard */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
@@ -94,6 +98,10 @@
 		C85BCF642AD1646B002B900C /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		C85BCF662AD16487002B900C /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
 		C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableViewCell.swift; sourceTree = "<group>"; };
+		C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paper_scissor_stone.json; sourceTree = "<group>"; };
+		C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fortune_cookie.json; sourceTree = "<group>"; };
+		C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = japan_lottery.json; sourceTree = "<group>"; };
+		C85BCF712AD406EA002B900C /* RandomTeam.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RandomTeam.storyboard; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -208,6 +216,7 @@
 				C85BCF662AD16487002B900C /* BlockListViewController.swift */,
 				C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */,
 				C899610A2ABD963D00C5D35D /* ProfileViewController.swift */,
+				C85BCF712AD406EA002B900C /* RandomTeam.storyboard */,
 				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
 			);
 			path = MyPage;
@@ -222,6 +231,16 @@
 				C86E15412AB8249400CBA201 /* AddPlayViewController.swift */,
 			);
 			path = FinderPage;
+			sourceTree = "<group>";
+		};
+		C85BCF6A2AD2E273002B900C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */,
+				C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */,
+				C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C86E14A52AB1AF4C00CBA201 = {
@@ -246,6 +265,7 @@
 		C86E14B02AB1AF4C00CBA201 /* Volleyer */ = {
 			isa = PBXGroup;
 			children = (
+				C85BCF6A2AD2E273002B900C /* Resources */,
 				C89961212AC2C31200C5D35D /* Fonts */,
 				C899611C2AC267D700C5D35D /* Extensions */,
 				C89961322AC94CE700C5D35D /* DataManagers */,
@@ -445,8 +465,12 @@
 				C89960FB2ABAE8C300C5D35D /* GoogleService-Info.plist in Resources */,
 				C899610F2AC038C600C5D35D /* PlayOne.storyboard in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
+				C85BCF6C2AD2E286002B900C /* paper_scissor_stone.json in Resources */,
 				C89961242AC2C32D00C5D35D /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
+				C85BCF722AD406EA002B900C /* RandomTeam.storyboard in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,
+				C85BCF702AD2E2B8002B900C /* japan_lottery.json in Resources */,
+				C85BCF6E2AD2E28F002B900C /* fortune_cookie.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
