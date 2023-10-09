@@ -9,7 +9,9 @@ import UIKit
 import Lottie
 
 class RandomTeamViewController: UIViewController {
-    
+
+    @IBOutlet weak var shadowView: UIView!
+
     @IBOutlet weak var aTeam1: UILabel!
     @IBOutlet weak var aTeam2: UILabel!
     @IBOutlet weak var aTeam3: UILabel!
@@ -30,6 +32,8 @@ class RandomTeamViewController: UIViewController {
     @IBOutlet weak var cTeam4: UILabel!
     @IBOutlet weak var cTeam5: UILabel!
     @IBOutlet weak var cTeam6: UILabel!
+
+    @IBOutlet weak var takeARestLabel: UILabel!
 
     lazy var aTeam: [UILabel] = [aTeam1, aTeam2, aTeam3, aTeam4, aTeam5, aTeam6]
     lazy var bTeam: [UILabel] = [bTeam1, bTeam2, bTeam3, bTeam4, bTeam5, bTeam6]
@@ -56,10 +60,6 @@ class RandomTeamViewController: UIViewController {
         Player(name: "Roland", gender: "Male"),
         Player(name: "Elven", gender: "Male")
     ]
-
-    private let aTeamLabel: [UILabel] = []
-    private let bTeamLabel: [UILabel] = []
-    private let cTeamLabel: [UILabel] = []
 
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
 
@@ -96,20 +96,12 @@ class RandomTeamViewController: UIViewController {
 //        view.addSubview(generateRandomTeamButton)
 //        view.addSubview(doneRandonTeamLable)
 //        setPlayersTableView()
+        shadowView.applyShadow()
         setNavBar()
 //        setLayout()
         setAnimate()
         generateRandomTeam()
 //        playAnimate()
-    }
-
-    private func setTeamLabels() {
-        let teams = ["A","B","C"]
-        for team in teams {
-            let teamLabel = UILabel()
-            teamLabel.text = team
-            
-        }
     }
 
     private func setNavBar() {
@@ -152,9 +144,6 @@ class RandomTeamViewController: UIViewController {
         animationView?.contentMode = .scaleAspectFit
         animationView?.isHidden = true
         view.addSubview(animationView!)
-//        animationView?.loopMode = .playOnce
-//        animationView?.animationSpeed = 1.0
-//        animationView?.play()
     }
     func playAnimate() {
         UIView.transition(with: animationView!, duration: 0.4,
@@ -163,12 +152,16 @@ class RandomTeamViewController: UIViewController {
             self.animationView?.isHidden = false
             self.animationView?.loopMode = .playOnce
             self.animationView?.animationSpeed = 1.0
-            self.animationView?.play(completion: { [weak self] completed in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                    self?.animationView?.isHidden = true
-                }
-            })
+            self.animationView?.play()
         })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+            // Put your code which should be executed with a delay here
+            UIView.transition(with: self.animationView!, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                self.animationView?.isHidden = true
+            })
+        }
     }
 
     @objc func generateRandomTeam() {
@@ -199,6 +192,8 @@ class RandomTeamViewController: UIViewController {
                 }
             }
         }
+        let abc = ["A", "B", "C"]
+        takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
     }
 
     func didTapProfileButton(for player: Player) {

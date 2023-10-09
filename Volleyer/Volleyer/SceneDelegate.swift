@@ -26,15 +26,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
 
         // for simulator
-//        MyDataManager.shared.getSimulatorProfileData()
-//        window?.rootViewController = TabBarViewController()
+        MyDataManager.shared.getSimulatorProfileData()
+        window?.rootViewController = TabBarViewController()
         // for user
-        if UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) != nil {
-            MyDataManager.shared.getProfileData(userId: UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue)!)
-            window?.rootViewController = TabBarViewController()
-        } else {
-            window?.rootViewController = LoginViewController()
-        }
+//        if UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) != nil {
+//            MyDataManager.shared.getProfileData(userId: UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue)!)
+//            window?.rootViewController = TabBarViewController()
+//        } else {
+//            window?.rootViewController = LoginViewController()
+//        }
 
         window?.makeKeyAndVisible()
         UserDefaults.standard.set(Date(), forKey: launchAppDate)
