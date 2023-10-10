@@ -32,6 +32,8 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoImageView.isHidden = true
+        noDataLabel.isHidden = true
         setNavBar()
         dataManager.getThisUserPlays()
         dataManager.playDataDelegate = self

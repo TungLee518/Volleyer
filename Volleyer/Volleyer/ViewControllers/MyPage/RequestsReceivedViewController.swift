@@ -30,6 +30,8 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoImageView.isHidden = true
+        noDataLabel.isHidden = true
         setNavBar()
         dataManager.getPlayRequests()
         dataManager.playRequestDelegate = self
@@ -130,6 +132,7 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
         // firebase get data by play id and request_sender_id
         nextVC.thisPlayId = myRequests[indexPath.row].playId
         nextVC.thisUserId = myRequests[indexPath.row].requestSenderId
+        nextVC.title = "寄送者與場地資訊"
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

@@ -30,6 +30,8 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoImageView.isHidden = true
+        noDataLabel.isHidden = true
         setNavBar()
         dataManager.getPlayRequests()
         dataManager.playRequestDelegate = self
@@ -135,6 +137,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         nextVC.thisUserId = myRequests[indexPath.row].requestReceverId
         nextVC.thisRequest = myRequests[indexPath.row]
         nextVC.cancelRequestButton.isHidden = false
+        nextVC.title = "主揪與場地資訊"
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
