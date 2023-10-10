@@ -13,13 +13,13 @@ class AddPlayViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ballnet")
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.alpha = 0.7
         return imageView
     }()
     let wantToAddLable: UILabel = {
         let label = UILabel()
-        label.textColor = .gray1
+        label.textColor = .clear
         label.text = "我要加"
         label.font = .semiboldNunito(size: 30)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -225,7 +225,7 @@ class AddPlayViewController: UIViewController {
         super.viewDidLoad()
         setNavBar()
         view.addSubview(topImageView)
-        topImageView.addSubview(wantToAddLable)
+        view.addSubview(wantToAddLable)
         view.addSubview(photoImageView)
         view.addSubview(accountLable)
         view.addSubview(startTimeLable)
@@ -250,12 +250,12 @@ class AddPlayViewController: UIViewController {
         setLayout()
     }
 
-    private func setNavBar() {
+    func setNavBar() {
         self.view.backgroundColor = UIColor.white
         self.title = ""
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = .gray7
+        backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
@@ -267,7 +267,7 @@ class AddPlayViewController: UIViewController {
 //            .font: UIFont.semiboldNunito(size: 20)
 //         ]
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
     func setContent() {
@@ -356,7 +356,7 @@ class AddPlayViewController: UIViewController {
 
             digView.topAnchor.constraint(equalTo: maleImageView.bottomAnchor, constant: standardMargin*2),
             digView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            digView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin*2),
+            digView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin*7),
             setView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             setView.centerYAnchor.constraint(equalTo: digView.centerYAnchor),
             blockView.centerYAnchor.constraint(equalTo: digView.centerYAnchor),
@@ -377,8 +377,8 @@ class AddPlayViewController: UIViewController {
             sendRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             sendRequestButton.widthAnchor.constraint(equalTo: sendRequestButton.heightAnchor, multiplier: 1.0),
+            wantToAddLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -standardMargin),
             wantToAddLable.centerXAnchor.constraint(equalTo: topImageView.centerXAnchor),
-            wantToAddLable.centerYAnchor.constraint(equalTo: topImageView.centerYAnchor),
             typeLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             topImageView.topAnchor.constraint(equalTo: view.topAnchor),
             topImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

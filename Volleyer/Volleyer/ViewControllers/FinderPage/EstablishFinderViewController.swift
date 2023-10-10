@@ -290,9 +290,9 @@ class EstablishFinderViewController: UIViewController {
     lazy var publishButton: UIButton = {
         let button = UIButton()
         button.setTitle(EstablishPageEnum.publish.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
+        button.titleLabel?.font =  .semiboldNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple1
+        button.backgroundColor = .purple2
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
@@ -408,6 +408,11 @@ class EstablishFinderViewController: UIViewController {
         backButton.title = ""
         backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .clear
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
     func setPlayListTableView() {
@@ -593,7 +598,7 @@ class EstablishFinderViewController: UIViewController {
     func setLayout() {
         NSLayoutConstraint.activate([
             startTimeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            startTimeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin),
+            startTimeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin*5),
             startTimeTextField.leadingAnchor.constraint(equalTo: startTimeLabel.trailingAnchor, constant: standardMargin),
             startTimeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             startTimeTextField.centerYAnchor.constraint(equalTo: startTimeLabel.centerYAnchor),
@@ -660,7 +665,8 @@ class EstablishFinderViewController: UIViewController {
 
 //            deletePostButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             publishButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            publishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
+            publishButton.topAnchor.constraint(equalTo: sumCheckboxes[0].bottomAnchor, constant: standardMargin*2),
+//            publishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             publishButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             publishButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: standardMargin/2),
 

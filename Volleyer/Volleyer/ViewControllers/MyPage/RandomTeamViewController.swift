@@ -40,26 +40,7 @@ class RandomTeamViewController: UIViewController {
     lazy var cTeam: [UILabel] = [cTeam1, cTeam2, cTeam3, cTeam4, cTeam5, cTeam6]
     lazy var teams = [aTeam, bTeam, cTeam]
 
-    private var players: [Player] = [
-        Player(name: "May", gender: "Female"),
-        Player(name: "Mandy", gender: "Female"),
-        Player(name: "Iris", gender: "Female"),
-        Player(name: "Ruby", gender: "Female"),
-        Player(name: "Shuyu", gender: "Female"),
-        Player(name: "Renee", gender: "Female"),
-        Player(name: "Finn", gender: "Female"),
-        Player(name: "Jenny", gender: "Female"),
-        Player(name: "Bonnie", gender: "Female"),
-        Player(name: "Angus", gender: "Male"),
-        Player(name: "Aaron", gender: "Male"),
-        Player(name: "Steven", gender: "Male"),
-        Player(name: "Jimmy", gender: "Male"),
-        Player(name: "品芸", gender: "Female"),
-        Player(name: "Jason", gender: "Male"),
-        Player(name: "Tim", gender: "Male"),
-        Player(name: "Roland", gender: "Male"),
-        Player(name: "Elven", gender: "Male")
-    ]
+    var players: [Player] = []
 
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
 

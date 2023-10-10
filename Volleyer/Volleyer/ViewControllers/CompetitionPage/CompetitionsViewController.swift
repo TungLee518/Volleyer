@@ -64,7 +64,12 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
         cell.titleLable.text = thisCompetition.title
         cell.dateLable.text = thisCompetition.date
         cell.countyLable.text = thisCompetition.county
-        cell.isEnrolling = thisCompetition.isEnrolling
+        if thisCompetition.isEnrolling {
+            cell.enrollingLabel.isHidden = false
+        } else {
+            cell.enrollingLabel.isHidden = true
+        }
+//        cell.isEnrolling = thisCompetition.isEnrolling
         cell.selectionStyle = .none
         return cell
     }
