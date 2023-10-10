@@ -67,7 +67,7 @@ class MyFinderInfoViewController: UIViewController {
         Player(name: "Aaron", gender: "Male"),
         Player(name: "Steven", gender: "Male"),
         Player(name: "Jimmy", gender: "Male"),
-        Player(name: "品芸", gender: "Female"),
+        Player(name: "品云", gender: "Female"),
         Player(name: "Jason", gender: "Male"),
         Player(name: "Tim", gender: "Male"),
         Player(name: "Roland", gender: "Male"),

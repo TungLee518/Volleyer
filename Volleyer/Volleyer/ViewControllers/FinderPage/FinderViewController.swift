@@ -38,6 +38,8 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     private let dataManager = FinderDataManager()
     var publicPlays = [Play]()
 
+    let navigationBarAppearance = UINavigationBarAppearance()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        setNavBar()
@@ -45,6 +47,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         setHeader()
         setTableView()
         setLayout()
+        setNavBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,10 +56,14 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         setNavBar()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+//        setDisapearNavBar()
+    }
+
     func setNavBar() {
         self.view.backgroundColor = UIColor.white
         navigationItem.title = NavBarEnum.finderPage.rawValue
-        let navigationBarAppearance = UINavigationBarAppearance()
+//        navigationController?.navigationBar.backgroundColor = .purple7
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = .purple7
         navigationBarAppearance.titleTextAttributes = [
@@ -65,10 +72,16 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
          ]
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         // establish post button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushToEstablishVC))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+    }
+    func setDisapearNavBar() {
+//        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .clear
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
     @objc func pushToEstablishVC() {
