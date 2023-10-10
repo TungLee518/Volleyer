@@ -32,7 +32,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         label.textColor = .purple2
         return label
     }()
-    
+
     var finderTableView: UITableView!
 
     private let dataManager = FinderDataManager()
@@ -66,6 +66,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        // establish post button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushToEstablishVC))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }

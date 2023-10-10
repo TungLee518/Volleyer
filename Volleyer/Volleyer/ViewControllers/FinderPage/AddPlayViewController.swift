@@ -250,7 +250,7 @@ class AddPlayViewController: UIViewController {
         setLayout()
     }
 
-    private func setNavBar() {
+    func setNavBar() {
         self.view.backgroundColor = UIColor.white
         self.title = ""
         let backButton = UIBarButtonItem()

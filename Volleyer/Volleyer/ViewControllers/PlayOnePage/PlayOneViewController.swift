@@ -30,6 +30,7 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
             playOneData = []
             playOneDataManager.getPlayOneCourts()
         }
+        playOneTableView.sectionHeaderTopPadding = 0
     }
 
     private func setNavBar() {

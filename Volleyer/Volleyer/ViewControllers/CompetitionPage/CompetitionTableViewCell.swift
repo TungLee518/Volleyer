@@ -16,7 +16,7 @@ class CompetitionTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "No title"
         label.textColor = .gray2
-        label.font = .semiboldNunito(size: 20)
+        label.font = .semiboldNunito(size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,7 +45,7 @@ class CompetitionTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.isHidden = true
+//        label.isHidden = true
         return label
     }()
     var isEnrolling: Bool? {

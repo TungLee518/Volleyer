@@ -408,6 +408,11 @@ class EstablishFinderViewController: UIViewController {
         backButton.title = ""
         backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.backgroundColor = .clear
+        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
     func setPlayListTableView() {
@@ -593,7 +598,7 @@ class EstablishFinderViewController: UIViewController {
     func setLayout() {
         NSLayoutConstraint.activate([
             startTimeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            startTimeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin),
+            startTimeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin*5),
             startTimeTextField.leadingAnchor.constraint(equalTo: startTimeLabel.trailingAnchor, constant: standardMargin),
             startTimeTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             startTimeTextField.centerYAnchor.constraint(equalTo: startTimeLabel.centerYAnchor),
