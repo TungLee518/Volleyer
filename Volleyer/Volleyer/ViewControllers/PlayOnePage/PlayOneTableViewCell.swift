@@ -9,13 +9,36 @@ import UIKit
 import Kingfisher
 
 class PlayOneTableViewCell: UITableViewCell {
+    lazy var photoImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "blow")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+    private let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "目前沒有 play"
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     @IBOutlet weak var playOneCollectionView: UICollectionView!
 
     var playOneFinderData: [User] = []
     var playOneData: [PlayOne] = [] {
         didSet {
-            playOneCollectionView.reloadData()
+            if playOneFinderData.count == 0 {
+                photoImageView.isHidden = false
+                noDataLabel.isHidden = false
+                playOneCollectionView.isHidden = true
+            } else {
+                photoImageView.isHidden = true
+                noDataLabel.isHidden = true
+                playOneCollectionView.isHidden = false
+                playOneCollectionView.reloadData()
+            }
         }
     }
 
@@ -25,6 +48,7 @@ class PlayOneTableViewCell: UITableViewCell {
         super.awakeFromNib()
         playOneCollectionView.dataSource = self
         playOneCollectionView.delegate = self
+        setImageView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,6 +57,18 @@ class PlayOneTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func setImageView() {
+        contentView.addSubview(photoImageView)
+        contentView.addSubview(noDataLabel)
+        NSLayoutConstraint.activate([
+            photoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            photoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            photoImageView.widthAnchor.constraint(equalToConstant: 50),
+            photoImageView.heightAnchor.constraint(equalToConstant: 50),
+            noDataLabel.centerXAnchor.constraint(equalTo: photoImageView.centerXAnchor),
+            noDataLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin)
+        ])
+    }
 }
 
 extension PlayOneTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {

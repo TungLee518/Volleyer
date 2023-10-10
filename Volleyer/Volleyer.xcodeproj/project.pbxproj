@@ -13,6 +13,14 @@
 		C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */; };
 		C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */; };
 		C800512F2AB9890700FEA7FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512E2AB9890700FEA7FD /* User.swift */; };
+		C85BCF632AD147CA002B900C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF622AD147CA002B900C /* CardView.swift */; };
+		C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF642AD1646B002B900C /* ReportViewController.swift */; };
+		C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF662AD16487002B900C /* BlockListViewController.swift */; };
+		C85BCF692AD2990D002B900C /* BlockListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */; };
+		C85BCF6C2AD2E286002B900C /* paper_scissor_stone.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */; };
+		C85BCF6E2AD2E28F002B900C /* fortune_cookie.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */; };
+		C85BCF702AD2E2B8002B900C /* japan_lottery.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */; };
+		C85BCF722AD406EA002B900C /* RandomTeam.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF712AD406EA002B900C /* RandomTeam.storyboard */; };
 		C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */; };
 		C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */; };
 		C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */; };
@@ -32,7 +40,7 @@
 		C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */; };
 		C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E152B2AB5897500CBA201 /* Seletions.swift */; };
 		C86E152E2AB598CD00CBA201 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E152D2AB598CD00CBA201 /* Play.swift */; };
-		C86E15312AB5D69A00CBA201 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15302AB5D69A00CBA201 /* DataManager.swift */; };
+		C86E15312AB5D69A00CBA201 /* FinderDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15302AB5D69A00CBA201 /* FinderDataManager.swift */; };
 		C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */; };
 		C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */; };
 		C86E15372AB6ABBB00CBA201 /* PlayInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */; };
@@ -70,6 +78,12 @@
 		C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */; };
 		C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */; };
 		C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */; };
+		C89961742ACD9AC400C5D35D /* ScrollImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961732ACD9AC400C5D35D /* ScrollImageView.swift */; };
+		C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961752ACE875400C5D35D /* KeyChainManager.swift */; };
+		C89961782ACE906300C5D35D /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961772ACE906300C5D35D /* UIImageView+Extension.swift */; };
+		C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961792ACEC05D00C5D35D /* MyProfileView.swift */; };
+		C8D54A0E2ACFD5A10020C06C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */; };
+		C8D54A102AD008420020C06C /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D54A0F2AD008420020C06C /* LevelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +94,14 @@
 		C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTeamViewController.swift; sourceTree = "<group>"; };
 		C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C800512E2AB9890700FEA7FD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C85BCF622AD147CA002B900C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		C85BCF642AD1646B002B900C /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		C85BCF662AD16487002B900C /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
+		C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableViewCell.swift; sourceTree = "<group>"; };
+		C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paper_scissor_stone.json; sourceTree = "<group>"; };
+		C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fortune_cookie.json; sourceTree = "<group>"; };
+		C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = japan_lottery.json; sourceTree = "<group>"; };
+		C85BCF712AD406EA002B900C /* RandomTeam.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RandomTeam.storyboard; sourceTree = "<group>"; };
 		C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Volleyer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +123,7 @@
 		C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListTableViewCell.swift; sourceTree = "<group>"; };
 		C86E152B2AB5897500CBA201 /* Seletions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seletions.swift; sourceTree = "<group>"; };
 		C86E152D2AB598CD00CBA201 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
-		C86E15302AB5D69A00CBA201 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C86E15302AB5D69A00CBA201 /* FinderDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderDataManager.swift; sourceTree = "<group>"; };
 		C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFindersViewController.swift; sourceTree = "<group>"; };
 		C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaysViewController.swift; sourceTree = "<group>"; };
 		C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfoView.swift; sourceTree = "<group>"; };
@@ -140,6 +162,12 @@
 		C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileViewController.swift; sourceTree = "<group>"; };
 		C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProfileViewController.swift; sourceTree = "<group>"; };
+		C89961732ACD9AC400C5D35D /* ScrollImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollImageView.swift; sourceTree = "<group>"; };
+		C89961752ACE875400C5D35D /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		C89961772ACE906300C5D35D /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		C89961792ACEC05D00C5D35D /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C8D54A0F2AD008420020C06C /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,7 +212,11 @@
 				C89960FC2ABBE0D200C5D35D /* RequestsReceivedViewController.swift */,
 				C89961062ABD687300C5D35D /* RequestSentViewController.swift */,
 				C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */,
+				C85BCF642AD1646B002B900C /* ReportViewController.swift */,
+				C85BCF662AD16487002B900C /* BlockListViewController.swift */,
+				C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */,
 				C899610A2ABD963D00C5D35D /* ProfileViewController.swift */,
+				C85BCF712AD406EA002B900C /* RandomTeam.storyboard */,
 				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
 			);
 			path = MyPage;
@@ -199,6 +231,16 @@
 				C86E15412AB8249400CBA201 /* AddPlayViewController.swift */,
 			);
 			path = FinderPage;
+			sourceTree = "<group>";
+		};
+		C85BCF6A2AD2E273002B900C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */,
+				C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */,
+				C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C86E14A52AB1AF4C00CBA201 = {
@@ -223,6 +265,7 @@
 		C86E14B02AB1AF4C00CBA201 /* Volleyer */ = {
 			isa = PBXGroup;
 			children = (
+				C85BCF6A2AD2E273002B900C /* Resources */,
 				C89961212AC2C31200C5D35D /* Fonts */,
 				C899611C2AC267D700C5D35D /* Extensions */,
 				C89961322AC94CE700C5D35D /* DataManagers */,
@@ -280,6 +323,8 @@
 				C899611F2AC29BDE00C5D35D /* UIColor+Extension.swift */,
 				C89961262AC2C49600C5D35D /* UIFont+Extension.swift */,
 				C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */,
+				C89961772ACE906300C5D35D /* UIImageView+Extension.swift */,
+				C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */,
 				C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */,
 			);
 			path = Extensions;
@@ -312,8 +357,12 @@
 			children = (
 				C86E15362AB6ABBB00CBA201 /* PlayInfoView.swift */,
 				C89961082ABD933700C5D35D /* ProfileView.swift */,
+				C89961792ACEC05D00C5D35D /* MyProfileView.swift */,
+				C8D54A0F2AD008420020C06C /* LevelView.swift */,
+				C85BCF622AD147CA002B900C /* CardView.swift */,
 				C86E15272AB5584B00CBA201 /* PlayerListTableView.swift */,
 				C86E15292AB55ABA00CBA201 /* PlayerListTableViewCell.swift */,
+				C89961732ACD9AC400C5D35D /* ScrollImageView.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -330,10 +379,11 @@
 		C89961322AC94CE700C5D35D /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
-				C86E15302AB5D69A00CBA201 /* DataManager.swift */,
+				C86E15302AB5D69A00CBA201 /* FinderDataManager.swift */,
 				C89961372ACABD3500C5D35D /* RequestDataManager.swift */,
 				C899612D2AC80B3C00C5D35D /* MyDataManager.swift */,
 				C899612B2AC56A7B00C5D35D /* PlayOneDataManager.swift */,
+				C89961752ACE875400C5D35D /* KeyChainManager.swift */,
 			);
 			path = DataManagers;
 			sourceTree = "<group>";
@@ -415,8 +465,12 @@
 				C89960FB2ABAE8C300C5D35D /* GoogleService-Info.plist in Resources */,
 				C899610F2AC038C600C5D35D /* PlayOne.storyboard in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
+				C85BCF6C2AD2E286002B900C /* paper_scissor_stone.json in Resources */,
 				C89961242AC2C32D00C5D35D /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
+				C85BCF722AD406EA002B900C /* RandomTeam.storyboard in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,
+				C85BCF702AD2E2B8002B900C /* japan_lottery.json in Resources */,
+				C85BCF6E2AD2E28F002B900C /* fortune_cookie.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,10 +541,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */,
+				C85BCF692AD2990D002B900C /* BlockListTableViewCell.swift in Sources */,
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
+				C89961742ACD9AC400C5D35D /* ScrollImageView.swift in Sources */,
 				C89961112AC03C0700C5D35D /* PlayOneViewController.swift in Sources */,
 				C86E14B62AB1AF4C00CBA201 /* FinderViewController.swift in Sources */,
 				C89961072ABD687300C5D35D /* RequestSentViewController.swift in Sources */,
@@ -499,9 +555,11 @@
 				C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */,
 				C86E151F2AB43B8600CBA201 /* TabBarViewController.swift in Sources */,
 				C89961192AC16BC400C5D35D /* PlayOneFinderViewController.swift in Sources */,
+				C89961782ACE906300C5D35D /* UIImageView+Extension.swift in Sources */,
 				C86E152A2AB55ABA00CBA201 /* PlayerListTableViewCell.swift in Sources */,
 				C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */,
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
+				C8D54A0E2ACFD5A10020C06C /* UIView+Extension.swift in Sources */,
 				C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */,
 				C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */,
 				C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */,
@@ -515,6 +573,7 @@
 				C899613D2ACBBA6700C5D35D /* LoginViewController.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
+				C8D54A102AD008420020C06C /* LevelView.swift in Sources */,
 				C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
@@ -522,15 +581,20 @@
 				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
 				C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
+				C85BCF632AD147CA002B900C /* CardView.swift in Sources */,
+				C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */,
+				C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */,
 				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
+				C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
+				C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */,
 				C89960FD2ABBE0D200C5D35D /* RequestsReceivedViewController.swift in Sources */,
 				C86E15242AB4A33600CBA201 /* StandardAmounts.swift in Sources */,
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,
 				C86E15102AB31FF300CBA201 /* FinderTableViewCell.swift in Sources */,
-				C86E15312AB5D69A00CBA201 /* DataManager.swift in Sources */,
+				C86E15312AB5D69A00CBA201 /* FinderDataManager.swift in Sources */,
 				C86E15422AB8249400CBA201 /* AddPlayViewController.swift in Sources */,
 				C899612E2AC80B3C00C5D35D /* MyDataManager.swift in Sources */,
 				C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */,

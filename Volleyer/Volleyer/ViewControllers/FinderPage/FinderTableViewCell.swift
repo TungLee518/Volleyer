@@ -15,71 +15,56 @@ class FinderTableViewCell: UITableViewCell {
 
     weak var parent: FinderViewController?
 
-    lazy var photoImageView: UIImageView = {
+    lazy var calanderImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "placeholder")
-        imageView.layer.cornerRadius = photoHeight / 2
-        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "calendar")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
-    private let accountLable: UILabel = {
+    let startTimeLable: UILabel = {
         let label = UILabel()
-        label.text = "maymmm518"
-        label.textColor = .gray1
+        label.textColor = .gray2
         label.font = .semiboldNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    let endTimeLable: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray2
+        label.font = .semiboldNunito(size: 20)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var placeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "location")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    let placeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray2
+        label.font = .regularNunito(size: 23)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
-    private var playView = PlayInfoView()
     var thisPlay: Play? {
         didSet {
-            sendDataToPlayView(thisPlay!)
-            accountLable.text = thisPlay?.finderId
-            DataManager.sharedDataMenager.getImageFromUserId(id: thisPlay!.finderId) { imageUrl, err in
-                if let error = err {
-                    // Handle the error
-                    print("Error: \(error)")
-                } else if let imageUrl = imageUrl {
-                    // Use the imageUrl
-                    print("Image URL: \(imageUrl)")
-                    self.photoImageView.kf.setImage(with: URL(string: imageUrl))
-                } else {
-                    // Handle the case where no matching document was found
-                    print("No matching document found")
-                }
-            }
-//            photoImageView.image = UIImage(named: )
-            if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
-                wantToAddButton.isHidden = true
-            } else {
-                wantToAddButton.isHidden = false
-            }
+            setContent()
         }
     }
 
-    lazy var wantToAddButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("我要加", for: .normal)
-        button.titleLabel?.font =  .semiboldNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple1
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(addPlay), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        return button
-    }()
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(photoImageView)
-        contentView.addSubview(accountLable)
-        contentView.addSubview(playView)
-        playView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(wantToAddButton)
+        self.selectionStyle = .none
+        applyShadow()
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 20
+        contentView.addSubview(startTimeLable)
+        contentView.addSubview(endTimeLable)
+        contentView.addSubview(placeImageView)
+        contentView.addSubview(placeLabel)
         setLayout()
     }
 
@@ -87,31 +72,31 @@ class FinderTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setLayout() {
-        NSLayoutConstraint.activate([
-            photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
-            photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
-            photoImageView.heightAnchor.constraint(equalToConstant: photoHeight),
-            photoImageView.widthAnchor.constraint(equalToConstant: photoHeight),
-
-            accountLable.leadingAnchor.constraint(equalTo: photoImageView.trailingAnchor, constant: standardMargin),
-            accountLable.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
-
-            playView.topAnchor.constraint(equalTo: photoImageView.bottomAnchor),
-            playView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            playView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
-            wantToAddButton.topAnchor.constraint(equalTo: playView.bottomAnchor, constant: standardMargin),
-            wantToAddButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-            wantToAddButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
-            wantToAddButton.heightAnchor.constraint(equalToConstant: 40),
-            wantToAddButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin)
-        ])
+    func setContent() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd EE HH:mm"
+        if let thisPlay = thisPlay {
+            startTimeLable.text = dateFormatter.string(from: thisPlay.startTime)
+            endTimeLable.text = dateFormatter.string(from: thisPlay.endTime)
+            placeLabel.text = thisPlay.place
+        }
     }
 
-    func sendDataToPlayView(_ data: Play) {
-        playView.play = thisPlay
-        playView.setUI()
+    private func setLayout() {
+        NSLayoutConstraint.activate([
+            startTimeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            startTimeLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
+            endTimeLable.leadingAnchor.constraint(equalTo: startTimeLable.leadingAnchor),
+            endTimeLable.topAnchor.constraint(equalTo: startTimeLable.bottomAnchor, constant: standardMargin/2),
+            placeLabel.topAnchor.constraint(equalTo: endTimeLable.bottomAnchor, constant: standardMargin),
+            placeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            placeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
+
+            placeImageView.trailingAnchor.constraint(equalTo: placeLabel.leadingAnchor, constant: -standardMargin),
+            placeImageView.centerYAnchor.constraint(equalTo: placeLabel.centerYAnchor),
+            placeImageView.heightAnchor.constraint(equalToConstant: 20),
+            placeImageView.widthAnchor.constraint(equalTo: placeImageView.heightAnchor, multiplier: 1)
+        ])
     }
 
     @objc func addPlay() {

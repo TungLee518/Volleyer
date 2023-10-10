@@ -11,19 +11,29 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "no data yet")
+        imageView.image = UIImage(named: "blow")
         imageView.translatesAutoresizingMaskIntoConstraints = false
 //        imageView.isHidden = true
         return imageView
     }()
+    private let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "目前沒有揪場"
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 32)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     private var myFindersTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = FinderDataManager()
     var myFinders = [Play]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoImageView.isHidden = true
+        noDataLabel.isHidden = true
         setNavBar()
         dataManager.getThisUserPlays()
         dataManager.playDataDelegate = self
@@ -47,6 +57,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         myFindersTableView.separatorStyle = .singleLine
         view.addSubview(myFindersTableView)
         view.addSubview(photoImageView)
+        view.addSubview(noDataLabel)
 
         myFindersTableView.translatesAutoresizingMaskIntoConstraints = false
         myFindersTableView.rowHeight = UITableView.automaticDimension
@@ -58,8 +69,10 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
             myFindersTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             photoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             photoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            photoImageView.widthAnchor.constraint(equalToConstant: 200),
-            photoImageView.heightAnchor.constraint(equalToConstant: 200)
+            photoImageView.widthAnchor.constraint(equalToConstant: 150),
+            photoImageView.heightAnchor.constraint(equalToConstant: 150),
+            noDataLabel.centerXAnchor.constraint(equalTo: photoImageView.centerXAnchor),
+            noDataLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin)
         ])
     }
 
@@ -74,6 +87,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
         let thisPlay = myFinders[indexPath.row]
         cell.thisPlay = thisPlay
+        cell.selectionStyle = .none
         return cell
     }
 
@@ -85,7 +99,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 }
 
 extension MyFindersViewController: PlayDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet plays: [Play]) {
+    func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
         for i in plays {
             if i.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
                 myFinders.append(i)
@@ -93,9 +107,12 @@ extension MyFindersViewController: PlayDataManagerDelegate {
         }
         if myFinders.count == 0 {
             photoImageView.isHidden = false
+            noDataLabel.isHidden = false
             myFindersTableView.isHidden = true
         } else {
             photoImageView.isHidden = true
+            noDataLabel.isHidden = true
+            myFindersTableView.isHidden = false
             myFindersTableView.reloadData()
         }
     }

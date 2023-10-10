@@ -24,8 +24,8 @@ class PlayerTableViewCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "name"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.sizeToFit()
@@ -53,8 +53,8 @@ class PlayerTableViewCell: UITableViewCell {
     private let genderLabel: UILabel = {
         let label = UILabel()
         label.text = "gender"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.gray2
+        label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.sizeToFit()
@@ -114,6 +114,8 @@ class PlayerTableViewCell: UITableViewCell {
 
             genderLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             genderLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            genderLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/2),
+            genderLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/2),
 
             inputNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
             inputNameTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),

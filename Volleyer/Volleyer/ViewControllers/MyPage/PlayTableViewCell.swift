@@ -16,7 +16,7 @@ class PlayTableViewCell: UITableViewCell {
 
     var thisPlay: Play? {
         didSet {
-            sendDataToPlayView(thisPlay!)
+            playView.thisPlay = thisPlay
         }
     }
 
@@ -38,11 +38,6 @@ class PlayTableViewCell: UITableViewCell {
             playView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             playView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin)
         ])
-    }
-
-    func sendDataToPlayView(_ data: Play) {
-        playView.play = thisPlay
-        playView.setUI()
     }
 
     @objc func addData() {

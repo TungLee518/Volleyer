@@ -23,6 +23,7 @@ target 'Volleyer' do
   pod 'MJRefresh'
   pod 'Kingfisher', '~> 7.0'
   pod 'JGProgressHUD'
+  pod 'lottie-ios'
 
 end
 

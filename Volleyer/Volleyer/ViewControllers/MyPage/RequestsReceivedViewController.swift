@@ -9,6 +9,20 @@ import UIKit
 import MJRefresh
 
 class RequestsReceivedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    lazy var photoImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "blow")
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+    private let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "目前沒有收到邀請"
+        label.textColor = UIColor.gray2
+        label.font = .semiboldNunito(size: 32)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     private var requestsTableView: UITableView!
 
     private let dataManager = RequestDataManager()
@@ -16,10 +30,13 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoImageView.isHidden = true
+        noDataLabel.isHidden = true
         setNavBar()
         dataManager.getPlayRequests()
         dataManager.playRequestDelegate = self
         setTableView()
+        setImageView()
     }
 
     private func setNavBar() {
@@ -55,6 +72,18 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
                 self.requestsTableView.mj_header?.endRefreshing()
             }
         }.autoChangeTransparency(true).link(to: self.requestsTableView)
+    }
+    func setImageView() {
+        view.addSubview(photoImageView)
+        view.addSubview(noDataLabel)
+        NSLayoutConstraint.activate([
+            photoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            photoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            photoImageView.widthAnchor.constraint(equalToConstant: 150),
+            photoImageView.heightAnchor.constraint(equalToConstant: 150),
+            noDataLabel.centerXAnchor.constraint(equalTo: photoImageView.centerXAnchor),
+            noDataLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin)
+        ])
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,6 +132,7 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
         // firebase get data by play id and request_sender_id
         nextVC.thisPlayId = myRequests[indexPath.row].playId
         nextVC.thisUserId = myRequests[indexPath.row].requestSenderId
+        nextVC.title = "寄送者與場地資訊"
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
@@ -110,7 +140,17 @@ class RequestsReceivedViewController: UIViewController, UITableViewDataSource, U
 extension RequestsReceivedViewController: RequestsDataManagerDelegate {
     func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
         myRequests = playRequests
-        requestsTableView.reloadData()
+//        requestsTableView.reloadData()
+        if myRequests.count == 0 {
+            photoImageView.isHidden = false
+            noDataLabel.isHidden = false
+            requestsTableView.isHidden = true
+        } else {
+            photoImageView.isHidden = true
+            noDataLabel.isHidden = true
+            requestsTableView.isHidden = false
+            requestsTableView.reloadData()
+        }
     }
     func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
     }

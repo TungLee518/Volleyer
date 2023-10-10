@@ -824,6 +824,7 @@ PODS:
   - JGProgressHUD (2.2)
   - Kingfisher (7.9.1)
   - leveldb-library (1.22.2)
+  - lottie-ios (4.3.0)
   - MJRefresh (3.7.5)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
@@ -843,6 +844,7 @@ DEPENDENCIES:
   - FirebaseStorage
   - JGProgressHUD
   - Kingfisher (~> 7.0)
+  - lottie-ios
   - MJRefresh
   - SwiftLint
 
@@ -850,6 +852,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - JGProgressHUD
     - Kingfisher
+    - lottie-ios
   trunk:
     - abseil
     - BoringSSL-GRPC
@@ -902,12 +905,13 @@ SPEC CHECKSUMS:
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
+  lottie-ios: c69214a487e1a1465a231c1918c6ce174e2d45bc
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   SwiftLint: 1cc5cd61ba9bacb2194e340aeb47a2a37fda00b3
 
-PODFILE CHECKSUM: ffb1358a1a6e44fcd63ec930fcac8315c9c4527a
+PODFILE CHECKSUM: 4f143dba541fa6fb6fde77fd3572078fabedf64c
 
 COCOAPODS: 1.12.1

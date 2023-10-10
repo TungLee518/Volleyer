@@ -38,7 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window?.makeKeyAndVisible()
         UserDefaults.standard.set(Date(), forKey: launchAppDate)
-        RequestDataManager.sharedDataMenager.listenPlayRequests()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

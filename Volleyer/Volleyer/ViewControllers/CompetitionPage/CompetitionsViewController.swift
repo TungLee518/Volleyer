@@ -13,7 +13,7 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
 
     private var competitionsTableView: UITableView!
 
-    private let dataManager = DataManager()
+    private let dataManager = FinderDataManager()
     var allCompetitions = [Competition]()
 
     override func viewDidLoad() {
@@ -64,7 +64,12 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
         cell.titleLable.text = thisCompetition.title
         cell.dateLable.text = thisCompetition.date
         cell.countyLable.text = thisCompetition.county
-        cell.isEnrolling = thisCompetition.isEnrolling
+        if thisCompetition.isEnrolling {
+            cell.enrollingLabel.isHidden = false
+        } else {
+            cell.enrollingLabel.isHidden = true
+        }
+//        cell.isEnrolling = thisCompetition.isEnrolling
         cell.selectionStyle = .none
         return cell
     }
@@ -80,7 +85,7 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
 }
 
 extension CompetitionsViewController: CompetitionDataManagerDelegate {
-    func manager(_ manager: DataManager, didGet competitions: [Competition]) {
+    func manager(_ manager: FinderDataManager, didGet competitions: [Competition]) {
         allCompetitions = competitions
         competitionsTableView.reloadData()
     }
