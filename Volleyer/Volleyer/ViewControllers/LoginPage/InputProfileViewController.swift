@@ -14,7 +14,7 @@ class InputProfileViewController: UIViewController {
         picker.sizeToFit()
         return picker
     }()
-    private let pleaseInputLabel: UILabel = {
+    private var pleaseInputLabel: UILabel = {
         let label = UILabel()
         label.text = "歡迎加入排球人"
         label.textColor = UIColor.gray2
@@ -144,7 +144,7 @@ class InputProfileViewController: UIViewController {
         button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
+        button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.purple1.cgColor
         button.addTarget(self, action: #selector(viewLevel), for: .touchUpInside)
         return button
@@ -181,11 +181,25 @@ class InputProfileViewController: UIViewController {
 
     lazy var thisUser = User(id: "", email: "", gender: -1, name: "")
 
+    var changeUserInfoData: User? {
+        didSet {
+            // auto input user data
+//            autoInputUserInfo()
+        }
+    }
+
     var levelImageIsHidden = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        pleaseInputLabel.text = "歡迎加入排球人"
+        viewLevelButton.removeTarget(nil, action: nil, for: .allEvents)
+        viewLevelButton.setTitle("自評表", for: .normal)
+        viewLevelButton.addTarget(self, action: #selector(viewLevel), for: .touchUpInside)
+        doneInputButton.removeTarget(nil, action: nil, for: .allEvents)
+        doneInputButton.setTitle("完成", for: .normal)
+        doneInputButton.addTarget(self, action: #selector(doneInput), for: .touchUpInside)
         print(thisUser)
         view.backgroundColor = .white
         view.addSubview(pleaseInputLabel)
@@ -228,6 +242,7 @@ class InputProfileViewController: UIViewController {
                 hud.dismiss(afterDelay: 1.5)
             }
         }
+        autoInputUserInfo()
     }
     func setLayout() {
         NSLayoutConstraint.activate([
@@ -344,6 +359,29 @@ class InputProfileViewController: UIViewController {
             levelImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
     }
+    func autoInputUserInfo() {
+        if let changeUserInfoData = changeUserInfoData {
+            thisUser = changeUserInfoData
+            idTextField.text = changeUserInfoData.id
+            nameTextField.text = changeUserInfoData.name
+            emailTextField.text = changeUserInfoData.email
+            genderTextField.text = genderList[changeUserInfoData.gender]
+            print(changeUserInfoData)
+            print(setCheckboxes)
+            setCheckboxes[changeUserInfoData.level.setBall].isSelected = true
+            blocCheckboxes[changeUserInfoData.level.block].isSelected = true
+            digCheckboxes[changeUserInfoData.level.dig].isSelected = true
+            spickCheckboxes[changeUserInfoData.level.spike].isSelected = true
+            sumCheckboxes[changeUserInfoData.level.sum].isSelected = true
+            pleaseInputLabel.text = "更改個人資訊"
+            viewLevelButton.removeTarget(nil, action: nil, for: .allEvents)
+            viewLevelButton.setTitle("刪除帳號", for: .normal)
+            viewLevelButton.addTarget(self, action: #selector(deleteAccount), for: .touchUpInside)
+            doneInputButton.removeTarget(nil, action: nil, for: .allEvents)
+            doneInputButton.setTitle("更改資料", for: .normal)
+            doneInputButton.addTarget(self, action: #selector(changeUserInfo), for: .touchUpInside)
+        }
+    }
     @objc func cancelToolbar() {
         self.view.endEditing(true)
     }
@@ -404,6 +442,36 @@ class InputProfileViewController: UIViewController {
         } else {
             LKProgressHUD.showFailure(text: "請輸入完整資訊")
         }
+    }
+    @objc func changeUserInfo() {
+        if idTextField.text != "", nameTextField.text != "", emailTextField.text != "", genderTextField.text != "" {
+            thisUser.email = emailTextField.text!
+            thisUser.id = idTextField.text!
+            thisUser.name = nameTextField.text!
+            thisUser.gender = genderList.firstIndex(of: genderTextField.text!)!
+            print(thisUser)
+            MyDataManager.shared.updateProfileInfo(changedUser: thisUser)
+            self.navigationController?.popViewController(animated: true)
+            LKProgressHUD.showSuccess(text: "帳號更改成功")
+        } else {
+            LKProgressHUD.showFailure(text: "請輸入完整資訊")
+        }
+    }
+    @objc func deleteAccount() {
+        let controller = UIAlertController(title: "確定？", message: "要刪除帳號？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            MyDataManager.shared.removeThisuser(firebaseId: self.thisUser.firebaseId, userId: self.thisUser.id)
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+                return
+            }
+            let loginVC = LoginViewController()
+            sceneDelegate.window?.rootViewController = loginVC
+            LKProgressHUD.showSuccess(text: "帳號刪除成功")
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
     }
 }
 
