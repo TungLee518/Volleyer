@@ -412,6 +412,7 @@
 				C86E14AC2AB1AF4C00CBA201 /* Resources */,
 				D7DDCE8F232239B9E66259F9 /* [CP] Embed Pods Frameworks */,
 				C86E15112AB408ED00CBA201 /* ShellScript */,
+				C88F8E412AD69C250080F9B6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -515,6 +516,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		C88F8E412AD69C250080F9B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		D7DDCE8F232239B9E66259F9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -745,20 +768,23 @@
 				CODE_SIGN_ENTITLEMENTS = Volleyer/Volleyer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a picture for this app!";
+				INFOPLIST_KEY_NSCameraUsageDescription = "允許我們的應用程序使用相機，以拍攝照片來幫助您記錄其他人的外貌特征，以便您在需要時能夠回顧和識別他們．";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "允許我們的應用程序訪問您的照片庫，以便您可以選擇圖片來更改您的個人資料照片。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.Volleyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -776,20 +802,23 @@
 				CODE_SIGN_ENTITLEMENTS = Volleyer/Volleyer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow access to take a picture for this app!";
+				INFOPLIST_KEY_NSCameraUsageDescription = "允許我們的應用程序使用相機，以拍攝照片來幫助您記錄其他人的外貌特征，以便您在需要時能夠回顧和識別他們．";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "允許我們的應用程序訪問您的照片庫，以便您可以選擇圖片來更改您的個人資料照片。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.Volleyer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
