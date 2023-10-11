@@ -97,6 +97,17 @@ class MyDataManager {
             }
         }
     }
+    func updateProfileInfo(changedUser: User) {
+        // users.update (use firebase id to update only id, name, email, gender, and levels fields)
+        // update UserDefault by saveUserDefault()
+        // if id is change, need to change all id in: plays finder, request sender receiver id, play one court finder id, play one finder document id
+        print("will update firebase later :)")
+    }
+    func removeThisuser(firebaseId: String, userId: String) {
+        // users.document(firebaseId).delete
+        // delete all userId in: plays finder, request sender receiver id, play one court finder id, play one finder document id
+        print("will delete account later :)")
+    }
     func addToBlocklist(userId: String) {
         print(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue))
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
