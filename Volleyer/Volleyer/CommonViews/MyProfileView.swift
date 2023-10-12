@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MyProfileView: UIView {
-    var thisUser: User?
 
     let dataManager = MyDataManager()
 

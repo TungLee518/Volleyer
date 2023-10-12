@@ -98,9 +98,31 @@ class MyDataManager {
         }
     }
     func updateProfileInfo(changedUser: User) {
+        let data: [String: Any] = [
+            UserTitle.id.rawValue: changedUser.id,
+            UserTitle.email.rawValue: changedUser.email,
+            UserTitle.name.rawValue: changedUser.name,
+            UserTitle.gender.rawValue: changedUser.gender,
+            UserTitle.level.rawValue: [
+                "set": changedUser.level.setBall,
+                "block": changedUser.level.block,
+                "dig": changedUser.level.dig,
+                "spike": changedUser.level.spike,
+                "sum": changedUser.level.sum
+            ]
+        ]
+        users.document(changedUser.firebaseId).updateData(data) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+
+        saveUserDefault(changedUser)
         // users.update (use firebase id to update only id, name, email, gender, and levels fields)
         // update UserDefault by saveUserDefault()
-        // if id is change, need to change all id in: plays finder, request sender receiver id, play one court finder id, play one finder document id
+        
         print("will update firebase later :)")
     }
     func removeThisuser(firebaseId: String, userId: String) {
