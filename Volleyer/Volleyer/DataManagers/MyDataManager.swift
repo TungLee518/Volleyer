@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
-// swiftlint:disable force_cast
+
 protocol BlockListDataManagerDelegate {
     func manager(_ manager: MyDataManager, didGet blockList: [User])
 }
@@ -43,7 +43,8 @@ class MyDataManager {
                 "sum": user.level.sum
             ],
             UserTitle.myPlayList.rawValue: user.myPlayList,
-            UserTitle.image.rawValue: user.image
+            UserTitle.image.rawValue: user.image,
+            UserTitle.blockList.rawValue: user.blockList
         ]
         users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: user.firebaseId).getDocuments { (querySnapshot, err) in
             if let err = err {
@@ -133,12 +134,12 @@ class MyDataManager {
     func addToBlocklist(userId: String) {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
-                var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
-                let blockListIdx = blockList.firstIndex(of: userId)
+                var blockList = document.data()?[UserTitle.blockList.rawValue] as? [String]
+                let blockListIdx = blockList?.firstIndex(of: userId)
                 if blockListIdx == nil {
-                    blockList.append(userId)
+                    blockList?.append(userId)
                     self.users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").updateData([
-                        UserTitle.blockList.rawValue: blockList
+                        UserTitle.blockList.rawValue: blockList as Any
                     ]) { err in
                         if let err = err {
                             print("Error updating document: \(err)")
@@ -159,10 +160,10 @@ class MyDataManager {
     func removeFromBlocklist(userId: String) {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
-                var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
-                let blockListIdx = blockList.firstIndex(of: userId)
+                var blockList = document.data()?[UserTitle.blockList.rawValue] as? [String]
+                let blockListIdx = blockList?.firstIndex(of: userId)
                 if let blockListIdx = blockListIdx {
-                    blockList.remove(at: blockListIdx)
+                    blockList?.remove(at: blockListIdx)
                     self.users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").updateData([
                         UserTitle.blockList.rawValue: blockList
                     ]) { err in
@@ -183,22 +184,24 @@ class MyDataManager {
     func getBlockList() {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
-                var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
-                if blockList.count == 0 {
-                    self.blockListDataManager?.manager(self, didGet: [])
-                } else {
-                    var blockListUser = [User]()
-                    for id in blockList {
-                        self.getUserById(id: id) { theUser, err in
-                            if let error = err {
-                                print("Error: \(error)")
-                            } else if let theUser = theUser {
-                                blockListUser.append(theUser)
-                                if blockListUser.count == blockList.count {
-                                    self.blockListDataManager?.manager(self, didGet: blockListUser)
+                var blockList = document.data()?[UserTitle.blockList.rawValue] as? [String]
+                if let blockList = blockList {
+                    if blockList.count == 0 {
+                        self.blockListDataManager?.manager(self, didGet: [])
+                    } else {
+                        var blockListUser = [User]()
+                        for id in blockList {
+                            self.getUserById(id: id) { theUser, err in
+                                if let error = err {
+                                    print("Error: \(error)")
+                                } else if let theUser = theUser {
+                                    blockListUser.append(theUser)
+                                    if blockListUser.count == blockList.count {
+                                        self.blockListDataManager?.manager(self, didGet: blockListUser)
+                                    }
+                                } else {
+                                    print("No matching document found")
                                 }
-                            } else {
-                                print("No matching document found")
                             }
                         }
                     }
@@ -210,24 +213,24 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "iamMay").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        let documentLevel = document.data()["self_level"] as! [String: Int]
+                        let documentLevel = document.data()["self_level"] as? [String: Int]
                         let thisUser = User(firebaseId: document.documentID,
-                                            id: document.data()["id"] as! String,
-                                            email: document.data()["email"] as! String,
-                                            gender: document.data()["gender"] as! Int,
-                                            name: document.data()["name"] as! String,
-                                            level: LevelRange(setBall: documentLevel["set"]!,
-                                                              block: documentLevel["block"]!,
-                                                              dig: documentLevel["dig"]!,
-                                                              spike: documentLevel["spike"]!,
-                                                              sum: documentLevel["sum"]!
-                                                             ),
-                                            image: document.data()["image"] as! String
+                                            id: document.data()["id"] as? String ?? "no id",
+                                            email: document.data()["email"] as? String ?? "no email",
+                                            gender: document.data()["gender"] as? Int ?? 0,
+                                            name: document.data()["name"] as? String ?? "no name",
+                                            level: LevelRange(setBall: documentLevel?["set"] ?? 0,
+                                            block: documentLevel?["block"] ?? 0,
+                                            dig: documentLevel?["dig"] ?? 0,
+                                            spike: documentLevel?["spike"] ?? 0,
+                                            sum: documentLevel?["sum"] ?? 0
+                                            ),
+                                            image: document.data()["image"] as? String ?? placeholderImage
                         )
                         print("success get user data \(document.documentID) => \(document.data())")
                         print(thisUser)
@@ -253,26 +256,26 @@ class MyDataManager {
     }
 
     func decodeUser(_ document: QueryDocumentSnapshot) -> User {
-        let levelDict = document.data()[UserTitle.level.rawValue] as! [String: Int]
+        let levelDict = document.data()[UserTitle.level.rawValue] as? [String: Int]
         let levelRange = LevelRange(
-            setBall: levelDict[LevelTitle.set.rawValue]!,
-            block: levelDict[LevelTitle.block.rawValue]!,
-            dig: levelDict[LevelTitle.dig.rawValue]!,
-            spike: levelDict[LevelTitle.spike.rawValue]!,
-            sum: levelDict[LevelTitle.sum.rawValue]!
+            setBall: levelDict?[LevelTitle.set.rawValue] ?? 0,
+            block: levelDict?[LevelTitle.block.rawValue] ?? 0,
+            dig: levelDict?[LevelTitle.dig.rawValue] ?? 0,
+            spike: levelDict?[LevelTitle.spike.rawValue] ?? 0,
+            sum: levelDict?[LevelTitle.sum.rawValue] ?? 0
         )
         let aUser = User(
             firebaseId: document.documentID,
-            loginWay: document.data()[UserTitle.loginWay.rawValue] as! Int,
+            loginWay: document.data()[UserTitle.loginWay.rawValue] as? Int ?? 0,
             userIdentifier: document.data()[UserTitle.userIdentifier.rawValue] as? String ?? "",
-            id: document.data()[UserTitle.id.rawValue] as! String,
-            email: document.data()[UserTitle.email.rawValue] as! String,
-            gender: document.data()[UserTitle.gender.rawValue] as! Int,
-            name: document.data()[UserTitle.name.rawValue] as! String,
+            id: document.data()[UserTitle.id.rawValue] as? String ?? "no id",
+            email: document.data()[UserTitle.email.rawValue] as? String ?? "no email",
+            gender: document.data()[UserTitle.gender.rawValue] as? Int ?? 0,
+            name: document.data()[UserTitle.name.rawValue] as? String ?? "no name",
             level: levelRange,
-            myPlayList: document.data()[UserTitle.myPlayList.rawValue] as! [String],
-            image: document.data()[UserTitle.image.rawValue] as! String,
-            blockList: document.data()[UserTitle.blockList.rawValue] as! [String]
+            myPlayList: document.data()[UserTitle.myPlayList.rawValue] as? [String] ?? [],
+            image: document.data()[UserTitle.image.rawValue] as? String ?? placeholderImage,
+            blockList: document.data()[UserTitle.blockList.rawValue] as? [String] ?? []
         )
         return aUser
     }
@@ -306,4 +309,3 @@ class MyDataManager {
         UserDefaults.standard.set(thisUser.level.sum, forKey: Level.sum.rawValue)
     }
 }
-// swiftlint:enable force_cast

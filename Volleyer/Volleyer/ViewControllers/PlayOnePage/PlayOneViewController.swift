@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
 
@@ -31,6 +32,14 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
             playOneDataManager.getPlayOneCourts()
         }
         playOneTableView.sectionHeaderTopPadding = 0
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                playOneData = []
+                playOneDataManager.getPlayOneCourts()
+                playOneTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.playOneTableView)
     }
 
     private func setNavBar() {
