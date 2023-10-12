@@ -227,7 +227,7 @@ class FinderDataManager {
     // MARK: get user by id
     // TODO: change to firebase id
     func getUserById(id: String) {
-        users.whereField(UserTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
+        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -239,7 +239,7 @@ class FinderDataManager {
                 }
         }
     }
-    
+
     func getUserByFirebaseId(id: String, completion: @escaping (User?, Error?) -> Void) {
         users.document(id).getDocument { (document, error) in
             if let document = document, document.exists {
