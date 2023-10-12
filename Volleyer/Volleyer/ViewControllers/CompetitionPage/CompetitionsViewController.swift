@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import WebKit
+//import WebKit
 import SafariServices
 
 class CompetitionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {

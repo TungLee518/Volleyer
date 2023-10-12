@@ -22,7 +22,7 @@ class ProfileView: UIView {
 
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "placeholder")
+        imageView.image = UIImage(named: "placeholder")
         imageView.layer.cornerRadius = photoHeight/2
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -282,11 +282,11 @@ class ProfileView: UIView {
     }
 
     func blockAction() {
-        if let thisUserId = self.thisUser?.id {
-            let controller = UIAlertController(title: "確定？", message: "要封鎖 \(thisUserId)？", preferredStyle: .alert)
+        if let thisUser = self.thisUser {
+            let controller = UIAlertController(title: "確定？", message: "要封鎖 \(thisUser.id)？", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "是", style: .default) { _ in
                 print("block")
-                MyDataManager.shared.addToBlocklist(userId: thisUserId)
+                MyDataManager.shared.addToBlocklist(userId: thisUser.firebaseId)
                 self.parent?.navigationController?.popToRootViewController(animated: true)
             }
             controller.addAction(okAction)

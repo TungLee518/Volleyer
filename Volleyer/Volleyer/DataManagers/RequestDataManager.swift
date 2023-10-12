@@ -37,7 +37,7 @@ class RequestDataManager {
             playerDictList.append(playerDict)
         }
         let data: [String: Any] = [
-            PlayRequestTitle.requestSenderId.rawValue: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any,
+            PlayRequestTitle.requestSenderId.rawValue: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) as Any,
             PlayRequestTitle.requestReceiverId.rawValue: play.finderId,
             PlayRequestTitle.playId.rawValue: play.id,
             PlayRequestTitle.status.rawValue: 0,
@@ -48,7 +48,7 @@ class RequestDataManager {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                if querySnapshot!.documents.count == 0 {
+                if querySnapshot!.documents.count == 0 { // 這個場沒有被邀請過
                     document.setData(data) { err in
                         if let err = err {
                             print("Error adding document: \(err)")
@@ -58,12 +58,12 @@ class RequestDataManager {
                     }
                     print("add data")
                     LKProgressHUD.showSuccess(text: AlertTitile.requestSent.rawValue)
-                } else {
+                } else { // 這個場有被邀請過
                     var canSendRequest = true
                     for document in querySnapshot!.documents {
                         let theSender = document.data()[PlayRequestTitle.requestSenderId.rawValue] as! String
                         let theReceiver = document.data()[PlayRequestTitle.requestReceiverId.rawValue] as! String
-                        if theSender == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) && theReceiver == play.finderId {
+                        if theSender == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) && theReceiver == play.finderId {
                             canSendRequest = false
                             break
                         }
@@ -110,9 +110,9 @@ class RequestDataManager {
                         createTime: createdTime.dateValue(),
                         id: document.documentID
                     )
-                    if aPlayRequest.requestReceverId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+                    if aPlayRequest.requestReceverId == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
                         playRequestsReceiveArray.append(aPlayRequest)
-                    } else if aPlayRequest.requestSenderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+                    } else if aPlayRequest.requestSenderId == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
                         playRequestsSentArray.append(aPlayRequest)
                     }
                 }
@@ -127,7 +127,8 @@ class RequestDataManager {
     // MARK: listen play requests
     func listenPlayRequests() {
         // bug
-        addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
+        // TODO: change to firebase id
+        addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) as Any).addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
@@ -149,7 +150,7 @@ class RequestDataManager {
                 }
             }
         }
-        addPlayRQs.whereField(PlayRequestTitle.requestSenderId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any).addSnapshotListener { querySnapshot, error in
+        addPlayRQs.whereField(PlayRequestTitle.requestSenderId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) as Any).addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
@@ -312,7 +313,7 @@ extension RequestDataManager {
     }
 
     func appendPlayIdToUserPlayList(_ playId: String, userId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId)
+        self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -336,7 +337,7 @@ extension RequestDataManager {
     }
 
     func deletePlayIdToUserPlayList(playId: String, userId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId)
+        self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")

@@ -135,16 +135,20 @@ class FinderDataManager {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "").getDocument {(document, error) in
             if let document = document, document.exists {
                 let myPlayList = document.data()?[UserTitle.myPlayList.rawValue] as! [String]
-                var playsArray: [Play] = []
-                for playId in myPlayList {
-                    self.plays.document(playId).getDocument {(document, error) in
-                        if let playDocument = document, playDocument.exists {
-                            playsArray.append(self.decodePlayDS(playDocument))
-                            if playsArray.count == myPlayList.count {
-                                self.playDataDelegate?.manager(self, didGet: playsArray)
+                if myPlayList.count == 0 {
+                    self.playDataDelegate?.manager(self, didGet: [])
+                } else {
+                    var playsArray: [Play] = []
+                    for playId in myPlayList {
+                        self.plays.document(playId).getDocument {(document, error) in
+                            if let playDocument = document, playDocument.exists {
+                                playsArray.append(self.decodePlayDS(playDocument))
+                                if playsArray.count == myPlayList.count {
+                                    self.playDataDelegate?.manager(self, didGet: playsArray)
+                                }
+                            } else {
+                                print("\(playId) Play Document does not exist")
                             }
-                        } else {
-                            print("\(playId) Play Document does not exist")
                         }
                     }
                 }
@@ -221,8 +225,9 @@ class FinderDataManager {
     }
 
     // MARK: get user by id
+    // TODO: change to firebase id
     func getUserById(id: String) {
-        users.whereField(UserTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
+        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -233,6 +238,19 @@ class FinderDataManager {
                     }
                 }
         }
+    }
+
+    func getUserByFirebaseId(id: String, completion: @escaping (User?, Error?) -> Void) {
+        users.document(id).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let thisUser = self.decodeUserDS(document)
+                completion(thisUser, nil)
+            } else {
+                print("Document does not exist")
+                completion(nil, error)
+            }
+        }
+
     }
 
     // MARK: get competitions
@@ -260,7 +278,7 @@ class FinderDataManager {
     }
 
     func getImageFromUserId(id: String, completion: @escaping (String?, Error?) -> Void) {
-        users.whereField(UserTitle.id.rawValue, isEqualTo: id)
+        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -370,8 +388,33 @@ extension FinderDataManager {
         return aUser
     }
 
+    func decodeUserDS(_ document: DocumentSnapshot) -> User {
+        let levelDict = document.data()?[UserTitle.level.rawValue] as! [String: Int]
+        let levelRange = LevelRange(
+            setBall: levelDict[LevelTitle.set.rawValue]!,
+            block: levelDict[LevelTitle.block.rawValue]!,
+            dig: levelDict[LevelTitle.dig.rawValue]!,
+            spike: levelDict[LevelTitle.spike.rawValue]!,
+            sum: levelDict[LevelTitle.sum.rawValue]!
+        )
+        let aUser = User(
+            firebaseId: document.documentID,
+            loginWay: document.data()?[UserTitle.loginWay.rawValue] as! Int,
+            userIdentifier: document.data()?[UserTitle.userIdentifier.rawValue] as? String ?? "",
+            id: document.data()?[UserTitle.id.rawValue] as! String,
+            email: document.data()?[UserTitle.email.rawValue] as! String,
+            gender: document.data()?[UserTitle.gender.rawValue] as! Int,
+            name: document.data()?[UserTitle.name.rawValue] as! String,
+            level: levelRange,
+            myPlayList: document.data()?[UserTitle.myPlayList.rawValue] as! [String],
+            image: document.data()?[UserTitle.image.rawValue] as! String,
+            blockList: document.data()?[UserTitle.blockList.rawValue] as! [String]
+        )
+        return aUser
+    }
+
     func appendPlayIdToUserPlayList(_ playId: String, userId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId)
+        self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -395,7 +438,7 @@ extension FinderDataManager {
     }
 
     func deletePlayIdToUserPlayList(playId: String, userId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: userId)
+        self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")

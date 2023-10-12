@@ -106,7 +106,18 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         // swiftlint:enable force_cast
 
         let thisRequest = myRequests[indexPath.row]
-        cell.titleLable.text = RequestEnum.requestSentTo.rawValue + " " + thisRequest.requestReceverId
+        FinderDataManager.sharedDataMenager.getUserByFirebaseId(id: thisRequest.requestReceverId) { gotUser, err in
+            if let error = err {
+                // Handle the error
+                print("Error: \(error)")
+            } else if let gotUser = gotUser {
+                // Use the gotUser
+                cell.titleLable.text = RequestEnum.requestSentTo.rawValue + " " + gotUser.id
+            } else {
+                // Handle the case where no matching document was found
+                print("No matching document found")
+            }
+        }
 
         let players = thisRequest.requestPlayerList
         var playerListText = "名單："

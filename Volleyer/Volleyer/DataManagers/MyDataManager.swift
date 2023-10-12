@@ -45,7 +45,7 @@ class MyDataManager {
             UserTitle.myPlayList.rawValue: user.myPlayList,
             UserTitle.image.rawValue: user.image
         ]
-        users.whereField(UserTitle.id.rawValue, isEqualTo: user.id).getDocuments { (querySnapshot, err) in
+        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: user.firebaseId).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -72,7 +72,7 @@ class MyDataManager {
         }
     }
     func saveProfileImage(imageData: Data) {
-        let savePath = "profileImages/\(UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "user_default_error").png"
+        let savePath = "profileImages/\(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "user_default_error").png"
         storage.child(savePath).putData(imageData) { _, error in
             guard error == nil else {
                 print("Upload Photo Fail")
@@ -98,9 +98,31 @@ class MyDataManager {
         }
     }
     func updateProfileInfo(changedUser: User) {
+        let data: [String: Any] = [
+            UserTitle.id.rawValue: changedUser.id,
+            UserTitle.email.rawValue: changedUser.email,
+            UserTitle.name.rawValue: changedUser.name,
+            UserTitle.gender.rawValue: changedUser.gender,
+            UserTitle.level.rawValue: [
+                "set": changedUser.level.setBall,
+                "block": changedUser.level.block,
+                "dig": changedUser.level.dig,
+                "spike": changedUser.level.spike,
+                "sum": changedUser.level.sum
+            ]
+        ]
+        users.document(changedUser.firebaseId).updateData(data) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+
+        saveUserDefault(changedUser)
         // users.update (use firebase id to update only id, name, email, gender, and levels fields)
         // update UserDefault by saveUserDefault()
-        // if id is change, need to change all id in: plays finder, request sender receiver id, play one court finder id, play one finder document id
+        
         print("will update firebase later :)")
     }
     func removeThisuser(firebaseId: String, userId: String) {
@@ -109,7 +131,6 @@ class MyDataManager {
         print("will delete account later :)")
     }
     func addToBlocklist(userId: String) {
-        print(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue))
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
                 var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
@@ -189,7 +210,7 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamMay").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -257,7 +278,7 @@ class MyDataManager {
     }
 
     func getUserById(id: String, completion: @escaping (User?, Error?) -> Void) {
-        users.whereField(UserTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
+        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                     completion(nil, err)
