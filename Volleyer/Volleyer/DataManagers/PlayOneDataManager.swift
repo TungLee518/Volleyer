@@ -50,7 +50,7 @@ class PlayOneDataManager {
                         } else {
                             var finders: [User] = []
                             for i in 0..<userIds.count {
-                                self.users.whereField(UserTitle.id.rawValue, isEqualTo: userIds[i]).getDocuments() { (userQuerySnapshot, err) in
+                                self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userIds[i]).getDocuments() { (userQuerySnapshot, err) in
                                         if let err = err {
                                             print("Error getting documents: \(err)")
                                         } else {
@@ -120,7 +120,7 @@ class PlayOneDataManager {
     }
 
     func savePlayOneImage(finder: User, playerN: String, imageData: Data, playerName: String, completion: @escaping (Error?) -> Void) {
-        let savePath = "playOneImages/\(finder.id) \(playerN).png"
+        let savePath = "playOneImages/\(finder.firebaseId) \(playerN).png"
         storage.child(savePath).putData(imageData) { _, error in
             guard error == nil else {
                 print("Upload Photo Fail")
@@ -134,7 +134,7 @@ class PlayOneDataManager {
                 }
                 let urlString = url.absoluteString
                 print("Image dounload string: \(urlString)")
-                self.playOneFinders.document(finder.id).updateData([
+                self.playOneFinders.document(finder.firebaseId).updateData([
                     playerN: [
                     "name": playerName,
                     "image": urlString
@@ -316,7 +316,7 @@ extension PlayOneDataManager {
     }
 
     func appendPlayIdToUserPlayList(_ documentId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any)
+        self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) as Any)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")

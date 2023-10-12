@@ -70,7 +70,7 @@ class PlayOneFinderViewController: UIViewController {
             finderAccountLabel.text = finderInfo.id
             finderImageView.kf.setImage(with: URL(string: finderInfo.image))
             finderImageView.layer.cornerRadius = 35
-            if finderInfo.id != UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+            if finderInfo.firebaseId != UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
                 takePlayer1PhotoButton.isHidden = true
                 takePlayer2PhotoButton.isHidden = true
                 takePlayer3PhotoButton.isHidden = true
@@ -104,7 +104,7 @@ class PlayOneFinderViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dataManager.getPlayOneFinderData(finder: finderInfo?.id ?? "")
+        dataManager.getPlayOneFinderData(finder: finderInfo?.firebaseId ?? "")
     }
 
     @IBAction func inputPlayer1Info(_ sender: Any) {

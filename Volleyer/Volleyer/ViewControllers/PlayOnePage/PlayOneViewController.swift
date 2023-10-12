@@ -139,7 +139,7 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         for playOne in playOneData {
             for finder in playOne.finders {
                 print("ppppp\(finder.id)")
-                if UserDefaults.standard.string(forKey: UserTitle.id.rawValue) == finder.id {
+                if UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) == finder.firebaseId {
                     canAddPlay = false
                     courtIAdded = playOne.court
                     navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.cancelPlay.rawValue, style: .plain, target: self, action: #selector(cancelPlay))
@@ -154,8 +154,8 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
 
     @objc func lineUp(_ sender: UIButton) {
         if canAddPlay {
-            playOneDataManager.createPlayOneFinder(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No Name")
-            playOneDataManager.addFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No Name", court: playOneData[sender.tag].court)
+            playOneDataManager.createPlayOneFinder(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No Id")
+            playOneDataManager.addFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No Id", court: playOneData[sender.tag].court)
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.cancelPlay.rawValue, style: .plain, target: self, action: #selector(cancelPlay))
         } else {
             // 跳個通知
@@ -169,8 +169,8 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
             print("確定要刪除")
             self.navigationItem.setRightBarButton(nil, animated: false)
             self.canAddPlay = true
-            self.playOneDataManager.deleteFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id", court: self.courtIAdded!)
-            self.playOneDataManager.deletaPlayOnefinder(finder: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "No User Id")
+            self.playOneDataManager.deleteFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No User Id", court: self.courtIAdded!)
+            self.playOneDataManager.deletaPlayOnefinder(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No User Id")
             self.courtIAdded = nil
         }
         controller.addAction(okAction)

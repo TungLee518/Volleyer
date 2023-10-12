@@ -45,7 +45,7 @@ class MyDataManager {
             UserTitle.myPlayList.rawValue: user.myPlayList,
             UserTitle.image.rawValue: user.image
         ]
-        users.whereField(UserTitle.id.rawValue, isEqualTo: user.id).getDocuments { (querySnapshot, err) in
+        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: user.firebaseId).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -72,7 +72,7 @@ class MyDataManager {
         }
     }
     func saveProfileImage(imageData: Data) {
-        let savePath = "profileImages/\(UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "user_default_error").png"
+        let savePath = "profileImages/\(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "user_default_error").png"
         storage.child(savePath).putData(imageData) { _, error in
             guard error == nil else {
                 print("Upload Photo Fail")
@@ -109,7 +109,6 @@ class MyDataManager {
         print("will delete account later :)")
     }
     func addToBlocklist(userId: String) {
-        print(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue))
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
                 var blockList = document.data()?[UserTitle.blockList.rawValue] as! [String]
@@ -257,7 +256,7 @@ class MyDataManager {
     }
 
     func getUserById(id: String, completion: @escaping (User?, Error?) -> Void) {
-        users.whereField(UserTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
+        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                     completion(nil, err)

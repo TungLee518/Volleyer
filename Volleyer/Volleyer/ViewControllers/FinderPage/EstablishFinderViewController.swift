@@ -352,7 +352,7 @@ class EstablishFinderViewController: UIViewController {
     private var levelRange = LevelRange(setBall: 4, block: 4, dig: 4, spike: 4, sum: 4)
     private var lackAmount = LackAmount(male: 0, female: 0, unlimited: 0)
 
-    lazy var thisPlay: Play = Play(id: "", finderId: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) ?? "Wrong User Id", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
+    lazy var thisPlay: Play = Play(id: "", finderId: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "Wrong User Id", startTime: Date(), endTime: Date(), place: "", price: 0, type: 0, levelRange: levelRange, lackAmount: lackAmount, playerInfo: [], status: 0)
 
     var players: [Player] = []
     var SABCLabels: [UILabel] = []
