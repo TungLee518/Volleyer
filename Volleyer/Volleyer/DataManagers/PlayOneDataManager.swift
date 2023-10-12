@@ -251,7 +251,7 @@ extension PlayOneDataManager {
             type: document.data()[PlayTitle.type.rawValue] as? Int ?? 0,
             levelRange: levelRange,
             lackAmount: lackAmount,
-            playerInfo: [],
+            playerInfo: document.data()[PlayTitle.playerInfo.rawValue] as? [String] ?? [],
             status: document.data()[PlayTitle.status.rawValue] as? Int ?? 0
         )
         return aPlay
@@ -283,7 +283,7 @@ extension PlayOneDataManager {
             type: document.data()?[PlayTitle.type.rawValue] as? Int ?? 0,
             levelRange: levelRange,
             lackAmount: lackAmount,
-            playerInfo: [],
+            playerInfo: document.data()?[PlayTitle.playerInfo.rawValue] as? [String] ?? [],
             status: document.data()?[PlayTitle.status.rawValue] as? Int ?? 0
         )
         return aPlay

@@ -122,6 +122,7 @@ class FinderDataManager {
                 print("Document successfully removed!")
             }
         }
+        print(play.playerInfo)
         for userId in play.playerInfo {
             deletePlayIdToUserPlayList(playId: play.id, userId: userId)
         }
@@ -328,7 +329,7 @@ extension FinderDataManager {
             type: document.data()[PlayTitle.type.rawValue] as? Int ?? 0,
             levelRange: levelRange,
             lackAmount: lackAmount,
-            playerInfo: [],
+            playerInfo: document.data()[PlayTitle.playerInfo.rawValue] as? [String] ?? [],
             status: document.data()[PlayTitle.status.rawValue] as? Int ?? 0
         )
         return aPlay
@@ -360,7 +361,7 @@ extension FinderDataManager {
             type: document.data()?[PlayTitle.type.rawValue] as? Int ?? 0,
             levelRange: levelRange,
             lackAmount: lackAmount,
-            playerInfo: [],
+            playerInfo: document.data()?[PlayTitle.playerInfo.rawValue] as? [String] ?? [],
             status: document.data()?[PlayTitle.status.rawValue] as? Int ?? 0
         )
         return aPlay
@@ -452,14 +453,14 @@ extension FinderDataManager {
                         if var myPlayList = myPlayList {
                             if let deleteIndex = myPlayList.firstIndex(of: playId) {
                                 myPlayList.remove(at: deleteIndex)
-                            }
-                            self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as? String ?? "no id").updateData([
-                                UserTitle.myPlayList.rawValue: myPlayList
-                            ]) { err in
-                                if let err = err {
-                                    print("Error updating document: \(err)")
-                                } else {
-                                    print("Document successfully updated")
+                                self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as? String ?? "no id").updateData([
+                                    UserTitle.myPlayList.rawValue: myPlayList
+                                ]) { err in
+                                    if let err = err {
+                                        print("Error updating document: \(err)")
+                                    } else {
+                                        print("Document successfully updated")
+                                    }
                                 }
                             }
                         }
