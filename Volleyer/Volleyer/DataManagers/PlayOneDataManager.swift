@@ -18,7 +18,6 @@ protocol PlayOneFinderDataManagerDelegate {
     func manager(_ manager: PlayOneDataManager, didget playerN: [PlayerN])
 }
 
-// swiftlint:disable force_cast
 class PlayOneDataManager {
 
     var playOneDataDelegate: PlayOneDataManagerDelegate?
@@ -39,9 +38,9 @@ class PlayOneDataManager {
                     var playOneDataArray: [PlayOne] = []
                     for document in querySnapshot!.documents {
                         print("pppp\(querySnapshot!.documents.count)")
-                        let userIds: [String] = document.data()["finder_ids"] as! [String]
+                        let userIds: [String] = document.data()["finder_ids"] as? [String] ?? []
                         print("=====", userIds)
-                        let order: Int = document.data()["order"] as! Int
+                        let order: Int = document.data()["order"] as? Int ?? 0
                         if userIds.count == 0 {
                             playOneDataArray.append(PlayOne(court: document.documentID, finders: [], order: order))
                             if querySnapshot!.documents.count == playOneDataArray.count {
@@ -50,7 +49,7 @@ class PlayOneDataManager {
                         } else {
                             var finders: [User] = []
                             for i in 0..<userIds.count {
-                                self.users.whereField(UserTitle.id.rawValue, isEqualTo: userIds[i]).getDocuments() { (userQuerySnapshot, err) in
+                                self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userIds[i]).getDocuments() { (userQuerySnapshot, err) in
                                         if let err = err {
                                             print("Error getting documents: \(err)")
                                         } else {
@@ -79,7 +78,7 @@ class PlayOneDataManager {
     func addFinderOFACourt(finder: String, court: String) {
         playOneCourts.document(court).getDocument { document, error in
             if let document = document, document.exists {
-                var userIds: [String] = document.data()?["finder_ids"] as! [String]
+                var userIds: [String] = document.data()?["finder_ids"] as? [String] ?? []
                 userIds.append(finder)
                 self.playOneCourts.document(court).updateData([
                     "finder_ids": userIds
@@ -99,7 +98,7 @@ class PlayOneDataManager {
     func deleteFinderOFACourt(finder: String, court: String) {
         playOneCourts.document(court).getDocument { document, error in
             if let document = document, document.exists {
-                var userIds: [String] = document.data()?["finder_ids"] as! [String]
+                var userIds: [String] = document.data()?["finder_ids"] as? [String] ?? []
                 let finderIndex = userIds.firstIndex(of: finder)
                 if let finderIndex = finderIndex {
                     userIds.remove(at: finderIndex)
@@ -120,7 +119,7 @@ class PlayOneDataManager {
     }
 
     func savePlayOneImage(finder: User, playerN: String, imageData: Data, playerName: String, completion: @escaping (Error?) -> Void) {
-        let savePath = "playOneImages/\(finder.id) \(playerN).png"
+        let savePath = "playOneImages/\(finder.firebaseId) \(playerN).png"
         storage.child(savePath).putData(imageData) { _, error in
             guard error == nil else {
                 print("Upload Photo Fail")
@@ -134,7 +133,7 @@ class PlayOneDataManager {
                 }
                 let urlString = url.absoluteString
                 print("Image dounload string: \(urlString)")
-                self.playOneFinders.document(finder.id).updateData([
+                self.playOneFinders.document(finder.firebaseId).updateData([
                     playerN: [
                     "name": playerName,
                     "image": urlString
@@ -213,8 +212,8 @@ class PlayOneDataManager {
                 let playersTitle = ["player1", "player2", "player3", "player4", "player5"]
                 var fivePlayersData: [PlayerN] = []
                 for playern in playersTitle {
-                    let player = document.data()?[playern] as! [String: String]
-                    fivePlayersData.append(PlayerN(name: player["name"] ?? "", image: player["image"] ?? ""))
+                    let player = document.data()?[playern] as? [String: String]
+                    fivePlayersData.append(PlayerN(name: player?["name"] ?? "", image: player?["image"] ?? ""))
                 }
                 self.playOneFinderDataDelegate?.manager(self, didget: fivePlayersData)
             } else {
@@ -226,112 +225,114 @@ class PlayOneDataManager {
 
 extension PlayOneDataManager {
     func decodePlay(_ document: QueryDocumentSnapshot) -> Play {
-        let levelDict = document.data()[PlayTitle.levelRange.rawValue] as! [String: Int]
+        let levelDict = document.data()[PlayTitle.levelRange.rawValue] as? [String: Int]
         let levelRange = LevelRange(
-            setBall: levelDict[LevelTitle.set.rawValue]!,
-            block: levelDict[LevelTitle.block.rawValue]!,
-            dig: levelDict[LevelTitle.dig.rawValue]!,
-            spike: levelDict[LevelTitle.spike.rawValue]!,
-            sum: levelDict[LevelTitle.sum.rawValue]!
+            setBall: levelDict?[LevelTitle.set.rawValue] ?? 0,
+            block: levelDict?[LevelTitle.block.rawValue] ?? 0,
+            dig: levelDict?[LevelTitle.dig.rawValue] ?? 0,
+            spike: levelDict?[LevelTitle.spike.rawValue] ?? 0,
+            sum: levelDict?[LevelTitle.sum.rawValue] ?? 0
         )
-        let lackDict = document.data()[PlayTitle.lackAmount.rawValue] as! [String: Int]
+        let lackDict = document.data()[PlayTitle.lackAmount.rawValue] as? [String: Int]
         let lackAmount = LackAmount(
-            male: lackDict[LackGender.male.rawValue]!,
-            female: lackDict[LackGender.female.rawValue]!,
-            unlimited: lackDict[LackGender.unlimited.rawValue]!
+            male: lackDict?[LackGender.male.rawValue] ?? 0,
+            female: lackDict?[LackGender.female.rawValue] ?? 0,
+            unlimited: lackDict?[LackGender.unlimited.rawValue] ?? 0
         )
-        let startTime = document.data()[PlayTitle.startTime.rawValue] as! Timestamp
-        let endTime = document.data()[PlayTitle.endTime.rawValue] as! Timestamp
+        let startTime = document.data()[PlayTitle.startTime.rawValue] as? Timestamp
+        let endTime = document.data()[PlayTitle.endTime.rawValue] as? Timestamp
         let aPlay = Play(
             id: document.documentID,
-            finderId: document.data()[PlayTitle.finderId.rawValue] as! String,
-            startTime: startTime.dateValue(),
-            endTime: endTime.dateValue(),
-            place: document.data()[PlayTitle.place.rawValue] as! String,
-            price: document.data()[PlayTitle.price.rawValue] as! Int,
-            type: document.data()[PlayTitle.type.rawValue] as! Int,
+            finderId: document.data()[PlayTitle.finderId.rawValue] as? String ?? "no firebase id",
+            startTime: startTime?.dateValue() ?? Date(),
+            endTime: endTime?.dateValue() ?? Date(),
+            place: document.data()[PlayTitle.place.rawValue] as? String ?? "no place",
+            price: document.data()[PlayTitle.price.rawValue] as? Int ?? -1,
+            type: document.data()[PlayTitle.type.rawValue] as? Int ?? 0,
             levelRange: levelRange,
             lackAmount: lackAmount,
-            playerInfo: [],
-            status: document.data()[PlayTitle.status.rawValue] as! Int
+            playerInfo: document.data()[PlayTitle.playerInfo.rawValue] as? [String] ?? [],
+            status: document.data()[PlayTitle.status.rawValue] as? Int ?? 0
         )
         return aPlay
     }
     func decodePlayDS(_ document: DocumentSnapshot) -> Play {
-        let levelDict = document.data()?[PlayTitle.levelRange.rawValue] as! [String: Int]
+        let levelDict = document.data()?[PlayTitle.levelRange.rawValue] as? [String: Int]
         let levelRange = LevelRange(
-            setBall: levelDict[LevelTitle.set.rawValue]!,
-            block: levelDict[LevelTitle.block.rawValue]!,
-            dig: levelDict[LevelTitle.dig.rawValue]!,
-            spike: levelDict[LevelTitle.spike.rawValue]!,
-            sum: levelDict[LevelTitle.sum.rawValue]!
+            setBall: levelDict?[LevelTitle.set.rawValue] ?? 0,
+            block: levelDict?[LevelTitle.block.rawValue] ?? 0,
+            dig: levelDict?[LevelTitle.dig.rawValue] ?? 0,
+            spike: levelDict?[LevelTitle.spike.rawValue] ?? 0,
+            sum: levelDict?[LevelTitle.sum.rawValue] ?? 0
         )
-        let lackDict = document.data()?[PlayTitle.lackAmount.rawValue] as! [String: Int]
+        let lackDict = document.data()?[PlayTitle.lackAmount.rawValue] as? [String: Int]
         let lackAmount = LackAmount(
-            male: lackDict[LackGender.male.rawValue]!,
-            female: lackDict[LackGender.female.rawValue]!,
-            unlimited: lackDict[LackGender.unlimited.rawValue]!
+            male: lackDict?[LackGender.male.rawValue] ?? 0,
+            female: lackDict?[LackGender.female.rawValue] ?? 0,
+            unlimited: lackDict?[LackGender.unlimited.rawValue] ?? 0
         )
-        let startTime = document.data()?[PlayTitle.startTime.rawValue] as! Timestamp
-        let endTime = document.data()?[PlayTitle.endTime.rawValue] as! Timestamp
+        let startTime = document.data()?[PlayTitle.startTime.rawValue] as? Timestamp
+        let endTime = document.data()?[PlayTitle.endTime.rawValue] as? Timestamp
         let aPlay = Play(
             id: document.documentID,
-            finderId: document.data()?[PlayTitle.finderId.rawValue] as! String,
-            startTime: startTime.dateValue(),
-            endTime: endTime.dateValue(),
-            place: document.data()?[PlayTitle.place.rawValue] as! String,
-            price: document.data()?[PlayTitle.price.rawValue] as! Int,
-            type: document.data()?[PlayTitle.type.rawValue] as! Int,
+            finderId: document.data()?[PlayTitle.finderId.rawValue] as? String ?? "no firebase id",
+            startTime: startTime?.dateValue() ?? Date(),
+            endTime: endTime?.dateValue() ?? Date(),
+            place: document.data()?[PlayTitle.place.rawValue] as? String ?? "no place",
+            price: document.data()?[PlayTitle.price.rawValue] as? Int ?? -1,
+            type: document.data()?[PlayTitle.type.rawValue] as? Int ?? 0,
             levelRange: levelRange,
             lackAmount: lackAmount,
-            playerInfo: [],
-            status: document.data()?[PlayTitle.status.rawValue] as! Int
+            playerInfo: document.data()?[PlayTitle.playerInfo.rawValue] as? [String] ?? [],
+            status: document.data()?[PlayTitle.status.rawValue] as? Int ?? 0
         )
         return aPlay
     }
 
     func decodeUser(_ document: QueryDocumentSnapshot) -> User {
-        let levelDict = document.data()[UserTitle.level.rawValue] as! [String: Int]
+        let levelDict = document.data()[UserTitle.level.rawValue] as? [String: Int]
         let levelRange = LevelRange(
-            setBall: levelDict[LevelTitle.set.rawValue]!,
-            block: levelDict[LevelTitle.block.rawValue]!,
-            dig: levelDict[LevelTitle.dig.rawValue]!,
-            spike: levelDict[LevelTitle.spike.rawValue]!,
-            sum: levelDict[LevelTitle.sum.rawValue]!
+            setBall: levelDict?[LevelTitle.set.rawValue] ?? 0,
+            block: levelDict?[LevelTitle.block.rawValue] ?? 0,
+            dig: levelDict?[LevelTitle.dig.rawValue] ?? 0,
+            spike: levelDict?[LevelTitle.spike.rawValue] ?? 0,
+            sum: levelDict?[LevelTitle.sum.rawValue] ?? 0
         )
         let aUser = User(
             firebaseId: document.documentID,
-            loginWay: document.data()[UserTitle.loginWay.rawValue] as! Int,
+            loginWay: document.data()[UserTitle.loginWay.rawValue] as? Int ?? 0,
             userIdentifier: document.data()[UserTitle.userIdentifier.rawValue] as? String ?? "",
-            id: document.data()[UserTitle.id.rawValue] as! String,
-            email: document.data()[UserTitle.email.rawValue] as! String,
-            gender: document.data()[UserTitle.gender.rawValue] as! Int,
-            name: document.data()[UserTitle.name.rawValue] as! String,
+            id: document.data()[UserTitle.id.rawValue] as? String ?? "no id",
+            email: document.data()[UserTitle.email.rawValue] as? String ?? "no email",
+            gender: document.data()[UserTitle.gender.rawValue] as? Int ?? 0,
+            name: document.data()[UserTitle.name.rawValue] as? String ?? "no name",
             level: levelRange,
-            myPlayList: document.data()[UserTitle.myPlayList.rawValue] as! [String],
-            image: document.data()[UserTitle.image.rawValue] as! String,
-            blockList: document.data()[UserTitle.blockList.rawValue] as! [String]
+            myPlayList: document.data()[UserTitle.myPlayList.rawValue] as? [String] ?? [],
+            image: document.data()[UserTitle.image.rawValue] as? String ?? placeholderImage,
+            blockList: document.data()[UserTitle.blockList.rawValue] as? [String] ?? [],
+            status: document.data()[UserTitle.status.rawValue] as? Int ?? 0
         )
         return aUser
     }
 
     func appendPlayIdToUserPlayList(_ documentId: String) {
-        self.users.whereField(UserTitle.id.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.id.rawValue) as Any)
+        self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) as Any)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for userDocument in querySnapshot!.documents {
-                        var myPlayList = userDocument.data()[UserTitle.myPlayList.rawValue] as! [String]
-                        print("\(userDocument.documentID) => \(userDocument.data())")
-                        myPlayList.append(documentId)
-                        self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as! String).updateData([
-                            UserTitle.myPlayList.rawValue: myPlayList
-                        ]) { err in
-                            if let err = err {
-                                print("Error updating document: \(err)")
-                            } else {
-                                print("Document successfully updated")
+                        let myPlayList = userDocument.data()[UserTitle.myPlayList.rawValue] as? [String]
+                        if var myPlayList = myPlayList {
+                            myPlayList.append(documentId)
+                            self.users.document(userDocument.data()[UserTitle.firebaseId.rawValue] as? String ?? "no id").updateData([
+                                UserTitle.myPlayList.rawValue: myPlayList
+                            ]) { err in
+                                if let err = err {
+                                    print("Error updating document: \(err)")
+                                } else {
+                                    print("Document successfully updated")
+                                }
                             }
                         }
                     }

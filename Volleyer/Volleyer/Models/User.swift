@@ -19,6 +19,7 @@ enum UserTitle: String {
     case myPlayList = "my_play_list"
     case image = "image"
     case blockList = "block_list"
+    case status = "status"
 }
 
 struct User {
@@ -34,6 +35,7 @@ struct User {
     var image: String = "https://firebasestorage.googleapis.com/v0/b/volleyer-a15b6.appspot.com/o/defaults%2Fplaceholder.png?alt=media&token=d686707b-7b55-4291-8d67-c809c14f9528&_gl=1*gmtbad*_ga*MTE1Njk3OTU3Ny4xNjkxNjU1MTk0*_ga_CW55HF8NVT*MTY5NjA2MDc1Ni45Mi4xLjE2OTYwNjEwMTguNTQuMC4w"
     var playN: Int = 0
     var blockList: [String] = [] // user id
+    var status: Int = 0
 }
 
 enum Level: String {

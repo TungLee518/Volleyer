@@ -29,9 +29,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        MyDataManager.shared.getSimulatorProfileData()
 //        window?.rootViewController = TabBarViewController()
         // for user
-        if UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) != nil {
-            MyDataManager.shared.getProfileData(userId: UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue)!)
-            window?.rootViewController = TabBarViewController()
+        if let thisUserAppleId = UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) {
+            MyDataManager.shared.getProfileData(appleUserId: thisUserAppleId) { gotUser, err in
+                if let error = err {
+                    // Handle the error
+                    print("Error: \(error)")
+                } else if let gotUser = gotUser {
+                    // Use the gotUser
+                    self.window?.rootViewController = TabBarViewController()
+                } else {
+                    // Handle the case where no matching document was found
+                    print("No matching document found")
+                }
+            }
         } else {
             window?.rootViewController = LoginViewController()
         }

@@ -98,7 +98,7 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            MyDataManager.shared.removeFromBlocklist(userId: blockUsers[indexPath.row].id)
+            MyDataManager.shared.removeFromBlocklist(userId: blockUsers[indexPath.row].firebaseId)
             self.blockUsers.remove(at: indexPath.row)
             blockListTableView.deleteRows(at: [indexPath], with: .automatic)
         }

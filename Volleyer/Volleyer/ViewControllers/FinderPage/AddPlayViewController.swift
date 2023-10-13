@@ -207,15 +207,15 @@ class AddPlayViewController: UIViewController {
 
     var thisPlay: Play? {
         didSet {
-            sendDataToPlayView(thisPlay!)
             setContent()
-            if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+            if thisPlay?.finderId == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
                 sendRequestButton.isHidden = true
             } else {
                 sendRequestButton.isHidden = false
             }
         }
     }
+    var thisFinderId: String?
 
     private var addPlayers: [Player] = []
 
@@ -286,7 +286,19 @@ class AddPlayViewController: UIViewController {
             spikeView.thisLevel = thisPlay.levelRange.spike
             sumView.thisLevel = thisPlay.levelRange.sum
             priceLable.text = "\(thisPlay.price) 元 /人"
-            accountLable.text = thisPlay.finderId
+            FinderDataManager.sharedDataMenager.getUserByFirebaseId(id: thisPlay.finderId) { gotUser, err in
+                if let error = err {
+                    // Handle the error
+                    print("Error: \(error)")
+                } else if let gotUser = gotUser {
+                    // Use the gotUser
+                    self.thisFinderId = gotUser.id
+                    self.accountLable.text = gotUser.id
+                } else {
+                    // Handle the case where no matching document was found
+                    print("No matching document found")
+                }
+            }
             FinderDataManager.sharedDataMenager.getImageFromUserId(id: thisPlay.finderId) { imageUrl, err in
                 if let error = err {
                     // Handle the error
@@ -397,7 +409,7 @@ class AddPlayViewController: UIViewController {
     }
 
     @objc func sendRequest() {
-        let controller = UIAlertController(title: "確定？", message: "要發加場邀請給 \(thisPlay?.finderId ??  "Internet Error")？", preferredStyle: .alert)
+        let controller = UIAlertController(title: "確定？", message: "要發加場邀請給 \(thisFinderId ??  "Internet Error")？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "是", style: .default) { _ in
             self.addPlayers = self.playerListTableView.players
             print(self.addPlayers)

@@ -28,8 +28,16 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "快來找適合自己的場！"
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .semiboldNunito(size: 20)
         label.textColor = .purple2
+        return label
+    }()
+    var pullDownRefreshLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "下拉更新貼文"
+        label.font = .regularNunito(size: 16)
+        label.textColor = .gray2
         return label
     }()
 
@@ -42,7 +50,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setNavBar()
+        view.addSubview(pullDownRefreshLabel)
         dataManager.playDataDelegate = self
         setHeader()
         setTableView()
@@ -52,6 +60,8 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        pullDownRefreshLabel.isHidden = false
+        pullDownRefreshLabel.text = "下拉更新貼文"
         dataManager.getPublishPlay()
         setNavBar()
     }
@@ -132,7 +142,10 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
             finderTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             finderTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             finderTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            finderTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            finderTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            pullDownRefreshLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            pullDownRefreshLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            pullDownRefreshLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: standardMargin)
         ])
     }
 
@@ -181,7 +194,13 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 // not determine public or not yet
 extension FinderViewController: PlayDataManagerDelegate {
     func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
-        publicPlays = plays
-        finderTableView.reloadData()
+        pullDownRefreshLabel.isHidden = true
+        if plays.count > 0 {
+            publicPlays = plays
+            finderTableView.reloadData()
+        } else {
+            pullDownRefreshLabel.text = "目前沒有揪場"
+            pullDownRefreshLabel.isHidden = false
+        }
     }
 }
