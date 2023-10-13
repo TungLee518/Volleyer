@@ -115,7 +115,7 @@ class EstablishFinderViewController: UIViewController {
         textField.autocapitalizationType = .none
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePlace))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolbar.setItems([spaceButton, doneButton], animated: false)
         textField.inputAccessoryView = toolbar
@@ -142,7 +142,7 @@ class EstablishFinderViewController: UIViewController {
         textField.keyboardType = .numberPad
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePrice))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolbar.setItems([spaceButton, doneButton], animated: false)
         textField.inputAccessoryView = toolbar
@@ -230,7 +230,7 @@ class EstablishFinderViewController: UIViewController {
         textField.keyboardType = .numberPad
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneMaleLack))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolbar.setItems([spaceButton, doneButton], animated: false)
         textField.inputAccessoryView = toolbar
@@ -257,7 +257,7 @@ class EstablishFinderViewController: UIViewController {
         textField.keyboardType = .numberPad
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneFemaleLack))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolbar.setItems([spaceButton, doneButton], animated: false)
         textField.inputAccessoryView = toolbar
@@ -471,6 +471,9 @@ class EstablishFinderViewController: UIViewController {
             checkbox.centerXAnchor.constraint(equalTo: SABCLabels[i].centerXAnchor).isActive = true
             checkbox.topAnchor.constraint(equalTo: questionLabel.topAnchor).isActive = true
             choiceButtons.append(checkbox)
+            if i == 4 {
+                checkbox.isSelected = true
+            }
             previous = checkbox
         }
         return choiceButtons
@@ -547,6 +550,40 @@ class EstablishFinderViewController: UIViewController {
         thisPlay.endTime = endDatePicker.date
         self.view.endEditing(true)
     }
+    @objc func donePlace() {
+        if placeTextField.text?.count ?? 0 > 10 {
+            LKProgressHUD.showFailure(text: "字數勿超過 10 字")
+        } else {
+            self.view.endEditing(true)
+        }
+    }
+    @objc func donePrice() {
+        let priceInput = Int(priceTextField.text ?? "-1") ?? -1
+        print(priceInput)
+        if priceInput > 100000 || priceInput < 0 {
+            LKProgressHUD.showFailure(text: "請輸入合理價格")
+        } else {
+            self.view.endEditing(true)
+        }
+    }
+    @objc func doneMaleLack() {
+        let amount = Int(maleTextField.text ?? "-1") ?? -1
+        print(amount)
+        if amount > 1000 || amount < 0 {
+            LKProgressHUD.showFailure(text: "請輸入合理人數")
+        } else {
+            self.view.endEditing(true)
+        }
+    }
+    @objc func doneFemaleLack() {
+        let amount = Int(femaleTextField.text ?? "-1") ?? -1
+        print(amount)
+        if amount > 1000 || amount < 0 {
+            LKProgressHUD.showFailure(text: "請輸入合理人數")
+        } else {
+            self.view.endEditing(true)
+        }
+    }
     @objc func cancelToolbar() {
         self.view.endEditing(true)
     }
@@ -563,23 +600,36 @@ class EstablishFinderViewController: UIViewController {
 
     @objc func addData(_ sender: UIButton) {
         players = playerListTableView.players
-        print(players)
         if sender == publishButton {
             thisPlay.status = 1
         }
-        if placeTextField.text != "", priceTextField.text != "", typeTextField.text != ""
+        if startTimeTextField.text != "", endTimeTextField.text != "", placeTextField.text != "", priceTextField.text != "", typeTextField.text != ""
             , maleTextField.text != "", femaleTextField.text != "" {
-            thisPlay.place = placeTextField.text!
-            thisPlay.price = Int(priceTextField.text!)!
-            thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
-            thisPlay.lackAmount.male = Int(maleTextField.text!)!
-            thisPlay.lackAmount.female = Int(femaleTextField.text!)!
-            if thisPlay.id == "" {
-                dataManager.savePlay(thisPlay)
+            if thisPlay.startTime > thisPlay.endTime {
+                LKProgressHUD.showFailure(text: "結束時間早於開始時間")
             } else {
-                dataManager.updatePlay(thisPlay)
+                let placeInput = placeTextField.text ?? "no place"
+                let priceInput = Int(priceTextField.text ?? "0") ?? 0
+                let maleInput = Int(maleTextField.text ?? "0") ?? 0
+                let femaleInput = Int(femaleTextField.text ?? "0") ?? 0
+                if placeInput.count > 10 || priceInput > 100000 || priceInput < 0 || maleInput > 1000 || maleInput < 0 || femaleInput > 1000 || femaleInput < 0 {
+                    LKProgressHUD.showFailure(text: "請符合字數限制")
+                } else {
+                    thisPlay.place = placeTextField.text!
+                    thisPlay.price = Int(priceTextField.text!)!
+                    thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
+                    thisPlay.lackAmount.male = Int(maleTextField.text!)!
+                    thisPlay.lackAmount.female = Int(femaleTextField.text!)!
+                    if thisPlay.id == "" {
+                        dataManager.savePlay(thisPlay)
+                    } else {
+                        dataManager.updatePlay(thisPlay)
+                    }
+                    navigationController?.popViewController(animated: true)
+                }
             }
-            navigationController?.popViewController(animated: true)
+        } else {
+            LKProgressHUD.showFailure(text: "請填寫完整資訊")
         }
     }
     @objc func deletePost() {
@@ -674,15 +724,6 @@ class EstablishFinderViewController: UIViewController {
             deletePostButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin/2),
             deletePostButton.centerYAnchor.constraint(equalTo: publishButton.centerYAnchor),
             deletePostButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
-
-//            deleteButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin),
-//            deleteButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
-//            deleteButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-//            deleteButton.widthAnchor.constraint(equalToConstant: 70),
-//            addButton.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -standardMargin),
-//            addButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
-//            addButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-//            addButton.widthAnchor.constraint(equalToConstant: 70)
         ])
     }
 }
