@@ -622,10 +622,12 @@ class EstablishFinderViewController: UIViewController {
                     thisPlay.lackAmount.female = Int(femaleTextField.text!)!
                     if thisPlay.id == "" {
                         dataManager.savePlay(thisPlay)
+                        LKProgressHUD.showSuccess(text: "發文成功")
                     } else {
                         dataManager.updatePlay(thisPlay)
+                        LKProgressHUD.showSuccess(text: "更改成功")
                     }
-                    navigationController?.popViewController(animated: true)
+                    navigationController?.popToRootViewController(animated: true)
                 }
             }
         } else {
