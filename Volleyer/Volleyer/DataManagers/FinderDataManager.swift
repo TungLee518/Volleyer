@@ -387,7 +387,8 @@ extension FinderDataManager {
             level: levelRange,
             myPlayList: document.data()[UserTitle.myPlayList.rawValue] as? [String] ?? [],
             image: document.data()[UserTitle.image.rawValue] as? String ?? placeholderImage,
-            blockList: document.data()[UserTitle.blockList.rawValue] as? [String] ?? []
+            blockList: document.data()[UserTitle.blockList.rawValue] as? [String] ?? [],
+            status: document.data()[UserTitle.status.rawValue] as? Int ?? 0
         )
         return aUser
     }
@@ -412,7 +413,8 @@ extension FinderDataManager {
             level: levelRange,
             myPlayList: document.data()?[UserTitle.myPlayList.rawValue] as? [String] ?? [],
             image: document.data()?[UserTitle.image.rawValue] as? String ?? placeholderImage,
-            blockList: document.data()?[UserTitle.blockList.rawValue] as? [String] ?? []
+            blockList: document.data()?[UserTitle.blockList.rawValue] as? [String] ?? [],
+            status: document.data()?[UserTitle.status.rawValue] as? Int ?? 0
         )
         return aUser
     }

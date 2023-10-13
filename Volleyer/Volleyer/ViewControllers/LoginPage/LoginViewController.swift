@@ -80,15 +80,27 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print("Error getting documents: \(err)")
                 } else {
                     if querySnapshot!.documents.count > 0 { // 已有帳號
-                        MyDataManager.shared.getProfileData(userId: userIdentifier)
-                        UserDefaults.standard.set(userIdentifier, forKey: UserTitle.userIdentifier.rawValue)
-                        let viewController = TabBarViewController()
-//                        RequestDataManager.sharedDataMenager.listenPlayRequests()
-                        viewController.modalPresentationStyle = .fullScreen
-                        self.present(viewController, animated: true)
+                        MyDataManager.shared.getProfileData(appleUserId: userIdentifier) { gotUser, err in
+                            if let error = err {
+                                // Handle the error
+                                print("Error: \(error)")
+                            } else if let gotUser = gotUser {
+                                // Use the gotUser
+                                if gotUser.status == -1 { // 以前刪過帳號
+                                    self.showInputProfileViewController(userIdentifier: userIdentifier, fullName: appleIDCredential.fullName, email: appleIDCredential.email, wasVolleyer: gotUser)
+                                } else { // 只是要重新登入
+                                    UserDefaults.standard.set(userIdentifier, forKey: UserTitle.userIdentifier.rawValue)
+                                    let viewController = TabBarViewController()
+                                    viewController.modalPresentationStyle = .fullScreen
+                                    self.present(viewController, animated: true)
+                                }
+                            } else {
+                                // Handle the case where no matching document was found
+                                print("No matching document found")
+                            }
+                        }
                     } else { // 沒有帳號
-                        self.showInputProfileViewController(userIdentifier: userIdentifier, fullName: appleIDCredential.fullName, email: appleIDCredential.email)
-                        print("email: \(appleIDCredential.email), name: \(appleIDCredential.fullName), userid: \(userIdentifier)")
+                        self.showInputProfileViewController(userIdentifier: userIdentifier, fullName: appleIDCredential.fullName, email: appleIDCredential.email, wasVolleyer: nil)
                     }
                     for document in querySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")
@@ -104,9 +116,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         print("save user in keychain")
     }
 
-    private func showInputProfileViewController(userIdentifier: String, fullName: PersonNameComponents?, email: String?) {
+    private func showInputProfileViewController(userIdentifier: String, fullName: PersonNameComponents?, email: String?, wasVolleyer: User?) {
         let viewController = InputProfileViewController()
         DispatchQueue.main.async {
+            if let wasVolleyer = wasVolleyer {
+                viewController.thisUser.firebaseId = wasVolleyer.firebaseId
+            }
             viewController.thisUser.loginWay = 1
             viewController.thisUser.userIdentifier = userIdentifier
             if let givenName = fullName?.givenName,
@@ -116,7 +131,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             if let email = email {
                 viewController.emailTextField.text = email
             }
-//            self.dismiss(animated: true, completion: nil)
             viewController.modalPresentationStyle = .fullScreen
             self.present(viewController, animated: true)
         }

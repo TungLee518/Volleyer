@@ -26,9 +26,8 @@ class MyDataManager {
     var blockListDataManager: BlockListDataManagerDelegate?
 
     func saveProfileInfo(_ user: User) {
-        let document = users.document()
-        let data: [String: Any] = [
-            UserTitle.firebaseId.rawValue: document.documentID,
+        var data: [String: Any] = [
+            UserTitle.firebaseId.rawValue: user.firebaseId,
             UserTitle.loginWay.rawValue: user.loginWay,
             UserTitle.id.rawValue: user.id,
             UserTitle.userIdentifier.rawValue: user.userIdentifier,
@@ -44,9 +43,11 @@ class MyDataManager {
             ],
             UserTitle.myPlayList.rawValue: user.myPlayList,
             UserTitle.image.rawValue: user.image,
-            UserTitle.blockList.rawValue: user.blockList
+            UserTitle.blockList.rawValue: user.blockList,
+            UserTitle.status.rawValue: user.status
         ]
-        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: user.firebaseId).getDocuments { (querySnapshot, err) in
+        // 檢查使用者輸入的 id 是否已經有人用了
+        users.whereField(UserTitle.id.rawValue, isEqualTo: user.id).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -55,23 +56,39 @@ class MyDataManager {
 //                    LKProgressHUD.showFailure(text: "此 ID 已存在")
                     self.canGoToTabbarVC?(false)
                 } else {
-                    document.setData(data) { err in
-                        if let err = err {
-                            print("Error adding document: \(err)")
-                        } else {
-                            print("User Document added with ID: \(document.documentID)")
-//                            LKProgressHUD.showSuccess(text: "儲存成功")
-                            var userCopy = user
-                            userCopy.firebaseId = document.documentID
-                            self.saveUserDefault(userCopy)
-                            UserDefaults.standard.set(user.userIdentifier, forKey: UserTitle.userIdentifier.rawValue)
-                            self.canGoToTabbarVC?(true)
+                    if user.firebaseId != "" { // 以前有過帳號
+                        self.users.document(user.firebaseId).updateData(data) { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                                self.saveUserDefault(user)
+                                UserDefaults.standard.set(user.userIdentifier, forKey: UserTitle.userIdentifier.rawValue)
+                                self.canGoToTabbarVC?(true)
+                            }
+                        }
+                    } else { // 以前沒有帳號，要新增
+                        let document = self.users.document()
+                        data.updateValue(document.documentID, forKey: UserTitle.firebaseId.rawValue)
+                        data["created_time"] = Date()
+                        document.setData(data) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("User Document added with ID: \(document.documentID)")
+                                var userCopy = user
+                                userCopy.firebaseId = document.documentID
+                                self.saveUserDefault(userCopy)
+                                UserDefaults.standard.set(user.userIdentifier, forKey: UserTitle.userIdentifier.rawValue)
+                                self.canGoToTabbarVC?(true)
+                            }
                         }
                     }
                 }
             }
         }
     }
+
     func saveProfileImage(imageData: Data) {
         let savePath = "profileImages/\(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "user_default_error").png"
         storage.child(savePath).putData(imageData) { _, error in
@@ -98,7 +115,8 @@ class MyDataManager {
             }
         }
     }
-    func updateProfileInfo(changedUser: User) {
+
+    func updateProfileInfo(changedUser: User, completion: @escaping (Bool?, Error?) -> Void) {
         let data: [String: Any] = [
             UserTitle.id.rawValue: changedUser.id,
             UserTitle.email.rawValue: changedUser.email,
@@ -112,24 +130,41 @@ class MyDataManager {
                 "sum": changedUser.level.sum
             ]
         ]
-        users.document(changedUser.firebaseId).updateData(data) { err in
+
+        self.users.document(changedUser.firebaseId).updateData(data) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+                completion(nil, err)
+            } else {
+                print("Document successfully updated")
+                self.saveUserDefault(changedUser)
+                completion(true, nil)
+            }
+        }
+    }
+
+    func removeThisuser(firebaseId: String, userId: String) {
+        users.document(firebaseId).updateData([
+            "status": -1
+        ]) { err in
             if let err = err {
                 print("Error updating document: \(err)")
             } else {
                 print("Document successfully updated")
+                UserDefaults.standard.set(nil, forKey: UserTitle.firebaseId.rawValue)
+                UserDefaults.standard.set(nil, forKey: UserTitle.userIdentifier.rawValue)
+                UserDefaults.standard.set(nil, forKey: UserTitle.id.rawValue)
+                UserDefaults.standard.set(nil, forKey: UserTitle.name.rawValue)
+                UserDefaults.standard.set(nil, forKey: UserTitle.image.rawValue)
+                UserDefaults.standard.set(nil, forKey: UserTitle.email.rawValue)
+                UserDefaults.standard.set(nil, forKey: UserTitle.gender.rawValue)
+                UserDefaults.standard.set(nil, forKey: Level.setBall.rawValue)
+                UserDefaults.standard.set(nil, forKey: Level.block.rawValue)
+                UserDefaults.standard.set(nil, forKey: Level.dig.rawValue)
+                UserDefaults.standard.set(nil, forKey: Level.spike.rawValue)
+                UserDefaults.standard.set(nil, forKey: Level.sum.rawValue)
             }
         }
-
-        saveUserDefault(changedUser)
-        // users.update (use firebase id to update only id, name, email, gender, and levels fields)
-        // update UserDefault by saveUserDefault()
-        
-        print("will update firebase later :)")
-    }
-    func removeThisuser(firebaseId: String, userId: String) {
-        // users.document(firebaseId).delete
-        // delete all userId in: plays finder, request sender receiver id, play one court finder id, play one finder document id
-        print("will delete account later :)")
     }
     func addToBlocklist(userId: String) {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
@@ -241,15 +276,17 @@ class MyDataManager {
         }
     }
 
-    func getProfileData(userId: String) {
-        users.whereField(UserTitle.userIdentifier.rawValue, isEqualTo: userId).getDocuments() { (querySnapshot, err) in
+    func getProfileData(appleUserId: String, completion: @escaping (User?, Error?) -> Void) {
+        users.whereField(UserTitle.userIdentifier.rawValue, isEqualTo: appleUserId).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
+                    completion(nil, err)
                 } else {
                     for document in querySnapshot!.documents {
                         let thisUser = self.decodeUser(document)
                         print("success get user data \(document.documentID) => \(document.data())")
                         self.saveUserDefault(thisUser)
+                        completion(thisUser, nil)
                     }
                 }
         }
@@ -275,7 +312,8 @@ class MyDataManager {
             level: levelRange,
             myPlayList: document.data()[UserTitle.myPlayList.rawValue] as? [String] ?? [],
             image: document.data()[UserTitle.image.rawValue] as? String ?? placeholderImage,
-            blockList: document.data()[UserTitle.blockList.rawValue] as? [String] ?? []
+            blockList: document.data()[UserTitle.blockList.rawValue] as? [String] ?? [],
+            status: document.data()[UserTitle.status.rawValue] as? Int ?? 0
         )
         return aUser
     }
@@ -297,6 +335,7 @@ class MyDataManager {
 
     func saveUserDefault(_ thisUser: User) {
         UserDefaults.standard.set(thisUser.firebaseId, forKey: UserTitle.firebaseId.rawValue)
+//        UserDefaults.standard.set(thisUser.userIdentifier, forKey: UserTitle.userIdentifier.rawValue) 其他地方會存
         UserDefaults.standard.set(thisUser.id, forKey: UserTitle.id.rawValue)
         UserDefaults.standard.set(thisUser.name, forKey: UserTitle.name.rawValue)
         UserDefaults.standard.set(thisUser.image, forKey: UserTitle.image.rawValue)

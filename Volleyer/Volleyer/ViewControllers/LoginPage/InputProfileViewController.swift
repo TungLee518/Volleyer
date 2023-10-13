@@ -189,6 +189,7 @@ class InputProfileViewController: UIViewController {
     }
 
     var levelImageIsHidden = true
+    let hud = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -235,7 +236,6 @@ class InputProfileViewController: UIViewController {
                 viewController.modalPresentationStyle = .fullScreen
                 self.present(viewController, animated: true)
             } else {
-                let hud = JGProgressHUD(style: .dark)
                 hud.textLabel.text = "此 ID 已存在"
                 hud.indicatorView = JGProgressHUDErrorIndicatorView()
                 hud.show(in: view)
@@ -440,7 +440,10 @@ class InputProfileViewController: UIViewController {
             print(thisUser)
             MyDataManager.shared.saveProfileInfo(thisUser)
         } else {
-            LKProgressHUD.showFailure(text: "請輸入完整資訊")
+            hud.textLabel.text = "請輸入完整資訊"
+            hud.indicatorView = JGProgressHUDErrorIndicatorView()
+            hud.show(in: view)
+            hud.dismiss(afterDelay: 1.5)
         }
     }
     @objc func changeUserInfo() {
@@ -450,15 +453,45 @@ class InputProfileViewController: UIViewController {
             thisUser.name = nameTextField.text!
             thisUser.gender = genderList.firstIndex(of: genderTextField.text!)!
             print(thisUser)
-            MyDataManager.shared.updateProfileInfo(changedUser: thisUser)
-            self.navigationController?.popViewController(animated: true)
-            LKProgressHUD.showSuccess(text: "帳號更改成功")
+            // 如果有改 id ，檢查使用者輸入的 id 是否已經有人用了
+            if thisUser.id != UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
+                MyDataManager.shared.users.whereField(UserTitle.id.rawValue, isEqualTo: thisUser.id).getDocuments { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        if querySnapshot!.documents.count > 0 {
+                            LKProgressHUD.showFailure(text: "此 ID 已存在")
+                        } else {
+                            self.updateToForebase(userToSave: self.thisUser)
+                        }
+                    }
+                }
+            } else {
+                updateToForebase(userToSave: thisUser)
+            }
         } else {
             LKProgressHUD.showFailure(text: "請輸入完整資訊")
         }
     }
+    func updateToForebase(userToSave: User) {
+        let hud = JGProgressHUD()
+        hud.textLabel.text = "上傳中"
+        hud.show(in: self.view)
+        MyDataManager.shared.updateProfileInfo(changedUser: userToSave){ isSuccess, err in
+            if let error = err {
+                // Handle the error
+                print("Error: \(error)")
+            } else if let isSuccess = isSuccess {
+                self.navigationController?.popViewController(animated: true)
+                LKProgressHUD.showSuccess(text: "帳號更改成功")
+                hud.dismiss()
+            } else {
+                print("No matching document found")
+            }
+        }
+    }
     @objc func deleteAccount() {
-        let controller = UIAlertController(title: "確定？", message: "要刪除帳號？", preferredStyle: .alert)
+        let controller = UIAlertController(title: "確定？", message: "要刪除帳號？刪除後需重新註冊", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "是", style: .default) { _ in
             MyDataManager.shared.removeThisuser(firebaseId: self.thisUser.firebaseId, userId: self.thisUser.id)
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {

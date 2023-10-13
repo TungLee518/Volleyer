@@ -82,6 +82,9 @@ class MyFinderInfoViewController: UIViewController {
         setPlayersTableView()
         setLayout()
         setNavBar()
+        playersTableViewLable.isHidden = true
+        playerListTableView.isHidden = true
+        randomTeamButton.isHidden = true
     }
 
     private func setNavBar() {
