@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Lottie
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    // swiftlint:disable force_cast
     static let shared = SceneDelegate()
-    // swiftlint:enable force_cast
+
     var window: UIWindow?
+    private var launchScreen: LottieAnimationView?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -24,27 +25,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // let navigationController = UINavigationController(rootViewController: viewController)
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
+        setAnimate()
 
         // for simulator
 //        MyDataManager.shared.getSimulatorProfileData()
 //        window?.rootViewController = TabBarViewController()
         // for user
-        if let thisUserAppleId = UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) {
-            MyDataManager.shared.getProfileData(appleUserId: thisUserAppleId) { gotUser, err in
-                if let error = err {
-                    // Handle the error
-                    print("Error: \(error)")
-                } else if let gotUser = gotUser {
-                    // Use the gotUser
-                    self.window?.rootViewController = TabBarViewController()
-                } else {
-                    // Handle the case where no matching document was found
-                    print("No matching document found")
-                }
-            }
-        } else {
-            window?.rootViewController = LoginViewController()
-        }
+        
 
         window?.makeKeyAndVisible()
         UserDefaults.standard.set(Date(), forKey: launchAppDate)
@@ -78,6 +65,55 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    func setAnimate() {
+        launchScreen = .init(name: "volleyHit")
+        launchScreen?.frame = window?.bounds ?? CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        launchScreen?.backgroundColor = .gray7
+        launchScreen?.contentMode = .scaleAspectFit
+        launchScreen?.isHidden = true
+        window?.addSubview(launchScreen!)
+        UIView.transition(with: launchScreen!, duration: 0.4,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            self.launchScreen?.isHidden = false
+            self.launchScreen?.loopMode = .playOnce
+            self.launchScreen?.animationSpeed = 1.0
+            self.launchScreen?.play(completion: { _ in
+                if let thisUserAppleId = UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) {
+                    MyDataManager.shared.getProfileData(appleUserId: thisUserAppleId) { gotUser, err in
+                        if let error = err {
+                            // Handle the error
+                            print("Error: \(error)")
+                        } else if let gotUser = gotUser {
+                            // Use the gotUser
+                            self.window?.rootViewController = TabBarViewController()
+                            UIView.transition(with: self.launchScreen!, duration: 0.4,
+                                              options: .transitionCrossDissolve,
+                                              animations: {
+                                self.launchScreen?.isHidden = true
+                            })
+                        } else {
+                            // Handle the case where no matching document was found
+                            print("No matching document found")
+                        }
+                    }
+                } else {
+                    self.window?.rootViewController = LoginViewController()
+                    UIView.transition(with: self.launchScreen!, duration: 0.4,
+                                      options: .transitionCrossDissolve,
+                                      animations: {
+                        self.launchScreen?.isHidden = true
+                    })
+                }
+            })
+        })
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+//            // Put your code which should be executed with a delay here
+//            UIView.transition(with: self.launchScreen!, duration: 0.4,
+//                              options: .transitionCrossDissolve,
+//                              animations: {
+//                self.launchScreen?.isHidden = true
+//            })
+//        }
+    }
 }
-
