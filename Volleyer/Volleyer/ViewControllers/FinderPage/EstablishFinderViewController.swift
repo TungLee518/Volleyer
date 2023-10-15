@@ -493,11 +493,11 @@ class EstablishFinderViewController: UIViewController {
             typeTextField.text = playTypes[thisPlay.type]
             maleTextField.text = String(thisPlay.lackAmount.male)
             femaleTextField.text = String(thisPlay.lackAmount.female)
-            setCheckboxes[thisPlay.levelRange.setBall].isSelected = true
-            blocCheckboxes[thisPlay.levelRange.block].isSelected = true
-            digCheckboxes[thisPlay.levelRange.dig].isSelected = true
-            spickCheckboxes[thisPlay.levelRange.spike].isSelected = true
-            sumCheckboxes[thisPlay.levelRange.sum].isSelected = true
+            setCheckboxTapped(sender: setCheckboxes[thisPlay.levelRange.setBall])
+            blockCheckboxTapped(sender: blocCheckboxes[thisPlay.levelRange.block])
+            digCheckboxTapped(sender: digCheckboxes[thisPlay.levelRange.dig])
+            spickCheckboxTapped(sender: spickCheckboxes[thisPlay.levelRange.spike])
+            sumCheckboxTapped(sender: sumCheckboxes[thisPlay.levelRange.sum])
         }
     }
     @objc func setCheckboxTapped(sender: UIButton) {

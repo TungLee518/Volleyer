@@ -15,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var launchScreen: LottieAnimationView?
     private var waitingScreen: LottieAnimationView?
+    let dispatchSemaphore = DispatchSemaphore(value: 0)
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -26,13 +27,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // let navigationController = UINavigationController(rootViewController: viewController)
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        setAnimate()
 
         // for simulator
 //        MyDataManager.shared.getSimulatorProfileData()
 //        window?.rootViewController = TabBarViewController()
         // for user
-        
+        setAnimate()
 
         window?.makeKeyAndVisible()
         UserDefaults.standard.set(Date(), forKey: launchAppDate)
@@ -84,49 +84,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIView.transition(with: launchScreen!, duration: 0.4,
                           options: .transitionCrossDissolve,
                           animations: {
-            self.launchScreen?.isHidden = false
-            self.launchScreen?.loopMode = .playOnce
-            self.launchScreen?.animationSpeed = 1.0
-            self.launchScreen?.play(completion: { _ in
-                self.waitingScreen?.isHidden = false
-                self.waitingScreen?.loopMode = .loop
-                self.waitingScreen?.animationSpeed = 1.0
-                self.waitingScreen?.play()
-                // 判斷是否已登入
-                if let thisUserAppleId = UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) {
-                    MyDataManager.shared.getProfileData(appleUserId: thisUserAppleId) { gotUser, err in
-                        if let error = err {
-                            // Handle the error
-                            print("Error: \(error)")
-                        } else if let gotUser = gotUser {
-                            // Use the gotUser
-                            self.window?.rootViewController = TabBarViewController()
-                            sleep(1)
-                            UIView.transition(with: self.launchScreen!, duration: 0.4,
-                                              options: .transitionCrossDissolve,
-                                              animations: {
-                                self.waitingScreen?.stop()
-                                self.launchScreen?.isHidden = true
-                                self.waitingScreen?.isHidden = true
-                            })
-                            
-                        } else {
-                            // Handle the case where no matching document was found
-                            print("No matching document found")
-                        }
-                    }
-                } else {
+            self.waitingScreen?.isHidden = false
+            self.waitingScreen?.loopMode = .loop
+            self.waitingScreen?.animationSpeed = 1.0
+            self.waitingScreen?.play()
+        })
+        // 判斷是否已登入
+        if let thisUserAppleId = UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) {
+            MyDataManager.shared.getProfileData(appleUserId: thisUserAppleId) { gotUser, err in
+                if let error = err {
+                    // Handle the error
+                    print("Error: \(error)")
+                } else if let gotUser = gotUser {
+                    // Use the gotUser
+                    sleep(1)
+                    self.window?.rootViewController = TabBarViewController()
                     UIView.transition(with: self.launchScreen!, duration: 0.4,
                                       options: .transitionCrossDissolve,
                                       animations: {
                         self.waitingScreen?.stop()
-                        self.launchScreen?.isHidden = true
+//                        self.launchScreen?.isHidden = true
                         self.waitingScreen?.isHidden = true
-                        self.window?.rootViewController = LoginViewController()
                     })
+                } else {
+                    // Handle the case where no matching document was found
+                    print("No matching document found")
                 }
+            }
+        } else {
+            sleep(1)
+            self.window?.rootViewController = LoginViewController()
+            UIView.transition(with: self.launchScreen!, duration: 0.4,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                self.waitingScreen?.stop()
+//                self.launchScreen?.isHidden = true
+                self.waitingScreen?.isHidden = true
             })
-        })
+        }
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
 //            // Put your code which should be executed with a delay here
 //            UIView.transition(with: self.launchScreen!, duration: 0.4,
