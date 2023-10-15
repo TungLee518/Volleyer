@@ -50,10 +50,10 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(pullDownRefreshLabel)
         dataManager.playDataDelegate = self
         setHeader()
         setTableView()
+        view.addSubview(pullDownRefreshLabel)
         setLayout()
         setNavBar()
     }
@@ -143,9 +143,9 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
             finderTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             finderTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             finderTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            pullDownRefreshLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            pullDownRefreshLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             pullDownRefreshLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            pullDownRefreshLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: standardMargin)
+            pullDownRefreshLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin)
         ])
     }
 

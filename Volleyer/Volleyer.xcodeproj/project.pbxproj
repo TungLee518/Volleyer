@@ -14,6 +14,7 @@
 		C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */; };
 		C800512F2AB9890700FEA7FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512E2AB9890700FEA7FD /* User.swift */; };
 		C848A44D2ADAE14900E7C9A6 /* volleyHit.json in Resources */ = {isa = PBXBuildFile; fileRef = C848A44C2ADAE14900E7C9A6 /* volleyHit.json */; };
+		C848A4512ADB8FC100E7C9A6 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = C848A4502ADB8FC100E7C9A6 /* loading.json */; };
 		C85BCF632AD147CA002B900C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF622AD147CA002B900C /* CardView.swift */; };
 		C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF642AD1646B002B900C /* ReportViewController.swift */; };
 		C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF662AD16487002B900C /* BlockListViewController.swift */; };
@@ -96,6 +97,7 @@
 		C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C800512E2AB9890700FEA7FD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C848A44C2ADAE14900E7C9A6 /* volleyHit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = volleyHit.json; sourceTree = "<group>"; };
+		C848A4502ADB8FC100E7C9A6 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		C85BCF622AD147CA002B900C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C85BCF642AD1646B002B900C /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		C85BCF662AD16487002B900C /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				C848A44C2ADAE14900E7C9A6 /* volleyHit.json */,
+				C848A4502ADB8FC100E7C9A6 /* loading.json */,
 				C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */,
 				C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */,
 				C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */,
@@ -470,6 +473,7 @@
 				C899610F2AC038C600C5D35D /* PlayOne.storyboard in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
 				C85BCF6C2AD2E286002B900C /* paper_scissor_stone.json in Resources */,
+				C848A4512ADB8FC100E7C9A6 /* loading.json in Resources */,
 				C89961242AC2C32D00C5D35D /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
 				C85BCF722AD406EA002B900C /* RandomTeam.storyboard in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,

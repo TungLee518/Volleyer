@@ -14,6 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private var launchScreen: LottieAnimationView?
+    private var waitingScreen: LottieAnimationView?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -72,6 +73,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         launchScreen?.contentMode = .scaleAspectFit
         launchScreen?.isHidden = true
         window?.addSubview(launchScreen!)
+
+        waitingScreen = .init(name: "loading")
+        waitingScreen?.frame = window?.bounds ?? CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        waitingScreen?.backgroundColor = .gray7
+        waitingScreen?.contentMode = .scaleAspectFit
+        waitingScreen?.isHidden = true
+        window?.addSubview(waitingScreen!)
+
         UIView.transition(with: launchScreen!, duration: 0.4,
                           options: .transitionCrossDissolve,
                           animations: {
@@ -79,6 +88,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.launchScreen?.loopMode = .playOnce
             self.launchScreen?.animationSpeed = 1.0
             self.launchScreen?.play(completion: { _ in
+                self.waitingScreen?.isHidden = false
+                self.waitingScreen?.loopMode = .loop
+                self.waitingScreen?.animationSpeed = 1.0
+                self.waitingScreen?.play()
+                // 判斷是否已登入
                 if let thisUserAppleId = UserDefaults.standard.string(forKey: UserTitle.userIdentifier.rawValue) {
                     MyDataManager.shared.getProfileData(appleUserId: thisUserAppleId) { gotUser, err in
                         if let error = err {
@@ -87,22 +101,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         } else if let gotUser = gotUser {
                             // Use the gotUser
                             self.window?.rootViewController = TabBarViewController()
+                            sleep(1)
                             UIView.transition(with: self.launchScreen!, duration: 0.4,
                                               options: .transitionCrossDissolve,
                                               animations: {
+                                self.waitingScreen?.stop()
                                 self.launchScreen?.isHidden = true
+                                self.waitingScreen?.isHidden = true
                             })
+                            
                         } else {
                             // Handle the case where no matching document was found
                             print("No matching document found")
                         }
                     }
                 } else {
-                    self.window?.rootViewController = LoginViewController()
                     UIView.transition(with: self.launchScreen!, duration: 0.4,
                                       options: .transitionCrossDissolve,
                                       animations: {
+                        self.waitingScreen?.stop()
                         self.launchScreen?.isHidden = true
+                        self.waitingScreen?.isHidden = true
+                        self.window?.rootViewController = LoginViewController()
                     })
                 }
             })
