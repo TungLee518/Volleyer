@@ -33,6 +33,8 @@ class RandomTeamViewController: UIViewController {
     @IBOutlet weak var cTeam5: UILabel!
     @IBOutlet weak var cTeam6: UILabel!
 
+    
+    @IBOutlet weak var restTeamImageView: UIImageView!
     @IBOutlet weak var takeARestLabel: UILabel!
 
     lazy var aTeam: [UILabel] = [aTeam1, aTeam2, aTeam3, aTeam4, aTeam5, aTeam6]
@@ -224,8 +226,10 @@ class RandomTeamViewController: UIViewController {
         }
 
         // 隨機選一隊先休息
-        let abc = ["A", "B", "C"]
-        takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
+        let imageNames = ["paper", "scissors", "stone"]
+        restTeamImageView.image = UIImage(named: imageNames.shuffled()[0])
+//        let abc = ["A", "B", "C"]
+//        takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
     }
 
     func didTapProfileButton(for player: Player) {
