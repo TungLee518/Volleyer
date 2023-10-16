@@ -185,11 +185,14 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     }
 
     @objc func pushToEditPhoto() {
+        LKProgressHUD.show()
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.allowsEditing = true
         picker.delegate = self
-        present(picker, animated: true)
+        present(picker, animated: true) {
+            LKProgressHUD.dismiss()
+        }
     }
     @objc func pushToInputProfile() {
         let nextVC = InputProfileViewController()
@@ -235,6 +238,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         controller.addAction(cancelAction)
         present(controller, animated: true)
     }
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }

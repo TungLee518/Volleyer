@@ -13,11 +13,11 @@ identifier_name:
 
 line_length:
     warning: 500 # warning
-    error: 750 # error
+    error: 800 # error
 
 file_length:
     warning: 500
-    error: 750
+    error: 800
 
 disabled_rules:
     — colon

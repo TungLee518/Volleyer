@@ -29,10 +29,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
 
         // for simulator
-//        MyDataManager.shared.getSimulatorProfileData()
-//        window?.rootViewController = TabBarViewController()
+        MyDataManager.shared.getSimulatorProfileData()
+        window?.rootViewController = TabBarViewController()
         // for user
-        setAnimate()
+//        setAnimate()
 
         window?.makeKeyAndVisible()
         UserDefaults.standard.set(Date(), forKey: launchAppDate)

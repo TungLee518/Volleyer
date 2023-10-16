@@ -114,12 +114,14 @@ class FinderDataManager {
         }
     }
 
-    func deletePlay(_ play: Play) {
+    func deletePlay(_ play: Play, completion: @escaping (Error?) -> Void) {
         plays.document(play.id).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
+                completion(err)
             } else {
                 print("Document successfully removed!")
+                completion(nil)
             }
         }
         print(play.playerInfo)
@@ -127,7 +129,6 @@ class FinderDataManager {
             deletePlayIdToUserPlayList(playId: play.id, userId: userId)
         }
         deletaAllRequestOfPlayId(playId: play.id)
-        LKProgressHUD.showSuccess(text: AlertTitile.successDeletePost.rawValue)
     }
 
     // MARK: get this user's play

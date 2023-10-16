@@ -37,9 +37,12 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         photoImageView.isHidden = true
         noDataLabel.isHidden = true
         setNavBar()
-        dataManager.getThisUserPlays()
         dataManager.playDataDelegate = self
         setTableView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dataManager.getThisUserPlays()
     }
 
     private func setNavBar() {
@@ -110,6 +113,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 extension MyFindersViewController: PlayDataManagerDelegate {
     func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
         LKProgressHUD.dismiss()
+        myFinders = []
         for i in plays {
             if i.finderId == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
                 myFinders.append(i)
