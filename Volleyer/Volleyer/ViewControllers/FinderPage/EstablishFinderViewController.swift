@@ -493,11 +493,11 @@ class EstablishFinderViewController: UIViewController {
             typeTextField.text = playTypes[thisPlay.type]
             maleTextField.text = String(thisPlay.lackAmount.male)
             femaleTextField.text = String(thisPlay.lackAmount.female)
-            setCheckboxes[thisPlay.levelRange.setBall].isSelected = true
-            blocCheckboxes[thisPlay.levelRange.block].isSelected = true
-            digCheckboxes[thisPlay.levelRange.dig].isSelected = true
-            spickCheckboxes[thisPlay.levelRange.spike].isSelected = true
-            sumCheckboxes[thisPlay.levelRange.sum].isSelected = true
+            setCheckboxTapped(sender: setCheckboxes[thisPlay.levelRange.setBall])
+            blockCheckboxTapped(sender: blocCheckboxes[thisPlay.levelRange.block])
+            digCheckboxTapped(sender: digCheckboxes[thisPlay.levelRange.dig])
+            spickCheckboxTapped(sender: spickCheckboxes[thisPlay.levelRange.spike])
+            sumCheckboxTapped(sender: sumCheckboxes[thisPlay.levelRange.sum])
         }
     }
     @objc func setCheckboxTapped(sender: UIButton) {
@@ -569,7 +569,7 @@ class EstablishFinderViewController: UIViewController {
     @objc func doneMaleLack() {
         let amount = Int(maleTextField.text ?? "-1") ?? -1
         print(amount)
-        if amount > 1000 || amount < 0 {
+        if amount > 99 || amount < 0 {
             LKProgressHUD.showFailure(text: "請輸入合理人數")
         } else {
             self.view.endEditing(true)
@@ -578,7 +578,7 @@ class EstablishFinderViewController: UIViewController {
     @objc func doneFemaleLack() {
         let amount = Int(femaleTextField.text ?? "-1") ?? -1
         print(amount)
-        if amount > 1000 || amount < 0 {
+        if amount > 99 || amount < 0 {
             LKProgressHUD.showFailure(text: "請輸入合理人數")
         } else {
             self.view.endEditing(true)
@@ -612,7 +612,7 @@ class EstablishFinderViewController: UIViewController {
                 let priceInput = Int(priceTextField.text ?? "0") ?? 0
                 let maleInput = Int(maleTextField.text ?? "0") ?? 0
                 let femaleInput = Int(femaleTextField.text ?? "0") ?? 0
-                if placeInput.count > 10 || priceInput > 100000 || priceInput < 0 || maleInput > 1000 || maleInput < 0 || femaleInput > 1000 || femaleInput < 0 {
+                if placeInput.count > 10 || priceInput > 100000 || priceInput < 0 || maleInput > 99 || maleInput < 0 || femaleInput > 99 || femaleInput < 0 {
                     LKProgressHUD.showFailure(text: "請符合字數限制")
                 } else {
                     thisPlay.place = placeTextField.text!

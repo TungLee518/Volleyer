@@ -52,6 +52,7 @@ class MyFinderInfoViewController: UIViewController {
             playView.thisPlay = thisPlay
         }
     }
+//    bruh
 
     private var addPlayers: [Player] = [
         Player(name: "May", gender: "Female"),
@@ -82,9 +83,9 @@ class MyFinderInfoViewController: UIViewController {
         setPlayersTableView()
         setLayout()
         setNavBar()
-        playersTableViewLable.isHidden = true
-        playerListTableView.isHidden = true
-        randomTeamButton.isHidden = true
+//        playersTableViewLable.isHidden = true
+//        playerListTableView.isHidden = true
+//        randomTeamButton.isHidden = true
     }
 
     private func setNavBar() {
@@ -159,6 +160,7 @@ class MyFinderInfoViewController: UIViewController {
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "RandomTeamViewController") as? RandomTeamViewController {
             nextVC.hidesBottomBarWhenPushed = true
             nextVC.players = addPlayers
+            nextVC.playerUsers = addUsers
             navigationController?.pushViewController(nextVC, animated: true)
         }
 //        let nextVC = RandomTeamViewController()
