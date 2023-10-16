@@ -30,6 +30,7 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LKProgressHUD.show()
         photoImageView.isHidden = true
         noDataLabel.isHidden = true
         setNavBar()
@@ -159,7 +160,7 @@ extension RequestSentViewController: RequestsDataManagerDelegate {
     }
     func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
         myRequests = playRequests
-//        requestsTableView.reloadData()
+        LKProgressHUD.dismiss()
         if myRequests.count == 0 {
             photoImageView.isHidden = false
             noDataLabel.isHidden = false

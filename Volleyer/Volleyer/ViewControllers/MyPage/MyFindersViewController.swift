@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class MyFindersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -32,6 +33,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LKProgressHUD.show()
         photoImageView.isHidden = true
         noDataLabel.isHidden = true
         setNavBar()
@@ -74,6 +76,13 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
             noDataLabel.centerXAnchor.constraint(equalTo: photoImageView.centerXAnchor),
             noDataLabel.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: standardMargin)
         ])
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                dataManager.getThisUserPlays()
+                self.myFindersTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.myFindersTableView)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,6 +109,7 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
 
 extension MyFindersViewController: PlayDataManagerDelegate {
     func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
+        LKProgressHUD.dismiss()
         for i in plays {
             if i.finderId == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
                 myFinders.append(i)

@@ -22,6 +22,7 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        LKProgressHUD.show()
         setNavBar()
         // playOneDataManager.getPlayOneCourts()
         playOneDataManager.listenPlayOne()
@@ -159,6 +160,7 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         }
         print("========\(playOneData)")
         playOneTableView.reloadData()
+        LKProgressHUD.dismiss()
     }
 
     @objc func lineUp(_ sender: UIButton) {
