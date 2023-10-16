@@ -13,7 +13,8 @@ class AddPlayViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ballnet")
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.alpha = 0.7
         return imageView
     }()

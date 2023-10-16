@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseFirestore
 import MJRefresh
+import Lottie
 
 class FinderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var db: Firestore!
@@ -32,12 +33,23 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         label.textColor = .purple2
         return label
     }()
-    var pullDownRefreshLabel: UILabel = {
+    var noPostLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "下拉更新貼文"
+        label.text = "目前沒有揪場"
         label.font = .regularNunito(size: 16)
         label.textColor = .gray2
+        label.isHidden = true
+        return label
+    }()
+    private var waitingAnimate: LottieAnimationView?
+    var pleaseWaitLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "請稍候"
+        label.font = .regularNunito(size: 16)
+        label.textColor = .gray2
+        label.isHidden = true
         return label
     }()
 
@@ -53,15 +65,12 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         dataManager.playDataDelegate = self
         setHeader()
         setTableView()
-        view.addSubview(pullDownRefreshLabel)
+        setWatingAnimate()
         setLayout()
-        setNavBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        pullDownRefreshLabel.isHidden = false
-        pullDownRefreshLabel.text = "下拉更新貼文"
         dataManager.getPublishPlay()
         setNavBar()
     }
@@ -72,7 +81,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        navigationItem.title = NavBarEnum.finderPage.rawValue
+        navigationItem.title = "請稍候"
 //        navigationController?.navigationBar.backgroundColor = .purple7
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = .purple7
@@ -92,6 +101,30 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         navigationBarAppearance.backgroundColor = .clear
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
 //        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+    }
+    func setWatingAnimate() {
+        waitingAnimate = .init(name: "volleyHit")
+        waitingAnimate?.frame = view.bounds
+        waitingAnimate?.backgroundColor = .gray7
+        waitingAnimate?.contentMode = .scaleAspectFit
+        view.addSubview(waitingAnimate!)
+        view.addSubview(pleaseWaitLabel)
+        NSLayoutConstraint.activate([
+            pleaseWaitLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            pleaseWaitLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
+        waitingAnimate?.isHidden = false
+        waitingAnimate?.loopMode = .loop
+        waitingAnimate?.animationSpeed = 1.0
+        waitingAnimate?.play()
+    }
+    func showNoPostLabel() {
+        view.addSubview(noPostLabel)
+        NSLayoutConstraint.activate([
+            noPostLabel.centerXAnchor.constraint(equalTo: finderTableView.centerXAnchor),
+            noPostLabel.centerYAnchor.constraint(equalTo: finderTableView.centerYAnchor)
+        ])
+        noPostLabel.isHidden = false
     }
 
     @objc func pushToEstablishVC() {
@@ -142,10 +175,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
             finderTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             finderTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             finderTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            finderTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            pullDownRefreshLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            pullDownRefreshLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            pullDownRefreshLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin)
+            finderTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
@@ -194,13 +224,15 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 // not determine public or not yet
 extension FinderViewController: PlayDataManagerDelegate {
     func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
-        pullDownRefreshLabel.isHidden = true
         if plays.count > 0 {
             publicPlays = plays
             finderTableView.reloadData()
+            waitingAnimate?.stop()
+            waitingAnimate?.isHidden = true
+            pleaseWaitLabel.isHidden = true
+            navigationItem.title = NavBarEnum.finderPage.rawValue
         } else {
-            pullDownRefreshLabel.text = "目前沒有揪場"
-            pullDownRefreshLabel.isHidden = false
+            showNoPostLabel()
         }
     }
 }
