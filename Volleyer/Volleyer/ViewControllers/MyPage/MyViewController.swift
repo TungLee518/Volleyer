@@ -73,7 +73,17 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         }
         return view
     }()
-    lazy var requestSentCard: CardView = {
+    private let requestReceiveAmountLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .red
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        label.font = .semiboldNunito(size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var requestReceiveCard: CardView = {
         let view = CardView()
         view.thisCardImage = "kick"
         view.thisImageView.transform = CGAffineTransform(scaleX: -1, y: 1)
@@ -85,7 +95,17 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         }
         return view
     }()
-    lazy var requestReceiveCard: CardView = {
+    private let requestSentAmountLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = .red
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        label.font = .semiboldNunito(size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var requestSentCard: CardView = {
         let view = CardView()
         view.thisCardImage = "defense"
         view.thisCardLabel = MyPageEnum.requestISent.rawValue
@@ -118,7 +138,8 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         }
         return view
     }()
-    let dataManager = MyDataManager()
+    let myDataManager = MyDataManager()
+    let requestDataManager = RequestDataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,8 +153,8 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         view.addSubview(myPlayCard)
         view.addSubview(reportCard)
         view.addSubview(myFinderCard)
-        view.addSubview(requestReceiveCard)
         view.addSubview(requestSentCard)
+        view.addSubview(requestReceiveCard)
         view.addSubview(lockCard)
         setLayout()
         navigationItem.title = NavBarEnum.myPage.rawValue
@@ -142,6 +163,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         myProfileView.setView()
+        setRequestsAmount()
     }
 
     private func setLayout() {
@@ -172,12 +194,12 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
             reportCard.topAnchor.constraint(equalTo: logoutButton.bottomAnchor, constant: standardMargin),
             reportCard.centerXAnchor.constraint(equalTo: logoutButton.centerXAnchor),
             reportCard.widthAnchor.constraint(equalTo: logoutButton.widthAnchor, multiplier: 0.8),
-            requestReceiveCard.topAnchor.constraint(equalTo: myFinderCard.bottomAnchor, constant: standardMargin),
-            requestReceiveCard.centerXAnchor.constraint(equalTo: editPhotoButton.centerXAnchor),
-            requestReceiveCard.widthAnchor.constraint(equalTo: editPhotoButton.widthAnchor, multiplier: 0.8),
-            requestSentCard.topAnchor.constraint(equalTo: myPlayCard.bottomAnchor, constant: standardMargin),
-            requestSentCard.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            requestSentCard.widthAnchor.constraint(equalTo: editProfileButton.widthAnchor, multiplier: 0.8),
+            requestSentCard.topAnchor.constraint(equalTo: myFinderCard.bottomAnchor, constant: standardMargin),
+            requestSentCard.centerXAnchor.constraint(equalTo: editPhotoButton.centerXAnchor),
+            requestSentCard.widthAnchor.constraint(equalTo: editPhotoButton.widthAnchor, multiplier: 0.8),
+            requestReceiveCard.topAnchor.constraint(equalTo: myPlayCard.bottomAnchor, constant: standardMargin),
+            requestReceiveCard.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            requestReceiveCard.widthAnchor.constraint(equalTo: editProfileButton.widthAnchor, multiplier: 0.8),
             lockCard.topAnchor.constraint(equalTo: reportCard.bottomAnchor, constant: standardMargin),
             lockCard.centerXAnchor.constraint(equalTo: logoutButton.centerXAnchor),
             lockCard.widthAnchor.constraint(equalTo: logoutButton.widthAnchor, multiplier: 0.8)
@@ -252,7 +274,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
             return
         }
         myProfileView.photoImageView.image = UIImage(data: imageData)
-        dataManager.saveProfileImage(imageData: imageData)
+        myDataManager.saveProfileImage(imageData: imageData)
     }
     @objc func pushToMyFinders() {
         let nextVC = MyFindersViewController()
@@ -284,5 +306,51 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     @objc func pushToLock() {
         let nextVC = BlockListViewController()
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    func setRequestsAmount() {
+        requestDataManager.getPlayRequests()
+        requestDataManager.playRequestDelegate = self
+        requestReceiveCard.addSubview(requestReceiveAmountLabel)
+        NSLayoutConstraint.activate([
+            requestReceiveAmountLabel.topAnchor.constraint(equalTo: requestReceiveCard.topAnchor),
+            requestReceiveAmountLabel.trailingAnchor.constraint(equalTo: requestReceiveCard.trailingAnchor)
+        ])
+        requestSentCard.addSubview(requestSentAmountLabel)
+        
+        NSLayoutConstraint.activate([
+            requestSentAmountLabel.topAnchor.constraint(equalTo: requestSentCard.topAnchor),
+            requestSentAmountLabel.trailingAnchor.constraint(equalTo: requestSentCard.trailingAnchor)
+        ])
+    }
+}
+
+extension MyViewController: RequestsDataManagerDelegate {
+    func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
+        var receiveAmount = 0
+        for i in playRequests {
+            if i.status == 0 {
+                receiveAmount += 1
+            }
+        }
+        if receiveAmount > 0 {
+            requestReceiveAmountLabel.isHidden = false
+            requestReceiveAmountLabel.text = "  \(String(receiveAmount))  "
+        } else {
+            requestReceiveAmountLabel.isHidden = true
+        }
+    }
+    func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
+        var sentAmount = 0
+        for i in playRequests {
+            if i.status == 0 {
+                sentAmount += 1
+            }
+        }
+        if sentAmount > 0 {
+            requestSentAmountLabel.isHidden = false
+            requestSentAmountLabel.text = "  \(String(sentAmount))  "
+        } else {
+            requestSentAmountLabel.isHidden = true
+        }
     }
 }
