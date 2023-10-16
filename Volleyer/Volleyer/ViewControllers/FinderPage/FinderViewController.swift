@@ -105,7 +105,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
     func setWatingAnimate() {
         waitingAnimate = .init(name: "volleyHit")
         waitingAnimate?.frame = view.bounds
-        waitingAnimate?.backgroundColor = .gray7
+        waitingAnimate?.backgroundColor = .white
         waitingAnimate?.contentMode = .scaleAspectFit
         view.addSubview(waitingAnimate!)
         view.addSubview(pleaseWaitLabel)
