@@ -48,7 +48,7 @@ class AddPlayViewController: UIViewController {
 
     private let accountLable: UILabel = {
         let label = UILabel()
-        label.text = "maymmm518"
+        label.text = "loading"
         label.textColor = .gray2
         label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false

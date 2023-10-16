@@ -91,6 +91,6 @@ class LKProgressHUD {
             }
             return
         }
-        shared.hud.dismiss()
+        shared.hud.dismiss(animated: false)
     }
 }
