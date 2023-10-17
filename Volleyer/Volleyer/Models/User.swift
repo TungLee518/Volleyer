@@ -67,7 +67,7 @@ let addUsers: [User] = [
             LevelRange(setBall: 3, block: 0, dig: 3, spike: 0, sum: 2)), // 攻擊手
     User(id: "Amelia", email: "Amelia", gender: 1, name: "Amelia", level:
             LevelRange(setBall: 1, block: 3, dig: 0, spike: 3, sum: 1)), // 自由球員
-    User(id: "Charlotte", email: "Charlotte", gender: 1, name: "Charlotte", level:
+    User(id: "Doris", email: "Doris", gender: 1, name: "Doris", level:
             LevelRange(setBall: 2, block: 2, dig: 2, spike: 2, sum: 2)),
     User(id: "Harper", email: "Harper", gender: 1, name: "Harper", level:
             LevelRange(setBall: 0, block: 0, dig: 0, spike: 0, sum: 0)), // 校隊
@@ -79,12 +79,12 @@ let addUsers: [User] = [
             LevelRange(setBall: 2, block: 2, dig: 3, spike: 2, sum: 2)),
     User(id: "Elijah", email: "Elijah", gender: 0, name: "Elijah", level:
             LevelRange(setBall: 1, block: 1, dig: 2, spike: 0, sum: 1)),
-    User(id: "Benjamin", email: "Benjamin", gender: 0, name: "Benjamin", level:
+    User(id: "Ben", email: "Ben", gender: 0, name: "Ben", level:
             LevelRange(setBall: 0, block: 2, dig: 1, spike: 3, sum: 2)),
     User(id: "Mason", email: "Mason", gender: 0, name: "Mason", level:
             LevelRange(setBall: 2, block: 3, dig: 0, spike: 3, sum: 2)),
     User(id: "James", email: "James", gender: 0, name: "James", level:
             LevelRange(setBall: 1, block: 1, dig: 0, spike: 0, sum: 1)),
-    User(id: "Alexander", email: "Alexander", gender: 0, name: "Alexander", level:
+    User(id: "Alex", email: "Alex", gender: 0, name: "Alex", level:
             LevelRange(setBall: 2, block: 1, dig: 2, spike: 1, sum: 2))
 ]

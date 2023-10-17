@@ -81,6 +81,7 @@ class RandomTeamViewController: UIViewController {
 //        view.addSubview(doneRandonTeamLable)
 //        setPlayersTableView()
         shadowView.applyShadow()
+        shadowView.backgroundColor = .white
         setNavBar()
 //        setLayout()
         setAnimate()
@@ -216,17 +217,27 @@ class RandomTeamViewController: UIViewController {
         // 完成分隊後放入 labels
         for i in 0...2 {
             for j in 0...5 {
-                teams[i][j].text = groups[i][j].name
+                teams[i][j].text = "  \(groups[i][j].name)  "
                 if groups[i][j].gender == 0 {
-                    teams[i][j].textColor = .gray1
+                    teams[i][j].textColor = .gray2
+                    teams[i][j].backgroundColor = UIColor.hexStringToUIColor(hex: "#D6EAF6")
+                    teams[i][j].layer.cornerRadius = 10
+                    teams[i][j].layer.borderColor = UIColor.hexStringToUIColor(hex: "#D6EAF6").cgColor
+                    teams[i][j].layer.borderWidth = 2
+                    teams[i][j].clipsToBounds = true
                 } else {
                     teams[i][j].textColor = .gray2
+                    teams[i][j].backgroundColor = UIColor.hexStringToUIColor(hex: "#F6DED9")
+                    teams[i][j].layer.cornerRadius = 10
+                    teams[i][j].layer.borderColor = UIColor.hexStringToUIColor(hex: "#F6DED9").cgColor
+                    teams[i][j].layer.borderWidth = 2
+                    teams[i][j].clipsToBounds = true
                 }
             }
         }
 
         // 隨機選一隊先休息
-        let imageNames = ["paper", "scissors", "stone"]
+        let imageNames = ["a", "b", "c"]
         restTeamImageView.image = UIImage(named: imageNames.shuffled()[0])
 //        let abc = ["A", "B", "C"]
 //        takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
