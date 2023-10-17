@@ -418,7 +418,7 @@ class EstablishFinderViewController: UIViewController {
     func setPlayListTableView() {
         view.addSubview(playerListTableView)
         // 第一個永遠是自己
-        playerListTableView.players.append(Player(name: "May", gender: "Female"))
+//        playerListTableView.players.append(Player(name: "May", gender: "Female"))
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -551,8 +551,8 @@ class EstablishFinderViewController: UIViewController {
         self.view.endEditing(true)
     }
     @objc func donePlace() {
-        if placeTextField.text?.count ?? 0 > 10 {
-            LKProgressHUD.showFailure(text: "字數勿超過 10 字")
+        if placeTextField.text?.count ?? 0 > 15 {
+            LKProgressHUD.showFailure(text: "字數勿超過 15 字")
         } else {
             self.view.endEditing(true)
         }
@@ -595,11 +595,11 @@ class EstablishFinderViewController: UIViewController {
     }
     @objc func addPlayer() {
         let newPlayer = Player(name: "", gender: "") // Customize as needed
-        playerListTableView.addNewPlayer(newPlayer)
+//        playerListTableView.addNewPlayer(newPlayer)
     }
 
     @objc func addData(_ sender: UIButton) {
-        players = playerListTableView.players
+//        players = playerListTableView.players
         if sender == publishButton {
             thisPlay.status = 1
         }
@@ -612,7 +612,7 @@ class EstablishFinderViewController: UIViewController {
                 let priceInput = Int(priceTextField.text ?? "0") ?? 0
                 let maleInput = Int(maleTextField.text ?? "0") ?? 0
                 let femaleInput = Int(femaleTextField.text ?? "0") ?? 0
-                if placeInput.count > 10 || priceInput > 100000 || priceInput < 0 || maleInput > 99 || maleInput < 0 || femaleInput > 99 || femaleInput < 0 {
+                if placeInput.count > 15 || priceInput > 100000 || priceInput < 0 || maleInput > 99 || maleInput < 0 || femaleInput > 99 || femaleInput < 0 {
                     LKProgressHUD.showFailure(text: "請符合字數限制")
                 } else {
                     thisPlay.place = placeTextField.text!

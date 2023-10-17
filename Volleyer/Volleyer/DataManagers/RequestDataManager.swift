@@ -40,7 +40,7 @@ class RequestDataManager {
             PlayRequestTitle.requestReceiverId.rawValue: play.finderId,
             PlayRequestTitle.playId.rawValue: play.id,
             PlayRequestTitle.status.rawValue: 0,
-            PlayRequestTitle.requestPlayerList.rawValue: playerDictList,
+            PlayRequestTitle.requestPlayerList.rawValue: [],
             PlayRequestTitle.createTime.rawValue: Date()
         ]
         addPlayRQs.whereField(PlayRequestTitle.playId.rawValue, isEqualTo: play.id).getDocuments { (querySnapshot, err) in
