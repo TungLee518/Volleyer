@@ -119,6 +119,7 @@ extension MyFindersViewController: PlayDataManagerDelegate {
                 myFinders.append(i)
             }
         }
+        myFinders.sort { $0.startTime < $1.startTime }
         if myFinders.count == 0 {
             photoImageView.isHidden = false
             noDataLabel.isHidden = false
