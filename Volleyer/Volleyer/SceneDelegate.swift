@@ -79,6 +79,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         waitingScreen?.backgroundColor = .gray7
         waitingScreen?.contentMode = .scaleAspectFit
         waitingScreen?.isHidden = true
+        waitingScreen?.backgroundColor = .white
         window?.addSubview(waitingScreen!)
 
         UIView.transition(with: launchScreen!, duration: 0.4,

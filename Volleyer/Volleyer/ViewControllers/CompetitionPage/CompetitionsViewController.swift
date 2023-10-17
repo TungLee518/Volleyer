@@ -18,6 +18,7 @@ class CompetitionsViewController: UIViewController, UITableViewDataSource, UITab
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LKProgressHUD.show()
         setNavBar()
         dataManager.getCompetion()
         dataManager.competitionDelegate = self
@@ -88,5 +89,6 @@ extension CompetitionsViewController: CompetitionDataManagerDelegate {
     func manager(_ manager: FinderDataManager, didGet competitions: [Competition]) {
         allCompetitions = competitions
         competitionsTableView.reloadData()
+        LKProgressHUD.dismiss()
     }
 }

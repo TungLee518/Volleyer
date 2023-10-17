@@ -13,7 +13,7 @@ class RequestsTableViewCell: UITableViewCell {
 
     var titleLable: UILabel = {
         let label = UILabel()
-        label.text = "No title"
+        label.text = "loading"
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false

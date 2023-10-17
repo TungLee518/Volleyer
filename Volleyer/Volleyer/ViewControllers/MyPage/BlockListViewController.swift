@@ -28,6 +28,7 @@ class BlockListViewController: UIViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LKProgressHUD.show()
         photoImageView.isHidden = true
         noDataLabel.isHidden = true
         setNavBar()
@@ -109,7 +110,7 @@ extension BlockListViewController: BlockListDataManagerDelegate {
     func manager(_ manager: MyDataManager, didGet blockList: [User]) {
         blockUsers = blockList
         print(blockUsers)
-//        requestsTableView.reloadData()
+        LKProgressHUD.dismiss()
         if blockUsers.count == 0 {
             photoImageView.isHidden = false
             noDataLabel.isHidden = false
