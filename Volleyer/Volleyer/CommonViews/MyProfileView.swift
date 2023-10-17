@@ -10,8 +10,6 @@ import UIKit
 
 class MyProfileView: UIView {
 
-    let dataManager = MyDataManager()
-
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder")

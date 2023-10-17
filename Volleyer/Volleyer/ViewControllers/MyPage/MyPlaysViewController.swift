@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -31,6 +32,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LKProgressHUD.show()
         photoImageView.isHidden = true
         noDataLabel.isHidden = true
         setNavBar()
@@ -67,6 +69,13 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
             myPlaysTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         myPlaysTableView.allowsSelection = false
+        MJRefreshNormalHeader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                dataManager.getThisUserPlays()
+                self.myPlaysTableView.mj_header?.endRefreshing()
+            }
+        }.autoChangeTransparency(true).link(to: self.myPlaysTableView)
     }
 
     func setImageView() {
@@ -106,6 +115,7 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
 extension MyPlaysViewController: PlayDataManagerDelegate {
     func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
         myPlays = plays
+        LKProgressHUD.dismiss()
         if myPlays.count == 0 {
             photoImageView.isHidden = false
             noDataLabel.isHidden = false

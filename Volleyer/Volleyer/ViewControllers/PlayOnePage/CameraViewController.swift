@@ -12,11 +12,21 @@ import JGProgressHUD
 
 class CameraViewController: UIViewController {
 
+    let headerLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "留下隊友的資訊"
+        label.font = .semiboldNunito(size: 20)
+        label.textColor = .gray2
+        label.textAlignment = .center
+        return label
+    }()
     var photoPreviewImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .secondarySystemBackground
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.image = UIImage(named: "placeholder")
         return imageView
     }()
@@ -26,7 +36,7 @@ class CameraViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = .regularNunito(size: 16)
         textField.textColor = .gray2
-        textField.placeholder = "name"
+        textField.placeholder = " 姓名"
         textField.textAlignment = .left
         textField.contentVerticalAlignment = .top
         textField.borderStyle = .roundedRect
@@ -43,14 +53,15 @@ class CameraViewController: UIViewController {
     lazy var takePhotoButton: UIButton = {
         let button = UIButton()
         button.setTitle("拍照", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
+        button.titleLabel?.font =  .regularNunito(size: 16)
         button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple1
+        button.backgroundColor = .clear
+        button.setTitleColor(.purple1, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.gray7, for: .normal)
-        button.addTarget(self, action: #selector(didTapOnTakePhotoButton), for: .touchUpInside)
         button.layer.cornerRadius = 16
-        button.clipsToBounds = true
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.purple1.cgColor
+        button.addTarget(self, action: #selector(didTapOnTakePhotoButton), for: .touchUpInside)
         return button
     }()
 
@@ -63,6 +74,7 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(headerLabel)
         view.addSubview(photoPreviewImageView)
         view.addSubview(nameTextField)
         view.addSubview(takePhotoButton)
@@ -72,7 +84,7 @@ class CameraViewController: UIViewController {
 
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
-        self.title = NavBarEnum.camera.rawValue
+        self.title = ""
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = .purple2
@@ -81,17 +93,20 @@ class CameraViewController: UIViewController {
 
     private func setLayout() {
         NSLayoutConstraint.activate([
-            photoPreviewImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            photoPreviewImageView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: standardMargin),
-            photoPreviewImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            photoPreviewImageView.bottomAnchor.constraint(equalTo: takePhotoButton.topAnchor, constant: -standardMargin),
+            photoPreviewImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            photoPreviewImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            photoPreviewImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            photoPreviewImageView.heightAnchor.constraint(equalTo: photoPreviewImageView.widthAnchor, multiplier: 1),
             nameTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             nameTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             nameTextField.bottomAnchor.constraint(equalTo: photoPreviewImageView.topAnchor, constant: -standardMargin),
-            nameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin*5),
             nameTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
+            headerLabel.centerXAnchor.constraint(equalTo: nameTextField.centerXAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
+            headerLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
+            headerLabel.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -standardMargin*2),
             takePhotoButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            takePhotoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin*3),
+            takePhotoButton.topAnchor.constraint(equalTo: photoPreviewImageView.bottomAnchor, constant: standardMargin),
             takePhotoButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             takePhotoButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
@@ -135,7 +150,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             let hud = JGProgressHUD()
             hud.textLabel.text = "上傳中"
             hud.show(in: self.view)
-            dataManager.savePlayOneImage(finder: finderInfo, playerN: playerN, imageData: imageTook, playerName: nameTextField.text!) { err in
+            dataManager.savePlayOneImage(finder: finderInfo, playerN: playerN, imageData: imageTook, playerName: nameTextField.text ?? "name error") { err in
                 if err == nil {
                     print("推回去")
                     hud.dismiss()
@@ -145,6 +160,8 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
                     LKProgressHUD.showFailure(text: "上傳失敗:(")
                 }
             }
+        } else {
+            LKProgressHUD.showFailure(text: "請輸入姓名")
         }
     }
     @objc func cancelToolbar() {

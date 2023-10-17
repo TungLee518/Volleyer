@@ -13,7 +13,8 @@ class AddPlayViewController: UIViewController {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ballnet")
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.alpha = 0.7
         return imageView
     }()
@@ -47,7 +48,7 @@ class AddPlayViewController: UIViewController {
 
     private let accountLable: UILabel = {
         let label = UILabel()
-        label.text = "maymmm518"
+        label.text = "loading"
         label.textColor = .gray2
         label.font = .regularNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -319,10 +320,10 @@ class AddPlayViewController: UIViewController {
 //        view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         // 第一個永遠是自己
-        playerListTableView.players.append(
-            Player(name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue)!,
-                   gender: UserDefaults.standard.string(forKey: UserTitle.gender.rawValue)!)
-        )
+//        playerListTableView.players.append(
+//            Player(name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue)!,
+//                   gender: UserDefaults.standard.string(forKey: UserTitle.gender.rawValue)!)
+//        )
     }
 
     private func setLayout() {
@@ -411,7 +412,7 @@ class AddPlayViewController: UIViewController {
     @objc func sendRequest() {
         let controller = UIAlertController(title: "確定？", message: "要發加場邀請給 \(thisFinderId ??  "Internet Error")？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "是", style: .default) { _ in
-            self.addPlayers = self.playerListTableView.players
+//            self.addPlayers = self.playerListTableView.players
             print(self.addPlayers)
             self.dataManager.saveRequest(self.thisPlay!, playerList: self.addPlayers)
             print("request sent")
@@ -430,7 +431,7 @@ class AddPlayViewController: UIViewController {
     }
     @objc func addPlayer() {
         let newPlayer = Player(name: "", gender: "") // Customize as needed
-        playerListTableView.addNewPlayer(newPlayer)
+//        playerListTableView.addNewPlayer(newPlayer)
     }
     func pushToProfileVC() {
         let nextVC = ProfileViewController()

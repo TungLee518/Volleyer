@@ -55,7 +55,7 @@ class MyPlayInfoViewController: UIViewController {
     private func setPlayersTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.players = addPlayers
+//        playerListTableView.players = addPlayers
         playerListTableView.canEdit = false
     }
 

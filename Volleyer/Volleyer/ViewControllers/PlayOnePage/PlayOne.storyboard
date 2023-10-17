@@ -161,7 +161,7 @@
                                     <constraint firstAttribute="width" constant="70" id="hMN-r7-qdq"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="248" verticalHuggingPriority="251" text="輸入名字" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce3-bG-2Kd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="248" verticalHuggingPriority="251" text="Loading" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce3-bG-2Kd">
                                 <rect key="frame" x="171.33333333333334" y="219.66666666666666" width="119.66666666666666" height="24.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="18"/>
                                 <color key="textColor" red="0.4392156862745098" green="0.43137254901960786" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -180,7 +180,7 @@
                                     <constraint firstAttribute="height" constant="70" id="yVY-gX-WZK"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="輸入名字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXk-gk-oxJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXk-gk-oxJ">
                                 <rect key="frame" x="171.33333333333334" y="305.66666666666669" width="119.66666666666666" height="24.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="18"/>
                                 <color key="textColor" red="0.4392156862745098" green="0.43137254901960786" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -211,7 +211,7 @@
                                     <constraint firstAttribute="width" constant="70" id="dxR-ix-roP"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="輸入名字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLD-GA-opS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLD-GA-opS">
                                 <rect key="frame" x="171.33333333333334" y="391.66666666666669" width="119.66666666666666" height="24.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="18"/>
                                 <color key="textColor" red="0.4392156862745098" green="0.43137254901960786" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -242,7 +242,7 @@
                                     <constraint firstAttribute="height" constant="70" id="mj2-vn-CwA"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="輸入名字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74r-yY-hlD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74r-yY-hlD">
                                 <rect key="frame" x="171.33333333333334" y="477.66666666666669" width="119.66666666666666" height="24.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="18"/>
                                 <color key="textColor" red="0.4392156862745098" green="0.43137254901960786" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -273,7 +273,7 @@
                                     <constraint firstAttribute="width" constant="70" id="qUZ-Ly-cXO"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="輸入名字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0K-UP-A9Z">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0K-UP-A9Z">
                                 <rect key="frame" x="171.33333333333334" y="563.66666666666663" width="119.66666666666666" height="24.666666666666629"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="18"/>
                                 <color key="textColor" red="0.4392156862745098" green="0.43137254901960786" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

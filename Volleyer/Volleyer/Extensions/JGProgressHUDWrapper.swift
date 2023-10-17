@@ -18,7 +18,7 @@ class LKProgressHUD {
 
     private init() {}
 
-    let hud = JGProgressHUD(style: .dark)
+    let hud = JGProgressHUD(style: .light)
 
     var view: UIView? {
         guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
@@ -91,6 +91,6 @@ class LKProgressHUD {
             }
             return
         }
-        shared.hud.dismiss()
+        shared.hud.dismiss(animated: false)
     }
 }

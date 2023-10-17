@@ -418,7 +418,7 @@ class EstablishFinderViewController: UIViewController {
     func setPlayListTableView() {
         view.addSubview(playerListTableView)
         // 第一個永遠是自己
-        playerListTableView.players.append(Player(name: "May", gender: "Female"))
+//        playerListTableView.players.append(Player(name: "May", gender: "Female"))
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -493,11 +493,11 @@ class EstablishFinderViewController: UIViewController {
             typeTextField.text = playTypes[thisPlay.type]
             maleTextField.text = String(thisPlay.lackAmount.male)
             femaleTextField.text = String(thisPlay.lackAmount.female)
-            setCheckboxes[thisPlay.levelRange.setBall].isSelected = true
-            blocCheckboxes[thisPlay.levelRange.block].isSelected = true
-            digCheckboxes[thisPlay.levelRange.dig].isSelected = true
-            spickCheckboxes[thisPlay.levelRange.spike].isSelected = true
-            sumCheckboxes[thisPlay.levelRange.sum].isSelected = true
+            setCheckboxTapped(sender: setCheckboxes[thisPlay.levelRange.setBall])
+            blockCheckboxTapped(sender: blocCheckboxes[thisPlay.levelRange.block])
+            digCheckboxTapped(sender: digCheckboxes[thisPlay.levelRange.dig])
+            spickCheckboxTapped(sender: spickCheckboxes[thisPlay.levelRange.spike])
+            sumCheckboxTapped(sender: sumCheckboxes[thisPlay.levelRange.sum])
         }
     }
     @objc func setCheckboxTapped(sender: UIButton) {
@@ -551,8 +551,8 @@ class EstablishFinderViewController: UIViewController {
         self.view.endEditing(true)
     }
     @objc func donePlace() {
-        if placeTextField.text?.count ?? 0 > 10 {
-            LKProgressHUD.showFailure(text: "字數勿超過 10 字")
+        if placeTextField.text?.count ?? 0 > 15 {
+            LKProgressHUD.showFailure(text: "字數勿超過 15 字")
         } else {
             self.view.endEditing(true)
         }
@@ -569,7 +569,7 @@ class EstablishFinderViewController: UIViewController {
     @objc func doneMaleLack() {
         let amount = Int(maleTextField.text ?? "-1") ?? -1
         print(amount)
-        if amount > 1000 || amount < 0 {
+        if amount > 99 || amount < 0 {
             LKProgressHUD.showFailure(text: "請輸入合理人數")
         } else {
             self.view.endEditing(true)
@@ -578,7 +578,7 @@ class EstablishFinderViewController: UIViewController {
     @objc func doneFemaleLack() {
         let amount = Int(femaleTextField.text ?? "-1") ?? -1
         print(amount)
-        if amount > 1000 || amount < 0 {
+        if amount > 99 || amount < 0 {
             LKProgressHUD.showFailure(text: "請輸入合理人數")
         } else {
             self.view.endEditing(true)
@@ -595,11 +595,11 @@ class EstablishFinderViewController: UIViewController {
     }
     @objc func addPlayer() {
         let newPlayer = Player(name: "", gender: "") // Customize as needed
-        playerListTableView.addNewPlayer(newPlayer)
+//        playerListTableView.addNewPlayer(newPlayer)
     }
 
     @objc func addData(_ sender: UIButton) {
-        players = playerListTableView.players
+//        players = playerListTableView.players
         if sender == publishButton {
             thisPlay.status = 1
         }
@@ -612,7 +612,7 @@ class EstablishFinderViewController: UIViewController {
                 let priceInput = Int(priceTextField.text ?? "0") ?? 0
                 let maleInput = Int(maleTextField.text ?? "0") ?? 0
                 let femaleInput = Int(femaleTextField.text ?? "0") ?? 0
-                if placeInput.count > 10 || priceInput > 100000 || priceInput < 0 || maleInput > 1000 || maleInput < 0 || femaleInput > 1000 || femaleInput < 0 {
+                if placeInput.count > 15 || priceInput > 100000 || priceInput < 0 || maleInput > 99 || maleInput < 0 || femaleInput > 99 || femaleInput < 0 {
                     LKProgressHUD.showFailure(text: "請符合字數限制")
                 } else {
                     thisPlay.place = placeTextField.text!
@@ -623,11 +623,18 @@ class EstablishFinderViewController: UIViewController {
                     if thisPlay.id == "" {
                         dataManager.savePlay(thisPlay)
                         LKProgressHUD.showSuccess(text: "發文成功")
+                        navigationController?.popToRootViewController(animated: true)
                     } else {
                         dataManager.updatePlay(thisPlay)
                         LKProgressHUD.showSuccess(text: "更改成功")
+                        for controller in self.navigationController!.viewControllers as Array {
+                            print(controller)
+                            if controller.isKind(of: MyFindersViewController.self) {
+                                self.navigationController!.popToViewController(controller, animated: true)
+                                break
+                            }
+                        }
                     }
-                    navigationController?.popToRootViewController(animated: true)
                 }
             }
         } else {
@@ -638,8 +645,21 @@ class EstablishFinderViewController: UIViewController {
         let controller = UIAlertController(title: "確定？", message: "要刪除貼文？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "是", style: .default) { _ in
             print("確定要刪除")
-            self.dataManager.deletePlay(self.thisPlay)
-            self.navigationController?.popToRootViewController(animated: true)
+            self.dataManager.deletePlay(self.thisPlay) { err in
+                if err == nil {
+                    for controller in self.navigationController!.viewControllers as Array {
+                        print(controller)
+                        if controller.isKind(of: MyFindersViewController.self) {
+                            self.navigationController!.popToViewController(controller, animated: true)
+                            break
+                        }
+                    }
+                    LKProgressHUD.showSuccess(text: AlertTitile.successDeletePost.rawValue)
+                } else {
+                    LKProgressHUD.showFailure(text: AlertTitile.failureDeletePost.rawValue)
+                    print(err)
+                }
+            }
         }
         controller.addAction(okAction)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
@@ -709,16 +729,8 @@ class EstablishFinderViewController: UIViewController {
 
             levelLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             levelLabel.topAnchor.constraint(equalTo: lackLabel.bottomAnchor, constant: standardMargin),
-
-//            playerListView.topAnchor.constraint(equalTo: checkboxes[-1].bottomAnchor, constant: standardMargin),
-//            playerListTableView.heightAnchor.constraint(equalToConstant: 200.0),
-//            playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-//            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-
-//            deletePostButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
             publishButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             publishButton.topAnchor.constraint(equalTo: sumCheckboxes[0].bottomAnchor, constant: standardMargin*2),
-//            publishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
             publishButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             publishButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: standardMargin/2),
 

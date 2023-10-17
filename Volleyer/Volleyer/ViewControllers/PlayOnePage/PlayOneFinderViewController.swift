@@ -65,6 +65,7 @@ class PlayOneFinderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        LKProgressHUD.show()
         titleLabel.text = court
         if let finderInfo = finderInfo {
             finderAccountLabel.text = finderInfo.id
@@ -207,5 +208,6 @@ extension PlayOneFinderViewController: PlayOneFinderDataManagerDelegate {
                 imageUrls.append(nil)
             }
         }
+        LKProgressHUD.dismiss()
     }
 }

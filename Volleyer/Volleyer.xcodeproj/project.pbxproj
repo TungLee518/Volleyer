@@ -13,6 +13,8 @@
 		C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */; };
 		C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */; };
 		C800512F2AB9890700FEA7FD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512E2AB9890700FEA7FD /* User.swift */; };
+		C848A44D2ADAE14900E7C9A6 /* volleyHit.json in Resources */ = {isa = PBXBuildFile; fileRef = C848A44C2ADAE14900E7C9A6 /* volleyHit.json */; };
+		C848A4512ADB8FC100E7C9A6 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = C848A4502ADB8FC100E7C9A6 /* loading.json */; };
 		C85BCF632AD147CA002B900C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF622AD147CA002B900C /* CardView.swift */; };
 		C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF642AD1646B002B900C /* ReportViewController.swift */; };
 		C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF662AD16487002B900C /* BlockListViewController.swift */; };
@@ -94,6 +96,8 @@
 		C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTeamViewController.swift; sourceTree = "<group>"; };
 		C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C800512E2AB9890700FEA7FD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C848A44C2ADAE14900E7C9A6 /* volleyHit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = volleyHit.json; sourceTree = "<group>"; };
+		C848A4502ADB8FC100E7C9A6 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		C85BCF622AD147CA002B900C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C85BCF642AD1646B002B900C /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		C85BCF662AD16487002B900C /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 		C89961792ACEC05D00C5D35D /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C8D54A0F2AD008420020C06C /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
+		C8F159BA2ADEB8E300D3D552 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -236,6 +241,8 @@
 		C85BCF6A2AD2E273002B900C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C848A44C2ADAE14900E7C9A6 /* volleyHit.json */,
+				C848A4502ADB8FC100E7C9A6 /* loading.json */,
 				C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */,
 				C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */,
 				C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */,
@@ -440,11 +447,12 @@
 			};
 			buildConfigurationList = C86E14A92AB1AF4C00CBA201 /* Build configuration list for PBXProject "Volleyer" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "zh-Hant";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = C86E14A52AB1AF4C00CBA201;
 			productRefGroup = C86E14AF2AB1AF4C00CBA201 /* Products */;
@@ -467,10 +475,12 @@
 				C899610F2AC038C600C5D35D /* PlayOne.storyboard in Resources */,
 				C86E14BE2AB1AF4E00CBA201 /* LaunchScreen.storyboard in Resources */,
 				C85BCF6C2AD2E286002B900C /* paper_scissor_stone.json in Resources */,
+				C848A4512ADB8FC100E7C9A6 /* loading.json in Resources */,
 				C89961242AC2C32D00C5D35D /* Nunito-Italic-VariableFont_wght.ttf in Resources */,
 				C85BCF722AD406EA002B900C /* RandomTeam.storyboard in Resources */,
 				C86E14BB2AB1AF4E00CBA201 /* Assets.xcassets in Resources */,
 				C85BCF702AD2E2B8002B900C /* japan_lottery.json in Resources */,
+				C848A44D2ADAE14900E7C9A6 /* volleyHit.json in Resources */,
 				C85BCF6E2AD2E28F002B900C /* fortune_cookie.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -638,6 +648,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C86E14BD2AB1AF4E00CBA201 /* Base */,
+				C8F159BA2ADEB8E300D3D552 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -649,6 +660,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -709,6 +721,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -772,12 +785,13 @@
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "排球人";
 				INFOPLIST_KEY_NSCameraUsageDescription = "允許我們的應用程序使用相機，以拍攝照片來幫助您記錄其他人的外貌特征，以便您在需要時能夠回顧和識別他們．";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "允許我們的應用程序訪問您的照片庫，以便您可以選擇圖片來更改您的個人資料照片。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -809,12 +823,13 @@
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "排球人";
 				INFOPLIST_KEY_NSCameraUsageDescription = "允許我們的應用程序使用相機，以拍攝照片來幫助您記錄其他人的外貌特征，以便您在需要時能夠回顧和識別他們．";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "允許我們的應用程序訪問您的照片庫，以便您可以選擇圖片來更改您的個人資料照片。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -33,6 +33,8 @@ class RandomTeamViewController: UIViewController {
     @IBOutlet weak var cTeam5: UILabel!
     @IBOutlet weak var cTeam6: UILabel!
 
+    
+    @IBOutlet weak var restTeamImageView: UIImageView!
     @IBOutlet weak var takeARestLabel: UILabel!
 
     lazy var aTeam: [UILabel] = [aTeam1, aTeam2, aTeam3, aTeam4, aTeam5, aTeam6]
@@ -41,6 +43,7 @@ class RandomTeamViewController: UIViewController {
     lazy var teams = [aTeam, bTeam, cTeam]
 
     var players: [Player] = []
+    var playerUsers: [User] = []
 
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
 
@@ -78,10 +81,12 @@ class RandomTeamViewController: UIViewController {
 //        view.addSubview(doneRandonTeamLable)
 //        setPlayersTableView()
         shadowView.applyShadow()
+        shadowView.backgroundColor = .white
         setNavBar()
 //        setLayout()
         setAnimate()
-        generateRandomTeam()
+//        generateRandomTeam()
+        generateRandomTeamWithLevel()
 //        playAnimate()
     }
 
@@ -97,7 +102,7 @@ class RandomTeamViewController: UIViewController {
     private func setPlayersTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.players = players
+        playerListTableView.players = playerUsers
         playerListTableView.canEdit = false
     }
 
@@ -175,6 +180,67 @@ class RandomTeamViewController: UIViewController {
         }
         let abc = ["A", "B", "C"]
         takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
+    }
+
+    @objc func generateRandomTeamWithLevel() {
+        playAnimate()
+        var groups: [[User]] = [[], [], []]
+        while true {
+            // Shuffle the players array randomly
+            var shuffledPlayers = playerUsers.shuffled()
+            // 照男女排序
+            shuffledPlayers.sort { $0.gender < $1.gender }
+            // Create an array to hold the groups
+            groups = [[], [], []]
+            var levelSum: [Double] = [0, 0, 0]
+            var totalNumber = 0
+            var nthTotal = totalNumber % 3
+            for player in shuffledPlayers {
+                groups[nthTotal].append(player)
+                let playerAve = (Double(player.level.setBall) + Double(player.level.block) + Double(player.level.dig) + Double(player.level.spike) + Double(player.level.sum)) / 5.0
+                print(player.id, playerAve)
+                levelSum[nthTotal] += playerAve
+                totalNumber += 1
+                nthTotal = totalNumber % 3
+            }
+
+            // 擺完後計算每對平均程度
+            let levelAve = levelSum.map { $0 / 6 }
+            print(levelAve)
+            // 如果差 0.5 個等級就重分(?)
+            // 但為了 demo 先設定 1.0
+            if abs(levelAve[0]-levelAve[1]) < 0.5 && abs(levelAve[0]-levelAve[2]) < 0.5 && abs(levelAve[2]-levelAve[1]) < 0.5 {
+                break
+            }
+        }
+
+        // 完成分隊後放入 labels
+        for i in 0...2 {
+            for j in 0...5 {
+                teams[i][j].text = "  \(groups[i][j].name)  "
+                if groups[i][j].gender == 0 {
+                    teams[i][j].textColor = .gray2
+                    teams[i][j].backgroundColor = UIColor.hexStringToUIColor(hex: "#D6EAF6")
+                    teams[i][j].layer.cornerRadius = 10
+                    teams[i][j].layer.borderColor = UIColor.hexStringToUIColor(hex: "#D6EAF6").cgColor
+                    teams[i][j].layer.borderWidth = 2
+                    teams[i][j].clipsToBounds = true
+                } else {
+                    teams[i][j].textColor = .gray2
+                    teams[i][j].backgroundColor = UIColor.hexStringToUIColor(hex: "#F6DED9")
+                    teams[i][j].layer.cornerRadius = 10
+                    teams[i][j].layer.borderColor = UIColor.hexStringToUIColor(hex: "#F6DED9").cgColor
+                    teams[i][j].layer.borderWidth = 2
+                    teams[i][j].clipsToBounds = true
+                }
+            }
+        }
+
+        // 隨機選一隊先休息
+        let imageNames = ["a", "b", "c"]
+        restTeamImageView.image = UIImage(named: imageNames.shuffled()[0])
+//        let abc = ["A", "B", "C"]
+//        takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
     }
 
     func didTapProfileButton(for player: Player) {

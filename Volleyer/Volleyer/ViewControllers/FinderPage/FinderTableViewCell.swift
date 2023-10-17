@@ -44,7 +44,35 @@ class FinderTableViewCell: UITableViewCell {
     let placeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray2
-        label.font = .regularNunito(size: 23)
+        label.font = .regularNunito(size: 20)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var maleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "male")
+        imageView.tintColor = .gray2
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    let maleLackLable: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray2
+        label.font = .regularNunito(size: 20)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var femaleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "female")
+        imageView.tintColor = .gray2
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    let femaleLackLable: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray2
+        label.font = .regularNunito(size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -65,6 +93,10 @@ class FinderTableViewCell: UITableViewCell {
         contentView.addSubview(endTimeLable)
         contentView.addSubview(placeImageView)
         contentView.addSubview(placeLabel)
+        contentView.addSubview(maleImageView)
+        contentView.addSubview(maleLackLable)
+        contentView.addSubview(femaleImageView)
+        contentView.addSubview(femaleLackLable)
         setLayout()
     }
 
@@ -79,20 +111,34 @@ class FinderTableViewCell: UITableViewCell {
             startTimeLable.text = dateFormatter.string(from: thisPlay.startTime)
             endTimeLable.text = dateFormatter.string(from: thisPlay.endTime)
             placeLabel.text = thisPlay.place
+            maleLackLable.text = String(thisPlay.lackAmount.male)
+            femaleLackLable.text = String(thisPlay.lackAmount.female)
         }
     }
 
     private func setLayout() {
         NSLayoutConstraint.activate([
-            startTimeLable.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            startTimeLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin*2),
             startTimeLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin),
             endTimeLable.leadingAnchor.constraint(equalTo: startTimeLable.leadingAnchor),
             endTimeLable.topAnchor.constraint(equalTo: startTimeLable.bottomAnchor, constant: standardMargin/2),
+            maleImageView.leadingAnchor.constraint(equalTo: startTimeLable.trailingAnchor, constant: standardMargin*2),
+            maleImageView.centerYAnchor.constraint(equalTo: startTimeLable.centerYAnchor),
+            maleImageView.heightAnchor.constraint(equalToConstant: 20),
+            maleImageView.widthAnchor.constraint(equalTo: placeImageView.heightAnchor, multiplier: 1),
+            maleLackLable.leadingAnchor.constraint(equalTo: maleImageView.trailingAnchor, constant: standardMargin),
+            maleLackLable.centerYAnchor.constraint(equalTo: maleImageView.centerYAnchor),
+            femaleImageView.leadingAnchor.constraint(equalTo: endTimeLable.trailingAnchor, constant: standardMargin*2),
+            femaleImageView.centerYAnchor.constraint(equalTo: endTimeLable.centerYAnchor),
+            femaleImageView.heightAnchor.constraint(equalToConstant: 20),
+            femaleImageView.widthAnchor.constraint(equalTo: placeImageView.heightAnchor, multiplier: 1),
+            femaleLackLable.leadingAnchor.constraint(equalTo: femaleImageView.trailingAnchor, constant: standardMargin),
+            femaleLackLable.centerYAnchor.constraint(equalTo: femaleImageView.centerYAnchor),
             placeLabel.topAnchor.constraint(equalTo: endTimeLable.bottomAnchor, constant: standardMargin),
-            placeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            placeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: standardMargin/2),
             placeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin),
 
-            placeImageView.trailingAnchor.constraint(equalTo: placeLabel.leadingAnchor, constant: -standardMargin),
+            placeImageView.trailingAnchor.constraint(equalTo: placeLabel.leadingAnchor, constant: -standardMargin/2),
             placeImageView.centerYAnchor.constraint(equalTo: placeLabel.centerYAnchor),
             placeImageView.heightAnchor.constraint(equalToConstant: 20),
             placeImageView.widthAnchor.constraint(equalTo: placeImageView.heightAnchor, multiplier: 1)

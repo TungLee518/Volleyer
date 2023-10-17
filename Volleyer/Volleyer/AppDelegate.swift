@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
         registerForPushNotifications()
         UNUserNotificationCenter.current().delegate = self
+        UIApplication.shared.applicationIconBadgeNumber = 0
 
         return true
     }
@@ -104,5 +105,28 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .badge, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let application = UIApplication.shared
+
+        if (application.applicationState == .active) {
+            print("user tapped the notification bar when the app is in foreground")
+        }
+
+        if (application.applicationState == .inactive) {
+            print("user tapped the notification bar when the app is in background")
+        }
+
+        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
+            return
+        }
+        print("got active scene")
+
+        if let tabBarController = rootViewController as? UITabBarController {
+            tabBarController.selectedIndex = 3
+        }
+
+        completionHandler()
     }
 }
