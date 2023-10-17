@@ -785,6 +785,7 @@
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "排球人";
 				INFOPLIST_KEY_NSCameraUsageDescription = "允許我們的應用程序使用相機，以拍攝照片來幫助您記錄其他人的外貌特征，以便您在需要時能夠回顧和識別他們．";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "允許我們的應用程序訪問您的照片庫，以便您可以選擇圖片來更改您的個人資料照片。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -822,6 +823,7 @@
 				DEVELOPMENT_TEAM = 3S3J2NAHLU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Volleyer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "排球人";
 				INFOPLIST_KEY_NSCameraUsageDescription = "允許我們的應用程序使用相機，以拍攝照片來幫助您記錄其他人的外貌特征，以便您在需要時能夠回顧和識別他們．";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "允許我們的應用程序訪問您的照片庫，以便您可以選擇圖片來更改您的個人資料照片。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
