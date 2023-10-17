@@ -54,26 +54,7 @@ class MyFinderInfoViewController: UIViewController {
     }
 //    bruh
 
-    private var addPlayers: [Player] = [
-        Player(name: "May", gender: "Female"),
-        Player(name: "Mandy", gender: "Female"),
-        Player(name: "Iris", gender: "Female"),
-        Player(name: "Ruby", gender: "Female"),
-        Player(name: "Shuyu", gender: "Female"),
-        Player(name: "Renee", gender: "Female"),
-        Player(name: "Finn", gender: "Female"),
-        Player(name: "Jenny", gender: "Female"),
-        Player(name: "Bonnie", gender: "Female"),
-        Player(name: "Angus", gender: "Male"),
-        Player(name: "Aaron", gender: "Male"),
-        Player(name: "Steven", gender: "Male"),
-        Player(name: "Jimmy", gender: "Male"),
-        Player(name: "品云", gender: "Female"),
-        Player(name: "Jason", gender: "Male"),
-        Player(name: "Tim", gender: "Male"),
-        Player(name: "Roland", gender: "Male"),
-        Player(name: "Elven", gender: "Male")
-    ]
+    private var addPlayers = addUsers
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,8 +140,8 @@ class MyFinderInfoViewController: UIViewController {
         let storyboard = UIStoryboard(name: "RandomTeam", bundle: nil)
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "RandomTeamViewController") as? RandomTeamViewController {
             nextVC.hidesBottomBarWhenPushed = true
-            nextVC.players = addPlayers
-            nextVC.playerUsers = addUsers
+//            nextVC.players = addPlayers
+            nextVC.playerUsers = addPlayers
             navigationController?.pushViewController(nextVC, animated: true)
         }
 //        let nextVC = RandomTeamViewController()

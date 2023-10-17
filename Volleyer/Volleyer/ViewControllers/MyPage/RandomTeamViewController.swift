@@ -101,7 +101,7 @@ class RandomTeamViewController: UIViewController {
     private func setPlayersTableView() {
         view.addSubview(playerListTableView)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.players = players
+        playerListTableView.players = playerUsers
         playerListTableView.canEdit = false
     }
 

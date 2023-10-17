@@ -14,7 +14,7 @@ struct Player {
 }
 
 protocol EditPlayersDelegate: AnyObject {
-    func addPlayer(from cell: PlayerTableViewCell, add player: Player)
+    func addPlayer(from cell: PlayerTableViewCell, add player: User)
 }
 
 class PlayerTableViewCell: UITableViewCell {
@@ -114,8 +114,8 @@ class PlayerTableViewCell: UITableViewCell {
 
             genderLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             genderLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            genderLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/2),
-            genderLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/2),
+            genderLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/4),
+            genderLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/4),
 
             inputNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
             inputNameTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -127,17 +127,17 @@ class PlayerTableViewCell: UITableViewCell {
             inputGenderTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
 
             rightButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            rightButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/4),
+//            rightButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/4),
             rightButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-            rightButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/4),
+//            rightButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/4),
             rightButton.heightAnchor.constraint(equalToConstant: 20),
             rightButton.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 
-    func showOnly(with player: Player) {
+    func showOnly(with player: User) {
         nameLabel.text = player.name
-        genderLabel.text = player.gender
+        genderLabel.text = genderList[player.gender]
         nameLabel.isHidden = false
         genderLabel.isHidden = false
         inputNameTextField.isHidden = true
@@ -152,7 +152,8 @@ class PlayerTableViewCell: UITableViewCell {
 
     @objc func doneToView(_ sender: UIButton) {
         if inputNameTextField.text != "" && inputGenderTextField.text != "" {
-            let newPlayer = Player(name: inputNameTextField.text!, gender: inputGenderTextField.text!)
+//            let newPlayer = Player(name: inputNameTextField.text!, gender: inputGenderTextField.text!)
+            let newPlayer = User(id: inputNameTextField.text!, email: inputNameTextField.text!, gender: 2, name: inputNameTextField.text!)
             showOnly(with: newPlayer)
             playerDelegate?.addPlayer(from: self, add: newPlayer)
         }

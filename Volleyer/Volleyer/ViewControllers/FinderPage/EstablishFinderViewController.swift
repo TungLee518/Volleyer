@@ -418,7 +418,7 @@ class EstablishFinderViewController: UIViewController {
     func setPlayListTableView() {
         view.addSubview(playerListTableView)
         // 第一個永遠是自己
-        playerListTableView.players.append(Player(name: "May", gender: "Female"))
+//        playerListTableView.players.append(Player(name: "May", gender: "Female"))
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -595,11 +595,11 @@ class EstablishFinderViewController: UIViewController {
     }
     @objc func addPlayer() {
         let newPlayer = Player(name: "", gender: "") // Customize as needed
-        playerListTableView.addNewPlayer(newPlayer)
+//        playerListTableView.addNewPlayer(newPlayer)
     }
 
     @objc func addData(_ sender: UIButton) {
-        players = playerListTableView.players
+//        players = playerListTableView.players
         if sender == publishButton {
             thisPlay.status = 1
         }

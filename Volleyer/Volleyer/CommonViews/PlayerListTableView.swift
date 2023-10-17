@@ -10,7 +10,7 @@ import UIKit
 
 class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelegate, EditPlayersDelegate {
 
-    var players: [Player] = []
+    var players: [User] = []
     var canEdit = true
 
     override init(frame: CGRect, style: UITableView.Style) {
@@ -119,12 +119,12 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
     }
 
     // Add a new player to the list
-    func addNewPlayer(_ player: Player) {
+    func addNewPlayer(_ player: User) {
         players.append(player)
         insertRows(at: [IndexPath(row: players.count - 1, section: 0)], with: .automatic)
     }
     
-    func addPlayer(from cell: PlayerTableViewCell, add player: Player) {
+    func addPlayer(from cell: PlayerTableViewCell, add player: User) {
         guard let indexPath = indexPath(for: cell) else {
             return
         }
