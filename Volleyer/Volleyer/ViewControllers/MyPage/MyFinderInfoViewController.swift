@@ -52,7 +52,6 @@ class MyFinderInfoViewController: UIViewController {
             playView.thisPlay = thisPlay
         }
     }
-//    bruh
 
     private var addPlayers = addUsers
 
@@ -64,9 +63,9 @@ class MyFinderInfoViewController: UIViewController {
         setPlayersTableView()
         setLayout()
         setNavBar()
-        playersTableViewLable.isHidden = true
-        playerListTableView.isHidden = true
-        randomTeamButton.isHidden = true
+//        playersTableViewLable.isHidden = true
+//        playerListTableView.isHidden = true
+//        randomTeamButton.isHidden = true
     }
 
     private func setNavBar() {

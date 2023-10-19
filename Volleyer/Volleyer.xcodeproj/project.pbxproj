@@ -86,6 +86,9 @@
 		C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961792ACEC05D00C5D35D /* MyProfileView.swift */; };
 		C8D54A0E2ACFD5A10020C06C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */; };
 		C8D54A102AD008420020C06C /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D54A0F2AD008420020C06C /* LevelView.swift */; };
+		C8F12EC82AE120D0008E22EE /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EC72AE120D0008E22EE /* UIButton+Extension.swift */; };
+		C8F12ECA2AE12E14008E22EE /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EC92AE12E14008E22EE /* UILabel+Extension.swift */; };
+		C8F12ECC2AE130C0008E22EE /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ECB2AE130C0008E22EE /* UITextField+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +175,9 @@
 		C89961792ACEC05D00C5D35D /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C8D54A0F2AD008420020C06C /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
+		C8F12EC72AE120D0008E22EE /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		C8F12EC92AE12E14008E22EE /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		C8F12ECB2AE130C0008E22EE /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		C8F159BA2ADEB8E300D3D552 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -281,8 +287,8 @@
 				C89961292AC4286400C5D35D /* CommonViews */,
 				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
-				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
 				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
+				C86E14B32AB1AF4C00CBA201 /* SceneDelegate.swift */,
 				C86E14BA2AB1AF4E00CBA201 /* Assets.xcassets */,
 				C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */,
 				C86E14BF2AB1AF4E00CBA201 /* Info.plist */,
@@ -332,6 +338,9 @@
 				C89961332AC9AE4400C5D35D /* UITableView+Extension.swift */,
 				C89961772ACE906300C5D35D /* UIImageView+Extension.swift */,
 				C8D54A0D2ACFD5A10020C06C /* UIView+Extension.swift */,
+				C8F12EC72AE120D0008E22EE /* UIButton+Extension.swift */,
+				C8F12EC92AE12E14008E22EE /* UILabel+Extension.swift */,
+				C8F12ECB2AE130C0008E22EE /* UITextField+Extension.swift */,
 				C89961352AC9AE9600C5D35D /* JGProgressHUDWrapper.swift */,
 			);
 			path = Extensions;
@@ -606,6 +615,7 @@
 				C899613D2ACBBA6700C5D35D /* LoginViewController.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
+				C8F12ECC2AE130C0008E22EE /* UITextField+Extension.swift in Sources */,
 				C8D54A102AD008420020C06C /* LevelView.swift in Sources */,
 				C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */,
 				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
@@ -620,6 +630,7 @@
 				C89961342AC9AE4400C5D35D /* UITableView+Extension.swift in Sources */,
 				C899610B2ABD963D00C5D35D /* ProfileViewController.swift in Sources */,
 				C899617A2ACEC05D00C5D35D /* MyProfileView.swift in Sources */,
+				C8F12EC82AE120D0008E22EE /* UIButton+Extension.swift in Sources */,
 				C86E15172AB438BF00CBA201 /* MyViewController.swift in Sources */,
 				C86E152C2AB5897500CBA201 /* Seletions.swift in Sources */,
 				C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */,
@@ -632,6 +643,7 @@
 				C899612E2AC80B3C00C5D35D /* MyDataManager.swift in Sources */,
 				C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */,
 				C86E15282AB5584B00CBA201 /* PlayerListTableView.swift in Sources */,
+				C8F12ECA2AE12E14008E22EE /* UILabel+Extension.swift in Sources */,
 				C86E151D2AB4392700CBA201 /* CommunityViewController.swift in Sources */,
 				C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */,
 				C86E14B42AB1AF4C00CBA201 /* SceneDelegate.swift in Sources */,

@@ -35,63 +35,26 @@ class EstablishFinderViewController: UIViewController {
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "開始時間"
-        label.textColor = UIColor.gray2
-        label.font = .semiboldNunito(size: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.sizeToFit()
+        label.semiboldSmallLabel()
         return label
     }()
     lazy var startTimeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "starttime"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneStartDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-
-        textField.inputAccessoryView = toolbar
+        textField.regularTextField(placeHolder: "starttime")
         textField.inputView = startDatePicker
-
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneStartDatePicker))
         return textField
     }()
     private let endTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "結束時間"
-        label.textColor = UIColor.gray2
-        label.font = .semiboldNunito(size: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.sizeToFit()
+        label.semiboldSmallLabel()
         return label
     }()
     lazy var endTimeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "endtime"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEndDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-
-        textField.inputAccessoryView = toolbar
+        textField.regularTextField(placeHolder: "endtime")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneEndDatePicker))
         textField.inputView = endDatePicker
         return textField
     }()
@@ -263,72 +226,26 @@ class EstablishFinderViewController: UIViewController {
         textField.inputAccessoryView = toolbar
         return textField
     }()
-    lazy var addButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Add", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 20)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(addPlayer), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
-        return button
-    }()
-    lazy var deleteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Delete", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
-        return button
-    }()
     lazy var publishButton: UIButton = {
         let button = UIButton()
+        button.purpleButton()
         button.setTitle(EstablishPageEnum.publish.rawValue, for: .normal)
-        button.titleLabel?.font =  .semiboldNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple2
-        button.setTitleColor(.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
         return button
     }()
     lazy var saveButton: UIButton = {
         let button = UIButton()
+        button.whiteButton()
         button.setTitle(EstablishPageEnum.save.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.clipsToBounds = true
         button.isHidden = true
         return button
     }()
     lazy var deletePostButton: UIButton = {
         let button = UIButton()
+        button.whiteButton()
         button.setTitle(EstablishPageEnum.deletePost.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.clipsToBounds = true
         button.isHidden = true
         return button
     }()
@@ -500,6 +417,15 @@ class EstablishFinderViewController: UIViewController {
             sumCheckboxTapped(sender: sumCheckboxes[thisPlay.levelRange.sum])
         }
     }
+    func createToolBar(doneTarget: Selector) -> UIToolbar {
+        let toolbar = UIToolbar()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: doneTarget)
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
+        toolbar.sizeToFit()
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        return toolbar
+    }
     @objc func setCheckboxTapped(sender: UIButton) {
         print(sender.tag)
         thisPlay.levelRange.setBall = sender.tag
@@ -588,15 +514,15 @@ class EstablishFinderViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-    @objc func toggleEditingMode() {
-        playerListTableView.toggleEditing()
-        let buttonText = playerListTableView.isEditing ? "Done" : "Delete"
-        deleteButton.setTitle(buttonText, for: .normal)
-    }
-    @objc func addPlayer() {
-        let newPlayer = Player(name: "", gender: "") // Customize as needed
-//        playerListTableView.addNewPlayer(newPlayer)
-    }
+//    @objc func toggleEditingMode() {
+//        playerListTableView.toggleEditing()
+//        let buttonText = playerListTableView.isEditing ? "Done" : "Delete"
+//        deleteButton.setTitle(buttonText, for: .normal)
+//    }
+//    @objc func addPlayer() {
+//        let newPlayer = Player(name: "", gender: "") // Customize as needed
+////        playerListTableView.addNewPlayer(newPlayer)
+//    }
 
     @objc func addData(_ sender: UIButton) {
 //        players = playerListTableView.players
