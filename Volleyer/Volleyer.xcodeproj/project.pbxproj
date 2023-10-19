@@ -18,7 +18,6 @@
 		C85BCF632AD147CA002B900C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF622AD147CA002B900C /* CardView.swift */; };
 		C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF642AD1646B002B900C /* ReportViewController.swift */; };
 		C85BCF672AD16487002B900C /* BlockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF662AD16487002B900C /* BlockListViewController.swift */; };
-		C85BCF692AD2990D002B900C /* BlockListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */; };
 		C85BCF6C2AD2E286002B900C /* paper_scissor_stone.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */; };
 		C85BCF6E2AD2E28F002B900C /* fortune_cookie.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */; };
 		C85BCF702AD2E2B8002B900C /* japan_lottery.json in Resources */ = {isa = PBXBuildFile; fileRef = C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */; };
@@ -89,6 +88,7 @@
 		C8F12EC82AE120D0008E22EE /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EC72AE120D0008E22EE /* UIButton+Extension.swift */; };
 		C8F12ECA2AE12E14008E22EE /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EC92AE12E14008E22EE /* UILabel+Extension.swift */; };
 		C8F12ECC2AE130C0008E22EE /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ECB2AE130C0008E22EE /* UITextField+Extension.swift */; };
+		C8F12ECF2AE175B6008E22EE /* BlockListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ECE2AE175B6008E22EE /* BlockListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,7 +104,6 @@
 		C85BCF622AD147CA002B900C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C85BCF642AD1646B002B900C /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		C85BCF662AD16487002B900C /* BlockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListViewController.swift; sourceTree = "<group>"; };
-		C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockListTableViewCell.swift; sourceTree = "<group>"; };
 		C85BCF6B2AD2E286002B900C /* paper_scissor_stone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paper_scissor_stone.json; sourceTree = "<group>"; };
 		C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fortune_cookie.json; sourceTree = "<group>"; };
 		C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = japan_lottery.json; sourceTree = "<group>"; };
@@ -178,6 +177,7 @@
 		C8F12EC72AE120D0008E22EE /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		C8F12EC92AE12E14008E22EE /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		C8F12ECB2AE130C0008E22EE /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		C8F12ECE2AE175B6008E22EE /* BlockListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockListTableViewCell.swift; path = /Users/leetung/Documents/iOS_Batch_21/Volleyer_clone_repo/Volleyer/Volleyer/Volleyer/Views/BlockListTableViewCell.swift; sourceTree = "<absolute>"; };
 		C8F159BA2ADEB8E300D3D552 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,15 +219,11 @@
 				C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */,
 				C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */,
 				C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */,
-				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
 				C89960FC2ABBE0D200C5D35D /* RequestsReceivedViewController.swift */,
 				C89961062ABD687300C5D35D /* RequestSentViewController.swift */,
-				C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */,
 				C85BCF642AD1646B002B900C /* ReportViewController.swift */,
 				C85BCF662AD16487002B900C /* BlockListViewController.swift */,
-				C85BCF682AD2990D002B900C /* BlockListTableViewCell.swift */,
 				C899610A2ABD963D00C5D35D /* ProfileViewController.swift */,
-				C85BCF712AD406EA002B900C /* RandomTeam.storyboard */,
 				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
 			);
 			path = MyPage;
@@ -237,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */,
-				C86E150F2AB31FF300CBA201 /* FinderTableViewCell.swift */,
 				C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */,
 				C86E15412AB8249400CBA201 /* AddPlayViewController.swift */,
 			);
@@ -283,8 +278,8 @@
 				C899611C2AC267D700C5D35D /* Extensions */,
 				C89961322AC94CE700C5D35D /* DataManagers */,
 				C86E15222AB4A30300CBA201 /* Models */,
+				C8F12ECD2AE17592008E22EE /* Views */,
 				C86E152F2AB5AD9D00CBA201 /* ViewControllers */,
-				C89961292AC4286400C5D35D /* CommonViews */,
 				C89961042ABC237C00C5D35D /* Volleyer.entitlements */,
 				C89961022ABC183200C5D35D /* Notifications.swift */,
 				C86E14B12AB1AF4C00CBA201 /* AppDelegate.swift */,
@@ -358,10 +353,7 @@
 		C89961282AC41DAA00C5D35D /* PlayOnePage */ = {
 			isa = PBXGroup;
 			children = (
-				C899610E2AC038C600C5D35D /* PlayOne.storyboard */,
 				C89961102AC03C0700C5D35D /* PlayOneViewController.swift */,
-				C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */,
-				C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */,
 				C89961182AC16BC400C5D35D /* PlayOneFinderViewController.swift */,
 				C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */,
 			);
@@ -413,6 +405,22 @@
 				C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */,
 			);
 			path = LoginPage;
+			sourceTree = "<group>";
+		};
+		C8F12ECD2AE17592008E22EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C86E150F2AB31FF300CBA201 /* FinderTableViewCell.swift */,
+				C86E15382AB6ECCF00CBA201 /* PlayTableViewCell.swift */,
+				C89961002ABBF11500C5D35D /* RequestsTableViewCell.swift */,
+				C8F12ECE2AE175B6008E22EE /* BlockListTableViewCell.swift */,
+				C85BCF712AD406EA002B900C /* RandomTeam.storyboard */,
+				C899610E2AC038C600C5D35D /* PlayOne.storyboard */,
+				C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */,
+				C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */,
+				C89961292AC4286400C5D35D /* CommonViews */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -583,7 +591,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */,
-				C85BCF692AD2990D002B900C /* BlockListTableViewCell.swift in Sources */,
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */,
@@ -613,6 +620,7 @@
 				C89961172AC043D200C5D35D /* PlayOne.swift in Sources */,
 				C899612C2AC56A7B00C5D35D /* PlayOneDataManager.swift in Sources */,
 				C899613D2ACBBA6700C5D35D /* LoginViewController.swift in Sources */,
+				C8F12ECF2AE175B6008E22EE /* BlockListTableViewCell.swift in Sources */,
 				C89961132AC03C1E00C5D35D /* PlayOneTableViewCell.swift in Sources */,
 				C89961152AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift in Sources */,
 				C8F12ECC2AE130C0008E22EE /* UITextField+Extension.swift in Sources */,

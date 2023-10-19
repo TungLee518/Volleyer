@@ -68,20 +68,8 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var placeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "place"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePlace))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
+        textField.regularTextField(placeHolder: "place")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(donePlace))
         return textField
     }()
     private let priceLabel: UILabel = {
@@ -94,39 +82,9 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var priceTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "price"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "price")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(donePrice))
         textField.keyboardType = .numberPad
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePrice))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
-        return textField
-    }()
-    private lazy var unitTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "unit"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
         return textField
     }()
     private let unitLabel: UILabel = {
@@ -147,14 +105,7 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var typeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "X 網 X 排"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "X 網 X 排")
         textField.inputView = typePicker
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -182,21 +133,9 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var maleTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "male"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "male")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneMaleLack))
         textField.keyboardType = .numberPad
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneMaleLack))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
         return textField
     }()
     private let femaleLabel: UILabel = {
@@ -209,21 +148,9 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var femaleTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "female"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "female")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneFemaleLack))
         textField.keyboardType = .numberPad
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneFemaleLack))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
         return textField
     }()
     lazy var publishButton: UIButton = {
