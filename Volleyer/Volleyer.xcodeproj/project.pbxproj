@@ -76,8 +76,6 @@
 		C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961372ACABD3500C5D35D /* RequestDataManager.swift */; };
 		C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961392ACAE8B400C5D35D /* Alert.swift */; };
 		C899613D2ACBBA6700C5D35D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899613C2ACBBA6700C5D35D /* LoginViewController.swift */; };
-		C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */; };
-		C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */; };
 		C89961432ACBC2E600C5D35D /* InputProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */; };
 		C89961742ACD9AC400C5D35D /* ScrollImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961732ACD9AC400C5D35D /* ScrollImageView.swift */; };
 		C89961762ACE875400C5D35D /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89961752ACE875400C5D35D /* KeyChainManager.swift */; };
@@ -89,6 +87,8 @@
 		C8F12ECA2AE12E14008E22EE /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EC92AE12E14008E22EE /* UILabel+Extension.swift */; };
 		C8F12ECC2AE130C0008E22EE /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ECB2AE130C0008E22EE /* UITextField+Extension.swift */; };
 		C8F12ECF2AE175B6008E22EE /* BlockListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ECE2AE175B6008E22EE /* BlockListTableViewCell.swift */; };
+		C8F12ED12AE17801008E22EE /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ED02AE17801008E22EE /* TextFieldTableViewCell.swift */; };
+		C8F12ED32AE17D7E008E22EE /* PostFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ED22AE17D7E008E22EE /* PostFinderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,8 +165,6 @@
 		C89961372ACABD3500C5D35D /* RequestDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataManager.swift; sourceTree = "<group>"; };
 		C89961392ACAE8B400C5D35D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		C899613C2ACBBA6700C5D35D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProfileViewController.swift; sourceTree = "<group>"; };
 		C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProfileViewController.swift; sourceTree = "<group>"; };
 		C89961732ACD9AC400C5D35D /* ScrollImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollImageView.swift; sourceTree = "<group>"; };
 		C89961752ACE875400C5D35D /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
@@ -178,6 +176,8 @@
 		C8F12EC92AE12E14008E22EE /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		C8F12ECB2AE130C0008E22EE /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		C8F12ECE2AE175B6008E22EE /* BlockListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockListTableViewCell.swift; path = /Users/leetung/Documents/iOS_Batch_21/Volleyer_clone_repo/Volleyer/Volleyer/Volleyer/Views/BlockListTableViewCell.swift; sourceTree = "<absolute>"; };
+		C8F12ED02AE17801008E22EE /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		C8F12ED22AE17D7E008E22EE /* PostFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFinderViewController.swift; sourceTree = "<group>"; };
 		C8F159BA2ADEB8E300D3D552 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +234,7 @@
 			children = (
 				C86E14B52AB1AF4C00CBA201 /* FinderViewController.swift */,
 				C86E15202AB4436B00CBA201 /* EstablishFinderViewController.swift */,
+				C8F12ED22AE17D7E008E22EE /* PostFinderViewController.swift */,
 				C86E15412AB8249400CBA201 /* AddPlayViewController.swift */,
 			);
 			path = FinderPage;
@@ -401,8 +402,6 @@
 			children = (
 				C899613C2ACBBA6700C5D35D /* LoginViewController.swift */,
 				C89961422ACBC2E600C5D35D /* InputProfileViewController.swift */,
-				C899613E2ACBBA7500C5D35D /* SignUpViewController.swift */,
-				C89961402ACBBA9C00C5D35D /* EnterProfileViewController.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -418,6 +417,7 @@
 				C899610E2AC038C600C5D35D /* PlayOne.storyboard */,
 				C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */,
 				C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */,
+				C8F12ED02AE17801008E22EE /* TextFieldTableViewCell.swift */,
 				C89961292AC4286400C5D35D /* CommonViews */,
 			);
 			path = Views;
@@ -592,6 +592,7 @@
 			files = (
 				C89961202AC29BDE00C5D35D /* UIColor+Extension.swift in Sources */,
 				C86E15212AB4436B00CBA201 /* EstablishFinderViewController.swift in Sources */,
+				C8F12ED32AE17D7E008E22EE /* PostFinderViewController.swift in Sources */,
 				C89961092ABD933700C5D35D /* ProfileView.swift in Sources */,
 				C899613A2ACAE8B400C5D35D /* Alert.swift in Sources */,
 				C86E15352AB6A54E00CBA201 /* MyPlaysViewController.swift in Sources */,
@@ -610,7 +611,6 @@
 				C86E152E2AB598CD00CBA201 /* Play.swift in Sources */,
 				C8D54A0E2ACFD5A10020C06C /* UIView+Extension.swift in Sources */,
 				C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */,
-				C89961412ACBBA9C00C5D35D /* EnterProfileViewController.swift in Sources */,
 				C86E153D2AB80DEF00CBA201 /* CompetitionTableViewCell.swift in Sources */,
 				C89961272AC2C49600C5D35D /* UIFont+Extension.swift in Sources */,
 				C86E15152AB437AB00CBA201 /* NavBarAndTabBar.swift in Sources */,
@@ -630,7 +630,6 @@
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
 				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
-				C899613F2ACBBA7500C5D35D /* SignUpViewController.swift in Sources */,
 				C86E15332AB6A52C00CBA201 /* MyFindersViewController.swift in Sources */,
 				C85BCF632AD147CA002B900C /* CardView.swift in Sources */,
 				C85BCF652AD1646B002B900C /* ReportViewController.swift in Sources */,
@@ -647,6 +646,7 @@
 				C86E15262AB4A35500CBA201 /* Levels.swift in Sources */,
 				C86E15102AB31FF300CBA201 /* FinderTableViewCell.swift in Sources */,
 				C86E15312AB5D69A00CBA201 /* FinderDataManager.swift in Sources */,
+				C8F12ED12AE17801008E22EE /* TextFieldTableViewCell.swift in Sources */,
 				C86E15422AB8249400CBA201 /* AddPlayViewController.swift in Sources */,
 				C899612E2AC80B3C00C5D35D /* MyDataManager.swift in Sources */,
 				C86E14B22AB1AF4C00CBA201 /* AppDelegate.swift in Sources */,
