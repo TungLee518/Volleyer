@@ -164,44 +164,10 @@ class AddPlayViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
-    lazy var addPlayerButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(AddPlayPageEnum.addPlayer.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(addPlayer), for: .touchUpInside)
-        button.isHidden = true
-        return button
-    }()
-    lazy var deleteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Delete", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
-        return button
-    }()
     lazy var sendRequestButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "plus")?.withTintColor(.purple4), for: .normal)
-//        button.tintColor = .purple4
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 10
-//        button.layer.borderWidth = 2
-//        button.layer.borderColor = UIColor.gray1.cgColor
         button.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
         return button
     }()
@@ -245,9 +211,7 @@ class AddPlayViewController: UIViewController {
         view.addSubview(digView)
         view.addSubview(spikeView)
         view.addSubview(sumView)
-        view.addSubview(addPlayerButton)
         view.addSubview(sendRequestButton)
-//        setPlayersTableView()
         setLayout()
     }
 
@@ -262,13 +226,7 @@ class AddPlayViewController: UIViewController {
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = .clear
         navigationBarAppearance.shadowColor = .clear
-//        navigationBarAppearance.backgroundImage = UIImage(named: "play-volleyball")
-//        navigationBarAppearance.titleTextAttributes = [
-//            .foregroundColor: UIColor.gray7,
-//            .font: UIFont.semiboldNunito(size: 20)
-//         ]
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 
     func setContent() {
@@ -314,16 +272,6 @@ class AddPlayViewController: UIViewController {
                 }
             }
         }
-    }
-
-    private func setPlayersTableView() {
-//        view.addSubview(playerListTableView)
-        playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        // 第一個永遠是自己
-//        playerListTableView.players.append(
-//            Player(name: UserDefaults.standard.string(forKey: UserTitle.name.rawValue)!,
-//                   gender: UserDefaults.standard.string(forKey: UserTitle.gender.rawValue)!)
-//        )
     }
 
     private func setLayout() {
@@ -381,11 +329,6 @@ class AddPlayViewController: UIViewController {
             sumView.centerYAnchor.constraint(equalTo: digView.centerYAnchor),
             sumView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
 
-            addPlayerButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            addPlayerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
-            addPlayerButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-            addPlayerButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -standardMargin/2),
-
             sendRequestButton.centerYAnchor.constraint(equalTo: typeLable.centerYAnchor),
             sendRequestButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             sendRequestButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
@@ -404,15 +347,9 @@ class AddPlayViewController: UIViewController {
         self.view.addConstraint(NSLayoutConstraint(item: sumView, attribute: .width, relatedBy: .equal, toItem: digView, attribute: .width, multiplier: 1.0, constant: 0.0))
     }
 
-    func sendDataToPlayView(_ data: Play) {
-//        playView.play = thisPlay
-//        playView.setUI()
-    }
-
     @objc func sendRequest() {
         let controller = UIAlertController(title: "確定？", message: "要發加場邀請給 \(thisFinderId ??  "Internet Error")？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "是", style: .default) { _ in
-//            self.addPlayers = self.playerListTableView.players
             print(self.addPlayers)
             self.dataManager.saveRequest(self.thisPlay!, playerList: self.addPlayers)
             print("request sent")
@@ -424,15 +361,6 @@ class AddPlayViewController: UIViewController {
         present(controller, animated: true)
     }
 
-    @objc func toggleEditingMode() {
-        playerListTableView.toggleEditing()
-        let buttonText = playerListTableView.isEditing ? "Done" : "Delete"
-        deleteButton.setTitle(buttonText, for: .normal)
-    }
-    @objc func addPlayer() {
-        let newPlayer = Player(name: "", gender: "") // Customize as needed
-//        playerListTableView.addNewPlayer(newPlayer)
-    }
     func pushToProfileVC() {
         let nextVC = ProfileViewController()
         nextVC.thisUserId = thisPlay?.finderId

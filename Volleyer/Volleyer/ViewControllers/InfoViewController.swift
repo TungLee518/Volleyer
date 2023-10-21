@@ -14,17 +14,8 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
     lazy var cancelRequestButton: UIButton = {
         let button = UIButton()
         button.setTitle(RequestEnum.cancelAddPlay.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.whiteButton()
         button.addTarget(self, action: #selector(cancelRequest), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.clipsToBounds = true
-        button.isHidden = true
         return button
     }()
 

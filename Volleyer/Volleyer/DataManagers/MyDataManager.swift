@@ -347,4 +347,19 @@ class MyDataManager {
         UserDefaults.standard.set(thisUser.level.spike, forKey: Level.spike.rawValue)
         UserDefaults.standard.set(thisUser.level.sum, forKey: Level.sum.rawValue)
     }
+
+    func deleteUserDefault() {
+        UserDefaults.standard.set(nil, forKey: UserTitle.firebaseId.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.userIdentifier.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.id.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.name.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.image.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.email.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.gender.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.setBall.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.block.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.dig.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.spike.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.sum.rawValue)
+    }
 }

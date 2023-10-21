@@ -33,14 +33,7 @@ class CameraViewController: UIViewController {
 
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = " 姓名"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: " 姓名")
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
@@ -53,14 +46,7 @@ class CameraViewController: UIViewController {
     lazy var takePhotoButton: UIButton = {
         let button = UIButton()
         button.setTitle("拍照", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
+        button.whiteButton()
         button.addTarget(self, action: #selector(didTapOnTakePhotoButton), for: .touchUpInside)
         return button
     }()

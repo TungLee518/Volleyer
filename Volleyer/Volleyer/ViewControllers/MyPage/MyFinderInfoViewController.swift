@@ -21,28 +21,14 @@ class MyFinderInfoViewController: UIViewController {
     lazy var randomTeamButton: UIButton = {
         let button = UIButton()
         button.setTitle("幫我分隊", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
+        button.whiteButton()
         button.addTarget(self, action: #selector(randomTeamPage), for: .touchUpInside)
         return button
     }()
     lazy var changeButton: UIButton = {
         let button = UIButton()
         button.setTitle("我要更改", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
+        button.whiteButton()
         button.addTarget(self, action: #selector(pushToEstablishVC), for: .touchUpInside)
         return button
     }()
@@ -83,7 +69,6 @@ class MyFinderInfoViewController: UIViewController {
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
         playerListTableView.players = addPlayers
         playerListTableView.canEdit = false
-//        playerListTableView.applyShadow()
         playerListTableView.layer.cornerRadius = 20
         playerListTableView.layer.borderColor = UIColor.gray4.cgColor
         playerListTableView.layer.borderWidth = 0.7
@@ -104,7 +89,6 @@ class MyFinderInfoViewController: UIViewController {
             playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             playerListTableView.topAnchor.constraint(equalTo: playersTableViewLable.bottomAnchor, constant: standardMargin/2),
             playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-//            playerListTableView.heightAnchor.constraint(equalToConstant: 200),
 
             changeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
             changeButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
@@ -139,11 +123,8 @@ class MyFinderInfoViewController: UIViewController {
         let storyboard = UIStoryboard(name: "RandomTeam", bundle: nil)
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "RandomTeamViewController") as? RandomTeamViewController {
             nextVC.hidesBottomBarWhenPushed = true
-//            nextVC.players = addPlayers
             nextVC.playerUsers = addPlayers
             navigationController?.pushViewController(nextVC, animated: true)
         }
-//        let nextVC = RandomTeamViewController()
-//        navigationController?.pushViewController(nextVC, animated: true)
     }
 }

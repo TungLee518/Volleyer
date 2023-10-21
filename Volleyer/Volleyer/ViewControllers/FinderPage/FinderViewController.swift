@@ -75,10 +75,6 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         setNavBar()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-//        setDisapearNavBar()
-    }
-
     func setNavBar() {
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "請稍候"

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		51253E9DEEAB3569A547D2F3 /* Pods_Volleyer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */; };
-		C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */; };
 		C800511F2AB834A000FEA7FD /* MyFinderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */; };
 		C80051232AB844F700FEA7FD /* RandomTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */; };
 		C800512B2AB92C8B00FEA7FD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */; };
@@ -89,12 +88,22 @@
 		C8F12ECF2AE175B6008E22EE /* BlockListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ECE2AE175B6008E22EE /* BlockListTableViewCell.swift */; };
 		C8F12ED12AE17801008E22EE /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ED02AE17801008E22EE /* TextFieldTableViewCell.swift */; };
 		C8F12ED32AE17D7E008E22EE /* PostFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ED22AE17D7E008E22EE /* PostFinderViewController.swift */; };
+		C8F12EDD2AE3BDF3008E22EE /* VolleyerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EDC2AE3BDF3008E22EE /* VolleyerTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C8F12EDE2AE3BDF3008E22EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C86E14A62AB1AF4C00CBA201 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C86E14AD2AB1AF4C00CBA201;
+			remoteInfo = Volleyer;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1A5A97EC46A1D1B15097F110 /* Pods_Volleyer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Volleyer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A2C1FD5979003FEF520EB2 /* Pods-Volleyer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.release.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.release.xcconfig"; sourceTree = "<group>"; };
-		C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayInfoViewController.swift; sourceTree = "<group>"; };
 		C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFinderInfoViewController.swift; sourceTree = "<group>"; };
 		C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTeamViewController.swift; sourceTree = "<group>"; };
 		C800512A2AB92C8B00FEA7FD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +187,8 @@
 		C8F12ECE2AE175B6008E22EE /* BlockListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BlockListTableViewCell.swift; path = /Users/leetung/Documents/iOS_Batch_21/Volleyer_clone_repo/Volleyer/Volleyer/Volleyer/Views/BlockListTableViewCell.swift; sourceTree = "<absolute>"; };
 		C8F12ED02AE17801008E22EE /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		C8F12ED22AE17D7E008E22EE /* PostFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFinderViewController.swift; sourceTree = "<group>"; };
+		C8F12EDA2AE3BDF3008E22EE /* VolleyerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VolleyerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8F12EDC2AE3BDF3008E22EE /* VolleyerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyerTests.swift; sourceTree = "<group>"; };
 		C8F159BA2ADEB8E300D3D552 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +199,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				51253E9DEEAB3569A547D2F3 /* Pods_Volleyer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8F12ED72AE3BDF3008E22EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,14 +235,12 @@
 				C86E15162AB438BF00CBA201 /* MyViewController.swift */,
 				C86E15322AB6A52C00CBA201 /* MyFindersViewController.swift */,
 				C800511E2AB834A000FEA7FD /* MyFinderInfoViewController.swift */,
+				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
 				C86E15342AB6A54E00CBA201 /* MyPlaysViewController.swift */,
-				C800511C2AB8349300FEA7FD /* MyPlayInfoViewController.swift */,
 				C89960FC2ABBE0D200C5D35D /* RequestsReceivedViewController.swift */,
 				C89961062ABD687300C5D35D /* RequestSentViewController.swift */,
 				C85BCF642AD1646B002B900C /* ReportViewController.swift */,
 				C85BCF662AD16487002B900C /* BlockListViewController.swift */,
-				C899610A2ABD963D00C5D35D /* ProfileViewController.swift */,
-				C80051222AB844F700FEA7FD /* RandomTeamViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -240,7 +256,7 @@
 			path = FinderPage;
 			sourceTree = "<group>";
 		};
-		C85BCF6A2AD2E273002B900C /* Resources */ = {
+		C85BCF6A2AD2E273002B900C /* Lotties */ = {
 			isa = PBXGroup;
 			children = (
 				C848A44C2ADAE14900E7C9A6 /* volleyHit.json */,
@@ -249,7 +265,7 @@
 				C85BCF6D2AD2E28F002B900C /* fortune_cookie.json */,
 				C85BCF6F2AD2E2B8002B900C /* japan_lottery.json */,
 			);
-			path = Resources;
+			path = Lotties;
 			sourceTree = "<group>";
 		};
 		C86E14A52AB1AF4C00CBA201 = {
@@ -257,6 +273,7 @@
 			children = (
 				C86E15122AB42A6A00CBA201 /* .swiftlint.yml */,
 				C86E14B02AB1AF4C00CBA201 /* Volleyer */,
+				C8F12EDB2AE3BDF3008E22EE /* VolleyerTests */,
 				C86E14AF2AB1AF4C00CBA201 /* Products */,
 				C705EC19C13A7D0DA66696F5 /* Pods */,
 				79C18332D75E61DF80DFB6C4 /* Frameworks */,
@@ -267,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */,
+				C8F12EDA2AE3BDF3008E22EE /* VolleyerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,7 +292,7 @@
 		C86E14B02AB1AF4C00CBA201 /* Volleyer */ = {
 			isa = PBXGroup;
 			children = (
-				C85BCF6A2AD2E273002B900C /* Resources */,
+				C85BCF6A2AD2E273002B900C /* Lotties */,
 				C89961212AC2C31200C5D35D /* Fonts */,
 				C899611C2AC267D700C5D35D /* Extensions */,
 				C89961322AC94CE700C5D35D /* DataManagers */,
@@ -314,13 +332,14 @@
 			isa = PBXGroup;
 			children = (
 				C86E151E2AB43B8600CBA201 /* TabBarViewController.swift */,
+				C899610C2ABDD3E300C5D35D /* InfoViewController.swift */,
+				C899610A2ABD963D00C5D35D /* ProfileViewController.swift */,
 				C899613B2ACBBA1400C5D35D /* LoginPage */,
 				C80051212AB8445D00FEA7FD /* FinderPage */,
 				C80051202AB8443B00FEA7FD /* MyPage */,
 				C899612A2AC42BEF00C5D35D /* CompetitionPage */,
 				C89961282AC41DAA00C5D35D /* PlayOnePage */,
-				C899610C2ABDD3E300C5D35D /* InfoViewController.swift */,
-				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
+				C8F12EE32AE3D01F008E22EE /* CommunityPage */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -380,7 +399,6 @@
 			isa = PBXGroup;
 			children = (
 				C86E15182AB438EE00CBA201 /* CompetitionsViewController.swift */,
-				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
 			);
 			path = CompetitionPage;
 			sourceTree = "<group>";
@@ -417,10 +435,27 @@
 				C899610E2AC038C600C5D35D /* PlayOne.storyboard */,
 				C89961122AC03C1E00C5D35D /* PlayOneTableViewCell.swift */,
 				C89961142AC03C2C00C5D35D /* PlayOneCollectionViewCell.swift */,
+				C86E153C2AB80DEF00CBA201 /* CompetitionTableViewCell.swift */,
 				C8F12ED02AE17801008E22EE /* TextFieldTableViewCell.swift */,
 				C89961292AC4286400C5D35D /* CommonViews */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C8F12EDB2AE3BDF3008E22EE /* VolleyerTests */ = {
+			isa = PBXGroup;
+			children = (
+				C8F12EDC2AE3BDF3008E22EE /* VolleyerTests.swift */,
+			);
+			path = VolleyerTests;
+			sourceTree = "<group>";
+		};
+		C8F12EE32AE3D01F008E22EE /* CommunityPage */ = {
+			isa = PBXGroup;
+			children = (
+				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
+			);
+			path = CommunityPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,6 +482,24 @@
 			productReference = C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C8F12ED92AE3BDF3008E22EE /* VolleyerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8F12EE02AE3BDF3008E22EE /* Build configuration list for PBXNativeTarget "VolleyerTests" */;
+			buildPhases = (
+				C8F12ED62AE3BDF3008E22EE /* Sources */,
+				C8F12ED72AE3BDF3008E22EE /* Frameworks */,
+				C8F12ED82AE3BDF3008E22EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C8F12EDF2AE3BDF3008E22EE /* PBXTargetDependency */,
+			);
+			name = VolleyerTests;
+			productName = VolleyerTests;
+			productReference = C8F12EDA2AE3BDF3008E22EE /* VolleyerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -459,6 +512,10 @@
 				TargetAttributes = {
 					C86E14AD2AB1AF4C00CBA201 = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					C8F12ED92AE3BDF3008E22EE = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = C86E14AD2AB1AF4C00CBA201;
 					};
 				};
 			};
@@ -477,6 +534,7 @@
 			projectRoot = "";
 			targets = (
 				C86E14AD2AB1AF4C00CBA201 /* Volleyer */,
+				C8F12ED92AE3BDF3008E22EE /* VolleyerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -499,6 +557,13 @@
 				C85BCF702AD2E2B8002B900C /* japan_lottery.json in Resources */,
 				C848A44D2ADAE14900E7C9A6 /* volleyHit.json in Resources */,
 				C85BCF6E2AD2E28F002B900C /* fortune_cookie.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8F12ED82AE3BDF3008E22EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +691,6 @@
 				C8F12ECC2AE130C0008E22EE /* UITextField+Extension.swift in Sources */,
 				C8D54A102AD008420020C06C /* LevelView.swift in Sources */,
 				C89961362AC9AE9600C5D35D /* JGProgressHUDWrapper.swift in Sources */,
-				C800511D2AB8349300FEA7FD /* MyPlayInfoViewController.swift in Sources */,
 				C86E15392AB6ECCF00CBA201 /* PlayTableViewCell.swift in Sources */,
 				C899611E2AC2680300C5D35D /* UIImage+Extension.swift in Sources */,
 				C89961382ACABD3500C5D35D /* RequestDataManager.swift in Sources */,
@@ -661,7 +725,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C8F12ED62AE3BDF3008E22EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8F12EDD2AE3BDF3008E22EE /* VolleyerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C8F12EDF2AE3BDF3008E22EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C86E14AD2AB1AF4C00CBA201 /* Volleyer */;
+			targetProxy = C8F12EDE2AE3BDF3008E22EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C86E14BC2AB1AF4E00CBA201 /* LaunchScreen.storyboard */ = {
@@ -868,6 +948,50 @@
 			};
 			name = Release;
 		};
+		C8F12EE12AE3BDF3008E22EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3S3J2NAHLU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.VolleyerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Volleyer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Volleyer";
+			};
+			name = Debug;
+		};
+		C8F12EE22AE3BDF3008E22EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3S3J2NAHLU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.VolleyerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Volleyer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Volleyer";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -885,6 +1009,15 @@
 			buildConfigurations = (
 				C86E14C32AB1AF4E00CBA201 /* Debug */,
 				C86E14C42AB1AF4E00CBA201 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C8F12EE02AE3BDF3008E22EE /* Build configuration list for PBXNativeTarget "VolleyerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8F12EE12AE3BDF3008E22EE /* Debug */,
+				C8F12EE22AE3BDF3008E22EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
