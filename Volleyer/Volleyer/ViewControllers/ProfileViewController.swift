@@ -28,12 +28,6 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
         setLayout()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        setContent()
-        print("view will appear")
-    }
-
     private func setNavBar() {
         self.view.backgroundColor = UIColor.white
         self.title = NavBarEnum.profile.rawValue
@@ -51,8 +45,6 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
             profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-//            profileView.heightAnchor.constraint(equalToConstant: 270)
-//            profileView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin)
         ])
     }
 

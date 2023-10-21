@@ -66,7 +66,6 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         requestsTableView.register(RequestsTableViewCell.self, forCellReuseIdentifier: RequestsTableViewCell.identifier)
         requestsTableView.separatorStyle = .singleLine
         view.addSubview(requestsTableView)
-
         requestsTableView.translatesAutoresizingMaskIntoConstraints = false
         requestsTableView.rowHeight = UITableView.automaticDimension
         requestsTableView.estimatedRowHeight = 50

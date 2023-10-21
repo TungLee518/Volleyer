@@ -14,40 +14,21 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     lazy var editPhotoButton: UIButton = {
         let button = UIButton()
         button.setTitle("更改照片", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
+        button.whiteButton()
         button.addTarget(self, action: #selector(pushToEditPhoto), for: .touchUpInside)
         return button
     }()
     lazy var editProfileButton: UIButton = {
         let button = UIButton()
         button.setTitle("更改資料", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
+        button.whiteButton()
         button.addTarget(self, action: #selector(pushToInputProfile), for: .touchUpInside)
         return button
     }()
     lazy var logoutButton: UIButton = {
         let button = UIButton()
         button.setTitle("登出", for: .normal)
-        button.titleLabel?.font =  .semiboldNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple1
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
+        button.purpleButton()
         button.addTarget(self, action: #selector(logout), for: .touchUpInside)
         return button
     }()
@@ -143,9 +124,19 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.backgroundColor = UIColor.white
+        addViews()
+        setLayout()
+        navigationItem.title = NavBarEnum.myPage.rawValue
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        myProfileView.setView()
+        setRequestsAmount()
+    }
+
+    private func addViews() {
         view.addSubview(myProfileView)
         view.addSubview(editPhotoButton)
         view.addSubview(editProfileButton)
@@ -156,14 +147,6 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         view.addSubview(requestSentCard)
         view.addSubview(requestReceiveCard)
         view.addSubview(lockCard)
-        setLayout()
-        navigationItem.title = NavBarEnum.myPage.rawValue
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        myProfileView.setView()
-        setRequestsAmount()
     }
 
     private func setLayout() {
@@ -239,18 +222,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
         let okAction = UIAlertAction(title: "是", style: .default) { _ in
             print("確定要登出")
             LKProgressHUD.showSuccess(text: "已登出")
-            UserDefaults.standard.set(nil, forKey: UserTitle.firebaseId.rawValue)
-            UserDefaults.standard.set(nil, forKey: UserTitle.userIdentifier.rawValue)
-            UserDefaults.standard.set(nil, forKey: UserTitle.id.rawValue)
-            UserDefaults.standard.set(nil, forKey: UserTitle.name.rawValue)
-            UserDefaults.standard.set(nil, forKey: UserTitle.image.rawValue)
-            UserDefaults.standard.set(nil, forKey: UserTitle.email.rawValue)
-            UserDefaults.standard.set(nil, forKey: UserTitle.gender.rawValue)
-            UserDefaults.standard.set(nil, forKey: Level.setBall.rawValue)
-            UserDefaults.standard.set(nil, forKey: Level.block.rawValue)
-            UserDefaults.standard.set(nil, forKey: Level.dig.rawValue)
-            UserDefaults.standard.set(nil, forKey: Level.spike.rawValue)
-            UserDefaults.standard.set(nil, forKey: Level.sum.rawValue)
+            MyDataManager.shared.deleteUserDefault()
             let nextVC = LoginViewController()
             nextVC.modalPresentationStyle = .fullScreen
             self.present(nextVC, animated: true)
@@ -301,10 +273,12 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
     }
     @objc func pushToReport() {
         let nextVC = ReportViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
     @objc func pushToLock() {
         let nextVC = BlockListViewController()
+        nextVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
     func setRequestsAmount() {
@@ -316,7 +290,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
             requestReceiveAmountLabel.trailingAnchor.constraint(equalTo: requestReceiveCard.trailingAnchor)
         ])
         requestSentCard.addSubview(requestSentAmountLabel)
-        
+
         NSLayoutConstraint.activate([
             requestSentAmountLabel.topAnchor.constraint(equalTo: requestSentCard.topAnchor),
             requestSentAmountLabel.trailingAnchor.constraint(equalTo: requestSentCard.trailingAnchor)
@@ -325,6 +299,7 @@ class MyViewController: UIViewController, UIImagePickerControllerDelegate & UINa
 }
 
 extension MyViewController: RequestsDataManagerDelegate {
+
     func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
         var receiveAmount = 0
         for i in playRequests {
@@ -339,6 +314,7 @@ extension MyViewController: RequestsDataManagerDelegate {
             requestReceiveAmountLabel.isHidden = true
         }
     }
+
     func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
         var sentAmount = 0
         for i in playRequests {
@@ -353,4 +329,5 @@ extension MyViewController: RequestsDataManagerDelegate {
             requestSentAmountLabel.isHidden = true
         }
     }
+
 }

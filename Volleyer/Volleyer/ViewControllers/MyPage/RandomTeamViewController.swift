@@ -33,7 +33,6 @@ class RandomTeamViewController: UIViewController {
     @IBOutlet weak var cTeam5: UILabel!
     @IBOutlet weak var cTeam6: UILabel!
 
-    
     @IBOutlet weak var restTeamImageView: UIImageView!
     @IBOutlet weak var takeARestLabel: UILabel!
 
@@ -45,49 +44,15 @@ class RandomTeamViewController: UIViewController {
     var players: [Player] = []
     var playerUsers: [User] = []
 
-    private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
-
-    lazy var generateRandomTeamButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("開始分隊", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.addTarget(self, action: #selector(generateRandomTeam), for: .touchUpInside)
-        return button
-    }()
-    let doneRandonTeamLable: UILabel = {
-        let label = UILabel()
-        label.text = "名單"
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.isHidden = true
-        label.numberOfLines = 0
-        label.sizeToFit()
-        return label
-    }()
-
     private var animationView: LottieAnimationView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.addSubview(generateRandomTeamButton)
-//        view.addSubview(doneRandonTeamLable)
-//        setPlayersTableView()
         shadowView.applyShadow()
         shadowView.backgroundColor = .white
         setNavBar()
-//        setLayout()
         setAnimate()
-//        generateRandomTeam()
         generateRandomTeamWithLevel()
-//        playAnimate()
     }
 
     private func setNavBar() {
@@ -97,30 +62,6 @@ class RandomTeamViewController: UIViewController {
         backButton.title = ""
         backButton.tintColor = .purple2
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-    }
-
-    private func setPlayersTableView() {
-        view.addSubview(playerListTableView)
-        playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.players = playerUsers
-        playerListTableView.canEdit = false
-    }
-
-    private func setLayout() {
-        NSLayoutConstraint.activate([
-            playerListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            playerListTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: standardMargin),
-            playerListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            playerListTableView.heightAnchor.constraint(equalToConstant: 200),
-
-            generateRandomTeamButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: standardMargin),
-            generateRandomTeamButton.topAnchor.constraint(equalTo: playerListTableView.bottomAnchor, constant: standardMargin),
-            generateRandomTeamButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
-            generateRandomTeamButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
-
-            doneRandonTeamLable.topAnchor.constraint(equalTo: generateRandomTeamButton.bottomAnchor, constant: standardMargin),
-            doneRandonTeamLable.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
-        ])
     }
 
     func setAnimate() {
@@ -141,7 +82,6 @@ class RandomTeamViewController: UIViewController {
             self.animationView?.play()
         })
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-            // Put your code which should be executed with a delay here
             UIView.transition(with: self.animationView!, duration: 0.4,
                               options: .transitionCrossDissolve,
                               animations: {
@@ -203,12 +143,10 @@ class RandomTeamViewController: UIViewController {
                 totalNumber += 1
                 nthTotal = totalNumber % 3
             }
-
             // 擺完後計算每對平均程度
             let levelAve = levelSum.map { $0 / 6 }
             print(levelAve)
-            // 如果差 0.5 個等級就重分(?)
-            // 但為了 demo 先設定 1.0
+            // 如果差 0.5 個等級就重分
             if abs(levelAve[0]-levelAve[1]) < 0.5 && abs(levelAve[0]-levelAve[2]) < 0.5 && abs(levelAve[2]-levelAve[1]) < 0.5 {
                 break
             }
@@ -239,11 +177,5 @@ class RandomTeamViewController: UIViewController {
         // 隨機選一隊先休息
         let imageNames = ["a", "b", "c"]
         restTeamImageView.image = UIImage(named: imageNames.shuffled()[0])
-//        let abc = ["A", "B", "C"]
-//        takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
-    }
-
-    func didTapProfileButton(for player: Player) {
-        print("Tapped on profile button for \(player.name)")
     }
 }

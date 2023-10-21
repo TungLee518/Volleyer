@@ -104,12 +104,6 @@ class MyPlaysViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.thisPlay = thisPlay
         return cell
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = MyPlayInfoViewController()
-        nextVC.thisPlay = myPlays[indexPath.row]
-        navigationController?.pushViewController(nextVC, animated: true)
-    }
 }
 
 extension MyPlaysViewController: PlayDataManagerDelegate {
