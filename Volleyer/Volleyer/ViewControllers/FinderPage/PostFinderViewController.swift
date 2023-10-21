@@ -7,6 +7,21 @@
 
 import UIKit
 
+private enum PostFields: Int, CaseIterable {
+    case startTime
+    case endTime
+    case place
+    case price
+    case type
+    case lackAmount
+    case levels
+    case setBallCheckBoxes
+    case blockCheckBoxes
+    case digCheckBoxes
+    case spikeCheckBoxes
+    case sumCheckBoxes
+}
+
 class PostFinderViewController: UIViewController {
 
     private var postFinderTableView: UITableView!
@@ -15,22 +30,24 @@ class PostFinderViewController: UIViewController {
         let button = UIButton()
         button.purpleButton()
         button.setTitle(EstablishPageEnum.publish.rawValue, for: .normal)
-//         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addData), for: .touchUpInside)
         return button
     }()
     private lazy var deletePostButton: UIButton = {
         let button = UIButton()
         button.whiteButton()
         button.setTitle(EstablishPageEnum.deletePost.rawValue, for: .normal)
-//        button.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
+        button.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
         button.isHidden = true
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.white
+        setUpNavBar()
+        setButtons()
+        setTableView()
     }
 
     private func setUpNavBar() {
@@ -46,12 +63,12 @@ class PostFinderViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
 //        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
-    
+
     private func setTableView() {
         postFinderTableView = UITableView()
         postFinderTableView.dataSource = self
         postFinderTableView.delegate = self
-//        postFinderTableView.register(postFinderTableViewCell.self, forCellReuseIdentifier: postFinderTableViewCell.identifier)
+        postFinderTableView.register(TextFieldTableViewCell.self, forCellReuseIdentifier: TextFieldTableViewCell.identifier)
         postFinderTableView.separatorStyle = .none
         view.addSubview(postFinderTableView)
         postFinderTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +89,7 @@ class PostFinderViewController: UIViewController {
             publishButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -standardMargin),
             publishButton.heightAnchor.constraint(equalToConstant: standardButtonHeight),
             publishButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: standardMargin/2),
+            publishButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin),
 
             deletePostButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: standardMargin),
             deletePostButton.trailingAnchor.constraint(equalTo: publishButton.leadingAnchor, constant: -standardMargin/2),
@@ -79,20 +97,65 @@ class PostFinderViewController: UIViewController {
             deletePostButton.heightAnchor.constraint(equalToConstant: standardButtonHeight)
         ])
     }
-}
 
+    @objc func addData(_ sender: UIButton) {
+
+    }
+    @objc func deletePost() {
+
+    }
+}
 
 extension PostFinderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return PostFields.allCases.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let fieldCells = PostFields(rawValue: indexPath.row)
         // swiftlint:disable force_cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: FinderTableViewCell.identifier, for: indexPath) as! FinderTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
         // swiftlint:enable force_cast
+        switch fieldCells {
+        case .startTime:
+            cell.setLabelAndTextField()
+            cell.theLabel.text = "開始時間"
+            cell.theTextField.placeholder = "start time"
+        case .endTime:
+            cell.setLabelAndTextField()
+            cell.theLabel.text = "結束時間"
+            cell.theTextField.placeholder = "end time"
+        case .place:
+            cell.setLabelAndTextField()
+            cell.theLabel.text = "地點"
+            cell.theTextField.placeholder = "place"
+        case .price:
+            cell.setLabelAndTextField()
+            cell.theLabel.text = "價錢"
+            cell.theTextField.placeholder = "price"
+        case .type:
+            cell.setLabelAndTextField()
+            cell.theLabel.text = "場種"
+            cell.theTextField.placeholder = "X 網 X 排"
+        case .lackAmount:
+            // 還沒寫
+            cell.setLabelAndTextField()
+            cell.theLabel.text = "缺"
+        case .levels:
+            cell.setSABC()
+        case .setBallCheckBoxes:
+            cell.setCheckboxesList = cell.createCheckboxes(text: "舉球", action: #selector(cell.setCheckboxTapped))
+        case .blockCheckBoxes:
+            cell.blocCheckboxesList = cell.createCheckboxes(text: "攔網", action: #selector(cell.blockCheckboxTapped))
+        case .digCheckBoxes:
+            cell.digCheckboxesList = cell.createCheckboxes(text: "接球", action: #selector(cell.digCheckboxTapped))
+        case .spikeCheckBoxes:
+            cell.spikeCheckboxesList = cell.createCheckboxes(text: "攻擊", action: #selector(cell.spickCheckboxTapped))
+        case .sumCheckBoxes:
+            cell.sumCheckboxesList = cell.createCheckboxes(text: "綜合", action: #selector(cell.sumCheckboxTapped))
+        case .none:
+            cell.theLabel.text = "nothing"
+        }
         return cell
     }
-    
-    
 }

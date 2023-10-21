@@ -207,6 +207,21 @@ class EstablishFinderViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
+        addViews()
+        setUpNavBar()
+        setSABC()
+        setCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[0], i: 0), action: #selector(setCheckboxTapped))
+        blocCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[1], i: 1), action: #selector(blockCheckboxTapped))
+        digCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[2], i: 2), action: #selector(digCheckboxTapped))
+        spickCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[3], i: 3), action: #selector(spickCheckboxTapped))
+        sumCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[4], i: 4), action: #selector(sumCheckboxTapped))
+        setLayout()
+        typePicker.dataSource = self
+        typePicker.delegate = self
+        ifEditMode()
+    }
+
+    func addViews() {
         view.addSubview(startTimeLabel)
         view.addSubview(startTimeTextField)
         view.addSubview(endTimeLabel)
@@ -226,20 +241,6 @@ class EstablishFinderViewController: UIViewController {
         view.addSubview(femaleTextField)
         view.addSubview(deletePostButton)
         view.addSubview(publishButton)
-
-        setUpNavBar()
-        setSABC()
-
-        setCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[0], i: 0), action: #selector(setCheckboxTapped))
-        blocCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[1], i: 1), action: #selector(blockCheckboxTapped))
-        digCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[2], i: 2), action: #selector(digCheckboxTapped))
-        spickCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[3], i: 3), action: #selector(spickCheckboxTapped))
-        sumCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[4], i: 4), action: #selector(sumCheckboxTapped))
-
-        setLayout()
-        typePicker.dataSource = self
-        typePicker.delegate = self
-        ifEditMode()
     }
 
     func setUpNavBar() {
