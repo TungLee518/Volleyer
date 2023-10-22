@@ -43,6 +43,7 @@ class RandomTeamViewController: UIViewController {
 
     var players: [Player] = []
     var playerUsers: [User] = []
+    var shuffledplayerUsers: [[User]] = [[], [], []]
 
     private var animationView: LottieAnimationView?
 
@@ -52,6 +53,7 @@ class RandomTeamViewController: UIViewController {
         shadowView.backgroundColor = .white
         setNavBar()
         setAnimate()
+        playAnimate()
         generateRandomTeamWithLevel()
     }
 
@@ -122,12 +124,15 @@ class RandomTeamViewController: UIViewController {
         takeARestLabel.text = "\(abc.shuffled()[0]) 隊先休息"
     }
 
-    @objc func generateRandomTeamWithLevel() {
-        playAnimate()
+    func generateRandomTeamWithLevel() {
+        calculateMaxAverageLevelDifference(players: playerUsers)
+        putNameIntoLabels(players: shuffledplayerUsers)
+    }
+    func calculateMaxAverageLevelDifference(players: [User]) -> Double {
         var groups: [[User]] = [[], [], []]
         while true {
             // Shuffle the players array randomly
-            var shuffledPlayers = playerUsers.shuffled()
+            var shuffledPlayers = players.shuffled()
             // 照男女排序
             shuffledPlayers.sort { $0.gender < $1.gender }
             // Create an array to hold the groups
@@ -146,17 +151,21 @@ class RandomTeamViewController: UIViewController {
             // 擺完後計算每對平均程度
             let levelAve = levelSum.map { $0 / 6 }
             print(levelAve)
+            let aveDiffs = [abs(levelAve[0]-levelAve[1]), abs(levelAve[2]-levelAve[1]), abs(levelAve[0]-levelAve[2])]
+            let maxAveDiff = aveDiffs.max() ?? -1
+            shuffledplayerUsers = groups
             // 如果差 0.5 個等級就重分
-            if abs(levelAve[0]-levelAve[1]) < 0.5 && abs(levelAve[0]-levelAve[2]) < 0.5 && abs(levelAve[2]-levelAve[1]) < 0.5 {
-                break
+            if maxAveDiff < 0.5 {
+                return maxAveDiff
             }
         }
-
+    }
+    func putNameIntoLabels(players: [[User]]) {
         // 完成分隊後放入 labels
         for i in 0...2 {
             for j in 0...5 {
-                teams[i][j].text = "  \(groups[i][j].name)  "
-                if groups[i][j].gender == 0 {
+                teams[i][j].text = "  \(players[i][j].name)  "
+                if players[i][j].gender == 0 {
                     teams[i][j].textColor = .gray2
                     teams[i][j].backgroundColor = UIColor.hexStringToUIColor(hex: "#D6EAF6")
                     teams[i][j].layer.cornerRadius = 10
@@ -173,7 +182,6 @@ class RandomTeamViewController: UIViewController {
                 }
             }
         }
-
         // 隨機選一隊先休息
         let imageNames = ["a", "b", "c"]
         restTeamImageView.image = UIImage(named: imageNames.shuffled()[0])
