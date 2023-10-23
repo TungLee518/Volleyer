@@ -89,10 +89,20 @@
 		C8F12ED12AE17801008E22EE /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ED02AE17801008E22EE /* TextFieldTableViewCell.swift */; };
 		C8F12ED32AE17D7E008E22EE /* PostFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12ED22AE17D7E008E22EE /* PostFinderViewController.swift */; };
 		C8F12EDD2AE3BDF3008E22EE /* VolleyerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EDC2AE3BDF3008E22EE /* VolleyerTests.swift */; };
+		C8F12EE52AE52504008E22EE /* GetUserByIdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EE42AE52504008E22EE /* GetUserByIdTest.swift */; };
+		C8F12EED2AE54EB7008E22EE /* VolleyerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EEC2AE54EB7008E22EE /* VolleyerUITests.swift */; };
+		C8F12EEF2AE54EB7008E22EE /* VolleyerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F12EEE2AE54EB7008E22EE /* VolleyerUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		C8F12EDE2AE3BDF3008E22EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C86E14A62AB1AF4C00CBA201 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C86E14AD2AB1AF4C00CBA201;
+			remoteInfo = Volleyer;
+		};
+		C8F12EF02AE54EB7008E22EE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C86E14A62AB1AF4C00CBA201 /* Project object */;
 			proxyType = 1;
@@ -189,6 +199,10 @@
 		C8F12ED22AE17D7E008E22EE /* PostFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFinderViewController.swift; sourceTree = "<group>"; };
 		C8F12EDA2AE3BDF3008E22EE /* VolleyerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VolleyerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8F12EDC2AE3BDF3008E22EE /* VolleyerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyerTests.swift; sourceTree = "<group>"; };
+		C8F12EE42AE52504008E22EE /* GetUserByIdTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserByIdTest.swift; sourceTree = "<group>"; };
+		C8F12EEA2AE54EB6008E22EE /* VolleyerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VolleyerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8F12EEC2AE54EB7008E22EE /* VolleyerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyerUITests.swift; sourceTree = "<group>"; };
+		C8F12EEE2AE54EB7008E22EE /* VolleyerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolleyerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C8F159BA2ADEB8E300D3D552 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		EB91A464CEF199896074B7AE /* Pods-Volleyer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Volleyer.debug.xcconfig"; path = "Target Support Files/Pods-Volleyer/Pods-Volleyer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +217,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C8F12ED72AE3BDF3008E22EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8F12EE72AE54EB6008E22EE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -274,6 +295,7 @@
 				C86E15122AB42A6A00CBA201 /* .swiftlint.yml */,
 				C86E14B02AB1AF4C00CBA201 /* Volleyer */,
 				C8F12EDB2AE3BDF3008E22EE /* VolleyerTests */,
+				C8F12EEB2AE54EB7008E22EE /* VolleyerUITests */,
 				C86E14AF2AB1AF4C00CBA201 /* Products */,
 				C705EC19C13A7D0DA66696F5 /* Pods */,
 				79C18332D75E61DF80DFB6C4 /* Frameworks */,
@@ -285,6 +307,7 @@
 			children = (
 				C86E14AE2AB1AF4C00CBA201 /* Volleyer.app */,
 				C8F12EDA2AE3BDF3008E22EE /* VolleyerTests.xctest */,
+				C8F12EEA2AE54EB6008E22EE /* VolleyerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -445,6 +468,7 @@
 		C8F12EDB2AE3BDF3008E22EE /* VolleyerTests */ = {
 			isa = PBXGroup;
 			children = (
+				C8F12EE42AE52504008E22EE /* GetUserByIdTest.swift */,
 				C8F12EDC2AE3BDF3008E22EE /* VolleyerTests.swift */,
 			);
 			path = VolleyerTests;
@@ -456,6 +480,15 @@
 				C86E151C2AB4392700CBA201 /* CommunityViewController.swift */,
 			);
 			path = CommunityPage;
+			sourceTree = "<group>";
+		};
+		C8F12EEB2AE54EB7008E22EE /* VolleyerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C8F12EEC2AE54EB7008E22EE /* VolleyerUITests.swift */,
+				C8F12EEE2AE54EB7008E22EE /* VolleyerUITestsLaunchTests.swift */,
+			);
+			path = VolleyerUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,6 +533,24 @@
 			productReference = C8F12EDA2AE3BDF3008E22EE /* VolleyerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		C8F12EE92AE54EB6008E22EE /* VolleyerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8F12EF22AE54EB7008E22EE /* Build configuration list for PBXNativeTarget "VolleyerUITests" */;
+			buildPhases = (
+				C8F12EE62AE54EB6008E22EE /* Sources */,
+				C8F12EE72AE54EB6008E22EE /* Frameworks */,
+				C8F12EE82AE54EB6008E22EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C8F12EF12AE54EB7008E22EE /* PBXTargetDependency */,
+			);
+			name = VolleyerUITests;
+			productName = VolleyerUITests;
+			productReference = C8F12EEA2AE54EB6008E22EE /* VolleyerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -514,6 +565,10 @@
 						CreatedOnToolsVersion = 14.3.1;
 					};
 					C8F12ED92AE3BDF3008E22EE = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = C86E14AD2AB1AF4C00CBA201;
+					};
+					C8F12EE92AE54EB6008E22EE = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = C86E14AD2AB1AF4C00CBA201;
 					};
@@ -535,6 +590,7 @@
 			targets = (
 				C86E14AD2AB1AF4C00CBA201 /* Volleyer */,
 				C8F12ED92AE3BDF3008E22EE /* VolleyerTests */,
+				C8F12EE92AE54EB6008E22EE /* VolleyerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -561,6 +617,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C8F12ED82AE3BDF3008E22EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8F12EE82AE54EB6008E22EE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -730,6 +793,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8F12EDD2AE3BDF3008E22EE /* VolleyerTests.swift in Sources */,
+				C8F12EE52AE52504008E22EE /* GetUserByIdTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8F12EE62AE54EB6008E22EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8F12EEF2AE54EB7008E22EE /* VolleyerUITestsLaunchTests.swift in Sources */,
+				C8F12EED2AE54EB7008E22EE /* VolleyerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +813,11 @@
 			isa = PBXTargetDependency;
 			target = C86E14AD2AB1AF4C00CBA201 /* Volleyer */;
 			targetProxy = C8F12EDE2AE3BDF3008E22EE /* PBXContainerItemProxy */;
+		};
+		C8F12EF12AE54EB7008E22EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C86E14AD2AB1AF4C00CBA201 /* Volleyer */;
+			targetProxy = C8F12EF02AE54EB7008E22EE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -992,6 +1070,42 @@
 			};
 			name = Release;
 		};
+		C8F12EF32AE54EB7008E22EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3S3J2NAHLU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.VolleyerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Volleyer;
+			};
+			name = Debug;
+		};
+		C8F12EF42AE54EB7008E22EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3S3J2NAHLU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.TungLee.VolleyerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Volleyer;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1018,6 +1132,15 @@
 			buildConfigurations = (
 				C8F12EE12AE3BDF3008E22EE /* Debug */,
 				C8F12EE22AE3BDF3008E22EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C8F12EF22AE54EB7008E22EE /* Build configuration list for PBXNativeTarget "VolleyerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8F12EF32AE54EB7008E22EE /* Debug */,
+				C8F12EF42AE54EB7008E22EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

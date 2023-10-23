@@ -39,7 +39,7 @@ class MyFinderInfoViewController: UIViewController {
         }
     }
 
-    private var addPlayers = addUsers
+    private var addPlayers = fakeUsers
 
     override func viewDidLoad() {
         super.viewDidLoad()
