@@ -19,8 +19,12 @@ final class VolleyerUITests: XCTestCase {
     func testSingleSelect() throws {
         app = XCUIApplication()
         app.launch()
-        let topLabel = app.staticTexts["Hi"]
-//        let rightNavBarButton = app.navigationBars["postFinder"].buttons.element(boundBy: 0)
-        XCTAssertTrue(topLabel.exists)
+//        let topLabel = app.staticTexts["Hi"]
+        let rightNavBarButton = app.navigationBars.buttons["postFinder"]
+        sleep(5)
+        XCTAssertTrue(rightNavBarButton.exists)
+        rightNavBarButton.tap()
+        let startTextFieldTime = app.textFields["starttime"]
+        XCTAssertTrue(startTextFieldTime.exists)
     }
 }
