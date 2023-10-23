@@ -15,6 +15,12 @@ class ProfileViewController: UIViewController {
             getUserData()
         }
     }
+    var thisUser: User? {
+        didSet {
+            profileView.thisUser = thisUser
+            profileView.parent = self
+        }
+    }
 
     private var profileView = ProfileView()
 

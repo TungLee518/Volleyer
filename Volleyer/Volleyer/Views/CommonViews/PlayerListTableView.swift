@@ -12,6 +12,7 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
 
     var players: [User] = []
     var canEdit = true
+    weak var parent: UIViewController?
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -102,6 +103,12 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = ProfileViewController()
+        nextVC.thisUser = players[indexPath.row]
+        parent?.navigationController?.pushViewController(nextVC, animated: true)
+    }
+
     // Toggle the editing mode of the table view
     func toggleEditing() {
         setEditing(!isEditing, animated: true)
@@ -123,7 +130,7 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
         players.append(player)
         insertRows(at: [IndexPath(row: players.count - 1, section: 0)], with: .automatic)
     }
-    
+
     func addPlayer(from cell: PlayerTableViewCell, add player: User) {
         guard let indexPath = indexPath(for: cell) else {
             return
