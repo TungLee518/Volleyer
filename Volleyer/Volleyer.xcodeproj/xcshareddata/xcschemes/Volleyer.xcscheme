@@ -40,6 +40,17 @@
                ReferencedContainer = "container:Volleyer.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C8F12EE92AE54EB6008E22EE"
+               BuildableName = "VolleyerUITests.xctest"
+               BlueprintName = "VolleyerUITests"
+               ReferencedContainer = "container:Volleyer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

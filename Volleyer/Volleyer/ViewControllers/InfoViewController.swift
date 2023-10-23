@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUserDataManagerDelegate {
+class InfoViewController: UIViewController {
 
     private var playView = PlayInfoView()
     private var profileView = ProfileView()
@@ -47,10 +47,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         view.addSubview(playView)
         view.addSubview(profileView)
         view.addSubview(cancelRequestButton)
-        dataManager.getPlayById(id: thisPlayId ?? "")
-        dataManager.getUserById(id: thisUserId ?? "")
-        dataManager.thisPlayDelegate = self
-        dataManager.thisUserDelegate = self
+        getUserAndPlayData()
         setLayout()
         setNavBar()
         playView.applyShadow()
@@ -86,12 +83,17 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         ])
     }
 
-    func manager(_ manager: FinderDataManager, thisPlay play: Play) {
-        thisPlay = play
-    }
-
-    func manager(_ manager: FinderDataManager, thisUser user: User) {
-        thisUser = user
+    func getUserAndPlayData() {
+        dataManager.getPlayById(id: thisPlayId ?? "") { gotPlay, err in
+            if let gotPlay = gotPlay {
+                self.thisPlay = gotPlay
+            }
+        }
+        dataManager.getUserByFirebaseId(id: thisUserId ?? "") { gotUser, err in
+            if let gotUser = gotUser {
+                self.thisUser = gotUser
+            }
+        }
     }
 
     @objc func cancelRequest() {

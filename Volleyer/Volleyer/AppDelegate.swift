@@ -18,11 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         // Override point for customization after application launch.
 
         FirebaseApp.configure()
-//        let dataManager = MyDataManager()
-
-//        var thisUser = User(id: "", email: "", gender: 99, name: "", level: LevelRange(setBall: -1, block: -1, dig: -1, spike: -1, sum: -1))
-
-//        dataManager.getSimulatorProfileData()
+        // Checking if unit tests are running
+        if ProcessInfo.processInfo.environment["unit_tests"] == "true" {
+            print("Setting up Firebase emulator localhost:8080")
+            let settings = Firestore.firestore().settings
+            settings.host = "localhost:8080"
+            settings.isPersistenceEnabled = false
+            settings.isSSLEnabled = false
+            Firestore.firestore().settings = settings
+        }
 
         registerForPushNotifications()
         UNUserNotificationCenter.current().delegate = self

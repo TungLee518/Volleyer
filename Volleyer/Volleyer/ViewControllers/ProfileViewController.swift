@@ -8,22 +8,19 @@
 import UIKit
 import Kingfisher
 
-class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
+class ProfileViewController: UIViewController {
 
     var thisUserId: String? {
         didSet {
-            dataManager.getUserById(id: thisUserId ?? "No User")
+            getUserData()
         }
     }
 
     private var profileView = ProfileView()
 
-    let dataManager = FinderDataManager()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(profileView)
-        dataManager.thisUserDelegate = self
         setNavBar()
         setLayout()
     }
@@ -48,8 +45,10 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
         ])
     }
 
-    func manager(_ manager: FinderDataManager, thisUser user: User) {
-        profileView.thisUser = user
-        profileView.parent = self
+    func getUserData() {
+        FinderDataManager.sharedDataMenager.getUserByFirebaseId(id: thisUserId ?? "No User") { gotUser, err in
+            self.profileView.thisUser = gotUser
+            self.profileView.parent = self
+        }
     }
 }
