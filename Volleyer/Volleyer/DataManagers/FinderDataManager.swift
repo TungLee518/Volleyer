@@ -247,6 +247,7 @@ class FinderDataManager {
                 if let gotUser = gotUser {
                     players.append(gotUser)
                     if players.count == playersId.count {
+                        players.sort { $0.gender < $1.gender }
                         completion(players, nil)
                     }
                 } else if let err = err {

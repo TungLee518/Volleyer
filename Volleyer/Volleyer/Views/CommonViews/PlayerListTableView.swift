@@ -38,52 +38,41 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
         40
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        let nameLabel: UILabel = {
-            let label = UILabel()
-            label.text = "名字"
-            label.textColor = UIColor.gray2
-            label.font = .regularNunito(size: 16)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        let genderLabel: UILabel = {
-            let label = UILabel()
-            label.text = "性別"
-            label.textColor = UIColor.gray2
-            label.font = .regularNunito(size: 16)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        let profileLabel: UILabel = {
-            let label = UILabel()
-            label.text = "Profile"
-            label.textColor = UIColor.gray2
-            label.font = .regularNunito(size: 16)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        headerView.backgroundColor = UIColor.purple7
-        headerView.layer.cornerRadius = 10
-//        headerView.layer.borderColor = UIColor.gray4.cgColor
-//        headerView.layer.borderWidth = 0.7
-        headerView.addSubview(nameLabel)
-        headerView.addSubview(genderLabel)
-        headerView.addSubview(profileLabel)
-        NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: standardMargin),
-            nameLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-
-            genderLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            genderLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            genderLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: standardMargin/2),
-            genderLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -standardMargin/2),
-            profileLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            profileLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -standardMargin)
-        ])
-        return headerView
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = UIView()
+//        let nameLabel: UILabel = {
+//            let label = UILabel()
+//            label.text = "隊員"
+//            label.textColor = UIColor.gray2
+//            label.font = .regularNunito(size: 16)
+//            label.translatesAutoresizingMaskIntoConstraints = false
+//            return label
+//        }()
+//        let genderLabel: UILabel = {
+//            let label = UILabel()
+//            label.text = "性別"
+//            label.textColor = UIColor.gray2
+//            label.font = .regularNunito(size: 16)
+//            label.translatesAutoresizingMaskIntoConstraints = false
+//            label.isHidden = true
+//            return label
+//        }()
+//        headerView.backgroundColor = UIColor.purple7
+//        headerView.layer.cornerRadius = 10
+////        headerView.layer.borderColor = UIColor.gray4.cgColor
+////        headerView.layer.borderWidth = 0.7
+//        headerView.addSubview(nameLabel)
+//        headerView.addSubview(genderLabel)
+//        NSLayoutConstraint.activate([
+//            nameLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+//            nameLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+//            nameLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: standardMargin/2),
+//            nameLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -standardMargin/2),
+//            genderLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+//            genderLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -standardMargin)
+//        ])
+//        return headerView
+//    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return players.count
@@ -95,6 +84,7 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
         cell.selectionStyle = .none
         cell.playerDelegate = self
         // swiftlint:enable force_cast
+        cell.indexLabel.text = String(indexPath.row + 1)
         let player = players[indexPath.row]
         // 第一個永遠是自己
         if indexPath.row == 0 || canEdit == false {
