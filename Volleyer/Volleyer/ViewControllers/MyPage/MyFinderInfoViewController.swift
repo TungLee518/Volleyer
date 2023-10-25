@@ -20,7 +20,7 @@ class MyFinderInfoViewController: UIViewController {
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var randomTeamButton: UIButton = {
         let button = UIButton()
-        button.setTitle("幫我分隊", for: .normal)
+//        button.setTitle("幫我分隊", for: .normal)
         button.whiteButton()
         button.addTarget(self, action: #selector(randomTeamPage), for: .touchUpInside)
         return button
@@ -78,6 +78,7 @@ class MyFinderInfoViewController: UIViewController {
     }
 
     private func setLayout() {
+        randomTeamButton.setTitle("18 人才能分隊", for: .normal)
         playView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             playView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -109,7 +110,8 @@ class MyFinderInfoViewController: UIViewController {
             if let gotPlayers = gotPlayers {
                 self.playerListTableView.players = gotPlayers
                 self.playerListTableView.reloadData()
-                if gotPlayers.count == 18 {
+                if gotPlayers.count >= 18 {
+                    self.randomTeamButton.setTitle("幫我分隊", for: .normal)
                     self.randomTeamButton.isEnabled = true
                     self.randomTeamButton.alpha = 1
                 }
@@ -131,7 +133,8 @@ class MyFinderInfoViewController: UIViewController {
         print("go to random team page")
         let storyboard = UIStoryboard(name: "RandomTeam", bundle: nil)
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "RandomTeamViewController") as? RandomTeamViewController {
-            nextVC.playerUsers = playerListTableView.players
+            let top18Players = playerListTableView.players.prefix(18)
+            nextVC.playerUsers = Array(top18Players)
             navigationController?.pushViewController(nextVC, animated: true)
         }
     }
