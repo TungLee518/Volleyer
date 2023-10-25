@@ -20,7 +20,7 @@ class MyFinderInfoViewController: UIViewController {
     private let playerListTableView = PlayerListTableView(frame: .zero, style: .plain)
     lazy var randomTeamButton: UIButton = {
         let button = UIButton()
-        button.setTitle("幫我分隊", for: .normal)
+//        button.setTitle("幫我分隊", for: .normal)
         button.whiteButton()
         button.addTarget(self, action: #selector(randomTeamPage), for: .touchUpInside)
         return button
@@ -36,10 +36,11 @@ class MyFinderInfoViewController: UIViewController {
     var thisPlay: Play? {
         didSet {
             playView.thisPlay = thisPlay
+            if let thisPlayPlayerInfo = thisPlay?.playerInfo {
+                getPlayersData(playersId: thisPlayPlayerInfo)
+            }
         }
     }
-
-    private var addPlayers = fakeUsers
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +50,8 @@ class MyFinderInfoViewController: UIViewController {
         setPlayersTableView()
         setLayout()
         setNavBar()
-//        playersTableViewLable.isHidden = true
-//        playerListTableView.isHidden = true
-//        randomTeamButton.isHidden = true
+        randomTeamButton.isEnabled = false
+        randomTeamButton.alpha = 0.5
     }
 
     private func setNavBar() {
@@ -67,7 +67,6 @@ class MyFinderInfoViewController: UIViewController {
         view.addSubview(playerListTableView)
         view.addSubview(changeButton)
         playerListTableView.translatesAutoresizingMaskIntoConstraints = false
-        playerListTableView.players = addPlayers
         playerListTableView.canEdit = false
         playerListTableView.layer.cornerRadius = 20
         playerListTableView.layer.borderColor = UIColor.gray4.cgColor
@@ -75,9 +74,11 @@ class MyFinderInfoViewController: UIViewController {
         playerListTableView.backgroundColor = .white
         playerListTableView.sectionHeaderTopPadding = 0
         playerListTableView.separatorStyle = .none
+        playerListTableView.parent = self
     }
 
     private func setLayout() {
+        randomTeamButton.setTitle("18 人才能分隊", for: .normal)
         playView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             playView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -104,10 +105,20 @@ class MyFinderInfoViewController: UIViewController {
         ])
     }
 
-    func didTapProfileButton(for player: Player) {
-        // Handle profile button tap for the selected player
-        print("Tapped on profile button for \(player.name)")
-        // Navigate to the player's profile view or perform any other action
+    func getPlayersData(playersId: [String]) {
+        FinderDataManager.sharedDataMenager.getPlayersData(playersId: playersId) { gotPlayers, err in
+            if let gotPlayers = gotPlayers {
+                self.playerListTableView.players = gotPlayers
+                self.playerListTableView.reloadData()
+                if gotPlayers.count >= 18 {
+                    self.randomTeamButton.setTitle("幫我分隊", for: .normal)
+                    self.randomTeamButton.isEnabled = true
+                    self.randomTeamButton.alpha = 1
+                }
+            } else if let err = err {
+                print("getPlayersData fail:", err)
+            }
+        }
     }
 
     @objc func pushToEstablishVC() {
@@ -122,8 +133,8 @@ class MyFinderInfoViewController: UIViewController {
         print("go to random team page")
         let storyboard = UIStoryboard(name: "RandomTeam", bundle: nil)
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "RandomTeamViewController") as? RandomTeamViewController {
-            nextVC.hidesBottomBarWhenPushed = true
-            nextVC.playerUsers = addPlayers
+            let top18Players = playerListTableView.players.prefix(18)
+            nextVC.playerUsers = Array(top18Players)
             navigationController?.pushViewController(nextVC, animated: true)
         }
     }

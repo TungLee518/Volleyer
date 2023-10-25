@@ -110,8 +110,17 @@ class ReportViewController: UIViewController {
     }
 
     @objc func submitReport() {
-        navigationController?.popViewController(animated: true)
-        LKProgressHUD.showSuccess(text: "檢舉成功")
+        if let title = idTextField.text, let content = reasonTextView.text {
+            let thisReport = Report(createTime: Date(), reportUserId: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "user default error", title: title, content: content)
+            MyDataManager.shared.saveReport(thisReport) { isSaved in
+                if isSaved {
+                    LKProgressHUD.showSuccess(text: "檢舉成功")
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    LKProgressHUD.showSuccess(text: "請再試一次")
+                }
+            }
+        }
     }
 }
 

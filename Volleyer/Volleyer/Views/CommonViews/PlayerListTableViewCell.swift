@@ -21,14 +21,16 @@ class PlayerTableViewCell: UITableViewCell {
 
     weak var playerDelegate: EditPlayersDelegate?
 
+    let indexLabel: UILabel = {
+        let label = UILabel()
+        label.text = "99"
+        label.regularSmallLabel()
+        return label
+    }()
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "name"
-        label.textColor = UIColor.gray2
-        label.font = .regularNunito(size: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.sizeToFit()
+        label.regularSmallLabel()
         label.isHidden = true
         return label
     }()
@@ -89,6 +91,7 @@ class PlayerTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(doneToView), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
 
@@ -102,6 +105,7 @@ class PlayerTableViewCell: UITableViewCell {
     }
 
     private func setupSubviews() {
+        contentView.addSubview(indexLabel)
         contentView.addSubview(nameLabel)
         contentView.addSubview(genderLabel)
         contentView.addSubview(inputNameTextField)
@@ -109,13 +113,13 @@ class PlayerTableViewCell: UITableViewCell {
         contentView.addSubview(rightButton)
 
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
-            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            indexLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
+            indexLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
 
-            genderLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            genderLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            genderLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/4),
-            genderLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/4),
+            nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/4),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/4),
 
             inputNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: standardMargin),
             inputNameTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -126,12 +130,8 @@ class PlayerTableViewCell: UITableViewCell {
             inputGenderTextField.widthAnchor.constraint(equalToConstant: standardSmallerTextFieldWidth*2),
             inputGenderTextField.heightAnchor.constraint(equalToConstant: standardTextFieldHeight),
 
-            rightButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-//            rightButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: standardMargin/4),
-            rightButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin),
-//            rightButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -standardMargin/4),
-            rightButton.heightAnchor.constraint(equalToConstant: 20),
-            rightButton.widthAnchor.constraint(equalToConstant: 50)
+            genderLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            genderLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -standardMargin)
         ])
     }
 

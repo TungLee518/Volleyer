@@ -240,6 +240,24 @@ class FinderDataManager {
         }
     }
 
+    func getPlayersData(playersId: [String], completion: @escaping ([User]?, Error?) -> Void) {
+        var players: [User] = []
+        for playerId in playersId {
+            getUserByFirebaseId(id: playerId) { gotUser, err in
+                if let gotUser = gotUser {
+                    players.append(gotUser)
+                    if players.count == playersId.count {
+                        players.sort { $0.gender < $1.gender }
+                        completion(players, nil)
+                    }
+                } else if let err = err {
+                    print("getUserByFirebaseId fail:", err)
+                    completion(nil, err)
+                }
+            }
+        }
+    }
+
     // MARK: get competitions
     func getCompetion() {
         competitions.getDocuments() { (querySnapshot, err) in

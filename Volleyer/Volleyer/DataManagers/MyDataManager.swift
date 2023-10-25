@@ -19,6 +19,7 @@ class MyDataManager {
     static let shared = MyDataManager()
 
     let users = Firestore.firestore().collection("users")
+    let reports = Firestore.firestore().collection("reports")
     private let storage = Storage.storage().reference()
 
     var canGoToTabbarVC: ((Bool) -> Void)?
@@ -112,6 +113,23 @@ class MyDataManager {
                         print("Document successfully written!")
                     }
                 }
+            }
+        }
+    }
+
+    func saveReport(_ report: Report, completion: @escaping (Bool) -> Void) {
+        reports.document().setData([
+            "create_time": report.createTime,
+            "report_user_id": report.reportUserId,
+            "title": report.title,
+            "content": report.content
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+                completion(false)
+            } else {
+                print("Document successfully written!")
+                completion(true)
             }
         }
     }
@@ -237,7 +255,7 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamAva").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
