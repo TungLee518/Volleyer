@@ -14,7 +14,6 @@ class MyFindersViewController: UIViewController, UITableViewDataSource, UITableV
         let imageView = UIImageView()
         imageView.image = UIImage(named: "blow")
         imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.isHidden = true
         return imageView
     }()
     private let noDataLabel: UILabel = {

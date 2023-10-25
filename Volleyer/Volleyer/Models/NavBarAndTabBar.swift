@@ -55,8 +55,8 @@ enum TabBarImageEnum: String {
     case players
 
     private var description: String {
-           return self.rawValue
-       }
+        return self.rawValue
+    }
 }
 
 enum RightBarTiems: String {

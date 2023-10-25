@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// 可放大縮小的照片
 class PanZoomImageView: UIScrollView {
 
     var imageName: String? {

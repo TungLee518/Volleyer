@@ -27,6 +27,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
 
     let headerLabel: UILabel = {
         let label = UILabel()
+        label.accessibilityIdentifier = "Hi"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "快來找適合自己的場！"
         label.font = .semiboldNunito(size: 20)
@@ -75,10 +76,6 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         setNavBar()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-//        setDisapearNavBar()
-    }
-
     func setNavBar() {
         self.view.backgroundColor = UIColor.white
         navigationItem.title = "請稍候"
@@ -91,17 +88,12 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
          ]
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-        // establish post button
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pushToEstablishVC))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "postFinder"
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
-    func setDisapearNavBar() {
-//        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.backgroundColor = .clear
-        navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-    }
+
     func setWatingAnimate() {
         waitingAnimate = .init(name: "volleyHit")
         waitingAnimate?.frame = view.bounds

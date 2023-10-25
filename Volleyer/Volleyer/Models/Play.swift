@@ -42,12 +42,6 @@ enum EstablishPageEnum: String {
     case level = "程度"
 }
 
-enum AddPlayPageEnum: String {
-    case sendRequest = "我要加"
-    case addPlayer = "新增隊友"
-    case level = "程度"
-}
-
 enum PlayTitle: String {
     case id = "id"
     case finderId = "finder_id"

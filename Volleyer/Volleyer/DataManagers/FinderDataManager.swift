@@ -215,36 +215,19 @@ class FinderDataManager {
     }
 
     // MARK: get play by id
-    func getPlayById(id: String) {
-        plays.whereField(PlayTitle.id.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        let thisPlay = self.decodePlay(document)
-                        self.thisPlayDelegate?.manager(self, thisPlay: thisPlay)
-                    }
-                }
+    func getPlayById(id: String, completion: @escaping (Play?, Error?) -> Void) {
+        plays.document(id).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let thisPlay = self.decodePlayDS(document)
+                completion(thisPlay, nil)
+            } else {
+                print("Document does not exist")
+                completion(nil, error)
+            }
         }
     }
 
     // MARK: get user by id
-    // TODO: change to firebase id
-    func getUserById(id: String) {
-        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        let thisUser = self.decodeUser(document)
-                        self.thisUserDelegate?.manager(self, thisUser: thisUser)
-                    }
-                }
-        }
-    }
-
     func getUserByFirebaseId(id: String, completion: @escaping (User?, Error?) -> Void) {
         users.document(id).getDocument { (document, error) in
             if let document = document, document.exists {
@@ -255,7 +238,24 @@ class FinderDataManager {
                 completion(nil, error)
             }
         }
+    }
 
+    func getPlayersData(playersId: [String], completion: @escaping ([User]?, Error?) -> Void) {
+        var players: [User] = []
+        for playerId in playersId {
+            getUserByFirebaseId(id: playerId) { gotUser, err in
+                if let gotUser = gotUser {
+                    players.append(gotUser)
+                    if players.count == playersId.count {
+                        players.sort { $0.gender < $1.gender }
+                        completion(players, nil)
+                    }
+                } else if let err = err {
+                    print("getUserByFirebaseId fail:", err)
+                    completion(nil, err)
+                }
+            }
+        }
     }
 
     // MARK: get competitions

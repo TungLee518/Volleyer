@@ -18,11 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         // Override point for customization after application launch.
 
         FirebaseApp.configure()
-//        let dataManager = MyDataManager()
-
-//        var thisUser = User(id: "", email: "", gender: 99, name: "", level: LevelRange(setBall: -1, block: -1, dig: -1, spike: -1, sum: -1))
-
-//        dataManager.getSimulatorProfileData()
 
         registerForPushNotifications()
         UNUserNotificationCenter.current().delegate = self

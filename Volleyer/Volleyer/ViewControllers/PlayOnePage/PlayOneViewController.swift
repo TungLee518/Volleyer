@@ -8,7 +8,7 @@
 import UIKit
 import MJRefresh
 
-class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
+class PlayOneViewController: UIViewController {
 
     @IBOutlet weak var playOneTableView: UITableView!
 
@@ -24,7 +24,6 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
 
         LKProgressHUD.show()
         setNavBar()
-        // playOneDataManager.getPlayOneCourts()
         playOneDataManager.listenPlayOne()
         playOneDataManager.playOneDataDelegate = self
         playOneDataManager.updatePlayOneTableView = { [weak self] isUpdate in
@@ -53,15 +52,42 @@ class PlayOneViewController: UIViewController, PlayOneDataManagerDelegate {
     func pushToPlayOneFinderVC(whichCourt: Int, whichFinder: Int) {
         let storyboard = UIStoryboard(name: "PlayOne", bundle: nil)
         if let nextVC = storyboard.instantiateViewController(withIdentifier: "PlayOneFinderViewController") as? PlayOneFinderViewController {
-            nextVC.court = "\(playOneData[whichCourt].court) play\(whichFinder+1)"
+            nextVC.court = "\(playOneData[whichCourt].court) play\(whichFinder + 1)"
             nextVC.finderInfo = playOneData[whichCourt].finders[whichFinder]
             nextVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(nextVC, animated: true)
         }
     }
+    
+    @objc func lineUp(_ sender: UIButton) {
+        if canAddPlay {
+            playOneDataManager.createPlayOneFinder(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No Id")
+            playOneDataManager.addFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No Id", court: playOneData[sender.tag].court)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.cancelPlay.rawValue, style: .plain, target: self, action: #selector(cancelPlay))
+        } else {
+            // 跳個通知
+            print("已經加過了")
+        }
+    }
+
+    @objc func cancelPlay() {
+        let controller = UIAlertController(title: "確定？", message: "要取消 Play？", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "是", style: .default) { _ in
+            print("確定要刪除")
+            self.navigationItem.setRightBarButton(nil, animated: false)
+            self.canAddPlay = true
+            self.playOneDataManager.deleteFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No User Id", court: self.courtIAdded!)
+            self.playOneDataManager.deletaPlayOnefinder(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No User Id")
+            self.courtIAdded = nil
+        }
+        controller.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        controller.addAction(cancelAction)
+        present(controller, animated: true)
+    }
 }
 
-extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
+extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource, PlayOneDataManagerDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         200
     }
@@ -84,14 +110,6 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
             pushToPlayOneFinderVC(whichCourt: indexPath.section, whichFinder: indexPathInCV.row)
         }
         return cell
-    }
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        view.tintColor = .purple2
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.heightAnchor.constraint(equalToConstant: standardButtonHeight).isActive = true
-//        guard let header = view as? UITableViewHeaderFooterView else { return }
-//        header.textLabel?.textColor = .gray7
-//        header.textLabel?.font = .semiboldNunito(size: 20)
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -161,33 +179,5 @@ extension PlayOneViewController: UITableViewDelegate, UITableViewDataSource {
         print("========\(playOneData)")
         playOneTableView.reloadData()
         LKProgressHUD.dismiss()
-    }
-
-    @objc func lineUp(_ sender: UIButton) {
-        if canAddPlay {
-            playOneDataManager.createPlayOneFinder(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No Id")
-            playOneDataManager.addFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No Id", court: playOneData[sender.tag].court)
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: RightBarTiems.cancelPlay.rawValue, style: .plain, target: self, action: #selector(cancelPlay))
-        } else {
-            // 跳個通知
-            print("已經加過了")
-        }
-    }
-
-    @objc func cancelPlay() {
-        let controller = UIAlertController(title: "確定？", message: "要取消 Play？", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "是", style: .default) { _ in
-            print("確定要刪除")
-            self.navigationItem.setRightBarButton(nil, animated: false)
-            self.canAddPlay = true
-            self.playOneDataManager.deleteFinderOFACourt(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No User Id", court: self.courtIAdded!)
-            self.playOneDataManager.deletaPlayOnefinder(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No User Id")
-            self.courtIAdded = nil
-        }
-        controller.addAction(okAction)
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-        controller.addAction(cancelAction)
-        present(controller, animated: true)
-        
     }
 }

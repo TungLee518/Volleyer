@@ -19,6 +19,7 @@ class MyDataManager {
     static let shared = MyDataManager()
 
     let users = Firestore.firestore().collection("users")
+    let reports = Firestore.firestore().collection("reports")
     private let storage = Storage.storage().reference()
 
     var canGoToTabbarVC: ((Bool) -> Void)?
@@ -116,6 +117,23 @@ class MyDataManager {
         }
     }
 
+    func saveReport(_ report: Report, completion: @escaping (Bool) -> Void) {
+        reports.document().setData([
+            "create_time": report.createTime,
+            "report_user_id": report.reportUserId,
+            "title": report.title,
+            "content": report.content
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+                completion(false)
+            } else {
+                print("Document successfully written!")
+                completion(true)
+            }
+        }
+    }
+
     func updateProfileInfo(changedUser: User, completion: @escaping (Bool?, Error?) -> Void) {
         let data: [String: Any] = [
             UserTitle.id.rawValue: changedUser.id,
@@ -151,18 +169,7 @@ class MyDataManager {
                 print("Error updating document: \(err)")
             } else {
                 print("Document successfully updated")
-                UserDefaults.standard.set(nil, forKey: UserTitle.firebaseId.rawValue)
-                UserDefaults.standard.set(nil, forKey: UserTitle.userIdentifier.rawValue)
-                UserDefaults.standard.set(nil, forKey: UserTitle.id.rawValue)
-                UserDefaults.standard.set(nil, forKey: UserTitle.name.rawValue)
-                UserDefaults.standard.set(nil, forKey: UserTitle.image.rawValue)
-                UserDefaults.standard.set(nil, forKey: UserTitle.email.rawValue)
-                UserDefaults.standard.set(nil, forKey: UserTitle.gender.rawValue)
-                UserDefaults.standard.set(nil, forKey: Level.setBall.rawValue)
-                UserDefaults.standard.set(nil, forKey: Level.block.rawValue)
-                UserDefaults.standard.set(nil, forKey: Level.dig.rawValue)
-                UserDefaults.standard.set(nil, forKey: Level.spike.rawValue)
-                UserDefaults.standard.set(nil, forKey: Level.sum.rawValue)
+                self.deleteUserDefault()
             }
         }
     }
@@ -226,7 +233,7 @@ class MyDataManager {
                     } else {
                         var blockListUser = [User]()
                         for id in blockList {
-                            self.getUserById(id: id) { theUser, err in
+                            self.getUserByFirebaseId(id: id) { theUser, err in
                                 if let error = err {
                                     print("Error: \(error)")
                                 } else if let theUser = theUser {
@@ -248,7 +255,7 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "iamMandy").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamAva").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -318,18 +325,41 @@ class MyDataManager {
         return aUser
     }
 
-    func getUserById(id: String, completion: @escaping (User?, Error?) -> Void) {
-        users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                    completion(nil, err)
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        let thisUser = self.decodeUser(document)
-                        completion(thisUser, nil)
-                    }
-                }
+    func decodeUserDS(_ document: DocumentSnapshot) -> User {
+        let levelDict = document.data()?[UserTitle.level.rawValue] as? [String: Int]
+        let levelRange = LevelRange(
+            setBall: levelDict?[LevelTitle.set.rawValue] ?? 0,
+            block: levelDict?[LevelTitle.block.rawValue] ?? 0,
+            dig: levelDict?[LevelTitle.dig.rawValue] ?? 0,
+            spike: levelDict?[LevelTitle.spike.rawValue] ?? 0,
+            sum: levelDict?[LevelTitle.sum.rawValue] ?? 0
+        )
+        let aUser = User(
+            firebaseId: document.documentID,
+            loginWay: document.data()?[UserTitle.loginWay.rawValue] as? Int ?? 0,
+            userIdentifier: document.data()?[UserTitle.userIdentifier.rawValue] as? String ?? "",
+            id: document.data()?[UserTitle.id.rawValue] as? String ?? "no id",
+            email: document.data()?[UserTitle.email.rawValue] as? String ?? "no email",
+            gender: document.data()?[UserTitle.gender.rawValue] as? Int ?? 0,
+            name: document.data()?[UserTitle.name.rawValue] as? String ?? "no name",
+            level: levelRange,
+            myPlayList: document.data()?[UserTitle.myPlayList.rawValue] as? [String] ?? [],
+            image: document.data()?[UserTitle.image.rawValue] as? String ?? placeholderImage,
+            blockList: document.data()?[UserTitle.blockList.rawValue] as? [String] ?? [],
+            status: document.data()?[UserTitle.status.rawValue] as? Int ?? 0
+        )
+        return aUser
+    }
+
+    func getUserByFirebaseId(id: String, completion: @escaping (User?, Error?) -> Void) {
+        users.document(id).getDocument { (document, error) in
+            if let document = document, document.exists {
+                let thisUser = self.decodeUserDS(document)
+                completion(thisUser, nil)
+            } else {
+                print("Document does not exist")
+                completion(nil, error)
+            }
         }
     }
 
@@ -346,5 +376,20 @@ class MyDataManager {
         UserDefaults.standard.set(thisUser.level.dig, forKey: Level.dig.rawValue)
         UserDefaults.standard.set(thisUser.level.spike, forKey: Level.spike.rawValue)
         UserDefaults.standard.set(thisUser.level.sum, forKey: Level.sum.rawValue)
+    }
+
+    func deleteUserDefault() {
+        UserDefaults.standard.set(nil, forKey: UserTitle.firebaseId.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.userIdentifier.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.id.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.name.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.image.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.email.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserTitle.gender.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.setBall.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.block.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.dig.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.spike.rawValue)
+        UserDefaults.standard.set(nil, forKey: Level.sum.rawValue)
     }
 }

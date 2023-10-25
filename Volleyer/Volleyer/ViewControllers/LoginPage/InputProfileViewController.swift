@@ -16,7 +16,6 @@ class InputProfileViewController: UIViewController {
     }()
     private var pleaseInputLabel: UILabel = {
         let label = UILabel()
-        label.text = "歡迎加入排球人"
         label.textColor = UIColor.gray2
         label.font = .semiboldNunito(size: 32)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,14 +31,7 @@ class InputProfileViewController: UIViewController {
     }()
     lazy var idTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "用於顯示且不重複的ID"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "用於顯示且不重複的ID")
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
@@ -58,14 +50,7 @@ class InputProfileViewController: UIViewController {
     }()
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "輸入姓名"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "輸入姓名")
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
@@ -84,14 +69,7 @@ class InputProfileViewController: UIViewController {
     }()
     lazy var emailTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "輸入 email"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "輸入 email")
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
@@ -110,14 +88,7 @@ class InputProfileViewController: UIViewController {
     }()
     lazy var genderTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "請選擇"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "請選擇")
         textField.inputView = genderPicker
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -137,39 +108,16 @@ class InputProfileViewController: UIViewController {
     }()
     lazy var viewLevelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("自評表", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
+        button.whiteButton()
         button.addTarget(self, action: #selector(viewLevel), for: .touchUpInside)
         return button
     }()
     lazy var doneInputButton: UIButton = {
         let button = UIButton()
-        button.setTitle("完成", for: .normal)
-        button.titleLabel?.font =  .semiboldNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple1
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
+        button.purpleButton()
         button.addTarget(self, action: #selector(doneInput), for: .touchUpInside)
         return button
     }()
-//    var levelImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.backgroundColor = .secondarySystemBackground
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.image = UIImage(named: "levels")
-//        imageView.isUserInteractionEnabled = true
-//        return imageView
-//    }()
     let levelImageView = PanZoomImageView(named: "levels")
 
     var setCheckboxes: [UIButton] = []
@@ -181,54 +129,25 @@ class InputProfileViewController: UIViewController {
 
     lazy var thisUser = User(id: "", email: "", gender: -1, name: "")
 
-    var changeUserInfoData: User? {
-        didSet {
-            // auto input user data
-//            autoInputUserInfo()
-        }
-    }
+    var changeUserInfoData: User?
 
     var levelImageIsHidden = true
     let hud = JGProgressHUD(style: .dark)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        pleaseInputLabel.text = "歡迎加入排球人"
-        viewLevelButton.removeTarget(nil, action: nil, for: .allEvents)
-        viewLevelButton.setTitle("自評表", for: .normal)
-        viewLevelButton.addTarget(self, action: #selector(viewLevel), for: .touchUpInside)
-        doneInputButton.removeTarget(nil, action: nil, for: .allEvents)
-        doneInputButton.setTitle("完成", for: .normal)
-        doneInputButton.addTarget(self, action: #selector(doneInput), for: .touchUpInside)
-        print(thisUser)
-        view.backgroundColor = .white
-        view.addSubview(pleaseInputLabel)
-        view.addSubview(idLabel)
-        view.addSubview(idTextField)
-        view.addSubview(nameLabel)
-        view.addSubview(nameTextField)
-        view.addSubview(emailLabel)
-        view.addSubview(emailTextField)
-        view.addSubview(genderLabel)
-        view.addSubview(genderTextField)
-        view.addSubview(levelLabel)
-        view.addSubview(viewLevelButton)
-        view.addSubview(doneInputButton)
-
+        setOriginViews()
+        setNavBar()
         setLayout()
         setSABC()
-
         setCheckboxes = createCheckboxes(text: positions[0], i: 0, action: #selector(setCheckboxTapped))
         blocCheckboxes = createCheckboxes(text: positions[1], i: 1, action: #selector(blockCheckboxTapped))
         digCheckboxes = createCheckboxes(text: positions[2], i: 2, action: #selector(digCheckboxTapped))
         spickCheckboxes = createCheckboxes(text: positions[3], i: 3, action: #selector(spickCheckboxTapped))
         sumCheckboxes = createCheckboxes(text: positions[4], i: 4, action: #selector(sumCheckboxTapped))
-
         genderPicker.dataSource = self
         genderPicker.delegate = self
         setLevelImage()
-
         MyDataManager.shared.canGoToTabbarVC = { [weak self] canGoToTabbarVc in
             guard let self = self else { return }
             if canGoToTabbarVc {
@@ -243,6 +162,36 @@ class InputProfileViewController: UIViewController {
             }
         }
         autoInputUserInfo()
+    }
+
+    func setNavBar() {
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = .purple2
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+
+    func setOriginViews() {
+        pleaseInputLabel.text = "歡迎加入排球人"
+        viewLevelButton.removeTarget(nil, action: nil, for: .allEvents)
+        viewLevelButton.setTitle("自評表", for: .normal)
+        viewLevelButton.addTarget(self, action: #selector(viewLevel), for: .touchUpInside)
+        doneInputButton.removeTarget(nil, action: nil, for: .allEvents)
+        doneInputButton.setTitle("完成", for: .normal)
+        doneInputButton.addTarget(self, action: #selector(doneInput), for: .touchUpInside)
+        view.backgroundColor = .white
+        view.addSubview(pleaseInputLabel)
+        view.addSubview(idLabel)
+        view.addSubview(idTextField)
+        view.addSubview(nameLabel)
+        view.addSubview(nameTextField)
+        view.addSubview(emailLabel)
+        view.addSubview(emailTextField)
+        view.addSubview(genderLabel)
+        view.addSubview(genderTextField)
+        view.addSubview(levelLabel)
+        view.addSubview(viewLevelButton)
+        view.addSubview(doneInputButton)
     }
     func setLayout() {
         NSLayoutConstraint.activate([
@@ -366,8 +315,6 @@ class InputProfileViewController: UIViewController {
             nameTextField.text = changeUserInfoData.name
             emailTextField.text = changeUserInfoData.email
             genderTextField.text = genderList[changeUserInfoData.gender]
-            print(changeUserInfoData)
-            print(setCheckboxes)
             setCheckboxes[changeUserInfoData.level.setBall].isSelected = true
             blocCheckboxes[changeUserInfoData.level.block].isSelected = true
             digCheckboxes[changeUserInfoData.level.dig].isSelected = true

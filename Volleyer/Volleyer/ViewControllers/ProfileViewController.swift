@@ -8,30 +8,27 @@
 import UIKit
 import Kingfisher
 
-class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
+class ProfileViewController: UIViewController {
 
     var thisUserId: String? {
         didSet {
-            dataManager.getUserById(id: thisUserId ?? "No User")
+            getUserData()
+        }
+    }
+    var thisUser: User? {
+        didSet {
+            profileView.thisUser = thisUser
+            profileView.parent = self
         }
     }
 
     private var profileView = ProfileView()
 
-    let dataManager = FinderDataManager()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(profileView)
-        dataManager.thisUserDelegate = self
         setNavBar()
         setLayout()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        setContent()
-        print("view will appear")
     }
 
     private func setNavBar() {
@@ -51,13 +48,13 @@ class ProfileViewController: UIViewController, ThisUserDataManagerDelegate {
             profileView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-//            profileView.heightAnchor.constraint(equalToConstant: 270)
-//            profileView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -standardMargin)
         ])
     }
 
-    func manager(_ manager: FinderDataManager, thisUser user: User) {
-        profileView.thisUser = user
-        profileView.parent = self
+    func getUserData() {
+        FinderDataManager.sharedDataMenager.getUserByFirebaseId(id: thisUserId ?? "No User") { gotUser, err in
+            self.profileView.thisUser = gotUser
+            self.profileView.parent = self
+        }
     }
 }

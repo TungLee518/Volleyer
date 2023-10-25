@@ -11,7 +11,7 @@ class ReportViewController: UIViewController {
 
     private let idLabel: UILabel = {
         let label = UILabel()
-        label.text = "要檢舉的 ID"
+        label.text = "標題"
         label.textColor = UIColor.gray2
         label.font = .semiboldNunito(size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -19,14 +19,7 @@ class ReportViewController: UIViewController {
     }()
     lazy var idTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "ID"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "Title")
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
@@ -48,10 +41,7 @@ class ReportViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .regularNunito(size: 16)
         textView.textColor = .gray4
-        //textView.placeholder = "content"
         textView.textAlignment = .left
-        //textView.contentVerticalAlignment = .top
-        //textView.borderStyle = .roundedRect
         textView.autocapitalizationType = .none
         textView.layer.borderColor = UIColor.gray3.cgColor
         textView.layer.borderWidth = 0.3
@@ -68,14 +58,7 @@ class ReportViewController: UIViewController {
     lazy var submitButton: UIButton = {
         let button = UIButton()
         button.setTitle("送出檢舉", for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
+        button.whiteButton()
         button.addTarget(self, action: #selector(submitReport), for: .touchUpInside)
         return button
     }()
@@ -127,8 +110,17 @@ class ReportViewController: UIViewController {
     }
 
     @objc func submitReport() {
-        navigationController?.popViewController(animated: true)
-        LKProgressHUD.showSuccess(text: "檢舉成功")
+        if let title = idTextField.text, let content = reasonTextView.text {
+            let thisReport = Report(createTime: Date(), reportUserId: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "user default error", title: title, content: content)
+            MyDataManager.shared.saveReport(thisReport) { isSaved in
+                if isSaved {
+                    LKProgressHUD.showSuccess(text: "檢舉成功")
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    LKProgressHUD.showSuccess(text: "請再試一次")
+                }
+            }
+        }
     }
 }
 
@@ -139,7 +131,7 @@ extension ReportViewController: UITextViewDelegate {
             textView.textColor = .gray1
         }
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "請輸入詳細原因"

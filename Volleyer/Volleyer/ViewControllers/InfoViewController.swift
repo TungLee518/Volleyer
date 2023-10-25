@@ -7,24 +7,15 @@
 
 import UIKit
 
-class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUserDataManagerDelegate {
+class InfoViewController: UIViewController {
 
     private var playView = PlayInfoView()
     private var profileView = ProfileView()
     lazy var cancelRequestButton: UIButton = {
         let button = UIButton()
         button.setTitle(RequestEnum.cancelAddPlay.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.whiteButton()
         button.addTarget(self, action: #selector(cancelRequest), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.clipsToBounds = true
-        button.isHidden = true
         return button
     }()
 
@@ -56,10 +47,7 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         view.addSubview(playView)
         view.addSubview(profileView)
         view.addSubview(cancelRequestButton)
-        dataManager.getPlayById(id: thisPlayId ?? "")
-        dataManager.getUserById(id: thisUserId ?? "")
-        dataManager.thisPlayDelegate = self
-        dataManager.thisUserDelegate = self
+        getUserAndPlayData()
         setLayout()
         setNavBar()
         playView.applyShadow()
@@ -95,12 +83,17 @@ class InfoViewController: UIViewController, ThisPlayDataManagerDelegate, ThisUse
         ])
     }
 
-    func manager(_ manager: FinderDataManager, thisPlay play: Play) {
-        thisPlay = play
-    }
-
-    func manager(_ manager: FinderDataManager, thisUser user: User) {
-        thisUser = user
+    func getUserAndPlayData() {
+        dataManager.getPlayById(id: thisPlayId ?? "") { gotPlay, err in
+            if let gotPlay = gotPlay {
+                self.thisPlay = gotPlay
+            }
+        }
+        dataManager.getUserByFirebaseId(id: thisUserId ?? "") { gotUser, err in
+            if let gotUser = gotUser {
+                self.thisUser = gotUser
+            }
+        }
     }
 
     @objc func cancelRequest() {

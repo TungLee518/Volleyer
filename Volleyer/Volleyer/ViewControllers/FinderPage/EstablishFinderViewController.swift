@@ -35,63 +35,26 @@ class EstablishFinderViewController: UIViewController {
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "開始時間"
-        label.textColor = UIColor.gray2
-        label.font = .semiboldNunito(size: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.sizeToFit()
+        label.semiboldSmallLabel()
         return label
     }()
     lazy var startTimeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "starttime"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneStartDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-
-        textField.inputAccessoryView = toolbar
+        textField.regularTextField(placeHolder: "starttime")
         textField.inputView = startDatePicker
-
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneStartDatePicker))
         return textField
     }()
     private let endTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "結束時間"
-        label.textColor = UIColor.gray2
-        label.font = .semiboldNunito(size: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.sizeToFit()
+        label.semiboldSmallLabel()
         return label
     }()
     lazy var endTimeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "endtime"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEndDatePicker))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-
-        textField.inputAccessoryView = toolbar
+        textField.regularTextField(placeHolder: "endtime")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneEndDatePicker))
         textField.inputView = endDatePicker
         return textField
     }()
@@ -105,20 +68,8 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var placeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "place"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePlace))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
+        textField.regularTextField(placeHolder: "place")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(donePlace))
         return textField
     }()
     private let priceLabel: UILabel = {
@@ -131,39 +82,9 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var priceTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "price"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "price")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(donePrice))
         textField.keyboardType = .numberPad
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePrice))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
-        return textField
-    }()
-    private lazy var unitTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "unit"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(cancelToolbar))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
         return textField
     }()
     private let unitLabel: UILabel = {
@@ -184,14 +105,7 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var typeTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "X 網 X 排"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "X 網 X 排")
         textField.inputView = typePicker
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -219,21 +133,9 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var maleTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "male"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "male")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneMaleLack))
         textField.keyboardType = .numberPad
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneMaleLack))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
         return textField
     }()
     private let femaleLabel: UILabel = {
@@ -246,89 +148,31 @@ class EstablishFinderViewController: UIViewController {
     }()
     lazy var femaleTextField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = .regularNunito(size: 16)
-        textField.textColor = .gray2
-        textField.placeholder = "female"
-        textField.textAlignment = .left
-        textField.contentVerticalAlignment = .top
-        textField.borderStyle = .roundedRect
-        textField.autocapitalizationType = .none
+        textField.regularTextField(placeHolder: "female")
+        textField.inputAccessoryView = createToolBar(doneTarget: #selector(doneFemaleLack))
         textField.keyboardType = .numberPad
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneFemaleLack))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([spaceButton, doneButton], animated: false)
-        textField.inputAccessoryView = toolbar
         return textField
-    }()
-    lazy var addButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Add", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 20)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(addPlayer), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
-        return button
-    }()
-    lazy var deleteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Delete", for: .normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = UIColor.blue
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(toggleEditingMode), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        button.clipsToBounds = true
-        return button
     }()
     lazy var publishButton: UIButton = {
         let button = UIButton()
+        button.purpleButton()
         button.setTitle(EstablishPageEnum.publish.rawValue, for: .normal)
-        button.titleLabel?.font =  .semiboldNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .purple2
-        button.setTitleColor(.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.clipsToBounds = true
         return button
     }()
     lazy var saveButton: UIButton = {
         let button = UIButton()
+        button.whiteButton()
         button.setTitle(EstablishPageEnum.save.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addData), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.clipsToBounds = true
         button.isHidden = true
         return button
     }()
     lazy var deletePostButton: UIButton = {
         let button = UIButton()
+        button.whiteButton()
         button.setTitle(EstablishPageEnum.deletePost.rawValue, for: .normal)
-        button.titleLabel?.font =  .regularNunito(size: 16)
-        button.titleLabel?.textAlignment = .center
-        button.backgroundColor = .clear
-        button.setTitleColor(.purple1, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.purple1.cgColor
-        button.clipsToBounds = true
         button.isHidden = true
         return button
     }()
@@ -363,6 +207,21 @@ class EstablishFinderViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
+        addViews()
+        setUpNavBar()
+        setSABC()
+        setCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[0], i: 0), action: #selector(setCheckboxTapped))
+        blocCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[1], i: 1), action: #selector(blockCheckboxTapped))
+        digCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[2], i: 2), action: #selector(digCheckboxTapped))
+        spickCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[3], i: 3), action: #selector(spickCheckboxTapped))
+        sumCheckboxes = createCheckboxes(leftLabel: createLevelLabels(text: positions[4], i: 4), action: #selector(sumCheckboxTapped))
+        setLayout()
+        typePicker.dataSource = self
+        typePicker.delegate = self
+        ifEditMode()
+    }
+
+    func addViews() {
         view.addSubview(startTimeLabel)
         view.addSubview(startTimeTextField)
         view.addSubview(endTimeLabel)
@@ -382,23 +241,6 @@ class EstablishFinderViewController: UIViewController {
         view.addSubview(femaleTextField)
         view.addSubview(deletePostButton)
         view.addSubview(publishButton)
-//        view.addSubview(deleteButton)
-//        view.addSubview(addButton)
-
-        setUpNavBar()
-        setSABC()
-
-        setCheckboxes = createCheckboxes(text: positions[0], i: 0, action: #selector(setCheckboxTapped))
-        blocCheckboxes = createCheckboxes(text: positions[1], i: 1, action: #selector(blockCheckboxTapped))
-        digCheckboxes = createCheckboxes(text: positions[2], i: 2, action: #selector(digCheckboxTapped))
-        spickCheckboxes = createCheckboxes(text: positions[3], i: 3, action: #selector(spickCheckboxTapped))
-        sumCheckboxes = createCheckboxes(text: positions[4], i: 4, action: #selector(sumCheckboxTapped))
-
-//        setPlayListTableView()
-        setLayout()
-        typePicker.dataSource = self
-        typePicker.delegate = self
-        ifEditMode()
     }
 
     func setUpNavBar() {
@@ -412,14 +254,6 @@ class EstablishFinderViewController: UIViewController {
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationBarAppearance.backgroundColor = .clear
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
-    }
-
-    func setPlayListTableView() {
-        view.addSubview(playerListTableView)
-        // 第一個永遠是自己
-//        playerListTableView.players.append(Player(name: "May", gender: "Female"))
-        playerListTableView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func setSABC() {
@@ -442,23 +276,22 @@ class EstablishFinderViewController: UIViewController {
         }
     }
 
-    func createCheckboxes(text: String, i: Int, action: Selector) -> [UIButton] {
-        // Create a label for the question
-        let questionLabel = UILabel()
-        questionLabel.text = text
-        questionLabel.font = .regularNunito(size: 16)
-        questionLabel.textColor = .gray3
-        questionLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(questionLabel)
-        // Create constraints for the question label
+    func createLevelLabels(text: String, i: Int) -> UILabel {
+        // Create a label
+        let label = UILabel()
+        label.text = text
+        label.regularSmallLabel()
+        view.addSubview(label)
         NSLayoutConstraint.activate([
-            questionLabel.leadingAnchor.constraint(equalTo: levelLabel.trailingAnchor, constant: standardMargin),
-            questionLabel.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: (standardMargin + 10) * (Double(i)+0.2))
+            label.leadingAnchor.constraint(equalTo: levelLabel.trailingAnchor, constant: standardMargin),
+            label.topAnchor.constraint(equalTo: levelLabel.bottomAnchor, constant: (standardMargin + 10) * (Double(i)+0.2))
         ])
+        return label
+    }
 
+    func createCheckboxes(leftLabel: UILabel, action: Selector) -> [UIButton] {
         // Create checkboxes for each choice
         var choiceButtons: [UIButton] = []
-        var previous: Any = questionLabel
         for i in 0...4 {
             let checkbox = UIButton(type: .custom)
             checkbox.translatesAutoresizingMaskIntoConstraints = false
@@ -469,12 +302,11 @@ class EstablishFinderViewController: UIViewController {
             checkbox.tag = i
             view.addSubview(checkbox)
             checkbox.centerXAnchor.constraint(equalTo: SABCLabels[i].centerXAnchor).isActive = true
-            checkbox.topAnchor.constraint(equalTo: questionLabel.topAnchor).isActive = true
+            checkbox.topAnchor.constraint(equalTo: leftLabel.topAnchor).isActive = true
             choiceButtons.append(checkbox)
             if i == 4 {
                 checkbox.isSelected = true
             }
-            previous = checkbox
         }
         return choiceButtons
     }
@@ -499,6 +331,15 @@ class EstablishFinderViewController: UIViewController {
             spickCheckboxTapped(sender: spickCheckboxes[thisPlay.levelRange.spike])
             sumCheckboxTapped(sender: sumCheckboxes[thisPlay.levelRange.sum])
         }
+    }
+    func createToolBar(doneTarget: Selector) -> UIToolbar {
+        let toolbar = UIToolbar()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: doneTarget)
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelToolbar))
+        toolbar.sizeToFit()
+        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        return toolbar
     }
     @objc func setCheckboxTapped(sender: UIButton) {
         print(sender.tag)
@@ -586,16 +427,6 @@ class EstablishFinderViewController: UIViewController {
     }
     @objc func cancelToolbar() {
         self.view.endEditing(true)
-    }
-
-    @objc func toggleEditingMode() {
-        playerListTableView.toggleEditing()
-        let buttonText = playerListTableView.isEditing ? "Done" : "Delete"
-        deleteButton.setTitle(buttonText, for: .normal)
-    }
-    @objc func addPlayer() {
-        let newPlayer = Player(name: "", gender: "") // Customize as needed
-//        playerListTableView.addNewPlayer(newPlayer)
     }
 
     @objc func addData(_ sender: UIButton) {
