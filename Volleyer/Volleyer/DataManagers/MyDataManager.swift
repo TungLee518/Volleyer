@@ -134,7 +134,7 @@ class MyDataManager {
         }
     }
 
-    func updateProfileInfo(changedUser: User, completion: @escaping (Bool?, Error?) -> Void) {
+    func updateProfileInfo(changedUser: User, completion: @escaping (Bool, Error?) -> Void) {
         let data: [String: Any] = [
             UserTitle.id.rawValue: changedUser.id,
             UserTitle.email.rawValue: changedUser.email,
@@ -152,7 +152,7 @@ class MyDataManager {
         self.users.document(changedUser.firebaseId).updateData(data) { err in
             if let err = err {
                 print("Error updating document: \(err)")
-                completion(nil, err)
+                completion(false, err)
             } else {
                 print("Document successfully updated")
                 self.saveUserDefault(changedUser)
@@ -190,6 +190,9 @@ class MyDataManager {
                             LKProgressHUD.showSuccess(text: "成功封鎖")
                         }
                     }
+                } else if let error = error {
+                    print("addToBlocklist error:", error)
+                    LKProgressHUD.showFailure(text: "再試一次")
                 } else {
                     LKProgressHUD.showFailure(text: "已封鎖此用戶")
                 }
@@ -207,7 +210,7 @@ class MyDataManager {
                 if let blockListIdx = blockListIdx {
                     blockList?.remove(at: blockListIdx)
                     self.users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").updateData([
-                        UserTitle.blockList.rawValue: blockList
+                        UserTitle.blockList.rawValue: blockList ?? []
                     ]) { err in
                         if let err = err {
                             print("Error updating document: \(err)")
@@ -217,6 +220,9 @@ class MyDataManager {
                         }
                     }
                 }
+            } else if let error = error {
+                print("removeFromBlocklist error:", error)
+                LKProgressHUD.showFailure(text: "再試一次")
             } else {
                 print("User Document does not exist")
             }
@@ -226,7 +232,7 @@ class MyDataManager {
     func getBlockList() {
         users.document(UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "no my id").getDocument { (document, error) in
             if let document = document, document.exists {
-                var blockList = document.data()?[UserTitle.blockList.rawValue] as? [String]
+                let blockList = document.data()?[UserTitle.blockList.rawValue] as? [String]
                 if let blockList = blockList {
                     if blockList.count == 0 {
                         self.blockListDataManager?.manager(self, didGet: [])
@@ -255,7 +261,7 @@ class MyDataManager {
     }
 
     func getSimulatorProfileData() {
-        users.whereField("id", isEqualTo: "iamAva").getDocuments() { (querySnapshot, err) in
+        users.whereField("id", isEqualTo: "iamAva").getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -284,7 +290,7 @@ class MyDataManager {
     }
 
     func getProfileData(appleUserId: String, completion: @escaping (User?, Error?) -> Void) {
-        users.whereField(UserTitle.userIdentifier.rawValue, isEqualTo: appleUserId).getDocuments() { (querySnapshot, err) in
+        users.whereField(UserTitle.userIdentifier.rawValue, isEqualTo: appleUserId).getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                     completion(nil, err)

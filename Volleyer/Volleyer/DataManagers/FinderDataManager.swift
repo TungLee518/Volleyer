@@ -41,8 +41,6 @@ class FinderDataManager {
     let competitions = Firestore.firestore().collection("competitions")
     let addPlayRQs = Firestore.firestore().collection("requests")
 
-    let dispatchSemaphore = DispatchSemaphore(value: 1)
-
     // MARK: save play
     func savePlay(_ play: Play) {
         let document = plays.document()
@@ -115,7 +113,7 @@ class FinderDataManager {
     }
 
     func deletePlay(_ play: Play, completion: @escaping (Error?) -> Void) {
-        plays.document(play.id).delete() { err in
+        plays.document(play.id).delete { err in
             if let err = err {
                 print("Error removing document: \(err)")
                 completion(err)
@@ -148,6 +146,8 @@ class FinderDataManager {
                                     if playsArray.count == myPlayList.count {
                                         self.playDataDelegate?.manager(self, didGet: playsArray)
                                     }
+                                } else if let error = error {
+                                    print("getPlayById error:", error)
                                 } else {
                                     print("\(playId) Play Document does not exist")
                                 }
@@ -155,6 +155,8 @@ class FinderDataManager {
                         }
                     }
                 }
+            } else if let error = error {
+                print("getThisUserPlays error:", error)
             } else {
                 print("User Document does not exist")
             }
@@ -168,7 +170,7 @@ class FinderDataManager {
 
                 let myBlockList = document.data()?[UserTitle.blockList.rawValue] as? [String] ?? []
 
-                self.plays.getDocuments() { (querySnapshot, err) in
+                self.plays.getDocuments { (querySnapshot, err) in
                     if let err = err {
                         print("Error getting documents: \(err)")
                     } else {
@@ -208,6 +210,8 @@ class FinderDataManager {
                         }
                     }
                 }
+            } else if let error = error {
+                print("getPublishPlay error:", error)
             } else {
                 print("User Document does not exist")
             }
@@ -260,7 +264,7 @@ class FinderDataManager {
 
     // MARK: get competitions
     func getCompetion() {
-        competitions.getDocuments() { (querySnapshot, err) in
+        competitions.getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -284,18 +288,17 @@ class FinderDataManager {
 
     func getImageFromUserId(id: String, completion: @escaping (String?, Error?) -> Void) {
         users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: id)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
-                    completion(nil, err) // Pass error to the completion handler
+                    completion(nil, err)
                 } else {
                     for userDocument in querySnapshot!.documents {
                         let imageUrl = userDocument.data()[UserTitle.image.rawValue] as? String
-                        completion(imageUrl, nil) // Pass the imageUrl to the completion handler
+                        completion(imageUrl, nil)
                         return
                     }
-                    // If no documents match the query, you can handle that case too
-                    completion(nil, nil) // Pass nil for imageUrl and error to indicate no matching document
+                    completion(nil, nil)
                 }
             }
     }
@@ -422,7 +425,7 @@ extension FinderDataManager {
 
     func appendPlayIdToUserPlayList(_ playId: String, userId: String) {
         self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -447,7 +450,7 @@ extension FinderDataManager {
 
     func deletePlayIdToUserPlayList(playId: String, userId: String) {
         self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -488,6 +491,8 @@ extension FinderDataManager {
                         }
                     }
                 }
+            } else if let error = error {
+                print("appendUserIdToPlayPlayerInfo error:", error)
             } else {
                 print("Document does not exist")
             }
@@ -511,6 +516,8 @@ extension FinderDataManager {
                         }
                     }
                 }
+            } else if let error = error {
+                print("deleteUserIdToPlayPlayerInfo error:", error)
             } else {
                 print("Document does not exist")
             }
@@ -524,7 +531,7 @@ extension FinderDataManager {
             } else {
                 for document in querySnapshot!.documents {
                     let thisRequestId = document.documentID
-                    self.addPlayRQs.document(thisRequestId).delete() { err in
+                    self.addPlayRQs.document(thisRequestId).delete { err in
                         if let err = err {
                             print("Error removing document: \(err)")
                         } else {

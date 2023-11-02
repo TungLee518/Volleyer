@@ -40,12 +40,10 @@ class RequestSentViewController: UIViewController, UITableViewDataSource, UITabl
         setImageView()
         RequestDataManager.sharedDataMenager.updateRequestsSentTableView = { [weak self] modifiedRequest in
             guard let self = self else { return }
-            for i in 0..<myRequests.count {
-                if myRequests[i].id == modifiedRequest.id {
-                    myRequests[i] = modifiedRequest
-                    let indexPathToReload = IndexPath(row: i, section: 0)
-                    requestsTableView.reloadRows(at: [indexPathToReload], with: .automatic)
-                }
+            for i in 0..<myRequests.count where myRequests[i].id == modifiedRequest.id {
+                myRequests[i] = modifiedRequest
+                let indexPathToReload = IndexPath(row: i, section: 0)
+                requestsTableView.reloadRows(at: [indexPathToReload], with: .automatic)
             }
         }
     }

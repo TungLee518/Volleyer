@@ -488,7 +488,7 @@ class EstablishFinderViewController: UIViewController {
                     LKProgressHUD.showSuccess(text: AlertTitile.successDeletePost.rawValue)
                 } else {
                     LKProgressHUD.showFailure(text: AlertTitile.failureDeletePost.rawValue)
-                    print(err)
+                    print(err as Any)
                 }
             }
         }

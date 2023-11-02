@@ -60,15 +60,15 @@ enum PlayTitle: String {
 }
 
 enum LevelTitle: String {
-    case set = "set"
-    case block = "block"
-    case dig = "dig"
-    case spike = "spike"
-    case sum = "sum"
+    case set
+    case block
+    case dig
+    case spike
+    case sum
 }
 
 enum LackGender: String {
-    case male = "male"
-    case female = "female"
-    case unlimited = "unlimited"
+    case male
+    case female
+    case unlimited
 }

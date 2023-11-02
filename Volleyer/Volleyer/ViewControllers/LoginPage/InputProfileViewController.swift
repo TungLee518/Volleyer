@@ -424,11 +424,11 @@ class InputProfileViewController: UIViewController {
         let hud = JGProgressHUD()
         hud.textLabel.text = "上傳中"
         hud.show(in: self.view)
-        MyDataManager.shared.updateProfileInfo(changedUser: userToSave){ isSuccess, err in
+        MyDataManager.shared.updateProfileInfo(changedUser: userToSave) { isSuccess, err in
             if let error = err {
                 // Handle the error
                 print("Error: \(error)")
-            } else if let isSuccess = isSuccess {
+            } else if isSuccess {
                 self.navigationController?.popViewController(animated: true)
                 LKProgressHUD.showSuccess(text: "帳號更改成功")
                 hud.dismiss()

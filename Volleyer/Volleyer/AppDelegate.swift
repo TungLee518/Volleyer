@@ -62,7 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             )
     }
 
-
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken
                      deviceToken: Data) {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
@@ -105,11 +104,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let application = UIApplication.shared
 
-        if (application.applicationState == .active) {
+        if application.applicationState == .active {
             print("user tapped the notification bar when the app is in foreground")
         }
 
-        if (application.applicationState == .inactive) {
+        if application.applicationState == .inactive {
             print("user tapped the notification bar when the app is in background")
         }
 
