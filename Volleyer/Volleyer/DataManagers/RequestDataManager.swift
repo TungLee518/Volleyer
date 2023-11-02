@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
 
-protocol RequestsDataManagerDelegate {
+protocol RequestsDataManagerDelegate: AnyObject {
     func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest])
     func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest])
 }
@@ -19,7 +19,7 @@ class RequestDataManager {
 
     static let sharedDataMenager = RequestDataManager()
 
-    var playRequestDelegate: RequestsDataManagerDelegate?
+    weak var playRequestDelegate: RequestsDataManagerDelegate?
 
     let users = Firestore.firestore().collection("users")
     let plays = Firestore.firestore().collection("plays")

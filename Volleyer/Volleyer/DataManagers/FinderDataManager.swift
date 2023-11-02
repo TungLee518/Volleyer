@@ -10,19 +10,19 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
 
-protocol PlayDataManagerDelegate {
+protocol PlayDataManagerDelegate: AnyObject {
     func manager(_ manager: FinderDataManager, didGet plays: [Play])
 }
 
-protocol ThisPlayDataManagerDelegate {
+protocol ThisPlayDataManagerDelegate: AnyObject {
     func manager(_ manager: FinderDataManager, thisPlay play: Play)
 }
 
-protocol ThisUserDataManagerDelegate {
+protocol ThisUserDataManagerDelegate: AnyObject {
     func manager(_ manager: FinderDataManager, thisUser user: User)
 }
 
-protocol CompetitionDataManagerDelegate {
+protocol CompetitionDataManagerDelegate: AnyObject {
     func manager(_ manager: FinderDataManager, didGet competitions: [Competition])
 }
 
@@ -30,11 +30,11 @@ class FinderDataManager {
 
     static let sharedDataMenager = FinderDataManager()
 
-    var playDataDelegate: PlayDataManagerDelegate?
-    var thisPlayDelegate: ThisPlayDataManagerDelegate?
-    var thisUserDelegate: ThisUserDataManagerDelegate?
-    var competitionDelegate: CompetitionDataManagerDelegate?
-    var playOneDataDelegate: PlayOneDataManagerDelegate?
+    weak var playDataDelegate: PlayDataManagerDelegate?
+    weak var thisPlayDelegate: ThisPlayDataManagerDelegate?
+    weak var thisUserDelegate: ThisUserDataManagerDelegate?
+    weak var competitionDelegate: CompetitionDataManagerDelegate?
+    weak var playOneDataDelegate: PlayOneDataManagerDelegate?
 
     let users = Firestore.firestore().collection("users")
     let plays = Firestore.firestore().collection("plays")

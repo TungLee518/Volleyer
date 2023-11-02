@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
 
-protocol BlockListDataManagerDelegate {
+protocol BlockListDataManagerDelegate: AnyObject {
     func manager(_ manager: MyDataManager, didGet blockList: [User])
 }
 
@@ -24,7 +24,7 @@ class MyDataManager {
 
     var canGoToTabbarVC: ((Bool) -> Void)?
 
-    var blockListDataManager: BlockListDataManagerDelegate?
+    weak var blockListDataManager: BlockListDataManagerDelegate?
 
     func saveProfileInfo(_ user: User) {
         var data: [String: Any] = [

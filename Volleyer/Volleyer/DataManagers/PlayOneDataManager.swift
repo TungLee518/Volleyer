@@ -10,18 +10,18 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
 
-protocol PlayOneDataManagerDelegate {
+protocol PlayOneDataManagerDelegate: AnyObject {
     func manager(_ manager: PlayOneDataManager, didget playOne: [PlayOne])
 }
 
-protocol PlayOneFinderDataManagerDelegate {
+protocol PlayOneFinderDataManagerDelegate: AnyObject {
     func manager(_ manager: PlayOneDataManager, didget playerN: [PlayerN])
 }
 
 class PlayOneDataManager {
 
-    var playOneDataDelegate: PlayOneDataManagerDelegate?
-    var playOneFinderDataDelegate: PlayOneFinderDataManagerDelegate?
+    weak var playOneDataDelegate: PlayOneDataManagerDelegate?
+    weak var playOneFinderDataDelegate: PlayOneFinderDataManagerDelegate?
 
     let users = Firestore.firestore().collection("users")
     let playOneCourts = Firestore.firestore().collection("play_one_courts")
