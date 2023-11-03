@@ -14,13 +14,14 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
+    let gcmMessageIDKey = "gcm.message_id"
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
         FirebaseApp.configure()
 
         registerForPushNotifications()
-        UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
 
         return true
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     func registerForPushNotifications() {
         Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             print("Permission granted: \(granted)")
             guard granted else { return }
@@ -47,19 +49,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(String(describing: fcmToken))")
-        messaging.token { token, error in
-            guard let token = token else {
-                print("messaging error", error as Any)
-                return
-            }
-            print("firebase messaging Token: \(token)")
-        }
+//        messaging.token { token, error in
+//            guard let token = token else {
+//                print("messaging error", error as Any)
+//                return
+//            }
+//            print("firebase messaging Token: \(token)")
+//        }
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
-            NotificationCenter.default.post(
-                name: Notification.Name("FCMToken"),
-                object: nil,
-                userInfo: dataDict
-            )
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken
@@ -67,7 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
-        // Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+            print("FCM registration token: \(token)")
+          }
+        }
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
@@ -102,6 +111,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+        let userInfo = response.notification.request.content.userInfo
+        if let messageID = userInfo[gcmMessageIDKey] {
+          print("Message ID: \(messageID)")
+        }
+        print(userInfo)
+
+        // 處理點擊 local 通知
         let application = UIApplication.shared
 
         if application.applicationState == .active {
