@@ -302,10 +302,8 @@ extension MyViewController: RequestsDataManagerDelegate {
 
     func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest]) {
         var receiveAmount = 0
-        for i in playRequests {
-            if i.status == 0 {
-                receiveAmount += 1
-            }
+        for i in playRequests where i.status == 0 {
+            receiveAmount += 1
         }
         if receiveAmount > 0 {
             requestReceiveAmountLabel.isHidden = false
@@ -317,10 +315,8 @@ extension MyViewController: RequestsDataManagerDelegate {
 
     func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest]) {
         var sentAmount = 0
-        for i in playRequests {
-            if i.status == 0 {
-                sentAmount += 1
-            }
+        for i in playRequests where i.status == 0 {
+            sentAmount += 1
         }
         if sentAmount > 0 {
             requestSentAmountLabel.isHidden = false

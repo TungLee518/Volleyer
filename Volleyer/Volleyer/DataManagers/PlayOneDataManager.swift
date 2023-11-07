@@ -10,18 +10,18 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
 
-protocol PlayOneDataManagerDelegate {
+protocol PlayOneDataManagerDelegate: AnyObject {
     func manager(_ manager: PlayOneDataManager, didget playOne: [PlayOne])
 }
 
-protocol PlayOneFinderDataManagerDelegate {
+protocol PlayOneFinderDataManagerDelegate: AnyObject {
     func manager(_ manager: PlayOneDataManager, didget playerN: [PlayerN])
 }
 
 class PlayOneDataManager {
 
-    var playOneDataDelegate: PlayOneDataManagerDelegate?
-    var playOneFinderDataDelegate: PlayOneFinderDataManagerDelegate?
+    weak var playOneDataDelegate: PlayOneDataManagerDelegate?
+    weak var playOneFinderDataDelegate: PlayOneFinderDataManagerDelegate?
 
     let users = Firestore.firestore().collection("users")
     let playOneCourts = Firestore.firestore().collection("play_one_courts")
@@ -49,7 +49,7 @@ class PlayOneDataManager {
                         } else {
                             var finders: [User] = []
                             for i in 0..<userIds.count {
-                                self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userIds[i]).getDocuments() { (userQuerySnapshot, err) in
+                                self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userIds[i]).getDocuments { (userQuerySnapshot, err) in
                                         if let err = err {
                                             print("Error getting documents: \(err)")
                                         } else {
@@ -89,6 +89,8 @@ class PlayOneDataManager {
                         print("Document successfully updated")
                     }
                 }
+            } else if let error = error {
+                print("addFinderOFACourt error:", error)
             } else {
                 print("Document does not exist")
             }
@@ -112,6 +114,8 @@ class PlayOneDataManager {
                         print("Document successfully updated")
                     }
                 }
+            } else if let error = error {
+                print("deleteFinderOFACourt error:", error)
             } else {
                 print("Document does not exist")
             }
@@ -183,7 +187,7 @@ class PlayOneDataManager {
     }
 
     func deletaPlayOnefinder(finder: String) {
-        playOneFinders.document(finder).delete() { err in
+        playOneFinders.document(finder).delete { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
@@ -216,6 +220,8 @@ class PlayOneDataManager {
                     fivePlayersData.append(PlayerN(name: player?["name"] ?? "", image: player?["image"] ?? ""))
                 }
                 self.playOneFinderDataDelegate?.manager(self, didget: fivePlayersData)
+            } else if let error = error {
+                print("getPlayOneFinderData error:", error)
             } else {
                 print("Document does not exist")
             }
@@ -317,7 +323,7 @@ extension PlayOneDataManager {
 
     func appendPlayIdToUserPlayList(_ documentId: String) {
         self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) as Any)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {

@@ -68,9 +68,6 @@ class TextFieldTableViewCell: UITableViewCell {
         ])
     }
 
-    func setStartTime() {
-        
-    }
     func createToolBar(doneTarget: Selector, endTarget: Selector) -> UIToolbar {
         let toolbar = UIToolbar()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: doneTarget)

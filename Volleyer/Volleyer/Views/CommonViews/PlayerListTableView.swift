@@ -89,7 +89,7 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
         // 第一個永遠是自己
         if indexPath.row == 0 || canEdit == false {
             cell.showOnly(with: player)
-        } 
+        }
         return cell
     }
 
@@ -108,7 +108,7 @@ class PlayerListTableView: UITableView, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Handle deletion of a player
-            let player = players[indexPath.row]
+            // let player = players[indexPath.row]
             // Perform deletion logic and update the data source
             players.remove(at: indexPath.row)
             deleteRows(at: [indexPath], with: .fade)
