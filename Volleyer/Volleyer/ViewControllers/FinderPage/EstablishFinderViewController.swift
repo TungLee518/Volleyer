@@ -439,18 +439,18 @@ class EstablishFinderViewController: UIViewController {
             if thisPlay.startTime > thisPlay.endTime {
                 LKProgressHUD.showFailure(text: "結束時間早於開始時間")
             } else {
-                let placeInput = placeTextField.text ?? "no place"
-                let priceInput = Int(priceTextField.text ?? "0") ?? 0
-                let maleInput = Int(maleTextField.text ?? "0") ?? 0
-                let femaleInput = Int(femaleTextField.text ?? "0") ?? 0
+                let placeInput = placeTextField.text ?? "input invalind place by user"
+                let priceInput = Int(priceTextField.text ?? "1000000") ?? 1000000
+                let maleInput = Int(maleTextField.text ?? "100") ?? 100
+                let femaleInput = Int(femaleTextField.text ?? "100") ?? 100
                 if placeInput.count > 15 || priceInput > 100000 || priceInput < 0 || maleInput > 99 || maleInput < 0 || femaleInput > 99 || femaleInput < 0 {
                     LKProgressHUD.showFailure(text: "請符合字數限制")
                 } else {
-                    thisPlay.place = placeTextField.text!
-                    thisPlay.price = Int(priceTextField.text!)!
-                    thisPlay.type = playTypes.firstIndex(of: typeTextField.text!)!
-                    thisPlay.lackAmount.male = Int(maleTextField.text!)!
-                    thisPlay.lackAmount.female = Int(femaleTextField.text!)!
+                    thisPlay.place = placeTextField.text ?? "input error"
+                    thisPlay.price = priceInput
+                    thisPlay.type = playTypes.firstIndex(of: typeTextField.text ?? "select error") ?? 0
+                    thisPlay.lackAmount.male = maleInput
+                    thisPlay.lackAmount.female = femaleInput
                     if thisPlay.id == "" {
                         dataManager.savePlay(thisPlay)
                         LKProgressHUD.showSuccess(text: "發文成功")
@@ -458,10 +458,10 @@ class EstablishFinderViewController: UIViewController {
                     } else {
                         dataManager.updatePlay(thisPlay)
                         LKProgressHUD.showSuccess(text: "更改成功")
-                        for controller in self.navigationController!.viewControllers as Array {
+                        for controller in (self.navigationController?.viewControllers ?? []) as Array {
                             print(controller)
                             if controller.isKind(of: MyFindersViewController.self) {
-                                self.navigationController!.popToViewController(controller, animated: true)
+                                self.navigationController?.popToViewController(controller, animated: true)
                                 break
                             }
                         }
@@ -478,7 +478,7 @@ class EstablishFinderViewController: UIViewController {
             print("確定要刪除")
             self.dataManager.deletePlay(self.thisPlay) { err in
                 if err == nil {
-                    for controller in self.navigationController!.viewControllers as Array {
+                    for controller in (self.navigationController?.viewControllers ?? []) as Array {
                         print(controller)
                         if controller.isKind(of: MyFindersViewController.self) {
                             self.navigationController!.popToViewController(controller, animated: true)

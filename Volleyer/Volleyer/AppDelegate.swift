@@ -49,13 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(String(describing: fcmToken))")
-//        messaging.token { token, error in
-//            guard let token = token else {
-//                print("messaging error", error as Any)
-//                return
-//            }
-//            print("firebase messaging Token: \(token)")
-//        }
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         NotificationCenter.default.post(
             name: Notification.Name("FCMToken"),
@@ -69,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
-        Messaging.messaging().apnsToken = deviceToken
+//        Messaging.messaging().apnsToken = deviceToken // command 掉也可以成功的
         Messaging.messaging().token { token, error in
           if let error = error {
             print("Error fetching FCM registration token: \(error)")

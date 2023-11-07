@@ -152,8 +152,7 @@ class PlayerTableViewCell: UITableViewCell {
 
     @objc func doneToView(_ sender: UIButton) {
         if inputNameTextField.text != "" && inputGenderTextField.text != "" {
-//            let newPlayer = Player(name: inputNameTextField.text!, gender: inputGenderTextField.text!)
-            let newPlayer = User(id: inputNameTextField.text!, email: inputNameTextField.text!, gender: 2, name: inputNameTextField.text!)
+            let newPlayer = User(id: inputNameTextField.text ?? "input error", email: inputNameTextField.text ?? "input error", gender: 2, name: inputNameTextField.text ?? "input error")
             showOnly(with: newPlayer)
             playerDelegate?.addPlayer(from: self, add: newPlayer)
         }

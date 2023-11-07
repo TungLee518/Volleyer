@@ -380,10 +380,10 @@ class InputProfileViewController: UIViewController {
     }
     @objc func doneInput() {
         if idTextField.text != "", nameTextField.text != "", emailTextField.text != "", genderTextField.text != "", nameTextField.text != "", thisUser.level.block != 4, thisUser.level.setBall != 4, thisUser.level.dig != 4, thisUser.level.spike != 4, thisUser.level.sum != 4 {
-            thisUser.email = emailTextField.text!
-            thisUser.id = idTextField.text!
-            thisUser.name = nameTextField.text!
-            thisUser.gender = genderList.firstIndex(of: genderTextField.text!)!
+            thisUser.email = emailTextField.text ?? "input error"
+            thisUser.id = idTextField.text ?? "input error"
+            thisUser.name = nameTextField.text ?? "input error"
+            thisUser.gender = genderList.firstIndex(of: genderTextField.text ?? "input error") ?? 0
             print(thisUser)
             MyDataManager.shared.saveProfileInfo(thisUser)
         } else {
@@ -395,10 +395,10 @@ class InputProfileViewController: UIViewController {
     }
     @objc func changeUserInfo() {
         if idTextField.text != "", nameTextField.text != "", emailTextField.text != "", genderTextField.text != "" {
-            thisUser.email = emailTextField.text!
-            thisUser.id = idTextField.text!
-            thisUser.name = nameTextField.text!
-            thisUser.gender = genderList.firstIndex(of: genderTextField.text!)!
+            thisUser.email = emailTextField.text ?? "input error"
+            thisUser.id = idTextField.text ?? "input error"
+            thisUser.name = nameTextField.text ?? "input error"
+            thisUser.gender = genderList.firstIndex(of: genderTextField.text ?? "input error") ?? 0
             print(thisUser)
             // 如果有改 id ，檢查使用者輸入的 id 是否已經有人用了
             if thisUser.id != UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {

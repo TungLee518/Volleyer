@@ -164,7 +164,7 @@ class RequestDataManager {
                     if let requestPlayerList = diff.document.data()[PlayRequestTitle.requestPlayerList.rawValue] as? [[String: String]] {
                         var requestPlayerArray = [Player]()
                         for player in requestPlayerList {
-                            requestPlayerArray.append(Player(name: player["Name"]!, gender: player["Gender"]!))
+                            requestPlayerArray.append(Player(name: player["Name"] ?? "name error", gender: player["Gender"] ?? "gender error"))
                         }
                         let createdTime = diff.document.data()[PlayRequestTitle.createTime.rawValue] as? Timestamp
                         let aPlayRequest = PlayRequest(
