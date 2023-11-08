@@ -351,9 +351,11 @@ class AddPlayViewController: UIViewController {
         let controller = UIAlertController(title: "確定？", message: "要發加場邀請給 \(thisFinderId ??  "Internet Error")？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "是", style: .default) { _ in
             print(self.addPlayers)
-            self.dataManager.saveRequest(self.thisPlay!, playerList: self.addPlayers)
-            print("request sent")
-            self.navigationController?.popToRootViewController(animated: true)
+            if let thisPlay = self.thisPlay {
+                self.dataManager.saveRequest(thisPlay, playerList: self.addPlayers)
+                print("request sent")
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
         controller.addAction(okAction)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)

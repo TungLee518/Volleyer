@@ -20,7 +20,6 @@ struct PlayRequest {
 
 enum PlayRequestTitle: String {
     case requestPlayerList = "request_player_list"
-    // TODO 拼錯了
     case requestReceiverId = "request_reveiver_id"
     case requestSenderId = "request_sender_id"
 //    case requestIdStatus = "requests_Id_Status"

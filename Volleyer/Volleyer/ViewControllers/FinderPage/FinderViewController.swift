@@ -84,7 +84,7 @@ class FinderViewController: UIViewController, UITableViewDataSource, UITableView
         navigationBarAppearance.backgroundColor = .purple7
         navigationBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.black,
-            .font: UIFont.semiboldNunito(size: 20)
+            .font: UIFont.semiboldNunito(size: 20) as Any
          ]
         navigationBarAppearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = navigationBarAppearance

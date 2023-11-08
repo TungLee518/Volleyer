@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-public typealias SimpleClosure = (() -> ())
-private var tappableKey : UInt8 = 0
-private var actionKey : UInt8 = 1
+public typealias SimpleClosure = (() -> Void)
+private var tappableKey: UInt8 = 0
+private var actionKey: UInt8 = 1
 
 extension UIView {
     func applyShadow() {
@@ -37,23 +37,21 @@ extension UIView {
     }
 
     var gesture: UITapGestureRecognizer {
-        get {
-            return UITapGestureRecognizer(target: self, action: #selector(tapped))
-        }
+        return UITapGestureRecognizer(target: self, action: #selector(tapped))
     }
 
     var tappable: Bool! {
         get {
             return objc_getAssociatedObject(self, &tappableKey) as? Bool
         }
-        set(newValue) {
+        set {
             objc_setAssociatedObject(self, &tappableKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
             self.addTapGesture()
         }
     }
 
     fileprivate func addTapGesture() {
-        if (self.tappable) {
+        if self.tappable {
             self.gesture.numberOfTapsRequired = 1
             self.isUserInteractionEnabled = true
             self.addGestureRecognizer(gesture)

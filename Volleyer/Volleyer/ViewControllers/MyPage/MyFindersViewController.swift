@@ -113,10 +113,8 @@ extension MyFindersViewController: PlayDataManagerDelegate {
     func manager(_ manager: FinderDataManager, didGet plays: [Play]) {
         LKProgressHUD.dismiss()
         myFinders = []
-        for i in plays {
-            if i.finderId == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
-                myFinders.append(i)
-            }
+        for i in plays where i.finderId == UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) {
+            myFinders.append(i)
         }
         myFinders.sort { $0.startTime < $1.startTime }
         if myFinders.count == 0 {

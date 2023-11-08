@@ -380,10 +380,10 @@ class InputProfileViewController: UIViewController {
     }
     @objc func doneInput() {
         if idTextField.text != "", nameTextField.text != "", emailTextField.text != "", genderTextField.text != "", nameTextField.text != "", thisUser.level.block != 4, thisUser.level.setBall != 4, thisUser.level.dig != 4, thisUser.level.spike != 4, thisUser.level.sum != 4 {
-            thisUser.email = emailTextField.text!
-            thisUser.id = idTextField.text!
-            thisUser.name = nameTextField.text!
-            thisUser.gender = genderList.firstIndex(of: genderTextField.text!)!
+            thisUser.email = emailTextField.text ?? "input error"
+            thisUser.id = idTextField.text ?? "input error"
+            thisUser.name = nameTextField.text ?? "input error"
+            thisUser.gender = genderList.firstIndex(of: genderTextField.text ?? "input error") ?? 0
             print(thisUser)
             MyDataManager.shared.saveProfileInfo(thisUser)
         } else {
@@ -395,10 +395,10 @@ class InputProfileViewController: UIViewController {
     }
     @objc func changeUserInfo() {
         if idTextField.text != "", nameTextField.text != "", emailTextField.text != "", genderTextField.text != "" {
-            thisUser.email = emailTextField.text!
-            thisUser.id = idTextField.text!
-            thisUser.name = nameTextField.text!
-            thisUser.gender = genderList.firstIndex(of: genderTextField.text!)!
+            thisUser.email = emailTextField.text ?? "input error"
+            thisUser.id = idTextField.text ?? "input error"
+            thisUser.name = nameTextField.text ?? "input error"
+            thisUser.gender = genderList.firstIndex(of: genderTextField.text ?? "input error") ?? 0
             print(thisUser)
             // 如果有改 id ，檢查使用者輸入的 id 是否已經有人用了
             if thisUser.id != UserDefaults.standard.string(forKey: UserTitle.id.rawValue) {
@@ -424,11 +424,11 @@ class InputProfileViewController: UIViewController {
         let hud = JGProgressHUD()
         hud.textLabel.text = "上傳中"
         hud.show(in: self.view)
-        MyDataManager.shared.updateProfileInfo(changedUser: userToSave){ isSuccess, err in
+        MyDataManager.shared.updateProfileInfo(changedUser: userToSave) { isSuccess, err in
             if let error = err {
                 // Handle the error
                 print("Error: \(error)")
-            } else if let isSuccess = isSuccess {
+            } else if isSuccess {
                 self.navigationController?.popViewController(animated: true)
                 LKProgressHUD.showSuccess(text: "帳號更改成功")
                 hud.dismiss()

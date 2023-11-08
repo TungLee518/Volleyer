@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseStorage
 
-protocol RequestsDataManagerDelegate {
+protocol RequestsDataManagerDelegate: AnyObject {
     func manager(_ manager: RequestDataManager, iReceive playRequests: [PlayRequest])
     func manager(_ manager: RequestDataManager, iSent playRequests: [PlayRequest])
 }
@@ -19,7 +19,7 @@ class RequestDataManager {
 
     static let sharedDataMenager = RequestDataManager()
 
-    var playRequestDelegate: RequestsDataManagerDelegate?
+    weak var playRequestDelegate: RequestsDataManagerDelegate?
 
     let users = Firestore.firestore().collection("users")
     let plays = Firestore.firestore().collection("plays")
@@ -40,7 +40,7 @@ class RequestDataManager {
             PlayRequestTitle.requestReceiverId.rawValue: play.finderId,
             PlayRequestTitle.playId.rawValue: play.id,
             PlayRequestTitle.status.rawValue: 0,
-            PlayRequestTitle.requestPlayerList.rawValue: [],
+            PlayRequestTitle.requestPlayerList.rawValue: [String](),
             PlayRequestTitle.createTime.rawValue: Date()
         ]
         addPlayRQs.whereField(PlayRequestTitle.playId.rawValue, isEqualTo: play.id).getDocuments { (querySnapshot, err) in
@@ -87,7 +87,7 @@ class RequestDataManager {
 
     // MARK: get play requests
     func getPlayRequests() {
-        addPlayRQs.getDocuments() { (querySnapshot, err) in
+        addPlayRQs.getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -127,15 +127,13 @@ class RequestDataManager {
 
     // MARK: listen play requests
     func listenPlayRequests() {
-        // bug
-        // TODO: change to firebase id
         addPlayRQs.whereField(PlayRequestTitle.requestReceiverId.rawValue, isEqualTo: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) as Any).addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
             snapshot.documentChanges.forEach { diff in
-                if (diff.type == .added) {
+                if diff.type == .added {
                     print("New request: \(diff.document.data())")
                     if let launchTime = UserDefaults.standard.value(forKey: launchAppDate) as? Date,
                        let firebaseTime = diff.document.data()["create_time"] as? Timestamp {
@@ -144,10 +142,10 @@ class RequestDataManager {
                         }
                     }
                 }
-                if (diff.type == .modified) {
+                if diff.type == .modified {
                     print("Modified request: \(diff.document.data())")
                 }
-                if (diff.type == .removed) {
+                if diff.type == .removed {
                     print("Removed request: \(diff.document.data())")
                 }
             }
@@ -158,15 +156,15 @@ class RequestDataManager {
                 return
             }
             snapshot.documentChanges.forEach { diff in
-                if (diff.type == .added) {
+                if diff.type == .added {
                     print("New request: \(diff.document.data())")
                 }
-                if (diff.type == .modified) {
+                if diff.type == .modified {
                     print("Modified request: \(diff.document.data())")
                     if let requestPlayerList = diff.document.data()[PlayRequestTitle.requestPlayerList.rawValue] as? [[String: String]] {
                         var requestPlayerArray = [Player]()
                         for player in requestPlayerList {
-                            requestPlayerArray.append(Player(name: player["Name"]!, gender: player["Gender"]!))
+                            requestPlayerArray.append(Player(name: player["Name"] ?? "name error", gender: player["Gender"] ?? "gender error"))
                         }
                         let createdTime = diff.document.data()[PlayRequestTitle.createTime.rawValue] as? Timestamp
                         let aPlayRequest = PlayRequest(
@@ -181,7 +179,7 @@ class RequestDataManager {
                         self.updateRequestsSentTableView?(aPlayRequest)
                     }
                 }
-                if (diff.type == .removed) {
+                if diff.type == .removed {
                     print("Removed request: \(diff.document.data())")
                 }
             }
@@ -318,7 +316,7 @@ extension RequestDataManager {
 
     func appendPlayIdToUserPlayList(_ playId: String, userId: String) {
         self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -342,7 +340,7 @@ extension RequestDataManager {
 
     func deletePlayIdToUserPlayList(playId: String, userId: String) {
         self.users.whereField(UserTitle.firebaseId.rawValue, isEqualTo: userId)
-            .getDocuments() { (querySnapshot, err) in
+            .getDocuments { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
@@ -381,6 +379,8 @@ extension RequestDataManager {
                         }
                     }
                 }
+            } else if let error = error {
+                print("appendUserIdToPlayPlayerInfo error:", error)
             } else {
                 print("Document does not exist")
             }
@@ -403,6 +403,8 @@ extension RequestDataManager {
                         }
                     }
                 }
+            } else if let error = error {
+                print("deleteUserIdToPlayPlayerInfo error:", error)
             } else {
                 print("Document does not exist")
             }
@@ -416,7 +418,7 @@ extension RequestDataManager {
             } else {
                 for document in querySnapshot!.documents {
                     let thisRequestId = document.documentID
-                    self.addPlayRQs.document(thisRequestId).delete() { err in
+                    self.addPlayRQs.document(thisRequestId).delete { err in
                         if let err = err {
                             print("Error removing document: \(err)")
                         } else {

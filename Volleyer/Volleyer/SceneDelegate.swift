@@ -96,7 +96,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 if let error = err {
                     // Handle the error
                     print("Error: \(error)")
-                } else if let gotUser = gotUser {
+                } else if gotUser != nil {
                     // Use the gotUser
                     sleep(1)
                     self.window?.rootViewController = TabBarViewController()

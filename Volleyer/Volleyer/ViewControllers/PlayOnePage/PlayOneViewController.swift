@@ -26,7 +26,7 @@ class PlayOneViewController: UIViewController {
         setNavBar()
         playOneDataManager.listenPlayOne()
         playOneDataManager.playOneDataDelegate = self
-        playOneDataManager.updatePlayOneTableView = { [weak self] isUpdate in
+        playOneDataManager.updatePlayOneTableView = { [weak self] _ in
             guard let self = self else { return }
             playOneData = []
             playOneDataManager.getPlayOneCourts()
@@ -58,7 +58,7 @@ class PlayOneViewController: UIViewController {
             navigationController?.pushViewController(nextVC, animated: true)
         }
     }
-    
+
     @objc func lineUp(_ sender: UIButton) {
         if canAddPlay {
             playOneDataManager.createPlayOneFinder(finder: UserDefaults.standard.string(forKey: UserTitle.firebaseId.rawValue) ?? "No Id")

@@ -22,7 +22,6 @@ private enum STColor: String {
 
 extension UIColor {
 
-    // swiftlint:disable identifier_name
     static let purple1 = hexStringToUIColor(hex: "#491A85")
     static let purple2 = hexStringToUIColor(hex: "#62339F")
     static let purple3 = hexStringToUIColor(hex: "#7340AE")
@@ -37,8 +36,7 @@ extension UIColor {
     static let gray5 = hexStringToUIColor(hex: "#DFDCE2")
     static let gray6 = hexStringToUIColor(hex: "#ECE9EF")
     static let gray7 = hexStringToUIColor(hex: "#F8F6F9")
-    // swiftlint:enable identifier_name
-    
+
     private static func STColor(_ color: STColor) -> UIColor? {
         return UIColor(named: color.rawValue)
     }
